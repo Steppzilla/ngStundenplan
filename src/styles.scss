@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+h1{font-size:20pt;
+text-align:center;
+}
+
+.arrow{
+    display:none !important;
+  }
+
+  .arrow::before{
+    display:none !important;
+
+  }
+  
+   .tooltip-inner{
+    padding:1pt !important;
+    max-width:150pt !important;
+   }
+
+.tooltip{
+    top:-15pt !important;
+}

@@ -1,0 +1,52 @@
+.reihe {
+  border-bottom-style:dotted;
+  border-bottom-width:0.5pt;
+  min-height:40pt;
+  font-size: 13pt;
+  margin-left: 10pt;
+  display: flex;
+  text-align: center;
+  >div {
+    width: 19%;
+    display:flex;
+    text-align:center;
+    border-right-style:dotted;
+    border-right-width:0.5pt;
+    ///background-color:violet;
+  }
+  >div:first-child {
+    text-align: left;
+    width:20pt;
+   // background-color:yellow;
+  }
+}
+
+.container {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 100%;
+
+  .unterrichtsFeld {
+    font-size: 13pt;
+    text-align: center;
+    width: 100%;
+  }
+
+  .lehrerKuerzel {
+    font-size: 7pt;
+    text-align: center;
+    width: 100%;
+  }
+
+}
+
+.reiheOben{
+  padding-top:10pt;
+  font-weight: bold;
+  >div{
+    >div{
+      width:100%;
+      //background-color:Green;
+    }
+  }
+}

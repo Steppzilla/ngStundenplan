@@ -1,0 +1,28 @@
+<h1 >Stundenplan {{stundenPlan.getTitel()}}</h1>
+<div class="reihe reiheOben">
+  <div><div class="leftCell"></div></div>
+  <div><div> Montag </div></div>
+  <div><div> Dienstag </div></div>
+  <div><div> Mittwoch </div></div>
+  <div><div> Donnerstag </div></div>
+  <div><div> Freitag </div></div> 
+
+</div>
+<div *ngFor="let reihe of stundenPlan.stundenPlan index as r" class="reihe">
+  <div class="leftCell">
+    {{r+1}}
+  </div>
+  <div *ngFor="let cell of reihe index as c">
+    <div *ngFor="let lehrerItemErw of cell" class="container">
+      <div class="unterrichtsFeld">
+        {{lehrerItemErw?lehrerItemErw[1]:""}}
+      </div>
+      <div class="lehrerKuerzel" *ngIf="stundenPlan.lehrer===undefined">
+        {{lehrerItemErw[0].kuerzel}}
+      </div>
+      <div class="Klasse" *ngIf="stundenPlan.klasse===undefined">  <!-- hier ist Klasse drin -->
+        {{lehrerItemErw[2]}} 
+      </div>
+    </div>
+  </div>
+</div>

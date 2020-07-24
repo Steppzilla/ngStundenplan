@@ -1,0 +1,8 @@
+<h2>Lehrer-Liste</h2>
+<ul class="lehrer">
+    <li *ngFor="let element of lehrer">
+        <span  class="badge">{{element.id}}</span>
+        <span>{{element.name}}: </span>
+        <span *ngFor="let bim of element.zuweisung">  {{bim[1]}}({{bim[0]}}) </span>
+    </li>
+</ul>
