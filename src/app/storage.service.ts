@@ -16,10 +16,16 @@ export class StorageService {
     this.stundenRasterAll.push(this.entStringen(localStorage.getItem("stundenRasterDonnerstag")));
     this.stundenRasterAll.push(this.entStringen(localStorage.getItem("stundenRasterFreitag")));
   }
-  entStringen(y){
+  entStringen(y:string){
+    try{
     y=atob(y);
-    let parsed=JSON.parse(y);
-    return parsed;
+     let parsed=JSON.parse(y);
+     return parsed;
+    }catch(e){
+      console.log(e);
+
+      return this.lehrerservice.createEmptyStundenraster();
+    }
   }
   save(tagvorher){
     let x=btoa(JSON.stringify(this.lehrerservice.stundenRaster.getValue()));

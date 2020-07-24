@@ -506,8 +506,12 @@ export class LehrerService {
 
   zuweisungKlasseFach = new Array();
 
+  createEmptyStundenraster(){
+    return new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = []));
+  }
+
   constructor() {
-    this.stundenRaster.next(new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = [])));
+    this.stundenRaster.next(this.createEmptyStundenraster());
     //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
 
   }
