@@ -64,7 +64,9 @@ export class StorageService {
         break;
     }
     y=atob(y);
-    let stundenRaster=JSON.parse(y);
+    try {
+      let stundenRaster=JSON.parse(y);
+ 
    // console.log(stundenRaster);
 
     this.gefaerbteCells.splice(0,this.gefaerbteCells.length);
@@ -92,7 +94,11 @@ export class StorageService {
       });
     }); 
     //this.lehrerservice.alleStundenRaster.push(stundenRaster)
+    }catch(e){
+      console.log(e); 
+    }
   } //load ende
+  
 
   constructor(private lehrerservice:LehrerService) { 
 
