@@ -11,10 +11,10 @@ import { ButtonComponent } from './button/button.component';
 import { WochenplanComponent } from './wochenplan/wochenplan.component';
 import { ButtonsWocheComponent } from './buttons-woche/buttons-woche.component';
 import { EpochenSchedulerComponent } from './epochen-scheduler/epochen-scheduler.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {MatCheckboxModule} from '@angular/material/checkbox';
+//import {MatDatepickerModule} from '@angular/material/datepicker';
+//import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 
 //Firebase: (import browsermodule, ngmodule, appcomponent) und:
 
@@ -40,10 +40,10 @@ import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
+   // BrowserAnimationsModule,
+   // MatCheckboxModule,
+   // MatDatepickerModule,
+   // MatMomentDateModule,
   //  AngularFireModule.initializeApp(environment.firebase),
    // AngularFirestoreModule, //storage
   //  AngularFirestoreModule, //firestore
