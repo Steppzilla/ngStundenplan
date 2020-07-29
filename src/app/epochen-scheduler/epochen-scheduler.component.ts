@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+//import { AngularFirestore } from 'angularfire2/firestore';
+
 
 
 
@@ -7,13 +10,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './epochen-scheduler.component.html',
   styleUrls: ['./epochen-scheduler.component.scss']
 })
-export class EpochenSchedulerComponent implements OnInit {
+export class EpochenSchedulerComponent  {
 
-  calendarLabel: string="hi";
+    items: Observable<any[]>;
+ // constructor(private db: AngularFirestore) {
+  //  const things= db.collection('items').valueChanges();
+   // things.subscribe(console.log);
+ // }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+ 
 
 }

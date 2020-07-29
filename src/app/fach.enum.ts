@@ -60,4 +60,9 @@ export enum Fach {
     religion="Religion", //(Sonst ethik)
     griechisch="Griechisch", //Fünfte klasse
     latein="Latein",
+
+    //Spontan neu erfunden für rhythmischen Teil: 
+    deutschR="Sprache",
+    plastizierenR="Plastizieren"
+
 }

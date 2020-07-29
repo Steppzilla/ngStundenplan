@@ -253,6 +253,7 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.klassenbetreuer],
         [Lehrjahr.elf, Fach.plastizieren],
         [Lehrjahr.zwoelf, Fach.plastizieren],
+        [Lehrjahr.zehn, Fach.plastizierenR]
       ]
     },
     // { id: 15, name: 'Luley', kuerzel: 'Lu', anrede: "Frau"  , faecher: [Fac]},
@@ -390,6 +391,7 @@ export class LehrerService {
       anrede: "Frau",
       faecher: [Fach.deutsch],
       zuweisung: [
+        [Lehrjahr.neun, Fach.deutschR],
         [Lehrjahr.zehn, Fach.deutsch],
         [Lehrjahr.zehn, Fach.klassenbetreuer],
         [Lehrjahr.dreizehn, Fach.deutsch],

@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+//import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LehrerlisteComponent } from './lehrerliste/lehrerliste.component';
-import {NgbPaginationModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LehrerComponent } from './lehrer/lehrer.component';
 import { ButtonComponent } from './button/button.component';
 import { WochenplanComponent } from './wochenplan/wochenplan.component';
@@ -14,6 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+
+//Firebase: (import browsermodule, ngmodule, appcomponent) und:
+
+//import { AngularFirestoreModule } from 'angularfire2/firestore';
+//import { AngularFireModule } from 'angularfire2';
+//import { environment } from '../environments/environment';
+//import {AngularFireAuthModule} from '@angular/fire/auth';
+
 
 
 
@@ -34,11 +43,13 @@ import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+  //  AngularFireModule.initializeApp(environment.firebase),
+   // AngularFirestoreModule, //storage
+  //  AngularFirestoreModule, //firestore
+  ///  AngularFireAuthModule, //auth
   ],
-  providers: [
-
-  ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

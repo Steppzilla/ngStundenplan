@@ -1,6 +1,45 @@
 <p>epochen-scheduler works!</p>
+<ul>
+    <li *ngFor="let item of items | async">
+      {{ item.name }}
+    </li>
+  </ul>
+
+
+
+
+
 <mat-checkbox>subscribe</mat-checkbox>
 
 <input matInput [matDatepicker]="picker">
 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 <mat-datepicker #picker></mat-datepicker>
+
+
+<div id="plan">
+    <div class="oben">
+        <div>Datum</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> 
+    </div>
+    <div class="row">
+        <div>Sommerferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div>Herbstferien</div> 
+    </div>
+    <div class="row">
+
+        <div>Herbstferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div>Weihnachtsferien</div> 
+    </div>
+    <div class="row">
+
+
+        <div>Weihnachtsferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div>Osterferien</div> 
+    </div>
+    <div class="row">
+
+
+        <div>Osterferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div>Sommerferien</div> 
+    </div>
+ 
+
+
+</div>
+
+
