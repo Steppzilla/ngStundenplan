@@ -31,19 +31,19 @@ export class StorageService {
     let x=btoa(JSON.stringify(this.lehrerservice.stundenRaster.getValue()));
  //   console.log(" vorher (save): " + tagvorher + " aktuell (load): " + tag);
     switch(tagvorher){
-      case "Montag": 
+      case "montag": 
           localStorage.setItem("stundenRasterMontag",x);
           break;
-      case "Dienstag":
+      case "dienstag":
         localStorage.setItem("stundenRasterDienstag",x); 
         break;
-      case "Mittwoch":
+      case "mittwoch":
         localStorage.setItem("stundenRasterMittwoch",x);
         break;
-      case "Donnerstag":
+      case "donnerstag":
         localStorage.setItem("stundenRasterDonnerstag",x);
         break;
-      case "Freitag":
+      case "freitag":
         localStorage.setItem("stundenRasterFreitag",x);
         break;
     }
@@ -53,19 +53,19 @@ export class StorageService {
   load(day){
     let y;
     switch(day){ 
-      case "Montag": 
+      case "montag": 
         y=localStorage.getItem("stundenRasterMontag");
           break;
-      case "Dienstag":
+      case "dienstag":
         y =localStorage.getItem("stundenRasterDienstag"); 
         break;
-      case "Mittwoch":
+      case "mittwoch":
         y=localStorage.getItem("stundenRasterMittwoch");
         break;
-      case "Donnerstag":
+      case "donnerstag":
         y=localStorage.getItem("stundenRasterDonnerstag");
         break;
-      case "Freitag":
+      case "freitag":
        y=localStorage.getItem("stundenRasterFreitag");
         break;
     }

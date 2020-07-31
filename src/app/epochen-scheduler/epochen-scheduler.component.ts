@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-//import { AngularFirestore } from 'angularfire2/firestore';
-
-
-
+import { Component, OnInit, enableProdMode } from '@angular/core';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -11,13 +7,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./epochen-scheduler.component.scss']
 })
 export class EpochenSchedulerComponent  {
+ items;    //spiel-Items mit .tut und .user oder .name?
+ tage; //test für string stundenplaner
 
-    items: Observable<any[]>;
- // constructor(private db: AngularFirestore) {
-  //  const things= db.collection('items').valueChanges();
-   // things.subscribe(console.log);
- // }
+  
+ add(x,y){
+   this.loginService.add(x,y);
+ }
 
- 
+  constructor(private loginService:LoginService
+     ) {
+       this.loginService=loginService;
+       this.items=loginService.items;
+       this.tage=loginService.tage;
 
+       //this.dinge=loginService.dinge;
+       //console.log(this.dinge);
+         
+  }
 }

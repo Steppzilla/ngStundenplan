@@ -1,11 +1,29 @@
 <p>epochen-scheduler works!</p>
-<ul>
-    <li *ngFor="let item of items | async">
-      {{ item.name }}
+<!--<ul>
+    <li *ngFor="let item of items | async"  >
+      <p> {{item.user}}</p>
+      <p> {{item.tut}}</p> 
     </li>
-  </ul>
+  </ul>--><!--{{console(item)|json}}-->
 
+  <div style="text-align:center">
+    <br> Name:
+    <input #userName>
+    <br> Price:
+    <input #tutValue>
+    <br>
+    <button (click)="add(userName.value, tutValue.value)">Add some items</button>
+    <br>
+    <div style="text-align:center;display:unset;">
+        List of Items:
+        <ul>
+            <li *ngFor="let item of tage | async">
+                {{ item.tag }}
+            </li>
 
+        </ul>
+    </div>
+</div>
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-buttons-woche',
@@ -7,15 +8,17 @@ import { StorageService } from '../storage.service';
   styleUrls: ['./buttons-woche.component.scss']
 })
 export class ButtonsWocheComponent implements OnInit {
-  wochentag="Montag";
-  tagvorher="Montag";
+  wochentag="montag";
+  tagvorher="montag";
 
   wochenTag(tag){  //Buttonclick
     this.tagvorher=this.wochentag;
     this.wochentag=tag;
-    this.storageService.save(this.tagvorher);
+   // this.storageService.save(this.tagvorher);
     this.storageService.load(this.wochentag);
 
+    this.loginService.save(this.tagvorher);
+    this.loginService.load(this.wochentag);
 
        //nachm load neu färben:
    //console.log(this.storageService.gefaerbteCells);
@@ -24,7 +27,9 @@ export class ButtonsWocheComponent implements OnInit {
 
 
 
-  constructor(private storageService:StorageService) { 
+  constructor(
+    private storageService:StorageService,
+    private loginService:LoginService) { 
     this.storageService.load(this.tagvorher);//Montag wird geladen
   }
     

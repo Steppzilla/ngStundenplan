@@ -145,20 +145,20 @@ export class PlanmakerService {
    }
   constructor(private lehrerService:LehrerService, storageService: StorageService) { 
     
-    storageService.loadAll();
+    //storageService.loadAll();
 
 
-    this.montag=storageService.stundenRasterAll[0];
-    this.dienstag=storageService.stundenRasterAll[1];
-    this.mittwoch=storageService.stundenRasterAll[2];
-    this.donnerstag=storageService.stundenRasterAll[3];
-    this.freitag=storageService.stundenRasterAll[4];
+    //this.montag=storageService.stundenRasterAll[0];
+    //this.dienstag=storageService.stundenRasterAll[1];
+   // this.mittwoch=storageService.stundenRasterAll[2];
+   // this.donnerstag=storageService.stundenRasterAll[3];
+    //this.freitag=storageService.stundenRasterAll[4];
 
 
-    storageService.load("Montag");
+    //storageService.load("Montag");
 
 
-    this.planLehrer(lehrerService.lehrer[13]);
+   // this.planLehrer(lehrerService.lehrer[13]);
 
   }
 }

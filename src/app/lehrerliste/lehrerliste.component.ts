@@ -15,6 +15,7 @@ import {
   Fach
 } from '../fach.enum';
 import { StorageService } from '../storage.service';
+import{LoginService} from '../login.service';
 
 @Component({
   selector: 'app-lehrerliste',
@@ -137,10 +138,11 @@ export class LehrerlisteComponent implements OnInit {
   //für Buttons;
 
 
-  constructor(private lehrerservice: LehrerService, private storageService:StorageService//,private buttonComponent:ButtonComponent
+  constructor(private loginService: LoginService, private lehrerservice: LehrerService
+    //,    private storageService:StorageService//,private buttonComponent:ButtonComponent
     //,   private   planMaker:PlanMaker
   ) {
-    this.storageService.load("Montag");//Montag wird geladen
+    //this.storageService.load("Montag");//Montag wird geladen
     lehrerservice.stundenRaster$.subscribe((stundenRaster)=>this.stundenRaster=stundenRaster);
     //this.stundenRaster = lehrerservice.stundenRaster.getValue();
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
@@ -159,6 +161,8 @@ export class LehrerlisteComponent implements OnInit {
 
     this.lehrer=lehrerservice.lehrer;
     this.klassen=lehrerservice.klassen;
+
+    
     
   }
 
