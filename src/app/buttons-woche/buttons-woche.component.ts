@@ -15,9 +15,9 @@ export class ButtonsWocheComponent implements OnInit {
     this.tagvorher=this.wochentag;
     this.wochentag=tag;
    // this.storageService.save(this.tagvorher);
-    this.storageService.load(this.wochentag);
+    //this.storageService.load(this.wochentag);
 
-    this.loginService.save(this.tagvorher);
+    //this.loginService.save(this.tagvorher);
     this.loginService.load(this.wochentag);
 
        //nachm load neu färben:
@@ -31,6 +31,7 @@ export class ButtonsWocheComponent implements OnInit {
     private storageService:StorageService,
     private loginService:LoginService) { 
     this.storageService.load(this.tagvorher);//Montag wird geladen
+    //console.log( storageService);
   }
     
   ngOnInit(): void {

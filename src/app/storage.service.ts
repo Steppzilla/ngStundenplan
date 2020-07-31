@@ -30,57 +30,19 @@ export class StorageService {
   save(tagvorher){
     let x=btoa(JSON.stringify(this.lehrerservice.stundenRaster.getValue()));
  //   console.log(" vorher (save): " + tagvorher + " aktuell (load): " + tag);
-    switch(tagvorher){
-      case "montag": 
-          localStorage.setItem("stundenRasterMontag",x);
-          break;
-      case "dienstag":
-        localStorage.setItem("stundenRasterDienstag",x); 
-        break;
-      case "mittwoch":
-        localStorage.setItem("stundenRasterMittwoch",x);
-        break;
-      case "donnerstag":
-        localStorage.setItem("stundenRasterDonnerstag",x);
-        break;
-      case "freitag":
-        localStorage.setItem("stundenRasterFreitag",x);
-        break;
-    }
-    
+            localStorage.setItem("stundenRaster" + tagvorher,x);
   }
 
   load(day){
     let y;
-    switch(day){ 
-      case "montag": 
-        y=localStorage.getItem("stundenRasterMontag");
-          break;
-      case "dienstag":
-        y =localStorage.getItem("stundenRasterDienstag"); 
-        break;
-      case "mittwoch":
-        y=localStorage.getItem("stundenRasterMittwoch");
-        break;
-      case "donnerstag":
-        y=localStorage.getItem("stundenRasterDonnerstag");
-        break;
-      case "freitag":
-       y=localStorage.getItem("stundenRasterFreitag");
-        break;
-    }
-    y=atob(y);
+           y=localStorage.getItem("stundenRaster" +day);
+      y=atob(y);
     try {
       let stundenRaster=JSON.parse(y);
- 
-   // console.log(stundenRaster);
-
     this.gefaerbteCells.splice(0,this.gefaerbteCells.length);
-  //  this.lehrerservice.stundenRaster.next(stundenRaster);
 
     this.lehrerservice.stundenRaster.getValue().forEach((reihe, r) => {
-  
-      let kuerzelRow=[];    //für rote färbung
+        let kuerzelRow=[];    //für rote färbung
       reihe.forEach((zelle,z) => {
           var loadCell=stundenRaster[r][z];  //geladene Zelle/ aus dem Speicher
           zelle.splice(0, zelle.length); //aktuelle Zelle löschen
@@ -105,8 +67,6 @@ export class StorageService {
     }
   } //load ende
   
-
   constructor(private lehrerservice:LehrerService) { 
-
   }
 }

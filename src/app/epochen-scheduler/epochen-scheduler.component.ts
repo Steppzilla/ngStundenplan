@@ -8,7 +8,7 @@ import { LoginService } from '../login.service';
 })
 export class EpochenSchedulerComponent  {
  items;    //spiel-Items mit .tut und .user oder .name?
- tage; //test für string stundenplaner
+// tage; //test für string stundenplaner
 
   
  add(x,y){
@@ -19,7 +19,7 @@ export class EpochenSchedulerComponent  {
      ) {
        this.loginService=loginService;
        this.items=loginService.items;
-       this.tage=loginService.tage;
+      // this.tage=loginService.tage;
 
        //this.dinge=loginService.dinge;
        //console.log(this.dinge);
