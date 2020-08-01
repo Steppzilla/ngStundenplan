@@ -20,17 +20,17 @@ export class WochenplanComponent implements OnInit {
 
 
   constructor(
-    //private planMakerService:PlanmakerService, 
+    private planMakerService:PlanmakerService, 
     //loginService:LoginService, 
     private lehrerService:LehrerService
     ) { 
       console.log(lehrerService.alleStundenRaster);
-      this.stundenPlan
-     // this.stundenPlan=lehrerService.alleStundenRaster[0];
+     // this.stundenPlan
+      //this.stundenPlan=lehrerService.alleStundenRaster[0];
 
-     // planMakerService.aktuell$.subscribe((bob)=>{
-     //   this.stundenPlan=bob;
-     // });
+      planMakerService.aktuell$.subscribe((bob)=>{
+        this.stundenPlan=bob;
+      });
 
   }
 

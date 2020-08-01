@@ -15,7 +15,7 @@ export class LoginService {
   store:AngularFirestore;   //db
   items:Observable<any[]>; //original: Shirts observable any//collection
    stundenStrings:Array<Plan>=[];  //Hier sind die StundenRaster-Strings gespeichert unter plan{.tag und .wochentag}
-   stundenRasterAll=[];
+   
 
   add(userNeu: string, tutNeu: string){
     let items = this.store.collection<Item>("items"); //hier wird unter der collection  items gespeichert heißt
@@ -49,6 +49,7 @@ export class LoginService {
     this.store.collection<Array<Plan>>('tage').doc('/' + tag).valueChanges().subscribe((val:Plan)=>{
       this.stundenStrings.push(val);
       });
+
      }
 
     
@@ -67,9 +68,13 @@ export class LoginService {
        this.planPushen('donnerstag');
        this.planPushen('freitag');  
        console.log(this.stundenStrings); //geht
+       console.log(this.stundenStrings.length);
+       //Kaputt::??
        this.stundenStrings.forEach((val:Plan) => {
          console.log(val); //geht nicht mehr
-        let z:Array<Array<Array<[Lehrer,Fach]>>>=JSON.parse(atob(val.tag));
+         let z= atob(val.tag);
+         console.log(z);
+         z=JSON.parse(z);  //z ist hier   Array<Array<Array<[Lehrer,Fach]>>>
         console.log(z);
         lehrerservice.alleStundenRaster.push(z);
        });
