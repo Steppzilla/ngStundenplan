@@ -138,7 +138,7 @@ export class LehrerlisteComponent implements OnInit {
   //für Buttons;
 
 
-  constructor(private loginService: LoginService, private lehrerservice: LehrerService
+  constructor( private lehrerservice: LehrerService,private loginService: LoginService
     //,    private storageService:StorageService//,private buttonComponent:ButtonComponent
     //,   private   planMaker:PlanMaker
   ) {
@@ -167,6 +167,8 @@ export class LehrerlisteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
 
   }
 }

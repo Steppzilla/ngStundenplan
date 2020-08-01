@@ -17,7 +17,7 @@ export class EpochenSchedulerComponent  {
 
   constructor(private loginService:LoginService
      ) {
-       this.loginService=loginService;
+      // this.loginService=loginService;
        this.items=loginService.items;
       // this.tage=loginService.tage;
 

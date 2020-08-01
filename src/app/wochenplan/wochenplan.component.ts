@@ -26,11 +26,11 @@ export class WochenplanComponent implements OnInit {
     ) { 
       console.log(lehrerService.alleStundenRaster);
      // this.stundenPlan
-      //this.stundenPlan=lehrerService.alleStundenRaster[0];
+     // this.stundenPlan=lehrerService.alleStundenRaster[0];
 
-      planMakerService.aktuell$.subscribe((bob)=>{
-        this.stundenPlan=bob;
-      });
+     // planMakerService.aktuell$.subscribe((bob)=>{
+     //   this.stundenPlan=bob;
+     // });
 
   }
 

@@ -8,7 +8,7 @@ import { LehrerService } from './lehrer.service';
 export class StorageService {
 
   gefaerbteCells=[];
-  stundenRasterAll=[];
+  stundenRasterAll=[[],[],[],[],[]];
   loadAll(){
     this.stundenRasterAll.push(this.entStringen(localStorage.getItem("stundenRasterMontag")));
     this.stundenRasterAll.push(this.entStringen(localStorage.getItem("stundenRasterDienstag"))); 

@@ -17,6 +17,8 @@ import {
   ButtonComponent
 } from './button/button.component';
 import { BehaviorSubject } from 'rxjs';
+import { LoginService } from './login.service';
+import { Plan } from './interfaces/plan';
 
 @Injectable({
   providedIn: 'root'
@@ -26,18 +28,14 @@ export class LehrerService {
   klassen = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   stundenRaster=new BehaviorSubject <Array < Array < Array < [Lehrer, Fach] >>>>(null);
   stundenRaster$=this.stundenRaster.asObservable();
-  alleStundenRaster:Array<Array<Array<Array<[Lehrer,Fach]>>>>=new Array();
+  alleStundenRaster:Array<Array<Array<Array<[Lehrer,Fach]>>>>=[];
   //
 
     //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
   wochentage=5;
   
   lehrer: Lehrer[] = [
-    //{ id: 0, name: 'Mittag', kuerzel: ' ', anrede: "Herr" , faecher: [Fach.mittag], 
-    // zuweisung: [[Lehrjahr.eins,Fach.mittag],[Lehrjahr.zwei,Fach.mittag],[Lehrjahr.drei,Fach.mittag],[Lehrjahr.vier,Fach.mittag],[Lehrjahr.fuenf,Fach.mittag],
-    //  [Lehrjahr.sechs,Fach.mittag],[Lehrjahr.sieben,Fach.mittag],[Lehrjahr.acht,Fach.mittag],[Lehrjahr.neun,Fach.mittag],[Lehrjahr.zehn,Fach.mittag],
-    //  [Lehrjahr.elf,Fach.mittag],[Lehrjahr.zwoelf,Fach.mittag],[Lehrjahr.dreizehn,Fach.mittag]
-    // ]},
+   
     {
       id: 32,
       name: 'Ba',
@@ -510,11 +508,17 @@ export class LehrerService {
   zuweisungKlasseFach = new Array();
 
   createEmptyStundenraster(){
-    return new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = []));
+    return new Array(this.stundenanzahl).fill(null).map(
+      (r) =>     r = new Array(this.klassen.length).fill(null).map(
+        (s) => s = []));
   }
 
   constructor() {
     this.stundenRaster.next(this.createEmptyStundenraster());
+    //this.alleStundenRaster = new Array(this.wochentage).fill(null).map(
+   //   (f)=> f=  new Array (this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = []))
+   // );
+
     //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
 
   }

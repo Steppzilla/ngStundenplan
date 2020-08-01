@@ -14,12 +14,14 @@ import { Fach } from './fach.enum';
 export class LoginService {
   store:AngularFirestore;   //db
   items:Observable<any[]>; //original: Shirts observable any//collection
-   stundenStrings:Array<Plan>=[];  //Hier sind die StundenRaster-Strings gespeichert unter plan{.tag und .wochentag}
+  stundenStrings:Array<Plan>=new Array();  //Hier sind die StundenRaster-Strings gespeichert unter plan{.tag und .wochentag}
    
 
   add(userNeu: string, tutNeu: string){
+   
     let items = this.store.collection<Item>("items"); //hier wird unter der collection  items gespeichert heißt
     items.add({user: userNeu, tut: tutNeu});
+  
   }
 
   save(tagvorher){
@@ -30,9 +32,11 @@ export class LoginService {
     //  console.log('done' + '. tag:'+ tag + 'string: ' +x );
     }).catch(function(error){console.error(error);
   });
+ 
   }
 
   load(day){   
+
     let str=this.stundenStrings;
     str.forEach((plan:Plan) => {
         //console.log(plan.wochentag + "  :  " + day);
@@ -43,44 +47,51 @@ export class LoginService {
         this.lehrerservice.stundenRaster.next(stundenRaster);
       }      
     });
+   
   }
     
-   planPushen(tag){
-    this.store.collection<Array<Plan>>('tage').doc('/' + tag).valueChanges().subscribe((val:Plan)=>{
-      this.stundenStrings.push(val);
-      });
+  login(){
+    let email="bob@trottel.de";
+    let passwort="jojojo";
+   this.auth.signInWithEmailAndPassword(email, passwort).catch(function(e){
+    var errorCode = e.code;
+     var errorMessage = e.message;
+    }); //original: Anonymously
+  }
 
-     }
+  logout(){
+    this.auth.signOut().then(function() {
+      // Sign-out successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
 
+  planPushen(tag){
+    
+   this.store.collection<Array<Plan>>('tage').doc('/' + tag).valueChanges().subscribe((val:Plan)=>{
+
+    // this.stundenStrings.slice(0,1);
+     this.stundenStrings.push(val);
+     let z= atob(val.tag);
+  
+     let y: Array<Array<Array<[Lehrer,Fach]>>>=JSON.parse(z);  
+     this.lehrerservice.alleStundenRaster.push(y);
+        console.log("länge: " +this.lehrerservice.alleStundenRaster.length);
+ 
+     });
+   
+    }
     
 
-  constructor(public lehrerservice:LehrerService, db: AngularFirestore, public auth: AngularFireAuth) { 
+  constructor(private lehrerservice:LehrerService, db: AngularFirestore, public auth: AngularFireAuth) { 
 
-        let email="bob@trottel.de";
-       let passwort="jojojo";
-      this.auth.signInWithEmailAndPassword(email, passwort); //original: Anonymously
-     // admin.initializeApp();
        this.items=db.collection('items').valueChanges(); //items ist firestore-collection name
        this.store=db; //hier speichere ich die ganze angularfirestore dings
-       this.planPushen('montag');
-       this.planPushen('dienstag');
-       this.planPushen('mittwoch');
-       this.planPushen('donnerstag');
-       this.planPushen('freitag');  
-       console.log(this.stundenStrings); //geht
-       console.log(this.stundenStrings.length);
-       //Kaputt::??
-       this.stundenStrings.forEach((val:Plan) => {
-         console.log(val); //geht nicht mehr
-         let z= atob(val.tag);
-         console.log(z);
-         let y: Array<Array<Array<[Lehrer,Fach]>>>=JSON.parse(z);  
-        console.log(y);
-        lehrerservice.alleStundenRaster.push(y);
-       });
-       console.log(lehrerservice.alleStundenRaster);
-       
-      // this.stundenRasterAll=lehrerservice.alleStundenRaster;
-
+      // var elementAnzahl=5;
+      // let planElemente:Plan={tag: "", wochentag: ""};
+     // this.stundenStrings=new Array(elementAnzahl).fill(null).map((r) => r = planElemente)
+          //storageService.loadAll();
+  
   }
 }
