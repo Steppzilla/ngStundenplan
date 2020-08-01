@@ -515,6 +515,17 @@ export class LehrerService {
 
   constructor() {
     this.stundenRaster.next(this.createEmptyStundenraster());
+
+
+ 
+ //(plan: Array<Array<Array<[Lehrer,Fach]>>>)=>
+ 
+  
+
+
+
+
+    console.log("Konstruktor LehrerService");
     //this.alleStundenRaster = new Array(this.wochentage).fill(null).map(
    //   (f)=> f=  new Array (this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = []))
    // );

@@ -150,19 +150,8 @@ export class PlanmakerService {
 
   constructor(public loginService:LoginService, private lehrerService:LehrerService) { 
     
-    console.log("alleraster:");
- console.log(lehrerService.alleStundenRaster);
-    console.log("raster1");
- console.log(lehrerService.alleStundenRaster[1]);
-this.montag=lehrerService.alleStundenRaster[0];
-this.dienstag=lehrerService.alleStundenRaster[1];
-this.mittwoch=lehrerService.alleStundenRaster[2];
-this.donnerstag=lehrerService.alleStundenRaster[3];
-this.freitag=lehrerService.alleStundenRaster[4];
 
-   console.log("donnerstag");
-    console.log(this.donnerstag);  //undefiniert
-   
+    console.log("Konstruktor PlanmakerService");
     
     //this.planLehrer(lehrerService.lehrer[13]);
     

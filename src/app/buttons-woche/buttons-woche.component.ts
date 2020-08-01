@@ -24,36 +24,21 @@ export class ButtonsWocheComponent implements OnInit {
 
     //this.loginService.save(this.tagvorher);
     this.loginService.load(this.wochentag);
-
-       //nachm load neu färben:
-   //console.log(this.storageService.gefaerbteCells);
-
-   //Array erstellen:
-   this.loginService.planPushen('montag');
-   this.loginService.planPushen('dienstag');
-   this.loginService.planPushen('mittwoch');
-   this.loginService.planPushen('donnerstag');
-   this.loginService.planPushen('freitag');  
-
-   
-   
-   
-   console.log("länge: " +this.lehrerService.alleStundenRaster.length);
-   console.log("jo, gepushed");
-
-   console.log("sppäter: " ); //geht
-    console.log(this.loginService.stundenStrings.length);
-    console.log(this.loginService.stundenStrings);
-
-   //montag, dienstag etc in den planmakerService speichern:
-
-
-
-   console.log("alleraster:");
-   console.log(this.lehrerService.alleStundenRaster);
-      console.log("raster1");
-   console.log(this.lehrerService.alleStundenRaster.length);
-
+  
+    console.log("länge im Wochenplan: " +this.lehrerService.alleStundenRaster.length);
+    console.log("jo, gepushed");
+ 
+    console.log("sppäter: " ); //geht
+     console.log(this.loginService.stundenStrings.length);
+     console.log(this.loginService.stundenStrings);
+ 
+    //
+ 
+    console.log("alleraster:");
+    console.log(this.lehrerService.alleStundenRaster);
+       console.log("raster1");
+    console.log(this.lehrerService.alleStundenRaster.length);
+ 
 
 
 
@@ -70,11 +55,18 @@ export class ButtonsWocheComponent implements OnInit {
 
   constructor(
     //private storageService:StorageService,
-    private loginService:LoginService, private planMakerService: PlanmakerService, private lehrerService: LehrerService) { 
-     
-    this.wochenTag('montag');//Montag wird geladen
+    private loginService:LoginService,  private lehrerService: LehrerService, private planMakerService: PlanmakerService) { 
+     this.wochenTag('montag');
+
+         //Array erstellen:
+  
+
+
+
+  
     //console.log("wo bin ich");
     //console.log( storageService);
+    console.log("Konstruktor WochenPlan");
   }
     
   ngOnInit(): void {

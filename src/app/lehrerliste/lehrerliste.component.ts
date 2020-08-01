@@ -16,6 +16,7 @@ import {
 } from '../fach.enum';
 import { StorageService } from '../storage.service';
 import{LoginService} from '../login.service';
+import { ButtonsWocheComponent } from '../buttons-woche/buttons-woche.component';
 
 @Component({
   selector: 'app-lehrerliste',
@@ -161,9 +162,8 @@ export class LehrerlisteComponent implements OnInit {
 
     this.lehrer=lehrerservice.lehrer;
     this.klassen=lehrerservice.klassen;
-
-    
-    
+  
+  
   }
 
   ngOnInit(): void {
