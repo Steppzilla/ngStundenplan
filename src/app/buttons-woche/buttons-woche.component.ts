@@ -28,9 +28,9 @@ export class ButtonsWocheComponent implements OnInit {
 
 
   constructor(
-    private storageService:StorageService,
+    //private storageService:StorageService,
     private loginService:LoginService) { 
-    this.storageService.load(this.tagvorher);//Montag wird geladen
+    this.loginService.load(this.tagvorher);//Montag wird geladen
     //console.log( storageService);
   }
     

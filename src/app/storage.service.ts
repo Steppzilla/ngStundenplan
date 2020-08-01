@@ -18,7 +18,7 @@ export class StorageService {
   }
   entStringen(y:string){
     try{
-    y=atob(y);
+      y=atob(y);
      let parsed=JSON.parse(y);
      return parsed;
     }catch(e){
@@ -34,12 +34,12 @@ export class StorageService {
   }
 
   load(day){
-    let y;
-           y=localStorage.getItem("stundenRaster" +day);
-      y=atob(y);
+    let y=localStorage.getItem("stundenRaster" +day);
+      
     try {
+      y=atob(y);
       let stundenRaster=JSON.parse(y);
-    this.gefaerbteCells.splice(0,this.gefaerbteCells.length);
+      this.gefaerbteCells.splice(0,this.gefaerbteCells.length);
 
     this.lehrerservice.stundenRaster.getValue().forEach((reihe, r) => {
         let kuerzelRow=[];    //für rote färbung
