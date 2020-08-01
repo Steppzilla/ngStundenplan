@@ -74,9 +74,9 @@ export class LoginService {
          console.log(val); //geht nicht mehr
          let z= atob(val.tag);
          console.log(z);
-         z=JSON.parse(z);  //z ist hier   Array<Array<Array<[Lehrer,Fach]>>>
-        console.log(z);
-        lehrerservice.alleStundenRaster.push(z);
+         let y: Array<Array<Array<[Lehrer,Fach]>>>=JSON.parse(z);  
+        console.log(y);
+        lehrerservice.alleStundenRaster.push(y);
        });
        console.log(lehrerservice.alleStundenRaster);
        
