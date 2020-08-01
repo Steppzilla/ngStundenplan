@@ -3,10 +3,10 @@
 </app-buttons-woche>
 
 <h1>Gesamtplan</h1>
-<table id="table">
+<table id="table" *ngIf="stundenRaster">
   <tbody>
     <tr>
-      <td></td><td *ngFor="let zelle of stundenRaster[0] index as f">{{f+1}}</td>
+      <td></td><td *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}</td>
     </tr>
     <tr *ngFor="let row of stundenRaster;index as r">
         <td>{{r+1}}</td>
@@ -45,8 +45,9 @@
   </tbody>
 </table>
 <app-epochen-scheduler></app-epochen-scheduler>
-<app-button>
-</app-button>
+
+<!--<app-button></app-button>-->
+
 <div class="stundenPlanContainer">
 <app-wochenplan></app-wochenplan>
 </div>

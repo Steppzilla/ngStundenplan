@@ -3,22 +3,15 @@ import {
 } from '@angular/core';
 import {
   Lehrer
-} from './lehrer';
+} from '../lehrer';
 import {
   Fach
-} from './fach.enum';
+} from '../fach.enum';
 import {
   Lehrjahr
-} from './lehrjahr.enum';
-import {
-  Kompetenz
-} from './kompetenz';
-import {
-  ButtonComponent
-} from './button/button.component';
+} from '../lehrjahr.enum';
 import { BehaviorSubject } from 'rxjs';
-import { LoginService } from './login.service';
-import { Plan } from './interfaces/plan';
+
 
 @Injectable({
   providedIn: 'root'
@@ -515,22 +508,5 @@ export class LehrerService {
 
   constructor() {
     this.stundenRaster.next(this.createEmptyStundenraster());
-
-
- 
- //(plan: Array<Array<Array<[Lehrer,Fach]>>>)=>
- 
-  
-
-
-
-
-    console.log("Konstruktor LehrerService");
-    //this.alleStundenRaster = new Array(this.wochentage).fill(null).map(
-   //   (f)=> f=  new Array (this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassen.length).fill(null).map((s) => s = []))
-   // );
-
-    //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
-
   }
 }

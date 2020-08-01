@@ -32,7 +32,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 //import{AuthGuardServiceService} from '../authg'
 
 import * as admin from 'firebase-admin';
-import { LoginService } from './login.service';
+import { LoginService } from './services/login.service';
+import { GesamtplanComponent } from './components/gesamtplan/gesamtplan.component';
+import { ButtonsGesamtplanComponent } from './components/buttons-gesamtplan/buttons-gesamtplan.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { LoginService } from './login.service';
     ButtonComponent,
     WochenplanComponent,
     ButtonsWocheComponent,
-    EpochenSchedulerComponent
+    EpochenSchedulerComponent,
+    GesamtplanComponent,
+    ButtonsGesamtplanComponent
   ],
   imports: [
     BrowserModule,

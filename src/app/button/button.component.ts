@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LehrerService } from '../lehrer.service';
-import{PlanmakerService} from '../planmaker.service';
+import { LehrerService } from '../services/lehrer.service';
+import{PlanmakerService} from '../services/planmaker.service';
 import { LehrerlisteComponent } from '../lehrerliste/lehrerliste.component';
 import { WochenplanComponent } from '../wochenplan/wochenplan.component';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../storage.service';
-import { LoginService } from '../login.service';
-import { PlanmakerService } from '../planmaker.service';
-import { LehrerService } from '../lehrer.service';
+import { StorageService } from '../services/storage.service';
+import { LoginService } from '../services/login.service';
+import { PlanmakerService } from '../services/planmaker.service';
+import { LehrerService } from '../services/lehrer.service';
 import { initializeApp } from 'firebase';
 
 @Component({
@@ -23,9 +23,10 @@ export class ButtonsWocheComponent implements OnInit {
     //this.storageService.load(this.wochentag);
 
     //this.loginService.save(this.tagvorher);
+    
     this.loginService.load(this.wochentag);
   
-    console.log("länge im Wochenplan: " +this.lehrerService.alleStundenRaster.length);
+   /* console.log("länge im Wochenplan: " +this.lehrerService.alleStundenRaster.length);
     console.log("jo, gepushed");
  
     console.log("sppäter: " ); //geht
@@ -38,6 +39,7 @@ export class ButtonsWocheComponent implements OnInit {
     console.log(this.lehrerService.alleStundenRaster);
        console.log("raster1");
     console.log(this.lehrerService.alleStundenRaster.length);
+    */
  
 
 
@@ -54,9 +56,12 @@ export class ButtonsWocheComponent implements OnInit {
 
 
   constructor(
+    
     //private storageService:StorageService,
     private loginService:LoginService,  private lehrerService: LehrerService, private planMakerService: PlanmakerService) { 
-     this.wochenTag('montag');
+      this.loginService.planPushen();
+      this.wochenTag('montag');
+
 
          //Array erstellen:
   
@@ -70,6 +75,7 @@ export class ButtonsWocheComponent implements OnInit {
   }
     
   ngOnInit(): void {
+    
   }
 
 }

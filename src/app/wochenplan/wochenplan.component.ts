@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LehrerService } from '../lehrer.service';
-import{PlanmakerService} from '../planmaker.service';
+import { LehrerService } from '../services/lehrer.service';
+import{PlanmakerService} from '../services/planmaker.service';
 import { VirtualTimeScheduler } from 'rxjs';
-import { Stundenplan } from '../stundenplan';
-import { LoginService } from '../login.service';
+import { Stundenplan } from '../interfaces/stundenplan';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-wochenplan',
@@ -27,10 +27,11 @@ export class WochenplanComponent implements OnInit {
       console.log(lehrerService.alleStundenRaster);
      // this.stundenPlan
      // this.stundenPlan=lehrerService.alleStundenRaster[0];
+    
 
-     // planMakerService.aktuell$.subscribe((bob)=>{
-     //   this.stundenPlan=bob;
-     // });
+      planMakerService.aktuell$.subscribe((plan)=>{
+        this.stundenPlan=plan;
+     });
 
   }
 

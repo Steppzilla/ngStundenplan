@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import {
   LehrerService
-} from '../lehrer.service';
+} from '../services/lehrer.service';
 import {
   Lehrjahr
 } from '../lehrjahr.enum';
@@ -14,9 +14,8 @@ import {
 import {
   Fach
 } from '../fach.enum';
-import { StorageService } from '../storage.service';
-import{LoginService} from '../login.service';
-import { ButtonsWocheComponent } from '../buttons-woche/buttons-woche.component';
+import{LoginService} from '../services/login.service';
+
 
 @Component({
   selector: 'app-lehrerliste',
@@ -144,6 +143,8 @@ export class LehrerlisteComponent implements OnInit {
     //,   private   planMaker:PlanMaker
   ) {
     //this.storageService.load("Montag");//Montag wird geladen
+
+    
     lehrerservice.stundenRaster$.subscribe((stundenRaster)=>this.stundenRaster=stundenRaster);
     //this.stundenRaster = lehrerservice.stundenRaster.getValue();
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
@@ -162,7 +163,7 @@ export class LehrerlisteComponent implements OnInit {
 
     this.lehrer=lehrerservice.lehrer;
     this.klassen=lehrerservice.klassen;
-  
+    this.loginService.load('montag');
   
   }
 

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { LehrerService } from './lehrer.service';
 import { StorageService } from './storage.service';
-import { Lehrer } from './lehrer';
-import { Fach } from './fach.enum';
+import { Lehrer } from '../lehrer';
+import { Fach } from '../fach.enum';
 import { BehaviorSubject } from 'rxjs';
-import{Stundenplan} from './stundenplan'
+import{Stundenplan} from '../interfaces/stundenplan'
 import { LoginService } from './login.service';
-import { Plan } from './interfaces/plan';
+import { Plan } from '../interfaces/plan';
 
 @Injectable({
   providedIn: 'root'
@@ -16,73 +16,30 @@ export class PlanmakerService {
   aktuell=new BehaviorSubject<Stundenplan>(null);
   aktuell$=this.aktuell.asObservable();
 
-
+//aktuelle Pläne:
   montag;  //Stundenraster Montag
   dienstag;
   mittwoch;
   donnerstag;
   freitag;
 
+  planLehrer(dieserlehrer:Lehrer){
+    console.log(this.montag);
+    let lehrerPlan= new Stundenplan;
+    lehrerPlan.stundenPlan=new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s)=>s=[]));
+    this.montag.forEach((row,r) => {
+      row.forEach((cell ,c) => {
+        cell.forEach(([lehrer,fach]) => {
+          if(lehrer.kuerzel===dieserlehrer.kuerzel){
+            lehrerPlan.stundenPlan[r][0].push([lehrer,fach,'Kl. ' + c]);
+          }
+        });
+      });
+    });
 
-  planLehrer(lehrer:Lehrer){
-    let stundenPlan= new Stundenplan();
-    stundenPlan.lehrer=lehrer;
-    stundenPlan.stundenPlan=new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s)=>s=[]));
-     stundenPlan.stundenPlan.forEach((reihe,r) => {
-       reihe.forEach((cell,c) => {
-         cell.splice(0,cell.length); //zelle im plan löschen
-         switch(c){
-           case 0: //herausfinden ob der lehrer Montag in irgendeiner klasse ist:
-             this.montag[r].forEach((zelle,z) => {
-               zelle.forEach(lehreritem => {
-                 if(lehrer.kuerzel===lehreritem[0].kuerzel){
-                   cell.push([lehreritem[0],lehreritem[1],`Kl. ${z+1}`]);
-                 }
-               });
-             });
-             break;
-           case 1: 
-           this.dienstag[r].forEach((zelle,z) => {
-             zelle.forEach(lehreritem => {
-               if(lehrer.kuerzel===lehreritem[0].kuerzel){
-                 cell.push([lehreritem[0],lehreritem[1],`Kl. ${z+1}`]);
-               }
-             });   
-           });
-             break;
-           case 2:
-             this.mittwoch[r].forEach((zelle,z) => {
-               zelle.forEach(lehreritem => {
-                 if(lehrer.kuerzel===lehreritem[0].kuerzel){
-                   cell.push([lehreritem[0],lehreritem[1],`Kl. ${z+1}`]);
-                 }
-               });
-             });
-             break;
-            case 3:
-             this.donnerstag[r].forEach((zelle,z) => {
-               zelle.forEach(lehreritem => {
-                 if(lehrer.kuerzel===lehreritem[0].kuerzel){
-                   cell.push([lehreritem[0],lehreritem[1],`Kl. ${z+1}`]);
-                 }
-               }); 
-             });
-             break;
-            case 4:
-             this.freitag[r].forEach((zelle,z) => {
-               zelle.forEach(lehreritem => {
-                 if(lehrer.kuerzel===lehreritem[0].kuerzel){
-                   cell.push([lehreritem[0],lehreritem[1],`Kl. ${z+1}`]);
-                 }
-               });
-             });
-             break;
-         }
-       });
-     });
-     this.aktuell.next(stundenPlan);
- 
-   }
+    this.aktuell.next(lehrerPlan);
+  }
+
  
    planKlasse(klasse:number){
     let stundenPlan= new Stundenplan();
@@ -146,17 +103,7 @@ export class PlanmakerService {
 
    }
 
-  
-
-  constructor(public loginService:LoginService, private lehrerService:LehrerService) { 
-    
-
-    console.log("Konstruktor PlanmakerService");
-    
+  constructor(private lehrerService:LehrerService) { 
     //this.planLehrer(lehrerService.lehrer[13]);
-    
-  
-  
-
   }
 }

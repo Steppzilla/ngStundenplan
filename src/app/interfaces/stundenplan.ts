@@ -1,5 +1,5 @@
-import { Lehrer } from './lehrer';
-import { Fach } from './fach.enum';
+import { Lehrer } from '../lehrer';
+import { Fach } from '../fach.enum';
 
 export class Stundenplan {
 
