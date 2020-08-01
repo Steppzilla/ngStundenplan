@@ -5,6 +5,7 @@ import { Lehrer } from './lehrer';
 import { Fach } from './fach.enum';
 import { BehaviorSubject } from 'rxjs';
 import{Stundenplan} from './stundenplan'
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -143,22 +144,36 @@ export class PlanmakerService {
      this.aktuell.next(stundenPlan);
 
    }
-  constructor(private lehrerService:LehrerService, storageService: StorageService) { 
+  constructor(private loginService:LoginService, private lehrerService:LehrerService, storageService: StorageService) { 
     
     //storageService.loadAll();
-
-
-    //this.montag=storageService.stundenRasterAll[0];
-    //this.dienstag=storageService.stundenRasterAll[1];
-   // this.mittwoch=storageService.stundenRasterAll[2];
-   // this.donnerstag=storageService.stundenRasterAll[3];
-    //this.freitag=storageService.stundenRasterAll[4];
-
-
-    //storageService.load("Montag");
-
-
-   // this.planLehrer(lehrerService.lehrer[13]);
+    
+    console.log(this.lehrerService.alleStundenRaster); //Das array gibts aber
+   // console.log(loginService.stundenRasterAll);
+    console.log(lehrerService.alleStundenRaster.length);  //Länge ist 0
+    lehrerService.alleStundenRaster.forEach((element,e) => {
+      console.log(e)
+      switch(e){
+        default:;
+        case 0:this.montag=element;
+          break;
+        case 1: this.dienstag=element;
+          break;
+        case 2: this.mittwoch=element;
+          break;
+        case 3: this.donnerstag=element;
+          break;
+        case 4: this.freitag=element;
+          break;
+      }
+      
+    });
+    console.log(this.donnerstag);  //undefiniert
+    
+    this.planLehrer(lehrerService.lehrer[13]);
+   
+  
+  
 
   }
 }

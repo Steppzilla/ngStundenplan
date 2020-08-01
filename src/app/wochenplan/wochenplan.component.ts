@@ -3,6 +3,7 @@ import { LehrerService } from '../lehrer.service';
 import{PlanmakerService} from '../planmaker.service';
 import { VirtualTimeScheduler } from 'rxjs';
 import { Stundenplan } from '../stundenplan';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-wochenplan',
@@ -18,11 +19,18 @@ export class WochenplanComponent implements OnInit {
   //klasseAktiv:boolean=false;
 
 
-  constructor(private planMakerService:PlanmakerService, private lehrerService:LehrerService
+  constructor(
+    //private planMakerService:PlanmakerService, 
+    //loginService:LoginService, 
+    private lehrerService:LehrerService
     ) { 
-      planMakerService.aktuell$.subscribe((bob)=>{
-        this.stundenPlan=bob;
-      });
+      console.log(lehrerService.alleStundenRaster);
+      this.stundenPlan
+     // this.stundenPlan=lehrerService.alleStundenRaster[0];
+
+     // planMakerService.aktuell$.subscribe((bob)=>{
+     //   this.stundenPlan=bob;
+     // });
 
   }
 

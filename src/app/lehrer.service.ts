@@ -26,7 +26,8 @@ export class LehrerService {
   klassen = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   stundenRaster=new BehaviorSubject <Array < Array < Array < [Lehrer, Fach] >>>>(null);
   stundenRaster$=this.stundenRaster.asObservable();
-  alleStundenRaster;
+  alleStundenRaster:Array<Array<Array<Array<[Lehrer,Fach]>>>>=new Array();
+  //
 
     //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
   wochentage=5;
