@@ -6,11 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { LehrerlisteComponent } from './lehrerliste/lehrerliste.component';
-import { LehrerComponent } from './lehrer/lehrer.component';
-import { WochenplanComponent } from './wochenplan/wochenplan.component';
-import { ButtonsWocheComponent } from './buttons-woche/buttons-woche.component';
-import { EpochenSchedulerComponent } from './epochen-scheduler/epochen-scheduler.component';
+import { LehrerlisteComponent } from './components/gesamtplan/gesamtplan.component';
+import { LehrerComponent } from './components/lehrer/lehrer.component';
+import { WochenplanComponent } from './components/wochenplan/wochenplan.component';
+import { ButtonsWocheComponent } from './components/buttons-woche/buttons-woche.component';
+import { EpochenSchedulerComponent } from './components/epochen-scheduler/epochen-scheduler.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -30,10 +30,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 //import { AuthGuard, AuthService, NotesService, UserService } from './services';
 //import{AuthGuardServiceService} from '../authg'
 
-import * as admin from 'firebase-admin';
 import { LoginService } from './services/login.service';
-import { GesamtplanComponent } from './components/gesamtplan/gesamtplan.component';
-import { ButtonsGesamtplanComponent } from './components/buttons-gesamtplan/buttons-gesamtplan.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +39,7 @@ import { ButtonsGesamtplanComponent } from './components/buttons-gesamtplan/butt
     LehrerComponent,
     WochenplanComponent,
     ButtonsWocheComponent,
-    EpochenSchedulerComponent,
-    GesamtplanComponent,
-    ButtonsGesamtplanComponent
+    EpochenSchedulerComponent
   ],
   imports: [
     BrowserModule,

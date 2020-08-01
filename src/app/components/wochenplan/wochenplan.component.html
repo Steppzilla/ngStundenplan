@@ -8,9 +8,9 @@
 
 <h1 >Stundenplan </h1>
 <h2>{{aktuellerPlan.getTitel()}}</h2>
-
+<div class="gesamtplan">
 <div class="reihe reiheOben">
-  <div><div class="leftCell"></div></div>
+  <div><div></div></div>
   <div><div> Montag </div></div>
   <div><div> Dienstag </div></div>
   <div><div> Mittwoch </div></div>
@@ -20,7 +20,7 @@
 </div>
 
 <div *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
-  <div class="leftCell">
+  <div>
     {{r+1}}
   </div>
   <div *ngFor="let cell of reihe; index as c">
@@ -36,5 +36,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 

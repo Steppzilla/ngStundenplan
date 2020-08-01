@@ -1,6 +1,13 @@
 *{min-width:20pt;
 min-height:20pt;}
 
+
+.gesamtplan{  
+  width:80%;
+  margin-left:15pt;
+  border: solid 1pt; 
+  border-radius:15pt;
+}
 .buttonreihe{
   display:flex;
 
@@ -19,26 +26,28 @@ min-height:20pt;}
 
 
 .reihe {
-  border-bottom-style:dotted;
-  border-bottom-width:0.5pt;
+  border-bottom:dotted 1pt;
   min-height:40pt;
   font-size: 13pt;
-  margin-left: 10pt;
   display: flex;
   text-align: center;
   >div {
     width: 19%;
     display:flex;
     text-align:center;
-    border-right-style:dotted;
-    border-right-width:0.5pt;
+    border-right:dotted 1pt;
     ///background-color:violet;
   }
-  >div:first-child {
-    text-align: left;
-    width:20pt;
-   // background-color:yellow;
+  >div:last-child{                     //reihe rechts
+    border-right:dotted 0pt;
   }
+  >div:first-child {          //reihe links
+    width:20pt;
+    justify-content: center;
+  }
+}
+.reihe:last-child{
+  border-bottom:dotted 0pt;
 }
 
 .container {

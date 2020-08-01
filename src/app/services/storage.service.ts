@@ -5,7 +5,6 @@ import {
   LehrerService
 } from './lehrer.service';
 
-
 @Injectable({
   providedIn: 'root'
 })

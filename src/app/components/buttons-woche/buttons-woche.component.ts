@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import {
   LoginService
-} from '../services/login.service';
+} from '../../services/login.service';
 
 @Component({
   selector: 'app-buttons-woche',
@@ -34,6 +34,5 @@ export class ButtonsWocheComponent implements OnInit {
     this.loginService.planPushen();
     this.wochenTag('montag');
   }
-
   ngOnInit(): void {}
 }

@@ -1,1 +1,57 @@
-<p>gesamtplan works!</p>
+<app-buttons-woche>
+
+</app-buttons-woche>
+
+<h1>Gesamtplan</h1>
+<table id="table" *ngIf="stundenRaster">
+  <tbody>
+    <tr>
+      <td></td><td *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}</td>
+    </tr>
+    <tr *ngFor="let row of stundenRaster;index as r">
+        <td>{{r+1}}</td>
+        <td class="box" *ngFor="let cell of row; index as c">
+        <div 
+          triggers="click"  
+          [autoClose]="true" 
+          class="dropButton" 
+          [ngbTooltip]= "Lehrer" placement="bottom"
+          >                   <!-- -->
+          <div 
+            *ngFor="let lehrerFach of cell"
+            class="{{doppelt(row,lehrerFach[0])}} lehrerFachBehaelter"  
+            >
+            <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
+            <p>{{lehrerFach?lehrerFach[1]:""}}</p> 
+          </div>
+        </div>
+       <ng-template #Lehrer >
+          <div class="buttonContainer">
+            <button (click)="deleteAll(r,c)" id="delete" class="btn btn-danger container-fluid">delete</button>
+            <button 
+              *ngFor="let lehrerFach of lehrerErmitteln(c)" 
+              ngbDropdownItem  
+              (click)="lehrerWahl(r,c, lehrerFach,$event )"
+              class="dropCell LehrerPopupButton {{farbwaehler(row,cell,lehrerFach[0])}}" 
+              >  
+                <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> : 
+                <div class="dropSpan2">  {{lehrerFach[1]}}</div>
+            </button>
+            <button (click)="mittagsPause(r,c,$event)" id="mittag" class="btn container-fluid"> Mittag </button>
+        </div>
+       </ng-template>
+    </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="stundenPlanContainer">    <app-wochenplan></app-wochenplan>      </div>
+
+<p class="epochenplan">
+  <app-epochen-scheduler></app-epochen-scheduler>
+</p>
+
+
+
+

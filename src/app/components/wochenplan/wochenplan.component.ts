@@ -4,16 +4,16 @@ import {
 } from '@angular/core';
 import {
   LehrerService
-} from '../services/lehrer.service';
+} from '../../services/lehrer.service';
 import {
   PlanmakerService
-} from '../services/planmaker.service';
+} from '../../services/planmaker.service';
 import {
   Stundenplan
-} from '../interfaces/stundenplan';
+} from '../../interfaces/stundenplan';
 import {
   Lehrer
-} from '../interfaces/lehrer';
+} from '../../interfaces/lehrer';
 
 @Component({
   selector: 'app-wochenplan',

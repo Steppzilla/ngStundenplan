@@ -1,5 +1,5 @@
 import { Component, OnInit, enableProdMode } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -7,22 +7,16 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./epochen-scheduler.component.scss']
 })
 export class EpochenSchedulerComponent  {
- items;    //spiel-Items mit .tut und .user oder .name?
-// tage; //test für string stundenplaner
+ items;    
 
   
- add(x,y){
-   
- }
+
 
   constructor(private loginService:LoginService
      ) {
-      // this.loginService=loginService;
-       this.items=loginService.items;
-      // this.tage=loginService.tage;
 
-       //this.dinge=loginService.dinge;
-       //console.log(this.dinge);
+       this.items=loginService.items;
+
          
   }
 }
