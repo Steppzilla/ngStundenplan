@@ -8,7 +8,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { LehrerlisteComponent } from './lehrerliste/lehrerliste.component';
 import { LehrerComponent } from './lehrer/lehrer.component';
-import { ButtonComponent } from './button/button.component';
 import { WochenplanComponent } from './wochenplan/wochenplan.component';
 import { ButtonsWocheComponent } from './buttons-woche/buttons-woche.component';
 import { EpochenSchedulerComponent } from './epochen-scheduler/epochen-scheduler.component';
@@ -41,7 +40,6 @@ import { ButtonsGesamtplanComponent } from './components/buttons-gesamtplan/butt
     AppComponent,
     LehrerlisteComponent,
     LehrerComponent,
-    ButtonComponent,
     WochenplanComponent,
     ButtonsWocheComponent,
     EpochenSchedulerComponent,

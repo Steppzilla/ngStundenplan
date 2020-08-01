@@ -1,4 +1,4 @@
-import{Kompetenz} from "./kompetenz";
+
 import { Lehrjahr } from './lehrjahr.enum';
 import { Fach } from './fach.enum';
 

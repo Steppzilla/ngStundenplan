@@ -7,13 +7,13 @@ import {
 } from '../services/lehrer.service';
 import {
   Lehrjahr
-} from '../lehrjahr.enum';
+} from '../interfaces/lehrjahr.enum';
 import {
   Lehrer
-} from '../lehrer';
+} from '../interfaces/lehrer';
 import {
   Fach
-} from '../fach.enum';
+} from '../interfaces/fach.enum';
 import{LoginService} from '../services/login.service';
 
 

@@ -12,7 +12,7 @@ export class EpochenSchedulerComponent  {
 
   
  add(x,y){
-   this.loginService.add(x,y);
+   
  }
 
   constructor(private loginService:LoginService

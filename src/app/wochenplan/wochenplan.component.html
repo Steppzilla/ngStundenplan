@@ -1,4 +1,14 @@
-<!--<h1 >Stundenplan {{stundenPlan.getTitel()}}</h1>-->
+
+<div class="buttonreihe">
+  <button *ngFor="let einer of lehrer; index as l" (click)="planLehrer(einer)"> {{einer.kuerzel}} </button>
+</div>
+<div class="buttonreihe">
+  <button *ngFor="let eine of klassen; index as k" (click)="planKlasse(eine)"> {{eine}} </button>
+</div>
+
+<h1 >Stundenplan </h1>
+<h2>{{aktuellerPlan.getTitel()}}</h2>
+
 <div class="reihe reiheOben">
   <div><div class="leftCell"></div></div>
   <div><div> Montag </div></div>
@@ -8,23 +18,23 @@
   <div><div> Freitag </div></div> 
 
 </div>
-<!--
-<div *ngFor="let reihe of stundenPlan.stundenPlan index as r" class="reihe">
+
+<div *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
   <div class="leftCell">
     {{r+1}}
   </div>
-  <div *ngFor="let cell of reihe index as c">
+  <div *ngFor="let cell of reihe; index as c">
     <div *ngFor="let lehrerItemErw of cell" class="container">
       <div class="unterrichtsFeld">
         {{lehrerItemErw?lehrerItemErw[1]:""}}
       </div>
-      <div class="lehrerKuerzel" *ngIf="stundenPlan.lehrer===undefined">
-        {{lehrerItemErw?lehrerItemErw[0].kuerzel:""}}
+      <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined"><!-- wenn Lehrer definiert will ich ihn nicht sehen!-->
+        {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
       </div>
-      <div class="Klasse" *ngIf="stundenPlan.klasse===undefined"> 
+      <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined"> 
         {{lehrerItemErw[2]}} 
       </div>
     </div>
   </div>
 </div>
--->
+

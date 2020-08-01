@@ -1,3 +1,23 @@
+*{min-width:20pt;
+min-height:20pt;}
+
+.buttonreihe{
+  display:flex;
+
+  button{width:100%;
+      border:none;
+          margin:2pt;
+          padding:1pt;
+          background-color:rgb(132, 158, 147);
+          border-radius:5pt;
+  }
+  button:hover{
+      background-color:indianred;
+  }
+  
+}
+
+
 .reihe {
   border-bottom-style:dotted;
   border-bottom-width:0.5pt;
@@ -50,3 +70,4 @@
     }
   }
 }
+

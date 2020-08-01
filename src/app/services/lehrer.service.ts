@@ -3,32 +3,33 @@ import {
 } from '@angular/core';
 import {
   Lehrer
-} from '../lehrer';
+} from '../interfaces/lehrer';
 import {
   Fach
-} from '../fach.enum';
+} from '../interfaces/fach.enum';
 import {
   Lehrjahr
-} from '../lehrjahr.enum';
-import { BehaviorSubject } from 'rxjs';
-
+} from '../interfaces/lehrjahr.enum';
+import {
+  BehaviorSubject
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LehrerService {
   stundenanzahl = 10;
-  klassen = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-  stundenRaster=new BehaviorSubject <Array < Array < Array < [Lehrer, Fach] >>>>(null);
-  stundenRaster$=this.stundenRaster.asObservable();
-  alleStundenRaster:Array<Array<Array<Array<[Lehrer,Fach]>>>>=[];
+  klassen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  stundenRaster = new BehaviorSubject < Array < Array < Array < [Lehrer, Fach] >>> > (null);
+  stundenRaster$ = this.stundenRaster.asObservable();
+  alleStundenRaster: Array < Array < Array < Array < [Lehrer, Fach] >>> >= [];
   //
 
-    //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
-  wochentage=5;
-  
+  //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
+  wochentage = 5;
+
   lehrer: Lehrer[] = [
-   
+
     {
       id: 32,
       name: 'Ba',
@@ -101,7 +102,7 @@ export class LehrerService {
         [Lehrjahr.elf, Fach.englisch],
         [Lehrjahr.zwoelf, Fach.englisch],
         [Lehrjahr.dreizehn, Fach.englisch],
-        
+
       ]
     },
     {
@@ -127,7 +128,7 @@ export class LehrerService {
       anrede: "Frau",
       faecher: [Fach.gartenbau],
       zuweisung: [
-       // [Lehrjahr.acht, Fach.gartenbau],
+        // [Lehrjahr.acht, Fach.gartenbau],
         [Lehrjahr.neun, Fach.gartenbau],
         [Lehrjahr.sechs, Fach.gartenbau],
         [Lehrjahr.sieben, Fach.gartenbau],
@@ -311,7 +312,7 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.musik],
         [Lehrjahr.elf, Fach.musik],
         [Lehrjahr.dreizehn, Fach.musik],
-        
+
       ]
     },
     //{ id: 18, name: 'Piaskowski', kuerzel: 'FPi', anrede: "Frau", faecher: [Fach]  },
@@ -397,10 +398,10 @@ export class LehrerService {
       anrede: "Frau",
       faecher: [Fach.englisch],
       zuweisung: [
-       // [Lehrjahr.sechs, Fach.englisch],
+        // [Lehrjahr.sechs, Fach.englisch],
         [Lehrjahr.fuenf, Fach.englisch],
         [Lehrjahr.sechs, Fach.englisch],
-     //   [Lehrjahr.sieben, Fach.englisch],
+        //   [Lehrjahr.sieben, Fach.englisch],
         [Lehrjahr.acht, Fach.englisch],
         [Lehrjahr.zehn, Fach.englisch],
       ]
@@ -418,7 +419,7 @@ export class LehrerService {
         [Lehrjahr.elf, Fach.klassenbetreuer],
         [Lehrjahr.zwoelf, Fach.deutsch],
         [Lehrjahr.dreizehn, Fach.deutsch],
-        
+
       ]
     },
     {
@@ -494,15 +495,9 @@ export class LehrerService {
     },
   ];
 
-
-  französisch = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
-  hauptUnterrischt = [];
-
-  zuweisungKlasseFach = new Array();
-
-  createEmptyStundenraster(){
+  createEmptyStundenraster() {
     return new Array(this.stundenanzahl).fill(null).map(
-      (r) =>     r = new Array(this.klassen.length).fill(null).map(
+      (r) => r = new Array(this.klassen.length).fill(null).map(
         (s) => s = []));
   }
 

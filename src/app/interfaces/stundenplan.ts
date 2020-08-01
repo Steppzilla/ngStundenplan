@@ -1,5 +1,5 @@
-import { Lehrer } from '../lehrer';
-import { Fach } from '../fach.enum';
+import { Lehrer } from './lehrer';
+import { Fach } from './fach.enum';
 
 export class Stundenplan {
 
@@ -14,7 +14,7 @@ export class Stundenplan {
         if(this.klasse!==undefined){
             return " Klasse " + this.klasse ;
         }else{
-            return " " + this.lehrer.name;
+            return " " + this.lehrer.anrede + " " + this.lehrer.name;
         }
 
     }
