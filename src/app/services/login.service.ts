@@ -85,11 +85,10 @@ export class LoginService {
 
       });
       this.lehrerservice.stundenRaster.next(this.planmakerService.montag);
-      console.log("HIER");
-      console.log(this.planmakerService.montag);
+     // console.log("HIER");
+     // console.log(this.planmakerService.montag);
       this.planmakerService.planKlasse(1);
       this.planmakerService.planLehrer(this.lehrerservice.lehrer[12]);
-      //console.log(this.planmakerService.montag);
     });
   }
 

@@ -39,7 +39,7 @@ export class WochenplanComponent implements OnInit {
 
     planMakerService.aktuell$.subscribe((plan) => {
       this.aktuellerPlan = plan;
-      console.log(plan);
+  //    console.log(plan);
     });
  // this.aktuellerPlan=planMakerService.aktuell$;
     

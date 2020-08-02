@@ -159,6 +159,7 @@ export class LehrerlisteComponent implements OnInit {
       });
     });
     this.klassenZuordnung = klassenZuordnung;
+    //console.log(this.klassenZuordnung);
 
 
     this.lehrer=lehrerservice.lehrer;

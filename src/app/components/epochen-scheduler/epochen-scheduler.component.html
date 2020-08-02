@@ -1,37 +1,30 @@
-
-<h1>Epochen-Plan</h1>
+<h1>Epochen-Plan </h1>
+<h2> {{aktuelleKlasse}}</h2>
 
 <div id="plan">
+  <div class="zeile" *ngFor="let zeile of epochenplan9; index as z">
     <div class="oben">
-        <div></div> <div>10.8. </div> <div>17. 8.</div> <div>24.8.</div> <div>31.8.</div> <div>7.9.</div> <div>14.9.</div> <div>21.9.</div> <div>28.9.</div>   
+      <div></div>
+      <div *ngFor="let datum of datumstring[0]">{{datum}}</div>
     </div>
     <div class="row">
-        <div>Sommer- <br> ferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>  <div>Herbst-<br> ferien</div> 
+      <div>{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <div *ngFor="let cell of zeile; index as c" ngbDropdown>
+        <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
+          <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter">
+            <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
+            <p>{{lehrerFach?lehrerFach[1]:""}}</p>
+          </div>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="buttonContainer">
+          <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="dropCell"
+            (click)="lehrerWahl(0,c, lehrerFach,$event )">
+            <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
+            <div class="dropSpan2"> {{lehrerFach[1]}}</div>
+          </button>
+        </div>
+      </div>
+      <div>{{ferien[z+1]}}-<br> {{ferien[5]}}</div>
     </div>
-    <div class="oben">
-        <div></div>  <div>19.10.</div> <div>26.10.</div> <div>2.11.</div> <div>9.11.</div> <div>16.11.</div> <div>23.11.</div> <div>30.11.</div> <div>7.12.</div> <div>14.12.</div>   
-    </div>
-    <div class="row">
-
-        <div>Herbst-<br> ferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div><div>Weihnachts- <br> ferien</div> 
-    </div>
-    <div class="oben">
-        <div></div>  <div>Do. 7.1. </div> <div>11.1.</div> <div>18.1.</div> <div>25.1.</div> <div>1.2.</div> <div>8.2.</div> <div>15.2.</div> <div>22.2.</div> <div>1.3.</div> <div>8.3.</div> <div>15.3.</div> <div>22.3.</div> <div>29.3.-Mi.</div> 
-    </div>
-    <div class="row">
-        <div>Weihnachts- <br> ferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div><div>Oster- <br> ferien</div> 
-    </div>
-    <div class="oben">
-        <div></div>  <div>19.4.</div> <div>26.4.</div> <div>3.5.</div> <div>10.5.-Mi</div> <div>17.5.</div> <div>Di. 25.5.</div> <div>31.5.</div> <div>7.6.</div> <div>14.6.-Fr.</div>  
-    </div>
-    <div class="row">
-
-
-        <div>Oster- <br> ferien</div>  <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>  <div></div><div>Sommer- <br> ferien</div> 
-    </div>
- 
-
-
+  </div>
 </div>
-
-

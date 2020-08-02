@@ -1,5 +1,6 @@
 
-
+*{margin:0pt;
+    padding:0pt;}
 
 .plan{
     padding:3pt;
@@ -30,3 +31,31 @@
 
 .row  :first-child{border-left:solid 1pt}
 .oben  :first-child{border-left: solid 1pt}
+
+.buttonContainer{  /* der Aufpopp-Rahmen*/
+    border:none;
+    margin:0pt;
+    padding:0pt;  
+      .dropCell{           /* das ist der button im Aufplopp-Rahmen*/
+        border:none;
+        text-align:left;
+        display:flex;
+        .dropSpan1{
+            border:none;
+       //   background-color:green;
+          width:80pt;
+          padding-left:10pt;
+          padding-right:5pt;
+          border-radius:5pt;
+        }
+        .dropSpan2{
+            border:none;
+         // background-color:yellow;
+          width:200pt;
+          padding-left:10pt;
+          padding-right:5pt;
+          border-radius:5pt;
+    
+        }
+      }
+    }

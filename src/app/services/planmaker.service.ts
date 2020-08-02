@@ -37,7 +37,7 @@ export class PlanmakerService {
   freitag;
 
   planLehrer(dieserlehrer: Lehrer) {
-    console.log(this.montag);
+  //  console.log(this.montag);
     let lehrerPlan = new Stundenplan();
     lehrerPlan.lehrer = dieserlehrer;
 
