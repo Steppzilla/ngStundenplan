@@ -1,14 +1,19 @@
+
 <h1>Epochen-Plan </h1>
-<h2> {{aktuelleKlasse}}</h2>
+<h2> {{aktuelleKlasse}}. Klasse</h2>
+<button (click)="changeClass(9)">Klasse 9</button>
+<button (click)="changeClass(10)">Klasse 10</button>
+<button (click)="changeClass(11)">Klasse 11</button>
+<button (click)="changeClass(12)">Klasse 12</button> 
 
 <div id="plan">
   <div class="zeile" *ngFor="let zeile of epochenPlanAktuell; index as z">
     <div class="datumzeile">
-      <div class="first"></div>
-      <div *ngFor="let datum of datumstring[z]">{{datum}}</div>
+      <div class="first normalsize"></div>
+      <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
     </div>
     <div class="row">
-      <div class="first">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !duplicates[z][c])      ||      (duplicates[z][c]        &&            duplicates[z][c][0]===c)"

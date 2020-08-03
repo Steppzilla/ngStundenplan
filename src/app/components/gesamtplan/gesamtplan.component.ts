@@ -14,7 +14,10 @@ import {
 import {
   Fach
 } from '../../interfaces/fach.enum';
-import{LoginService} from '../../services/login.service';
+import {
+  LoginService
+} from '../../services/login.service';
+import { GuardsCheckEnd } from '@angular/router';
 
 
 @Component({
@@ -28,22 +31,39 @@ export class LehrerlisteComponent implements OnInit {
   klassen; //für buttons
   lehrerKuerzel;
   klassenZuordnung;
-  stundenRaster:Array < Array < Array < [Lehrer, Fach] >>>;
+  stundenRaster: Array < Array < Array < [Lehrer, Fach] >>> ;
+  schieneLage={zeilenStarts:[6,4,8,7],cellsMoMi:[8,11],
+    cellsDo:[8,9]};
+ 
+
+//Buttons:
+
+
+wochentag = "montag";
+tagvorher = "montag";
+
+wochenTag(tag) { //Buttonclick
+  this.tagvorher = this.wochentag;
+  this.wochentag = tag;
+
+  this.loginService.login();
+  // this.storageService.save(this.tagvorher);
+  //this.storageService.load(this.wochentag);
+  //this.loginService.save(this.tagvorher);
+  this.loginService.load(this.wochentag);
+  //Logout
+  this.loginService.logout();
+
+  //diesen Tag speichern im loginservice:
+ // this.loginService.tagAlsString=this.wochentag;
+
+}
+
+
+//Gesamtplan:
 
 
 
-
- // wochenTag(tag){  //Buttonclick
- //   this.tagvorher=this.wochentag;
- //   this.wochentag=tag;
- //   this.storageService.save(this.tagvorher);
- //   this.storageService.load(this.wochentag);
-
-
-       //nachm load neu färben:
- //  console.log(this.storageService.gefaerbteCells);
-
-  //}
 
   lehrerErmitteln(c) {
     c++;
@@ -79,29 +99,27 @@ export class LehrerlisteComponent implements OnInit {
     }
   }
 
-  deleteAll(r,c){
+  deleteAll(r, c) {
     this.stundenRaster[r][c] = [];
   }
 
-  mittagsPause(r,c,e){
+  mittagsPause(r, c, e) {
     //console.log(r + " (row) " + c +" (cell) " + e + "(event)")
   }
 
   lehrerWahl(r: number, c: number, lehrerFach: [Lehrer, Fach], event) { //angeklicktes Fach wird reingeschrieben
-   // console.log(this.stundenRaster[r][c]);
-    if (this.stundenRaster[r][c].includes(lehrerFach)) {      // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
+    // console.log(this.stundenRaster[r][c]);
+    if (this.stundenRaster[r][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
       let index = this.stundenRaster[r][c].indexOf(lehrerFach);
       this.stundenRaster[r][c].splice(index, 1);
-    }
-    else if (event.shiftKey) {                                  //mit Shift: Hinzufügen       
+    } else if (event.shiftKey) { //mit Shift: Hinzufügen       
       this.stundenRaster[r][c].push(lehrerFach);
-    } 
-    else {
-      this.stundenRaster[r][c] = [lehrerFach];   // standard: Ersetzen des Lehrers durch neuen Lehrer.
+    } else {
+      this.stundenRaster[r][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
     }
   }
 
-  farbwaehler(row, cell, lehrer,r,c) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
+  farbwaehler(row, cell, lehrer, r, c) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
     let previousHit: boolean;
     cell.forEach(([cellLehrer, fach]) => {
       if (cellLehrer.id === lehrer.id) {
@@ -112,50 +130,78 @@ export class LehrerlisteComponent implements OnInit {
     if (previousHit === true) {
       return "gruen";
     }
-    return this.doppelt(row, lehrer,r,c);
+    return this.doppelt(row, lehrer, r, c);
   }
-  
-  doppelt(row, lehrer,z,c) { //hauptZellen-Methode, daueraktiv, doppelte rot
-   
-   // console.log(row);
-   // console.log([...row]);
+
+  doppelt(row, lehrer, z, c) { //hauptZellen-Methode, daueraktiv, doppelte rot
     var duplicates = 0;
     row.forEach(element => {
       element.forEach(lehrerFach => {
-       // console.log(`${lehrerFach[0].kuerzel } ${lehrer.kuerzel}` );
-
+        // console.log(`${lehrerFach[0].kuerzel } ${lehrer.kuerzel}` );
         if ((lehrerFach !== null) && (lehrerFach[0].id === lehrer.id)
           //&&(lehrerFach[1]!==Fach.mittag)
-          ) {
+        ) {
           ++duplicates;
         }
       });
     });
-   // console.log(duplicates);
-    if(((z===1)||(z==2))&&(c>7)&&(c<12)){
-      return "gruen";
+    // console.log(duplicates);
 
+    if(duplicates>1){
+      return "rot";
     }
-    if((z===0)&&(c>7)&&(c<12)){
+    if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
+      return "gruen";
+    }
+    if ((z === 0) && (c > 7) && (c < 12)) {
+        return "gold";
+    }
+    if ((z === 0) && (c > 7) && (c < 12)) {
       console.log("gold");
       return "gold";
     }
-
-    return duplicates > 1 ? "rot" : "hellblau"; 
+  
+ //   console.log(this.schieneLage);
+    //Bei schiene muss mo/di/mi/do/fr unterschieden werden:
+    switch(this.wochentag){
+      case "montag": 
+     
+       //  console.log(element);
+        if(((z=== this.schieneLage.zeilenStarts[0])||(z===this.schieneLage.zeilenStarts[0]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
+          return "violet";
+        }
+        break;
+        
+      case "dienstag":
+        if(((z=== this.schieneLage.zeilenStarts[1])||(z===this.schieneLage.zeilenStarts[1]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
+          return "violet";
+        }
+        break;
+      case "mittwoch":
+        if(((z=== this.schieneLage.zeilenStarts[2])||(z===this.schieneLage.zeilenStarts[2]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
+          return "violet";
+        }
+        break;
+      case "donnerstag":
+        if(((z=== this.schieneLage.zeilenStarts[3])||(z===this.schieneLage.zeilenStarts[3]+1))&&(c>=this.schieneLage.cellsDo[0])&&(c<=this.schieneLage.cellsDo[1])){
+          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
+          return "violet";
+        }
+        break;
+    }
+    
+   // this.
+   // if(this.schieneLage.)
+    return "hellblau";
   }
 
-  //für Buttons;
-
-
-  constructor( private lehrerservice: LehrerService,private loginService: LoginService
-    //,    private storageService:StorageService//,private buttonComponent:ButtonComponent
-    //,   private   planMaker:PlanMaker
-  ) {
-    //this.storageService.load("Montag");//Montag wird geladen
-
-    
-    lehrerservice.stundenRaster$.subscribe((stundenRaster)=>this.stundenRaster=stundenRaster);
-    //this.stundenRaster = lehrerservice.stundenRaster.getValue();
+  constructor(private lehrerservice: LehrerService, private loginService: LoginService
+    ) {
+  
+    lehrerservice.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
     let klassenZuordnung = {};
 
@@ -168,18 +214,20 @@ export class LehrerlisteComponent implements OnInit {
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-    //console.log(this.klassenZuordnung);
 
-
-    this.lehrer=lehrerservice.lehrer;
-    this.klassen=lehrerservice.klassen;
-    this.loginService.load('montag');
+    this.lehrer = lehrerservice.lehrer;
+    this.klassen = lehrerservice.klassen;
   
+    this.loginService.load('montag');
+
+
+       //private storageService:StorageService,
+  
+        this.loginService.planPushen();
+        this.wochenTag('montag');
+   
   }
 
   ngOnInit(): void {
-
-    
-
   }
 }

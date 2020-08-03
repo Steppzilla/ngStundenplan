@@ -32,24 +32,21 @@ export class WochenplanComponent implements OnInit {
     this.planMakerService.planKlasse(klasse);
   }
 
-  constructor(private lehrerService: LehrerService,private planMakerService: PlanmakerService,
-    ) {
-      this.lehrer = lehrerService.lehrer;
-      this.klassen = lehrerService.klassen;
+  constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService, ) {
+    this.lehrer = lehrerService.lehrer;
+    this.klassen = lehrerService.klassen;
 
     planMakerService.aktuell$.subscribe((plan) => {
       this.aktuellerPlan = plan;
-  //    console.log(plan);
+      //    console.log(plan);
     });
- // this.aktuellerPlan=planMakerService.aktuell$;
-    
+    // this.aktuellerPlan=planMakerService.aktuell$;
     //this.planKlasse(1);
-
     // this.planLehrer(this.lehrerService.lehrer[13]);
   }
 
   ngOnInit(): void {
-    
+
   }
 
 }

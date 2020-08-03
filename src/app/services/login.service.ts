@@ -35,7 +35,7 @@ export class LoginService {
   store: AngularFirestore; //db
   items: Observable < any[] > ; //original: Shirts observable any//collection
   stundenStrings: Array < Plan >= new Array(); //Hier sind die StundenRaster-Strings gespeichert unter plan{.tag und .wochentag}
-
+tagAlsString; //wird im button-woche gepushed;
 
   save(tagvorher) {
     let tage = this.store.collection < Plan > ('tage');

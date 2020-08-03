@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { LehrerlisteComponent } from './components/gesamtplan/gesamtplan.component';
 import { LehrerComponent } from './components/lehrer/lehrer.component';
 import { WochenplanComponent } from './components/wochenplan/wochenplan.component';
-import { ButtonsWocheComponent } from './components/buttons-woche/buttons-woche.component';
 import { EpochenSchedulerComponent } from './components/epochen-scheduler/epochen-scheduler.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,7 +37,6 @@ import { LoginService } from './services/login.service';
     LehrerlisteComponent,
     LehrerComponent,
     WochenplanComponent,
-    ButtonsWocheComponent,
     EpochenSchedulerComponent
   ],
   imports: [

@@ -1,74 +1,85 @@
 //achtung, css aus gesamtplan kopiert, kann vieles nutzlos sein...
 *{margin:0pt;
-    padding:0pt;}
+    padding:0pt;
+ 
+  }
+
+  button{
+    border:none;
+  margin:2pt;
+  padding:1pt;
+  background-color:rgb(132, 158, 147);
+  border-radius:5pt;}
+  
+  div{    font-size:8pt; }
     .btn-outline-primary{
       color:inherit;
     }
-.plan{
-    padding:3pt;
-}
-.row ,.datumzeile{
+
+.row {
     display:flex;
      height:30pt;
      margin-left:6pt;
   }
+  .datumzeile{
+    height:15pt;
+    display:flex;
+    margin-left:6pt;
+ 
+  }
 
 
 .first{
-    width:40pt;}
+  border-left: solid 1pt;}
 
 
-.row >div, .datumzeile >div{
-    min-width:20pt;
+.row >div, .datumzeile >div {
     border-top:solid 1pt;
-    border-right:solid 1pt;
-    font-size:8pt; 
-   
+    border-right:solid 1pt;   
 }
-.datumzeile >div{width:40pt;}
+
 
 .zeile{margin-bottom:15pt;
 }
 .row  >div{
     border-bottom:solid 1pt;
-    
 }
 
 .plan  :last-child{
     border-bottom: solid 1pt;
 }
 
-//.row  :first-child{border-left:solid 1pt}
-
-
-
 
 .normalsize{
-  width:40pt;
+  //width:40pt;
+  width:5%;
 }
 .size-1{
-  width:40pt;
+  //width:40pt;
 }
 .size-2{
-  width:80pt;
+  //width:80pt;
+  width:10%;
 }
 .size-3{
-  width:120pt;
+  //width:120pt;
+  width:15%;
 }
 .size-4{
-  width:160pt;
+  //width:160pt;
+  width:20%;
 }
 .size-5{
-  width:200pt;
+ // width:200pt;
 }
 .size-6{
-  width:240pt;
+  //width:240pt;
 }
 .size-7{
-  width:280pt;
+ // width:280pt;
 }
 .size-8{
-  width:320pt;
+ // width:320pt;
 }
 
   .hellblau{background-color:lightsteelblue;}
@@ -107,6 +118,7 @@
     }
 
     .buttonDrop{ /*Der ganze Button/jetzt div/ in der Table-Zelle*/
+   
         overflow: hidden;
         width:100%;
         height:100%;
@@ -117,6 +129,7 @@
       ///  background-color:pink; //HIER DARF kein Hintergrund rein SONST WIRDS NICHTs ROT
         display:flex;
         div{      //Lehrer-Fach-Behälter
+         
           width:100%;
      //  background: yellow;
           height:100%; //NEU HIER

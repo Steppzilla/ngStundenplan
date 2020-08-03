@@ -26,18 +26,54 @@ export class EpochenSchedulerComponent {
   items;
   klassenZuordnung; //entspricht der aus dem gesamtplan
 
-  aktuelleKlasse = "9. Klasse";
+  aktuelleKlasse;
 
   datumstring; // siehe unten für Unterteilung, enthält jeweils Startdatum und ggf End-Wochentag als String der Woche
 
-  epochenplanLeer: Array < Array <Array< [Lehrer, Fach] | null >>> ;
-  epochenPlanAktuell:Array < Array <Array< [Lehrer, Fach] | null >>>;
-  epochenplan9; // in 0 die Wochen bis Herbst, 1 bis Weihnachten, 3 bis oster, 4 bis sommer (lehreritem)
-  epochenplan10;
-  epochenplan11;
-  epochenplan12;
+  epochenplanLeer: Array < Array < Array < [Lehrer, Fach] | null >>> ;
+  epochenPlanAktuell: Array < Array < Array < [Lehrer, Fach] | null >>> ;
+  epochenplan9: Array < Array < Array < [Lehrer, Fach] | null >>> ; // in 0 die Wochen bis Herbst, 1 bis Weihnachten, 3 bis oster, 4 bis sommer (lehreritem)
+  epochenplan10: Array < Array < Array < [Lehrer, Fach] | null >>> ;
+  epochenplan11: Array < Array < Array < [Lehrer, Fach] | null >>> ;
+  epochenplan12: Array < Array < Array < [Lehrer, Fach] | null >>> ;
+  duplicates9;
+  duplicates10;
+  duplicates11;
+  duplicates12;
+
+  tag;
   //epochenplan13;
-  ferien = [    ['Sommer'],    ['Herbst'],    ['Winter'],    ['Oster'],    ['Sommer'],    ['ferien']  ];
+  ferien = [
+    ['Sommer'],
+    ['Herbst'],
+    ['Winter'],
+    ['Oster'],
+    ['Sommer'],
+    ['ferien']
+  ];
+  changeClass(n:number){
+    console.log(this.epochenPlanAktuell);
+    //alten plan speichern:
+    this["epochenplan"+this.aktuelleKlasse]=this.epochenPlanAktuell;
+
+    //alte duplicates speichern:
+    this["duplicates"+this.aktuelleKlasse]=this.duplicates;
+    //neuen Plan speichern/laden:
+    if(this["epochenplan"+n]!==undefined){
+      this.epochenPlanAktuell=this["epochenplan"+n];
+    }else{
+      this.epochenPlanAktuell=this.datumstring.map(zeile => zeile.map(cell => []));;
+    }
+    //neue Überschrift:
+    this.aktuelleKlasse= n;
+    //duplicates laden:
+    if(this["duplicates"+n]!==undefined){
+      this.duplicates=this["duplicates"+n];
+    }else{
+      this.duplicates=  [{}, {}, {}, {}];
+    }
+   // console.log(this.epochenPlanAktuell);
+  }
 
   lehrerErmitteln() {
     let c = 9;
@@ -75,7 +111,7 @@ export class EpochenSchedulerComponent {
 
   //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
   lehrerWahl(z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
-    
+
     if (this.epochenPlanAktuell[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
       let index = this.epochenPlanAktuell[z][c].indexOf(lehrerFach);
       this.epochenPlanAktuell[z][c].splice(index, 1);
@@ -84,7 +120,7 @@ export class EpochenSchedulerComponent {
     } else {
       this.epochenPlanAktuell[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
     }
-    this.generateDuplicates(this.epochenplan9);
+    this.generateDuplicates(this.epochenPlanAktuell);
     console.log(this.duplicates);
   }
 
@@ -105,21 +141,20 @@ export class EpochenSchedulerComponent {
       });
       this.duplicates[r] = duplicate;
     });
-    console.log(this.duplicates);
   }
 
 
-  equal(fl1: Array<[Lehrer, Fach]> , fl2: Array<[Lehrer, Fach]> ): boolean {
-    let returnvalue=true;
-    if((fl1===undefined)||(fl2===undefined)||(fl1.length!==fl2.length)||(fl1.length===0)){
-      returnvalue=false;
-    }else{
-    fl1.forEach(([lehrer,fach],lf) => {
-      if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) && (fach !== fl2[lf][1])) {
-        returnvalue=false;
-      } 
-    });
-  }
+  equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
+    let returnvalue = true;
+    if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
+      returnvalue = false;
+    } else {
+      fl1.forEach(([lehrer, fach], lf) => {
+        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) && (fach !== fl2[lf][1])) {
+          returnvalue = false;
+        }
+      });
+    }
     return returnvalue;
   }
 
@@ -186,13 +221,14 @@ export class EpochenSchedulerComponent {
         '14.6.-Fr.'
       ]
     ]
-
+this.aktuelleKlasse=9;
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenplan9 = this.epochenplanLeer;
-    this.epochenplan10 = this.epochenplanLeer;
-    this.epochenplan11 = this.epochenplanLeer;
-    this.epochenplan12 = this.epochenplanLeer;
-    this.epochenPlanAktuell=this.epochenplan9;
+    this.epochenplan9 = this.datumstring.map(zeile => zeile.map(cell => []));
+    this.epochenplan10 = this.datumstring.map(zeile => zeile.map(cell => []));
+    this.epochenplan11 = this.datumstring.map(zeile => zeile.map(cell => []));
+    this.epochenplan12 = this.datumstring.map(zeile => zeile.map(cell => []));
+    this.epochenPlanAktuell =this.datumstring.map(zeile => zeile.map(cell => []));
+    this.tag=loginService.tagAlsString;
 
   }
 
