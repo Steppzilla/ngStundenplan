@@ -43,6 +43,10 @@ button:hover{
   .gruen{background-color:lightgreen;  }
   .hide{opacity:0;}
   .verdoppeln{width:80pt;}
+  .dreimal{width:120pt;}
+  .viermal{width:160pt;}
+  .normalsize{width:40pt;}
+  .show{opacity:1;}
 
 .buttonContainer{  /* der Aufpopp-Rahmen*/
     border:none;
@@ -77,12 +81,13 @@ button:hover{
         height:100%;
       // background-color:orange;
         border:0;
-        min-width:40pt;
+        min-width:20pt;
         min-height:25pt;
       ///  background-color:pink; //HIER DARF kein Hintergrund rein SONST WIRDS NICHTs ROT
         display:flex;
         div{      //Lehrer-Fach-Behälter
           width:100%;
+     //  background: yellow;
           height:100%; //NEU HIER
     
       }

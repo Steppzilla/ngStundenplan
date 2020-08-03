@@ -21,6 +21,7 @@ import {
 import {
   merge
 } from 'rxjs';
+import { parseTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -50,7 +51,7 @@ export class EpochenSchedulerComponent {
     ['Sommer'],
     ['ferien']
   ];
-  angedockteItemsIndexes: any;
+  
 
   lehrerErmitteln() {
     let c = 9;
@@ -89,9 +90,8 @@ export class EpochenSchedulerComponent {
 
   //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
   lehrerWahl(z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
-    // console.log(this.stundenRaster[r][c]);
     let aktuellerPlan = this.epochenplan9;
-    //console.log(aktuellerPlan);
+    let anzahlGleich=0;
     if (aktuellerPlan[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
       let index = aktuellerPlan[z][c].indexOf(lehrerFach);
       this.epochenplan9[z][c].splice(index, 1);
@@ -99,16 +99,33 @@ export class EpochenSchedulerComponent {
       this.epochenplan9[z][c].push(lehrerFach);
     } else {
       this.epochenplan9[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
-      //Wenn fach vorhder oder nacher gleich ist dann:
+      //Wenn fach vorhder oder nacher gleich ist dann:(NEU):
       if(this.epocheVorher===lehrerFach){
-        this.color="gruen"; //färbt alles sobald zwei gleich sind.
-        this.andockItemsIndexes.push([z,c]);
+        this.color="violet"; //färbt alles sobald zwei gleich sind.
+        this.andockItemsIndexes.push([z,c]);  //NEU WENN GLEICH IS 
+        //nur wenn felder davor nicht auch gleich sind, darf nur echt das erste sein....
+        if(this.epochenStartFelderMitLaenge===undefined){
+          this.epochenStartFelderMitLaenge.push([z,c-1]);
+          console.log(this.epochenStartFelderMitLaenge);
+        }else{
+          this.epochenStartFelderMitLaenge.forEach(element => {
+            console.log(element);
+            console.log(row);
+            console.log(z );
+            console.log(c-1);
+
+          });
+
+        }
       }else if(this.epocheNachher===lehrerFach){
         this.color="rot";
-        this.andockItemsIndexes.push([z,c+1]);
+        this.andockItemsIndexes.push([z,c+1]); //NEU
+         //nur wenn felder davor nicht auch gleich sind, darf nur echt das erste sein....
+         this.epochenStartFelderMitLaenge.push([z,c]);
       }
     }
   }
+
 color;
 andockItemsIndexes=new Array();
 
@@ -117,6 +134,7 @@ andockItemsIndexes=new Array();
   epocheNachher;
 
   gleicheFelder=[];
+  epochenStartFelderMitLaenge=[]; //jeweils, r,c und wochenanzahl
 
   click(prevCell: [Lehrer, Fach], cellafter: [Lehrer, Fach]) { //Einzelklick auf große Zelle, check, ob zelle davor oder danach gleich ist.
     if (prevCell != null) {
@@ -139,29 +157,61 @@ andockItemsIndexes=new Array();
     if ((this.epocheNachher !== undefined) && (this.epocheNachher.length !== null)&&(this.epocheNachher === lehrerfach) ) { //feld danach definiert und nicht länge null und gleich
         return "violet";
     } 
-    return "gruen";
-
-    //else{console.log("undefined")};
+    return "hellblau";
   }
 
-  //UNNÖTIG???
-  speicherzelle;
+
 
   //Doppelte felder werden gefärbt (andockitems/gleiche felder werden in lehrerWahl ermittelt)
   hauptFaerber(z,i) { //doppelte in der reihe zählen und ggf. epochen mergen..., lehrerfach sind alle möglichen lehrer/fach-kombis
-    let bool=false;;
-    console.log(this.andockItemsIndexes);
+    let bool=false;
     if(this.andockItemsIndexes===undefined){}else{
       this.andockItemsIndexes.forEach((element) => {
-        //console.log(element + " ist " +  i);
-      if((element[0]===z)&&(element[1]===i)){
+       if((element[0]===z)&&(element[1]===i)){
         bool=true;
-        //console.log(element + "ist true und muss gruen");
       }
     });
-   // return bool?"gruen":"rot";
-   return bool?"rot":"gruen verdoppeln";   //feld 2,3,4 werden versteckt, rest gruen
+   return bool?"rot":"gruen";   //feld 2,3,4 werden versteckt, rest gruen
   }
+}
+
+breite(row,z,i){  //wie hauptfärber nur für breite des parents
+  //let bool=false;
+  let breite="normalsize";
+  let index:number=i;
+   if(this.andockItemsIndexes===undefined){}else{
+     this.andockItemsIndexes.forEach((element) => {
+       //wenn voriges element gleich ist, versteckt er das aktuelle i element, angeklicktes ist schon    
+     if((element[0]===z)&&(element[1]===index)){               //bsp: element ist [1,3] und einst ist [1,4], dann muss [1,2] über 3 felder gehen. i ist aktueller index/Standort (hab ihn schon angeklickt)
+      breite="";
+     }
+     
+    /* else if((element[0]===z)&&(element[1]===index+1)){//wenn doppeltes element links vom angeklickten (das davor und davor aber nicht gleich)
+       //verdoppeln
+        breite="show verdoppeln";
+
+       if((element[1]===index-1)){
+           //verdreifachen wenn vom aktuellen index aus die nächsten beiden gleich sind...
+         breite="show dreimal";
+       
+         if(element[1]===index-2){
+           breite="show viermal";
+           //vervierfachen
+
+         }
+       }
+     }
+     */
+
+   });
+
+
+   //wenn 2 folgende gleich sin
+  // return bool?"gruen":"rot";
+  // if(bool===true)
+
+  return breite;   //feld 2,3,4 werden versteckt, rest gruen
+ }
 }
   
 
@@ -184,8 +234,7 @@ andockItemsIndexes=new Array();
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-    // console.log(this.klassenZuordnung);
-
+ 
     this.datumstring = [
       [
         '10.8.',
@@ -244,11 +293,6 @@ andockItemsIndexes=new Array();
     this.epochenplan10 = this.epochenplanLeer;
     this.epochenplan11 = this.epochenplanLeer;
     this.epochenplan12 = this.epochenplanLeer;
-    console.log(this.epochenplan9);
-    console.log(this.datumstring[0]);
-    // lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r)
-    // => new Array(this.lehrerService.wochentage).fill(null).map((s)
-    // => s = []));
 
   }
 
