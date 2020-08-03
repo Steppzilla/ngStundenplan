@@ -16,7 +16,7 @@
 
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">
           <!-- -->
-          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0])}} lehrerFachBehaelter">
+          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c)}} lehrerFachBehaelter">
             <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
           </div>
@@ -28,7 +28,7 @@
 
             <button *ngFor="let lehrerFach of lehrerErmitteln(c)" ngbDropdownItem
               (click)="lehrerWahl(r,c, lehrerFach,$event )"
-              class="dropCell LehrerPopupButton {{farbwaehler(row,cell,lehrerFach[0])}}">
+              class="dropCell LehrerPopupButton {{farbwaehler(row,cell,lehrerFach[0],r,c)}}">
 
               <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
               <div class="dropSpan2"> {{lehrerFach[1]}}</div>

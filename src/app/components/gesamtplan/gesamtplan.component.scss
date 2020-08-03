@@ -7,26 +7,29 @@ button:hover{
 }
 .rot{background-color:red;}
 .violet{background-color:violet;}
-.gruen{background-color:lightgreen;
-
-}
+.gruen{background-color:lightgreen;}
+.gold{background-color: goldenrod;}
 .hellblau{background-color:lightsteelblue;}
 #mittag{background-color:blue;
 border-radius:5pt;
 color:lightgrey;}
+
+
 table{
   line-height:0.9 ;
    border:1pt;
    row-gap:0pt;
    border-spacing:0pt;
+ 
 
   tr{
     min-height:20pt;
     margin:0pt;
     padding:0pt;
+ 
 
    td{
-
+    
     min-width:50pt;
     border:1px solid;
     border-collapse:collapse;

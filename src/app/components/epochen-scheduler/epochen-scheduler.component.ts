@@ -1,7 +1,5 @@
 import {
   Component,
-  OnInit,
-  enableProdMode
 } from '@angular/core';
 import {
   LoginService
@@ -18,10 +16,6 @@ import {
 import {
   Fach
 } from 'src/app/interfaces/fach.enum';
-import {
-  merge
-} from 'rxjs';
-import { parseTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -32,26 +26,18 @@ export class EpochenSchedulerComponent {
   items;
   klassenZuordnung; //entspricht der aus dem gesamtplan
 
-
   aktuelleKlasse = "9. Klasse";
 
   datumstring; // siehe unten für Unterteilung, enthält jeweils Startdatum und ggf End-Wochentag als String der Woche
 
-  epochenplanLeer;
+  epochenplanLeer: Array < Array <Array< [Lehrer, Fach] | null >>> ;
+  epochenPlanAktuell:Array < Array <Array< [Lehrer, Fach] | null >>>;
   epochenplan9; // in 0 die Wochen bis Herbst, 1 bis Weihnachten, 3 bis oster, 4 bis sommer (lehreritem)
   epochenplan10;
   epochenplan11;
   epochenplan12;
   //epochenplan13;
-  ferien = [
-    ['Sommer'],
-    ['Herbst'],
-    ['Winter'],
-    ['Oster'],
-    ['Sommer'],
-    ['ferien']
-  ];
-  
+  ferien = [    ['Sommer'],    ['Herbst'],    ['Winter'],    ['Oster'],    ['Sommer'],    ['ferien']  ];
 
   lehrerErmitteln() {
     let c = 9;
@@ -87,144 +73,59 @@ export class EpochenSchedulerComponent {
     }
   }
 
-
   //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
   lehrerWahl(z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
-    let aktuellerPlan = this.epochenplan9;
-    let anzahlGleich=0;
-    if (aktuellerPlan[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
-      let index = aktuellerPlan[z][c].indexOf(lehrerFach);
-      this.epochenplan9[z][c].splice(index, 1);
-    } else if (event.shiftKey) { //mit Shift: Hinzufügen       
-      this.epochenplan9[z][c].push(lehrerFach);
+    
+    if (this.epochenPlanAktuell[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
+      let index = this.epochenPlanAktuell[z][c].indexOf(lehrerFach);
+      this.epochenPlanAktuell[z][c].splice(index, 1);
+    } else if (event.shiftKey) { //mit Shift: Hinzufügen 
+      this.epochenPlanAktuell[z][c].push(lehrerFach);
     } else {
-      this.epochenplan9[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
-      //Wenn fach vorhder oder nacher gleich ist dann:(NEU):
-      if(this.epocheVorher===lehrerFach){
-        this.color="violet"; //färbt alles sobald zwei gleich sind.
-        this.andockItemsIndexes.push([z,c]);  //NEU WENN GLEICH IS 
-        //nur wenn felder davor nicht auch gleich sind, darf nur echt das erste sein....
-        if(this.epochenStartFelderMitLaenge===undefined){
-          this.epochenStartFelderMitLaenge.push([z,c-1]);
-          console.log(this.epochenStartFelderMitLaenge);
-        }else{
-          this.epochenStartFelderMitLaenge.forEach(element => {
-            console.log(element);
-            console.log(row);
-            console.log(z );
-            console.log(c-1);
+      this.epochenPlanAktuell[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
+    }
+    this.generateDuplicates(this.epochenplan9);
+    console.log(this.duplicates);
+  }
 
-          });
+  duplicates = [{}, {}, {}, {}];
 
+  generateDuplicates(plan) {
+    plan.forEach((row, r) => {
+      let duplicate = {};
+      row.forEach((cell, c) => {
+        let prevIndex = c - 1;
+        if (this.equal(cell, row[prevIndex])) {
+          if (duplicate[prevIndex] === undefined) {
+            duplicate[prevIndex] = [prevIndex];
+          }
+          duplicate[prevIndex].push(c);
+          duplicate[c] = duplicate[prevIndex];
         }
-      }else if(this.epocheNachher===lehrerFach){
-        this.color="rot";
-        this.andockItemsIndexes.push([z,c+1]); //NEU
-         //nur wenn felder davor nicht auch gleich sind, darf nur echt das erste sein....
-         this.epochenStartFelderMitLaenge.push([z,c]);
-      }
-    }
-  }
-
-color;
-andockItemsIndexes=new Array();
-
-  //dropdown färben
-  epocheVorher;
-  epocheNachher;
-
-  gleicheFelder=[];
-  epochenStartFelderMitLaenge=[]; //jeweils, r,c und wochenanzahl
-
-  click(prevCell: [Lehrer, Fach], cellafter: [Lehrer, Fach]) { //Einzelklick auf große Zelle, check, ob zelle davor oder danach gleich ist.
-    if (prevCell != null) {
-      this.epocheVorher = prevCell[0];
-    } else {
-      this.epocheVorher = undefined;
-    }
-    if (cellafter != null) {
-      this.epocheNachher = cellafter[0]; //sonst nistet der das irgendwie.. jetzt ist wieder lehrer/fach
-    } else {
-      this.epocheNachher = undefined;
-    }
-  }
-
-  farbwaehler(row, i,lehrerfach) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
-    let c=i;
-    if ((this.epocheVorher !== undefined) && (this.epocheVorher.length !== null)&&(this.epocheVorher === lehrerfach)) { //definiertes voriges feld und nicht länge null und GLEICH
-        return "violet";
-    } 
-    if ((this.epocheNachher !== undefined) && (this.epocheNachher.length !== null)&&(this.epocheNachher === lehrerfach) ) { //feld danach definiert und nicht länge null und gleich
-        return "violet";
-    } 
-    return "hellblau";
-  }
-
-
-
-  //Doppelte felder werden gefärbt (andockitems/gleiche felder werden in lehrerWahl ermittelt)
-  hauptFaerber(z,i) { //doppelte in der reihe zählen und ggf. epochen mergen..., lehrerfach sind alle möglichen lehrer/fach-kombis
-    let bool=false;
-    if(this.andockItemsIndexes===undefined){}else{
-      this.andockItemsIndexes.forEach((element) => {
-       if((element[0]===z)&&(element[1]===i)){
-        bool=true;
-      }
+      });
+      this.duplicates[r] = duplicate;
     });
-   return bool?"rot":"gruen";   //feld 2,3,4 werden versteckt, rest gruen
+    console.log(this.duplicates);
   }
-}
-
-breite(row,z,i){  //wie hauptfärber nur für breite des parents
-  //let bool=false;
-  let breite="normalsize";
-  let index:number=i;
-   if(this.andockItemsIndexes===undefined){}else{
-     this.andockItemsIndexes.forEach((element) => {
-       //wenn voriges element gleich ist, versteckt er das aktuelle i element, angeklicktes ist schon    
-     if((element[0]===z)&&(element[1]===index)){               //bsp: element ist [1,3] und einst ist [1,4], dann muss [1,2] über 3 felder gehen. i ist aktueller index/Standort (hab ihn schon angeklickt)
-      breite="";
-     }
-     
-    /* else if((element[0]===z)&&(element[1]===index+1)){//wenn doppeltes element links vom angeklickten (das davor und davor aber nicht gleich)
-       //verdoppeln
-        breite="show verdoppeln";
-
-       if((element[1]===index-1)){
-           //verdreifachen wenn vom aktuellen index aus die nächsten beiden gleich sind...
-         breite="show dreimal";
-       
-         if(element[1]===index-2){
-           breite="show viermal";
-           //vervierfachen
-
-         }
-       }
-     }
-     */
-
-   });
 
 
-   //wenn 2 folgende gleich sin
-  // return bool?"gruen":"rot";
-  // if(bool===true)
-
-  return breite;   //feld 2,3,4 werden versteckt, rest gruen
- }
-}
-  
-
-
-
+  equal(fl1: Array<[Lehrer, Fach]> , fl2: Array<[Lehrer, Fach]> ): boolean {
+    let returnvalue=true;
+    if((fl1===undefined)||(fl2===undefined)||(fl1.length!==fl2.length)||(fl1.length===0)){
+      returnvalue=false;
+    }else{
+    fl1.forEach(([lehrer,fach],lf) => {
+      if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) && (fach !== fl2[lf][1])) {
+        returnvalue=false;
+      } 
+    });
+  }
+    return returnvalue;
+  }
 
   constructor(private loginService: LoginService, lehrerservice: LehrerService) {
-
-
     this.items = loginService.items;
-
     let klassenZuordnung = {};
-
     lehrerservice.lehrer.forEach((r) => {
       r.zuweisung.forEach((s) => {
         if (klassenZuordnung[s[0]] === undefined) {
@@ -234,7 +135,6 @@ breite(row,z,i){  //wie hauptfärber nur für breite des parents
       });
     });
     this.klassenZuordnung = klassenZuordnung;
- 
     this.datumstring = [
       [
         '10.8.',
@@ -288,11 +188,11 @@ breite(row,z,i){  //wie hauptfärber nur für breite des parents
     ]
 
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
-
     this.epochenplan9 = this.epochenplanLeer;
     this.epochenplan10 = this.epochenplanLeer;
     this.epochenplan11 = this.epochenplanLeer;
     this.epochenplan12 = this.epochenplanLeer;
+    this.epochenPlanAktuell=this.epochenplan9;
 
   }
 

@@ -101,7 +101,7 @@ export class LehrerlisteComponent implements OnInit {
     }
   }
 
-  farbwaehler(row, cell, lehrer) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
+  farbwaehler(row, cell, lehrer,r,c) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
     let previousHit: boolean;
     cell.forEach(([cellLehrer, fach]) => {
       if (cellLehrer.id === lehrer.id) {
@@ -112,10 +112,10 @@ export class LehrerlisteComponent implements OnInit {
     if (previousHit === true) {
       return "gruen";
     }
-    return this.doppelt(row, lehrer);
+    return this.doppelt(row, lehrer,r,c);
   }
   
-  doppelt(row, lehrer) { //hauptZellen-Methode, daueraktiv, doppelte rot
+  doppelt(row, lehrer,z,c) { //hauptZellen-Methode, daueraktiv, doppelte rot
    
    // console.log(row);
    // console.log([...row]);
@@ -132,6 +132,15 @@ export class LehrerlisteComponent implements OnInit {
       });
     });
    // console.log(duplicates);
+    if(((z===1)||(z==2))&&(c>7)&&(c<12)){
+      return "gruen";
+
+    }
+    if((z===0)&&(c>7)&&(c<12)){
+      console.log("gold");
+      return "gold";
+    }
+
     return duplicates > 1 ? "rot" : "hellblau"; 
   }
 

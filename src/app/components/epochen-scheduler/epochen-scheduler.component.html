@@ -2,28 +2,37 @@
 <h2> {{aktuelleKlasse}}</h2>
 
 <div id="plan">
-  <div class="zeile" *ngFor="let zeile of epochenplan9; index as z">
-    <div class="oben">
-      <div></div>
+  <div class="zeile" *ngFor="let zeile of epochenPlanAktuell; index as z">
+    <div class="datumzeile">
+      <div class="first"></div>
       <div *ngFor="let datum of datumstring[z]">{{datum}}</div>
     </div>
     <div class="row">
-      <div>{{ferien[z]}} - <br> {{ferien[5]}}</div>
-      <div *ngFor="let cell of zeile; index as c" ngbDropdown >
-        <div class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle class="dropButton {{breite(zeile,z,c)}}" (click)="click(zeile[c-1], zeile[c+1])">
-          <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter {{hauptFaerber(z,c)}}">
-            <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
-            <p>{{lehrerFach?lehrerFach[1]:""}}</p>
+      <div class="first">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <ng-container *ngFor="let cell of zeile; index as c">
+        <div
+          *ngIf="( !duplicates[z][c])      ||      (duplicates[z][c]        &&            duplicates[z][c][0]===c)"
+          ngbDropdown class="{{duplicates[z][c]? 'size-'+duplicates[z][c].length:'normalsize'}}">
+          <div class="btn btn-outline-primary buttonDrop gruen"
+            id="dropdownConfig" ngbDropdownToggle>
+            <!--hier click im main-->
+            <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter ">
+              <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
+              <p>{{lehrerFach?lehrerFach[1]:""}}</p>
+            </div>
+          </div>
+          <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="buttonContainer">
+            <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="toggleButton "
+              (click)="lehrerWahl(z,c, lehrerFach,$event , zeile)">
+              <!--hier click im toggle-->
+              <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
+              <div class="dropSpan2"> {{lehrerFach[1]}}</div>
+            </button>
+
           </div>
         </div>
-        <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="buttonContainer">
-          <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="dropCell {{farbwaehler(zeile,c,lehrerFach)}}"
-            (click)="lehrerWahl(z,c, lehrerFach,$event , zeile)">
-            <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
-            <div class="dropSpan2"> {{lehrerFach[1]}}</div>
-          </button>
-        </div>
-      </div>
+      </ng-container>
+
       <div>{{ferien[z+1]}}-<br> {{ferien[5]}}</div>
     </div>
   </div>

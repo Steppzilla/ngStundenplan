@@ -1,4 +1,3 @@
-
 <div class="buttonreihe">
   <button *ngFor="let einer of lehrer; index as l" (click)="planLehrer(einer)"> {{einer.kuerzel}} </button>
 </div>
@@ -6,36 +5,50 @@
   <button *ngFor="let eine of klassen; index as k" (click)="planKlasse(eine)"> {{eine}} </button>
 </div>
 
-<h1 >Stundenplan </h1>
-<h2>{{aktuellerPlan.getTitel()}}</h2>
-<div class="gesamtplan">
-<div class="reihe reiheOben">
-  <div><div></div></div>
-  <div><div> Montag </div></div>
-  <div><div> Dienstag </div></div>
-  <div><div> Mittwoch </div></div>
-  <div><div> Donnerstag </div></div>
-  <div><div> Freitag </div></div> 
+<h1>Stundenplan </h1>
+<h2 *ngIf="aktuellerPlan">{{aktuellerPlan.getTitel()}}</h2>
+<div *ngIf="aktuellerPlan" class="gesamtplan">
+  <div class="reihe reiheOben">
+    <div>
+      <div></div>
+    </div>
+    <div>
+      <div> Montag </div>
+    </div>
+    <div>
+      <div> Dienstag </div>
+    </div>
+    <div>
+      <div> Mittwoch </div>
+    </div>
+    <div>
+      <div> Donnerstag </div>
+    </div>
+    <div>
+      <div> Freitag </div>
+    </div>
 
-</div>
-
-<div *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
-  <div>
-    {{r+1}}
   </div>
-  <div *ngFor="let cell of reihe; index as c">
-    <div *ngFor="let lehrerItemErw of cell" class="container">
-      <div class="unterrichtsFeld">
-        {{lehrerItemErw?lehrerItemErw[1]:""}}
+
+  
+    <div *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
+      <div>
+        {{r+1}}
       </div>
-      <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined"><!-- wenn Lehrer definiert will ich ihn nicht sehen!-->
-        {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
-      </div>
-      <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined"> 
-        {{lehrerItemErw[2]}} 
+      <div *ngFor="let cell of reihe; index as c">
+        <div *ngFor="let lehrerItemErw of cell" class="container">
+          <div class="unterrichtsFeld">
+            {{lehrerItemErw?lehrerItemErw[1]:""}}
+          </div>
+          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+            <!-- wenn Lehrer definiert will ich ihn nicht sehen!-->
+            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+          </div>
+          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+            {{lehrerItemErw[2]}}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
+</div>

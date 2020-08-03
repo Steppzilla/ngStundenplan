@@ -1,27 +1,37 @@
 //achtung, css aus gesamtplan kopiert, kann vieles nutzlos sein...
 *{margin:0pt;
     padding:0pt;}
-
+    .btn-outline-primary{
+      color:inherit;
+    }
 .plan{
     padding:3pt;
 }
-
-.row,.oben{display:flex;
+.row ,.datumzeile{
+    display:flex;
      height:30pt;
      margin-left:6pt;
   }
-.oben{height:15pt;}
-.row >div, .oben >div{
-    width:40pt;
+
+
+.first{
+    width:40pt;}
+
+
+.row >div, .datumzeile >div{
+    min-width:20pt;
     border-top:solid 1pt;
     border-right:solid 1pt;
-    font-size:8pt;   
+    font-size:8pt; 
+   
 }
+.datumzeile >div{width:40pt;}
 
-.row{margin-bottom:15pt;
+.zeile{margin-bottom:15pt;
 }
-.row >div{
+.row  >div{
     border-bottom:solid 1pt;
+    
 }
 
 .plan  :last-child{
@@ -29,30 +39,49 @@
 }
 
 //.row  :first-child{border-left:solid 1pt}
-//.oben  :first-child{border-left: solid 1pt}
-
-button:hover{
-    background-color:indianred;
-  }
 
 
+
+
+.normalsize{
+  width:40pt;
+}
+.size-1{
+  width:40pt;
+}
+.size-2{
+  width:80pt;
+}
+.size-3{
+  width:120pt;
+}
+.size-4{
+  width:160pt;
+}
+.size-5{
+  width:200pt;
+}
+.size-6{
+  width:240pt;
+}
+.size-7{
+  width:280pt;
+}
+.size-8{
+  width:320pt;
+}
 
   .hellblau{background-color:lightsteelblue;}
   .rot{background-color:red;}
   .violet{background-color:violet;}
   .gruen{background-color:lightgreen;  }
-  .hide{opacity:0;}
-  .verdoppeln{width:80pt;}
-  .dreimal{width:120pt;}
-  .viermal{width:160pt;}
-  .normalsize{width:40pt;}
-  .show{opacity:1;}
+
 
 .buttonContainer{  /* der Aufpopp-Rahmen*/
     border:none;
     margin:0pt;
     padding:0pt;  
-      .dropCell{           /* das ist der button im Aufplopp-Rahmen*/
+      .toggleButton{           /* das ist der button im Aufplopp-Rahmen*/
        
         border:none;
         text-align:left;
@@ -76,8 +105,10 @@ button:hover{
         }
       }
     }
-    .dropButton{ /*Der ganze Button/jetzt div/ in der Table-Zelle*/
+
+    .buttonDrop{ /*Der ganze Button/jetzt div/ in der Table-Zelle*/
         overflow: hidden;
+        width:100%;
         height:100%;
       // background-color:orange;
         border:0;
@@ -89,8 +120,8 @@ button:hover{
           width:100%;
      //  background: yellow;
           height:100%; //NEU HIER
-    
+
       }
-     
-      
       }
+
+      .buttonDrop:hover{background-color:indianred;}
