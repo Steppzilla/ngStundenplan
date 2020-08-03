@@ -12,8 +12,15 @@ import {
 import {
   Lehrjahr
 } from 'src/app/interfaces/lehrjahr.enum';
-import { Lehrer } from 'src/app/interfaces/lehrer';
-import { Fach } from 'src/app/interfaces/fach.enum';
+import {
+  Lehrer
+} from 'src/app/interfaces/lehrer';
+import {
+  Fach
+} from 'src/app/interfaces/fach.enum';
+import {
+  merge
+} from 'rxjs';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -35,10 +42,18 @@ export class EpochenSchedulerComponent {
   epochenplan11;
   epochenplan12;
   //epochenplan13;
-  ferien=[['Sommer'],['Herbst'], ['Winter'],['Oster'],['Sommer'], ['ferien']];
+  ferien = [
+    ['Sommer'],
+    ['Herbst'],
+    ['Winter'],
+    ['Oster'],
+    ['Sommer'],
+    ['ferien']
+  ];
+  angedockteItemsIndexes: any;
 
   lehrerErmitteln() {
-    let c=9;
+    let c = 9;
     switch (c) {
       case 1:
         return this.klassenZuordnung[Lehrjahr.eins];
@@ -72,22 +87,83 @@ export class EpochenSchedulerComponent {
   }
 
 
-  lehrerWahl(r: number, c: number, lehrerFach: [Lehrer, Fach], event) { //angeklicktes Fach wird reingeschrieben
+  //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
+  lehrerWahl(z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
     // console.log(this.stundenRaster[r][c]);
-    let aktuellerPlan=this.epochenplan9;
-    let aktuelleReihe=0;
-     if (aktuellerPlan[aktuelleReihe][c].includes(lehrerFach)) {      // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
-       let index = aktuellerPlan[aktuelleReihe][c].indexOf(lehrerFach);
-       this.epochenplan9[aktuelleReihe][c].splice(index, 1);
-     }
-     else if (event.shiftKey) {                                  //mit Shift: Hinzufügen       
-       this.epochenplan9[aktuelleReihe][c].push(lehrerFach);
-     } 
-     else {
-       this.epochenplan9[aktuelleReihe][c] = [lehrerFach];   // standard: Ersetzen des Lehrers durch neuen Lehrer.
-     }
-   }
+    let aktuellerPlan = this.epochenplan9;
+    //console.log(aktuellerPlan);
+    if (aktuellerPlan[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
+      let index = aktuellerPlan[z][c].indexOf(lehrerFach);
+      this.epochenplan9[z][c].splice(index, 1);
+    } else if (event.shiftKey) { //mit Shift: Hinzufügen       
+      this.epochenplan9[z][c].push(lehrerFach);
+    } else {
+      this.epochenplan9[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
+      //Wenn fach vorhder oder nacher gleich ist dann:
+      if(this.epocheVorher===lehrerFach){
+        this.color="gruen"; //färbt alles sobald zwei gleich sind.
+        this.andockItemsIndexes.push([z,c]);
+      }else if(this.epocheNachher===lehrerFach){
+        this.color="rot";
+        this.andockItemsIndexes.push([z,c+1]);
+      }
+    }
+  }
+color;
+andockItemsIndexes=new Array();
 
+  //dropdown färben
+  epocheVorher;
+  epocheNachher;
+
+  gleicheFelder=[];
+
+  click(prevCell: [Lehrer, Fach], cellafter: [Lehrer, Fach]) { //Einzelklick auf große Zelle, check, ob zelle davor oder danach gleich ist.
+    if (prevCell != null) {
+      this.epocheVorher = prevCell[0];
+    } else {
+      this.epocheVorher = undefined;
+    }
+    if (cellafter != null) {
+      this.epocheNachher = cellafter[0]; //sonst nistet der das irgendwie.. jetzt ist wieder lehrer/fach
+    } else {
+      this.epocheNachher = undefined;
+    }
+  }
+
+  farbwaehler(row, i,lehrerfach) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
+    let c=i;
+    if ((this.epocheVorher !== undefined) && (this.epocheVorher.length !== null)&&(this.epocheVorher === lehrerfach)) { //definiertes voriges feld und nicht länge null und GLEICH
+        return "violet";
+    } 
+    if ((this.epocheNachher !== undefined) && (this.epocheNachher.length !== null)&&(this.epocheNachher === lehrerfach) ) { //feld danach definiert und nicht länge null und gleich
+        return "violet";
+    } 
+    return "gruen";
+
+    //else{console.log("undefined")};
+  }
+
+  //UNNÖTIG???
+  speicherzelle;
+
+  //Doppelte felder werden gefärbt (andockitems/gleiche felder werden in lehrerWahl ermittelt)
+  hauptFaerber(z,i) { //doppelte in der reihe zählen und ggf. epochen mergen..., lehrerfach sind alle möglichen lehrer/fach-kombis
+    let bool=false;;
+    console.log(this.andockItemsIndexes);
+    if(this.andockItemsIndexes===undefined){}else{
+      this.andockItemsIndexes.forEach((element) => {
+        //console.log(element + " ist " +  i);
+      if((element[0]===z)&&(element[1]===i)){
+        bool=true;
+        //console.log(element + "ist true und muss gruen");
+      }
+    });
+   // return bool?"gruen":"rot";
+   return bool?"rot":"gruen verdoppeln";   //feld 2,3,4 werden versteckt, rest gruen
+  }
+}
+  
 
 
 
@@ -162,13 +238,17 @@ export class EpochenSchedulerComponent {
       ]
     ]
 
-    this.epochenplanLeer = new Array(this.datumstring[0].map((r) => r = []));
+    this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
+
     this.epochenplan9 = this.epochenplanLeer;
     this.epochenplan10 = this.epochenplanLeer;
     this.epochenplan11 = this.epochenplanLeer;
     this.epochenplan12 = this.epochenplanLeer;
     console.log(this.epochenplan9);
     console.log(this.datumstring[0]);
+    // lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r)
+    // => new Array(this.lehrerService.wochentage).fill(null).map((s)
+    // => s = []));
 
   }
 

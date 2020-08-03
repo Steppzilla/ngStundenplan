@@ -5,20 +5,20 @@
   <div class="zeile" *ngFor="let zeile of epochenplan9; index as z">
     <div class="oben">
       <div></div>
-      <div *ngFor="let datum of datumstring[0]">{{datum}}</div>
+      <div *ngFor="let datum of datumstring[z]">{{datum}}</div>
     </div>
     <div class="row">
       <div>{{ferien[z]}} - <br> {{ferien[5]}}</div>
-      <div *ngFor="let cell of zeile; index as c" ngbDropdown>
-        <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
-          <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter">
+      <div *ngFor="let cell of zeile; index as c" ngbDropdown >
+        <div class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle class="dropButton" (click)="click(zeile[c-1], zeile[c+1])">
+          <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter {{hauptFaerber(z,c)}}">
             <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
           </div>
-        </button>
+        </div>
         <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="buttonContainer">
-          <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="dropCell"
-            (click)="lehrerWahl(0,c, lehrerFach,$event )">
+          <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="dropCell {{farbwaehler(zeile,c,lehrerFach)}}"
+            (click)="lehrerWahl(z,c, lehrerFach,$event , zeile)">
             <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
             <div class="dropSpan2"> {{lehrerFach[1]}}</div>
           </button>

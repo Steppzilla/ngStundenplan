@@ -18,6 +18,9 @@ h2{font-size:16pt;
     display:none !important;
 
   }
+
+  
+
   
    .tooltip-inner{
     padding:1pt !important;
@@ -26,4 +29,8 @@ h2{font-size:16pt;
 
 .tooltip{
     top:-15pt !important;
+}
+
+.dropdown-toggle::after {
+  display:none;
 }
