@@ -104,11 +104,11 @@ wochenTag(tag) { //Buttonclick
   }
 
   mittagsPause(r, c, e) {
-    //console.log(r + " (row) " + c +" (cell) " + e + "(event)")
+
   }
 
   lehrerWahl(r: number, c: number, lehrerFach: [Lehrer, Fach], event) { //angeklicktes Fach wird reingeschrieben
-    // console.log(this.stundenRaster[r][c]);
+
     if (this.stundenRaster[r][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
       let index = this.stundenRaster[r][c].indexOf(lehrerFach);
       this.stundenRaster[r][c].splice(index, 1);
@@ -137,15 +137,13 @@ wochenTag(tag) { //Buttonclick
     var duplicates = 0;
     row.forEach(element => {
       element.forEach(lehrerFach => {
-        // console.log(`${lehrerFach[0].kuerzel } ${lehrer.kuerzel}` );
         if ((lehrerFach !== null) && (lehrerFach[0].id === lehrer.id)
-          //&&(lehrerFach[1]!==Fach.mittag)
         ) {
           ++duplicates;
         }
       });
     });
-    // console.log(duplicates);
+
 
     if(duplicates>1){
       return "rot";
@@ -157,44 +155,34 @@ wochenTag(tag) { //Buttonclick
         return "gold";
     }
     if ((z === 0) && (c > 7) && (c < 12)) {
-      console.log("gold");
       return "gold";
     }
   
- //   console.log(this.schieneLage);
     //Bei schiene muss mo/di/mi/do/fr unterschieden werden:
     switch(this.wochentag){
       case "montag": 
      
-       //  console.log(element);
         if(((z=== this.schieneLage.zeilenStarts[0])||(z===this.schieneLage.zeilenStarts[0]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
-          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
           return "violet";
         }
         break;
         
       case "dienstag":
         if(((z=== this.schieneLage.zeilenStarts[1])||(z===this.schieneLage.zeilenStarts[1]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
-          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
           return "violet";
         }
         break;
       case "mittwoch":
         if(((z=== this.schieneLage.zeilenStarts[2])||(z===this.schieneLage.zeilenStarts[2]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
-          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
           return "violet";
         }
         break;
       case "donnerstag":
         if(((z=== this.schieneLage.zeilenStarts[3])||(z===this.schieneLage.zeilenStarts[3]+1))&&(c>=this.schieneLage.cellsDo[0])&&(c<=this.schieneLage.cellsDo[1])){
-          console.log(z + ":" +  this.schieneLage.zeilenStarts[0] );
           return "violet";
         }
         break;
     }
-    
-   // this.
-   // if(this.schieneLage.)
     return "hellblau";
   }
 
