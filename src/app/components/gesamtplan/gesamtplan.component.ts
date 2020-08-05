@@ -62,7 +62,7 @@ printGesamtplaene(){
 var raster= this.lehrerservice.createEmptyStundenraster();
 raster.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
-  $('#printcontainer .gesamtStundenplan-Table').children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+  $('#printcontainer .gesamtStundenplan-Table').children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();  //eqc++1 wählt td element aus, das kind ist der dropButton (div)
 });
 });
   

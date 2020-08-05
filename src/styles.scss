@@ -76,6 +76,12 @@ h2 {
 .lehrerFachBehaelter :nth-child(2){
   color:red;
 }
+
+//.lehrerFachBehaelter{border-left: 1pt solid;}
+.dropButton > :nth-child(2){border-left: 1pt dotted;}
+.dropButton > :nth-child(3){border-left: 1pt dotted;}
+//.gesamtStundenplan-Table  .dropButton :nth-child(3){border-left: 1pt solid;}
+
 h2{margin-top: 10pt;}
  
 
