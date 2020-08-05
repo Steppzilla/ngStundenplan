@@ -1,38 +1,72 @@
+
+
 *{margin:0pt;
 padding:0pt;}
-body{line-height:normal;}
-
+body{
+  line-height:normal;
+  
+}
+#buttonmenu{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color:    rgb(78, 161, 120);
+}
+.center{
+  text-align: center;
+}
+#save{
+  //align-items: center;
+}
+button{
+  border:none;
+      margin:2pt;
+      padding:2pt;
+      background-color:inherit;
+      border-radius:5pt;
+      padding-left:4pt;
+      padding-right:4pt;
+    
+}
 button:hover{
   background-color:indianred;
 }
-.rot{background-color:red;}
-.violet{background-color:violet;}
-.gruen{background-color:lightgreen;}
-.gold{background-color: goldenrod;}
-.hellblau{background-color:lightsteelblue;}
+
+//print ende
+button:hover{
+  background-color:indianred;
+}
+
+
+.rot{background-color:red;} //doppelte/falsche lehrer ;P
+.violet{background-color: rgb(229, 236, 132)} //Schiene// rgb(125, 224, 175)
+.gruen{background-color: rgb(78, 161, 120)} //epoche
+.gold{background-color:  rgb(189, 212, 147);} //rhythmischer teil
+.hellblau{background-color:rgb(104, 172, 212)} //standard hintergrund-farbe
 #mittag{background-color:blue;
 border-radius:5pt;
 color:lightgrey;}
 
+tr td:first{width:10pt;}
 
-table{
-  line-height:0.9 ;
+.gesamtStundenplan-Table{
+  margin-top:9pt;
+  line-height:0.8em ;
    border:1pt;
    row-gap:0pt;
    border-spacing:0pt;
+   border-collapse:collapse;
+  
  
 
   tr{
     min-height:20pt;
     margin:0pt;
     padding:0pt;
- 
+    border: 1px solid ;
 
    td{
-    
-    min-width:50pt;
-    border:1px solid;
-    border-collapse:collapse;
+    border: solid 1pt;
+    //min-width:50pt;
      text-align:center;
     // background-color:lightgreen;
      padding:0pt;
@@ -40,36 +74,50 @@ table{
       height:100%;
     // background-color:orange;
       border:0;
-      min-width:40pt;
-      min-height:25pt;
+      min-width:10pt;
+      min-height:8pt;
     ///  background-color:pink; //HIER DARF kein Hintergrund rein SONST WIRDS NICHTs ROT
       display:flex;
       div{      //Lehrer-Fach-Behälter
         width:100%;
-        border-right:1px solid;
+        padding-top: 1pt;
+        padding-bottom: 1pt;
+        border-right:1pt solid;
+        //background-color:green;
+        
       :first-child{
+       // border-top: 1px solid ;
+      //  border-right:1px solid;
+       // border-bottom: 1px dotted;
        // background-color:yellow;
-        width:auto;
-        padding-top:2pt;
-        padding-bottom:2pt;
+        width:100%;
+        padding-top:1px;
+        padding-bottom:1pt;
+   //     background-color:yellow;
      //   margin:2pt;
       }
       :nth-child(2){
         font-size:7pt;
         padding-top:2pt;
         padding-bottom:2pt;
+    //    border-right:1px solid;
+       // border-bottom: 1px solid;
      //   background-color:red;
       //  margin:2pt;
       }
     }
     :last-child  {   // das letzte div ohne rahmen
+  
       border-right:0px solid;
+
     }
    
     
     }
    }
+   
   }
+  
 }
 
 .fachklein{font-size:10pt;}
@@ -105,18 +153,22 @@ padding:0pt;
   }
 }
 
-.stundenPlanContainer{
+#stundenPlanContainer{
   margin-top:15pt;
  // background-color:lightpink;
 }
 
-.epochenplan{
+#epochenplan{
   margin-top:15pt;
   margin-left:15pt;
-  width:95%;
  // background-color: lightgoldenrodyellow;
 }
 
 
-
+.first{width:10pt;}
  
+
+.klassen-titel{
+  font-size:8pt;
+}
+

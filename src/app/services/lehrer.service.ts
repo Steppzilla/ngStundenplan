@@ -19,10 +19,10 @@ import {
 })
 export class LehrerService {
   stundenanzahl = 10;
-  klassen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  klassen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   stundenRaster = new BehaviorSubject < Array < Array < Array < [Lehrer, Fach] >>> > (null);
   stundenRaster$ = this.stundenRaster.asObservable();
-  alleStundenRaster: Array < Array < Array < Array < [Lehrer, Fach] >>> >= [];
+ // alleStundenRaster: Array < Array < Array < Array < [Lehrer, Fach] >>> >= []; im planmaker
   //
 
   //stundenRaster:  = new Array(this.stundenanzahl).fill(null).map((r) => r = new Array(this.klassenanzahl).fill(null).map((s) => s = []));
@@ -211,7 +211,7 @@ export class LehrerService {
       anrede: "Frau",
       faecher: [Fach.hauptunterricht],
       zuweisung: [
-        [Lehrjahr.eins, Fach.hauptunterricht],
+        //[Lehrjahr.eins, Fach.hauptunterricht],
         [Lehrjahr.zwei, Fach.handarbeit],
         [Lehrjahr.zwei, Fach.englisch],
         [Lehrjahr.drei, Fach.handarbeit],

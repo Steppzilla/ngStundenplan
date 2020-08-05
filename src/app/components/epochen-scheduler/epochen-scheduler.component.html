@@ -1,10 +1,12 @@
 
 <h1>Epochen-Plan </h1>
 <h2> {{aktuelleKlasse}}. Klasse</h2>
+<div id="buttonmenuEpochenplan">
 <button (click)="changeClass(9)">Klasse 9</button>
 <button (click)="changeClass(10)">Klasse 10</button>
 <button (click)="changeClass(11)">Klasse 11</button>
 <button (click)="changeClass(12)">Klasse 12</button> 
+</div>
 
 <div id="plan">
   <div class="zeile" *ngFor="let zeile of epochenPlanAktuell; index as z">

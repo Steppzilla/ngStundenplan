@@ -3,12 +3,18 @@
     padding:0pt;
  
   }
-
+#buttonmenuEpochenplan{
+  background-color:    rgb(78, 161, 120);
+  margin: 15pt 15pt 15pt 15pt;
+  text-align: center;
+}
   button{
+    width: 80pt;
+    font-size: 12pt;
     border:none;
   margin:2pt;
   padding:1pt;
-  background-color:rgb(132, 158, 147);
+  background-color:inherit;
   border-radius:5pt;}
   
   div{    font-size:8pt; }
@@ -70,22 +76,26 @@
   width:20%;
 }
 .size-5{
- // width:200pt;
+  //width:200pt;
+  width:25%;
 }
 .size-6{
   //width:240pt;
+  width:30%;
 }
 .size-7{
  // width:280pt;
+ width:35%;
 }
 .size-8{
  // width:320pt;
+ width:40%;
 }
 
   .hellblau{background-color:lightsteelblue;}
   .rot{background-color:red;}
   .violet{background-color:violet;}
-  .gruen{background-color:lightgreen;  }
+  .gruen{background-color: rgb(78, 161, 120);  } //epoche
 
 
 .buttonContainer{  /* der Aufpopp-Rahmen*/

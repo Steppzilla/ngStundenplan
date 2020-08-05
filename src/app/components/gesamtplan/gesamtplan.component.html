@@ -1,27 +1,37 @@
+
+<div id="buttonmenu">
+<div class="center">
 <button (click)="wochenTag('montag')" >Montag</button>
 <button (click)="wochenTag('dienstag')" > Dienstag</button>
 <button (click)="wochenTag('mittwoch')" >Mittwoch</button>
 <button (click)="wochenTag('donnerstag')" >Donnerstag</button>
 <button (click)="wochenTag('freitag')" >Freitag</button>
 
+</div><div class="center">
+ 
+  <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button> 
+  </div>
+</div>
 
 <h1>Gesamtplan</h1>
-<table id="table" *ngIf="stundenRaster">
+<h2>{{ueberschrift()}}</h2>
+<table #tabelle id="table" *ngIf="stundenRaster" class="gesamtStundenplan-Table">
   <tbody>
     <tr>
       <td></td>
-      <td *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}</td>
+      <td class="klassen-titel" *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}. Klasse</td>
     </tr>
     <tr *ngFor="let row of stundenRaster;index as r">
-      <td>{{r+1}}</td>
+      <td class="first">{{r+1}}</td>
 
       <td class="box" *ngFor="let cell of row; index as c">
 
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">
           <!-- -->
           <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c)}} lehrerFachBehaelter">
-            <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
+            
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
+            <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
           </div>
         </div>
 
@@ -47,12 +57,17 @@
     </tr>
   </tbody>
 </table>
+<!--
+<app-gesamtplancopies></app-gesamtplancopies>
+-->
+<ng-template #printAdd >
+    
+</ng-template>
 
-
-<div class="stundenPlanContainer">
+<div id="stundenPlanContainer">
   <app-wochenplan></app-wochenplan>
 </div>
 
-<p class="epochenplan">
+<p id="epochenplan">
   <app-epochen-scheduler></app-epochen-scheduler>
 </p>

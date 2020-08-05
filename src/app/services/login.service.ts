@@ -8,8 +8,7 @@ import {
   AngularFireAuth
 } from '@angular/fire/auth';
 import {
-  AngularFirestore,
-  validateEventsArray
+  AngularFirestore
 } from '@angular/fire/firestore';
 
 import {
@@ -27,6 +26,7 @@ import {
 import {
   PlanmakerService
 } from './planmaker.service';
+import { LehrerlisteComponent } from '../components/gesamtplan/gesamtplan.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,22 +37,47 @@ export class LoginService {
   stundenStrings: Array < Plan >= new Array(); //Hier sind die StundenRaster-Strings gespeichert unter plan{.tag und .wochentag}
 tagAlsString; //wird im button-woche gepushed;
 
-  save(tagvorher) {
+  saveAll() {
+    this.login();
     let tage = this.store.collection < Plan > ('tage');
-    // this.tage=tage;
-    let x = btoa(JSON.stringify(this.lehrerservice.stundenRaster.getValue()));
-    tage.doc('/' + tagvorher).update({
-      tag: x
-    }).then(() => {
-      //  console.log('done' + '. tag:'+ tag + 'string: ' +x );
-    }).catch(function (error) {
-      console.error(error);
-    });
+
+    let x= btoa(JSON.stringify(this.planmakerService.montag));
+    tage.doc('/' + 'montag').update({tag: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'montag');
+    }).catch(function(error){console.error(error);});
+
+    x= btoa(JSON.stringify(this.planmakerService.dienstag));
+    tage.doc('/' + 'dienstag').update({tag: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'dienstag');
+    }).catch(function(error){console.error(error);});
+
+  x= btoa(JSON.stringify(this.planmakerService.mittwoch));
+    tage.doc('/' + 'mittwoch').update({tag: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'mittwoch');
+    }).catch(function(error){console.error(error);});
+
+    x= btoa(JSON.stringify(this.planmakerService.donnerstag));
+    tage.doc('/' + 'donnerstag').update({tag: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'donnerstag');
+    }).catch(function(error){console.error(error);});
+
+    x= btoa(JSON.stringify(this.planmakerService.freitag));
+    tage.doc('/' + 'freitag').update({tag: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'freitag');
+    }).catch(function(error){console.error(error);});
+    
+this.logout();
+console.log(this.lehrerservice.stundenRaster.getValue());
+  }
+
+  saveIntern(prevDay){
+    this.planmakerService[prevDay]= this.lehrerservice.stundenRaster.getValue();
   }
 
   load(day) {
     //console.log("LOAD");
     this.lehrerservice.stundenRaster.next(this.planmakerService[day]);
+    console.log(this.lehrerservice.stundenRaster.getValue());
   }
 
   login() {
@@ -72,7 +97,7 @@ tagAlsString; //wird im button-woche gepushed;
     });
   }
 
-  planPushen() {
+  planPushen(tag) {
     let z: Array < Array < Array < [Lehrer, Fach] >>> ;
     this.store.collection < Plan > ('tage').valueChanges().subscribe((val: Array < Plan > ) => {
       val.forEach(plan => {
@@ -84,11 +109,14 @@ tagAlsString; //wird im button-woche gepushed;
        /// this.planmakerService.aktuell.next(planJSO);  ///will wochenplan haben dafür brauchich den
 
       });
-      this.lehrerservice.stundenRaster.next(this.planmakerService.montag);
+      this.lehrerservice.stundenRaster.next(this.planmakerService[tag]); //dies ruft fehler hervor beim saven->change inhalt, montag ausgabe??
+      
+      //reparatur des fehlers:
+
      // console.log("HIER");
      // console.log(this.planmakerService.montag);
       this.planmakerService.planKlasse(1);
-      this.planmakerService.planLehrer(this.lehrerservice.lehrer[12]);
+      this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
     });
   }
 

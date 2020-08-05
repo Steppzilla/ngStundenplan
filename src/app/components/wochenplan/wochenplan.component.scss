@@ -1,21 +1,15 @@
-*{min-width:20pt;
-min-height:20pt;}
-
-
-.gesamtplan{  
-  width:80%;
-  margin-left:15pt;
-  border: solid 1pt; 
-  border-radius:15pt;
-}
 .buttonreihe{
   display:flex;
+  background-color:    rgb(78, 161, 120);
+ 
+ 
 
   button{width:100%;
       border:none;
           margin:2pt;
           padding:1pt;
-          background-color:rgb(132, 158, 147);
+          background-color: inherit;
+         // background-color:rgb(132, 158, 147);
           border-radius:5pt;
   }
   button:hover{
@@ -23,58 +17,82 @@ min-height:20pt;}
   }
   
 }
+#stundenPlan{  
+  line-height: 1.2em;
+  //margin-left:15pt;
+  border: solid 1pt; 
+  border-radius:15pt;
+  .reihe {
+    border-bottom:dotted 1pt;
+    min-height:20pt;
+    //display: flex;
+    display:grid;
+    grid-template-columns: 3% 19% 19%  19% 19% 19%  ;
+    text-align: center;
+    >div {  //cells
+      border-right:dotted 1pt;
+      display:flex;
+     
+      
+      //background-color:green;
+     // 
+      .container {
+        width:100%;
+        padding-left: 2pt;
+        padding-right: 2pt;
+        overflow: hidden;
+        display:grid;
+        grid-template-columns: 100%;
+       
+    
+        //background-color:yellow;
+          .unterrichtsFeld {
+            width:100%;
+            font-size: 13pt;
+            text-align: center;
+          }
+        
+          .lehrerKuerzel {  
+             width:100%;
 
-
-.reihe {
-  border-bottom:dotted 1pt;
-  min-height:40pt;
-  font-size: 13pt;
-  display: flex;
-  text-align: center;
-  >div {
-    width: 19%;
-    display:flex;
-    text-align:center;
-    border-right:dotted 1pt;
-    ///background-color:violet;
-  }
-  >div:last-child{                     //reihe rechts
-    border-right:dotted 0pt;
-  }
-  >div:first-child {          //reihe links
-    width:20pt;
-    justify-content: center;
+            font-size: 9pt;
+            text-align: center;
+          }
+          .klasse{
+            width:100%;
+            font-size: 9pt;
+            text-align: center;
+          }
+        
+        
+      }
+  
+  
+    }
+    >div:last-child{                     //reihe rechts
+      border-right:dotted 0pt;
+    }
+    >div:first-child {          //reihe links
+      //width:10pt;
+      justify-content: center;
+    }
   }
 }
+
 .reihe:last-child{
   border-bottom:dotted 0pt;
 }
 
-.container {
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 100%;
 
-  .unterrichtsFeld {
-    font-size: 13pt;
-    text-align: center;
-    width: 100%;
-  }
-
-  .lehrerKuerzel {
-    font-size: 7pt;
-    text-align: center;
-    width: 100%;
-  }
-
-}
 
 .reiheOben{
-  padding-top:10pt;
+  padding-top:5pt;
+  padding-bottom:3pt;
+
   font-weight: bold;
   >div{
     >div{
-      width:100%;
+      width:100%; //ueberschriften zentriert mo/di/mi
       //background-color:Green;
     }
   }

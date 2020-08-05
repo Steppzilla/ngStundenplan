@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
-  ElementRef
-} from '@angular/core';
-import {
-  LehrerService
-} from '../../services/lehrer.service';
+import { Component, OnInit } from '@angular/core';
+import { PlanmakerService } from 'src/app/services/planmaker.service';
+import { LehrerService } from 'src/app/services/lehrer.service';
+import { LoginService } from 'src/app/services/login.service';
 import {
   Lehrjahr
 } from '../../interfaces/lehrjahr.enum';
@@ -17,22 +11,16 @@ import {
 import {
   Fach
 } from '../../interfaces/fach.enum';
-import {
-  LoginService
-} from '../../services/login.service';
-
-import { PlanmakerService } from 'src/app/services/planmaker.service';
-import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
-
 
 @Component({
-  selector: 'app-lehrerliste',
-  templateUrl: './gesamtplan.component.html',
-  styleUrls: ['./gesamtplan.component.scss']
+  selector: 'app-gesamtplancopies',
+  templateUrl: './gesamtplancopies.component.html',
+  styleUrls: ['./gesamtplancopies.component.scss']
 })
+export class GesamtplancopiesComponent implements OnInit {
 
-export class LehrerlisteComponent implements OnInit {
-  lehrer; //Für buttons
+
+ lehrer; //Für buttons
   klassen; //für buttons
   lehrerKuerzel;
   klassenZuordnung;
@@ -46,91 +34,7 @@ export class LehrerlisteComponent implements OnInit {
 wochentag :string= "montag";
 tagvorher :string;
 
-@ViewChild('Tabelle') someInput:ElementRef;
-
 printGesamtplaene(){
-  
-
-//printAdd
-//Tabelle
-
-  
-  $('body').append("<h2>" + "Montag" +"</h2>");
-
- //tablelen-Cellen-div inhalte leeren:
-var raster= this.lehrerservice.createEmptyStundenraster();
-raster.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-  $('#table').children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-});
-});
-
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.montag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-      //$('.gesamtStundenplan-Table').eq(1).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('.gesamtStundenplan-Table').eq(1).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter">  <p>'+ lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p></div>' );
-    });
-  });
-});
-
-$('body').append("<h2>" + "Dienstag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.dienstag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(2).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('.gesamtStundenplan-Table').eq(2).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
-    });
-  });
-});
-
-$('body').append("<h2>" + "Mittwoch" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.mittwoch.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-    //  $('.gesamtStundenplan-Table').eq(3).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('.gesamtStundenplan-Table').eq(3).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
-    });
-  });
-});
-
-$('body').append("<h2>" + "Donnerstag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.donnerstag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(4).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('.gesamtStundenplan-Table').eq(4).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>'+ lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
-    });
-  });
-});
-
-$('body').append("<h2>" + "Freitag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.freitag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(5).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('.gesamtStundenplan-Table').eq(5).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
-    });
-  });
-});
-
-$('.gesamtStundenplan-Table').css('line-height','8.5pt');
-$('.gesamtStundenplan-Table td div').css('overflow','hidden');
-//$('.gesamtStundenplan-Table td div').css('width','40px');
-$('.gesamtStundenplan-Table td div').css('font-size','8pt');
-$('.gesamtStundenplan-Table .lehrerFachBehaelter p').css('margin-top','0pt');
-$('.gesamtStundenplan-Table .lehrerFachBehaelter p').css('margin-bottom','0pt'); 
-$('.gesamtStundenplan-Table .lehrerFachBehaelter :nth-child(2)').css('color','red'); //rot machen die kurzel
-$('h2').css('margin-top','10pt');
-$('h2').last().css('margin-top','40pt');
-$(".gesamtStundenplan-Table").eq(0).hide();
-$("h2").eq(0).hide();
-  //$("#stundenPlan-Table")
 
   window.print();
 

@@ -26,7 +26,7 @@ import {
 })
 export class PlanmakerService {
 
-  aktuell = new BehaviorSubject < Stundenplan > (null);
+  aktuell = new BehaviorSubject < Stundenplan > (null); //von gewähltem lehrer oder klasse der plan
   aktuell$ = this.aktuell.asObservable();
 
   //aktuelle Pläne:
@@ -130,7 +130,6 @@ export class PlanmakerService {
   }
 
   constructor(private lehrerService: LehrerService) {
-    // this.aktuell.next(this.montag);
-    // this.planLehrer(lehrerService.lehrer[13]);
+
   }
 }
