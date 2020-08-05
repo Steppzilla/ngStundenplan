@@ -8,6 +8,8 @@
 <button (click)="wochenTag('freitag')" >Freitag</button>
 
 </div><div class="center">
+ <!--<button id="save" (click)="save()">Save</button> -->
+ 
  
   <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button> 
   </div>
@@ -60,9 +62,9 @@
 <!--
 <app-gesamtplancopies></app-gesamtplancopies>
 -->
-<ng-template #printAdd >
+<div id="printcontainer" #printAdd >
     
-</ng-template>
+</div>
 
 <div id="stundenPlanContainer">
   <app-wochenplan></app-wochenplan>

@@ -55,7 +55,7 @@ printGesamtplaene(){
 //Tabelle
 
   
-  $('body').append("<h2>" + "Montag" +"</h2>");
+  $('#printcontainer').append("<h2>" + "Montag" +"</h2>");
 
  //tablelen-Cellen-div inhalte leeren:
 var raster= this.lehrerservice.createEmptyStundenraster();
@@ -65,7 +65,7 @@ raster.forEach((zeile,z) => {
 });
 });
 
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
+$('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
 this.planmaker.montag.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
     cell.forEach(lehrerFach => {
@@ -75,8 +75,8 @@ this.planmaker.montag.forEach((zeile,z) => {
   });
 });
 
-$('body').append("<h2>" + "Dienstag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
+$('#printcontainer').append("<h2>" + "Dienstag" +"</h2>");
+$('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
 this.planmaker.dienstag.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
     cell.forEach(lehrerFach => {
@@ -86,8 +86,8 @@ this.planmaker.dienstag.forEach((zeile,z) => {
   });
 });
 
-$('body').append("<h2>" + "Mittwoch" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
+$('#printcontainer').append("<h2>" + "Mittwoch" +"</h2>");
+$('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
 this.planmaker.mittwoch.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
     cell.forEach(lehrerFach => {
@@ -97,8 +97,8 @@ this.planmaker.mittwoch.forEach((zeile,z) => {
   });
 });
 
-$('body').append("<h2>" + "Donnerstag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
+$('#printcontainer').append("<h2>" + "Donnerstag" +"</h2>");
+$('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
 this.planmaker.donnerstag.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
     cell.forEach(lehrerFach => {
@@ -108,8 +108,8 @@ this.planmaker.donnerstag.forEach((zeile,z) => {
   });
 });
 
-$('body').append("<h2>" + "Freitag" +"</h2>");
-$('body').append($(".gesamtStundenplan-Table").eq(0).clone());
+$('#printcontainer').append("<h2>" + "Freitag" +"</h2>");
+$('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
 this.planmaker.freitag.forEach((zeile,z) => {
   zeile.forEach((cell,c) => {
     cell.forEach(lehrerFach => {
