@@ -49,45 +49,41 @@ h2 {
     writing-mode: horizontal-tb; //
   }
 
+  //body div :first-of-type{display:none;}
+
+  body app-root app-lehrerliste >.gesamtStundenplan-Table {display:none;}
+  body app-root app-lehrerliste >h2 {display:none;}
+
+
   #printcontainer :nth-child(5)  {page-break-before:always;}
   #printcontainer :nth-child(9)  {page-break-before:always;}
-  
-  #table {
-    width: 100%;
-    height: 100%;
-    line-height: 0.6em;
-    // border: solid 1pt;
-    tr {
-      //   padding: 0pt;
-      border: solid 1pt;
-      margin: 0pt;
-    }
 
-    td {
-      border: solid 1pt;
-      padding: 1pt; //meiste linien werden hier angezeigt
-
-      //    margin: 0pt;
-      .dropButton {
-        padding: 2pt;
-        //display:flex;
-      }
-
-      .dropButton>div {
-        width: 100%;
-        padding: 1pt;
-      }
-
-      .dropButton>div>div {
-        padding: 2pt;
-        // padding-left: 1pt;
-      }
-    }
+  #printcontainer .gesamtStundenplan-Table{
+    line-height: 10pt;
+    width:100%;
   }
+
+  #printcontainer .gesamtStundenplan-Table td  .dropButton>div{width:100%;}
+  .gesamtStundenplan-Table td div{overflow: hidden;
+  //width: 40px;
+  font-size: 8pt;
+}
+
+.gesamtStundenplan-Table .lehrerFachBehaelter p{
+  margin-top: 0pt;
+  margin-bottom:0pt;
+}
+.lehrerFachBehaelter :nth-child(2){
+  color:red;
+}
+h2{margin-top: 10pt;}
+ 
+
 
    #stundenPlanContainer {
      display:none;
    }
+   /*
   #stundenPlan {
     line-height: 3em;
     .reihe>div {
@@ -145,7 +141,7 @@ h2 {
   .reiheOben>div>div {
     width: 100%;
   }
-
+*/
   //ueberschriften zentriert mo/di/mi
   //strundenplan
   #epochenplan {
@@ -156,7 +152,7 @@ h2 {
     display: none;
   }
 
-  h1 {}
+ 
 
 
   .buttonreihe {
