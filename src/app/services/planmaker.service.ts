@@ -36,12 +36,23 @@ export class PlanmakerService {
   donnerstag;
   freitag;
 
+  epochenplan9;
+  epochenplan10;
+  epochenplan11;
+  epochenplan12;
+
+  epochenDuplicates9;
+  epochenDuplicates10;
+  epochenDuplicates11;
+  epochenDuplicates12;
+
   planLehrer(dieserlehrer: Lehrer) {
   //  console.log(this.montag);
     let lehrerPlan = new Stundenplan();
     lehrerPlan.lehrer = dieserlehrer;
 
     lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s) => s = []));
+
     this.montag.forEach((row, r) => {
       row.forEach((cell, c) => {
         cell.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
@@ -94,6 +105,7 @@ export class PlanmakerService {
     });
 
     this.aktuell.next(lehrerPlan);
+    console.log(this.aktuell$);
   }
 
 

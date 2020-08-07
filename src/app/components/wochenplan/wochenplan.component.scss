@@ -1,100 +1,220 @@
-.buttonreihe{
-  display:flex;
-  background-color:    rgb(78, 161, 120);
- 
- 
+.buttonreihe {
+  display: flex;
+  background-color: rgb(78, 161, 120);
 
-  button{width:100%;
-      border:none;
-          margin:2pt;
-          padding:1pt;
-          background-color: inherit;
-         // background-color:rgb(132, 158, 147);
-          border-radius:5pt;
+
+  button {
+    //width:100%;
+    border: none;
+    border-left: 1px solid;
+
+    margin: 0pt;
+
+    background-color: inherit;
+    // background-color:rgb(132, 158, 147);
+    //  border-radius:5pt;
   }
-  button:hover{
-      background-color:indianred;
+
+  button:hover {
+    background-color: indianred;
   }
-  
 }
-#stundenPlan{  
-  line-height: 1.2em;
-  //margin-left:15pt;
-  border: solid 1pt; 
-  border-radius:15pt;
-  .reihe {
-    border-bottom:dotted 1pt;
-    min-height:20pt;
-    //display: flex;
-    display:grid;
-    grid-template-columns: 3% 19% 19%  19% 19% 19%  ;
-    text-align: center;
-    >div {  //cells
-      border-right:dotted 1pt;
-      display:flex;
-     
-      
-      //background-color:green;
-     // 
-      .container {
-        width:100%;
-        padding-left: 2pt;
-        padding-right: 2pt;
-        overflow: hidden;
-        display:grid;
-        grid-template-columns: 100%;
-       
+
+
+
+.lehrer button {
+  padding: 0.8pt;
+}
+
+//----------------------------------------------------------------------kopiert von ges-plan
+
+
+#stundenPlan {
+ 
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 9pt;
+  line-height: 0.8em;
+  row-gap: 0pt;
+  border-spacing: 0pt;
+  border-collapse: collapse;
+
+  tr {
+    min-height: 20pt;
+    margin: 0pt;
+    padding: 0pt;
+    border: 1px solid;
+
+    >td {
+      //Cell td
     
-        //background-color:yellow;
-          .unterrichtsFeld {
-            width:100%;
-            font-size: 13pt;
-            text-align: center;
-          }
-        
-          .lehrerKuerzel {  
-             width:100%;
+  //    background-color: green;
+      border: solid 1pt;
+      text-align: center;
+      width:auto;
+      padding: 0pt;
+ 
+        .container {
+          display:inline-block;
+          width:auto;
+          padding: 2pt;
+          margin:1pt;
+          border-right: 1pt solid;
 
-            font-size: 9pt;
-            text-align: center;
+          div{
+         display:block;
+            width:40pt;
+            //display:block;
           }
-          .klasse{
-            width:100%;
-            font-size: 9pt;
-            text-align: center;
+
+          .unterrichtsFeld {
+            //width: 100%;
+            padding-top: 1px;
+            padding-bottom: 1pt;
+
           }
-        
-        
-      }
-  
-  
-    }
-    >div:last-child{                     //reihe rechts
-      border-right:dotted 0pt;
-    }
-    >div:first-child {          //reihe links
-      //width:10pt;
-      justify-content: center;
+
+          .lehrerKuerzel {
+            font-size: 7pt;
+            padding-top: 2pt;
+            padding-bottom: 2pt;
+          }
+
+          .Klasse {
+            font-size: 7pt;
+            padding-top: 2pt;
+            padding-bottom: 2pt;
+          }
+        }
+        :last-child{border-right:solid 0pt;}
+    
+    
     }
   }
 }
 
-.reihe:last-child{
-  border-bottom:dotted 0pt;
+
+
+.reihe:last-child {
+  //border-bottom:dotted 0pt;
 }
 
-
-
-.reiheOben{
-  padding-top:5pt;
-  padding-bottom:3pt;
+.reiheOben {
+  padding-top: 5pt;
+  padding-bottom: 3pt;
 
   font-weight: bold;
-  >div{
-    >div{
-      width:100%; //ueberschriften zentriert mo/di/mi
-      //background-color:Green;
-    }
+}
+//print
+
+#printcontainer2{
+  *{padding:0pt;
+  margin:0pt;}
+  width:1150pt;
+  //background-color: green;
+  }
+//im printcontainer:
+//Stundenplan überschrift: 
+#printcontainer2 h1 {
+  padding-top: 0pt;
+  font-size: 30pt;
+  display: inline;
+  text-decoration: none;
+  margin-left:10pt;
+}
+#printcontainer2 h2 {
+  font-size: 30pt;
+  display: inline;
+  margin-left: 5pt;
+}
+
+//tabelle: -----------------------------------------------------------------------------------------
+
+
+#printcontainer2 table {
+  margin-left: 15pt;
+  margin-top: 15pt;
+  width:450pt!important;
+  max-width:550pt!important;
+   line-height: 12pt; 
+  border-collapse: collapse;
+
+  tr {
+    min-height: 20pt;
+    border: 1px solid;
+   
+    margin:2pt;
+
+    >td {
+      //Cell td 
+    //  background-color: green;
+     // max-width: 130pt;
+      overflow: hidden;   
+      border-right: none; 
+   //.container {  //mega fett......   //LehrerFach-behälter //display table-row-group geht..
+    .zelle{display:table;
+      min-width:75pt;
+      width:75pt;
+      max-width:75pt;
+        .container {   //jetzt wieder div
+          border-right: none; 
+        //  background-color:yellow;   
+          display:table-row;  //nicht optimal, aber inline is auch nich besser?
+          width:85pt;
+          max-width:85pt;
+          min-width:85pt;
+          //max-width:33pt!important;
+       //   overflow: hidden;
+
+          div{ //unterrichtsfeld, klasse etc, bunte felder
+            display:table-cell;
+            padding-top: 0px;
+            padding-bottom: 0pt;
+            overflow: hidden;
+            font-size: 12pt;
+            text-align:left;
+          }
+
+          .unterrichtsFeld {  // background-color: violet; 
+            max-width:60pt;
+            width:60pt;
+            min-width:60pt;
+          }
+    
+          .lehrerKuerzel {
+            min-width:25pt;
+            width:25pt;
+    //        background-color: red;
+            color:red;
+            text-align:right;
+          }
+    
+          .Klasse {
+            width:25pt;
+            min-width:25pt;
+            text-align:right;
+            color:darkorange;
+    
+     //       background-color: orange;
+          }
+
+        }
+      }
+    }   
   }
 }
+
+    
+
+
+
+
+
+
+
+
+      //farben:
+#printcontainer2 {    
+    }
+
 

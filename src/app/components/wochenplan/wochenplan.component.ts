@@ -14,6 +14,7 @@ import {
 import {
   Lehrer
 } from '../../interfaces/lehrer';
+import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
 
 @Component({
   selector: 'app-wochenplan',
@@ -23,7 +24,7 @@ import {
 export class WochenplanComponent implements OnInit {
   lehrer: Array < Lehrer > ;
   klassen: Array < number > ;
-  aktuellerPlan: Stundenplan;
+  aktuellerPlan: Stundenplan;  //stundenPlan:Array<Array<Array<[Lehrer,Fach,String]>>>;.lehrer und .klasse gibts noch
 
   planLehrer(lehrer) {
     this.planMakerService.planLehrer(lehrer);
@@ -31,12 +32,24 @@ export class WochenplanComponent implements OnInit {
   planKlasse(klasse) {
     this.planMakerService.planKlasse(klasse);
   }
+  stundenPlanDruck(){
+    $('#printcontainer2').append($("app-wochenplan h1").clone());
+    $('#printcontainer2').append($("app-wochenplan h2").clone());
+    $('#printcontainer2').append($("#stundenPlan").clone());
+    $('app-gesamtplan').hide();
+    $('app-epochen-scheduler').hide();
+    window.print();
+    $('app-gesamtplan').show();
+    $('app-epochen-scheduler').show();
+    $('#printcontainer2').empty();
+
+  }
 
   constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService, ) {
     this.lehrer = lehrerService.lehrer;
     this.klassen = lehrerService.klassen;
 
-    planMakerService.aktuell$.subscribe((plan) => {
+    planMakerService.aktuell$.subscribe((plan:Stundenplan) => {
       this.aktuellerPlan = plan;
       //    console.log(plan);
     });

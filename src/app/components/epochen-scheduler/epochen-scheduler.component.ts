@@ -16,6 +16,8 @@ import {
 import {
   Fach
 } from 'src/app/interfaces/fach.enum';
+import { PlanmakerService } from 'src/app/services/planmaker.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -51,24 +53,19 @@ export class EpochenSchedulerComponent {
     ['Sommer'],
     ['ferien']
   ];
-  changeClass(n:number){
-    console.log(this.epochenPlanAktuell);
-    //alten plan speichern:
-    this["epochenplan"+this.aktuelleKlasse]=this.epochenPlanAktuell;
+  changeClass(n:number){ //Buttonklick, andere Klasse aufrufen/laden aus internen Variablen
+   
 
-    //alte duplicates speichern:
-    this["duplicates"+this.aktuelleKlasse]=this.duplicates;
-    //neuen Plan speichern/laden:
-    if(this["epochenplan"+n]!==undefined){
-      this.epochenPlanAktuell=this["epochenplan"+n];
+    if(this.planmakerService["epochenplan"+n]!==undefined){
+      this.epochenPlanAktuell=this.planmakerService["epochenplan"+n];
     }else{
       this.epochenPlanAktuell=this.datumstring.map(zeile => zeile.map(cell => []));;
     }
     //neue Überschrift:
     this.aktuelleKlasse= n;
     //duplicates laden:
-    if(this["duplicates"+n]!==undefined){
-      this.duplicates=this["duplicates"+n];
+    if(this.planmakerService["duplicates"+n]!==undefined){
+      this.duplicates=this.planmakerService["epochenDuplicates"+n];
     }else{
       this.duplicates=  [{}, {}, {}, {}];
     }
@@ -122,6 +119,10 @@ export class EpochenSchedulerComponent {
     }
     this.generateDuplicates(this.epochenPlanAktuell);
     console.log(this.duplicates);
+    //hier im lehrerservice oder planmaker die neuen pläne speichern? übergeben?
+    this.planmakerService["epochenplan" + this.aktuelleKlasse]=this.epochenPlanAktuell;
+    this.planmakerService["epochenDuplicates" + this.aktuelleKlasse]= this.duplicates;
+    console.log(this.planmakerService.epochenplan9);
   }
 
   duplicates = [{}, {}, {}, {}];
@@ -150,7 +151,7 @@ export class EpochenSchedulerComponent {
       returnvalue = false;
     } else {
       fl1.forEach(([lehrer, fach], lf) => {
-        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) && (fach !== fl2[lf][1])) {
+        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
           returnvalue = false;
         }
       });
@@ -158,7 +159,7 @@ export class EpochenSchedulerComponent {
     return returnvalue;
   }
 
-  constructor(private loginService: LoginService, lehrerservice: LehrerService) {
+  constructor(private planmakerService: PlanmakerService, private loginService: LoginService, lehrerservice: LehrerService) {
     this.items = loginService.items;
     let klassenZuordnung = {};
     lehrerservice.lehrer.forEach((r) => {
@@ -223,11 +224,15 @@ export class EpochenSchedulerComponent {
     ]
 this.aktuelleKlasse=9;
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenplan9 = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenplan10 = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenplan11 = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenplan12 = this.datumstring.map(zeile => zeile.map(cell => []));
-    this.epochenPlanAktuell =this.datumstring.map(zeile => zeile.map(cell => []));
+    this.epochenplan9 = this.planmakerService.epochenplan9;
+    this.epochenplan10 = this.planmakerService.epochenplan10;
+    this.epochenplan11 = this.planmakerService.epochenplan11;
+    this.epochenplan12 = this.planmakerService.epochenplan12;
+    this.epochenPlanAktuell =this.planmakerService.epochenplan9;
+    this.duplicates9=this.planmakerService.epochenDuplicates9;
+    this.duplicates10=this.planmakerService.epochenDuplicates10;
+    this.duplicates11=this.planmakerService.epochenDuplicates11;
+    this.duplicates12=this.planmakerService.epochenDuplicates12;
     this.tag=loginService.tagAlsString;
 
   }

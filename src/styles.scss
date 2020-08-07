@@ -7,6 +7,10 @@ body {
 
 }
 
+button :hover {
+  background-color: indianred;
+}
+
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -45,126 +49,85 @@ h2 {
     size: landscape;
   }
 
-  body {
+  body {font-family: Georgia, ‘Times New Roman’, serif;
     writing-mode: horizontal-tb; //
   }
 
-  //body div :first-of-type{display:none;}
+  .buttonreihe button {
+    display: none;
+  }
 
-  body app-root app-lehrerliste >.gesamtStundenplan-Table {display:none;}
-  body app-root app-lehrerliste >h2 {display:none;}
 
+  //app root alles ausblenden bisauf printcontainer:
+  body app-root app-lehrerliste>h1 {
+    display: none;
+  }
 
-  #printcontainer :nth-child(5)  {page-break-before:always;}
-  #printcontainer :nth-child(9)  {page-break-before:always;}
+  body app-root app-lehrerliste>.gesamtStundenplan-Table {
+    display: none;
+  }
 
-  #printcontainer .gesamtStundenplan-Table{
+  body app-root app-lehrerliste>h2 {
+    display: none;
+  }
+
+  #printcontainer :nth-child(6) {
+    page-break-before: always;
+  }
+
+  #printcontainer :nth-child(10) {
+    page-break-before: always;
+  }
+
+  #printcontainer .gesamtStundenplan-Table {
     line-height: 10pt;
-    width:100%;
-  }
-
-  #printcontainer .gesamtStundenplan-Table td  .dropButton>div{width:100%;}
-  .gesamtStundenplan-Table td div{overflow: hidden;
-  //width: 40px;
-  font-size: 8pt;
-}
-
-.gesamtStundenplan-Table .lehrerFachBehaelter p{
-  margin-top: 0pt;
-  margin-bottom:0pt;
-}
-.lehrerFachBehaelter :nth-child(2){
-  color:red;
-}
-
-//.lehrerFachBehaelter{border-left: 1pt solid;}
-.dropButton > :nth-child(2){border-left: 1pt dotted;}
-.dropButton > :nth-child(3){border-left: 1pt dotted;}
-//.gesamtStundenplan-Table  .dropButton :nth-child(3){border-left: 1pt solid;}
-
-h2{margin-top: 10pt;}
- 
-
-
-   #stundenPlanContainer {
-     display:none;
-   }
-   /*
-  #stundenPlan {
-    line-height: 3em;
-    .reihe>div {
-      background-color: blue; //die hier haben korrekte breite....
-      padding: 3pt;
-      display:grid;
-      grid-template-rows: 50pt 50pt 50pt;
-    }
-
-    .reihe>div .container {
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 100%;
-      position: relative;
-      top: -5pt;
-      //container ist FETTTTTT.... viel breiter als parentj
-      background-color: yellow;    
-      border: 1pt solid;
-      padding: 2pt;
-      margin: 2pt;
-      
-    }
-  }
-  #stundenPlan .reihe >div .container {
-
-    .unterrichtsFeld{
-      display: flex;
-
-      padding-left: 35pt;
-      width: auto;
-      background-color: green;
-    }
-    .lehrerKuerzel {
-      display: flex;
-      
-      padding-left: 55pt;
-
-    }
-    .Klasse {
-      display: flex;
-      
-      padding-left: 55pt;
-    }
-}
-
-
-  //}
-
-  .reiheOben {
-    padding-top: 5pt;
-    padding-bottom: 5pt;
-    font-weight: bold;
-  }
-
-  .reiheOben>div>div {
     width: 100%;
   }
-*/
-  //ueberschriften zentriert mo/di/mi
-  //strundenplan
-  #epochenplan {
+
+  #printcontainer .gesamtStundenplan-Table td .dropButton>div {
+    width: 100%;
+  }
+
+  .gesamtStundenplan-Table td div {
+    overflow: hidden;
+    //width: 40px;
+    font-size: 8pt;
+  }
+
+  .gesamtStundenplan-Table .lehrerFachBehaelter p {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+
+  .lehrerFachBehaelter :nth-child(2) {
+    color: red;
+  }
+
+  //.lehrerFachBehaelter{border-left: 1pt solid;}
+  .dropButton> :nth-child(2) {
+    border-left: 1pt dotted;
+  }
+
+  .dropButton> :nth-child(3) {
+    border-left: 1pt dotted;
+  }
+
+  //.gesamtStundenplan-Table  .dropButton :nth-child(3){border-left: 1pt solid;}
+
+  h2 {
+    margin-top: 10pt;
+  }
+
+  //-----------------------------------------------------------------------------------
+  //Stundenplan alles ausblenden bis auf printcontainer2: 
+  body app-root app-wochenplan>.noprint {
     display: none;
   }
 
-  button {
+  body app-root app-wochenplan>#stundenPlan {
     display: none;
   }
 
- 
-
-
-  .buttonreihe {
-    display: none;
-  }
-
-
+  
 
 }

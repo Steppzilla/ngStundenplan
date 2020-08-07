@@ -30,7 +30,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 //import{AuthGuardServiceService} from '../authg'
 
 import { LoginService } from './services/login.service';
-import { GesamtplancopiesComponent } from './components/gesamtplancopies/gesamtplancopies.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { GesamtplancopiesComponent } from './components/gesamtplancopies/gesamtp
     LehrerlisteComponent,
     LehrerComponent,
     WochenplanComponent,
-    EpochenSchedulerComponent,
-    GesamtplancopiesComponent
+    EpochenSchedulerComponent
   ],
   imports: [
     BrowserModule,

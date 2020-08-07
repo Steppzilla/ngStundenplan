@@ -5,7 +5,7 @@ export class Stundenplan {
 
 
     
-    stundenPlan:Array<Array<Array<[Lehrer,Fach,String]>>>;
+    stundenPlan:Array<Array<Array<[Lehrer,Fach,string]>>>;
     klasse:number;  //Lehrer aktiv
     lehrer:Lehrer; //Klassen aktiv
 

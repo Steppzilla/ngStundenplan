@@ -40,22 +40,17 @@ export class LehrerlisteComponent implements OnInit {
   schieneLage={zeilenStarts:[6,4,8,7],cellsMoMi:[8,11],
     cellsDo:[8,9]};
  
-
 //Buttons:
-
 wochentag :string= "montag";
 tagvorher :string;
 
 @ViewChild('Tabelle') someInput:ElementRef;
 
 printGesamtplaene(){
-  
-
-//printAdd
+  //printAdd
 //Tabelle
-
-  
-  $('#printcontainer').append("<h2>" + "Montag" +"</h2>");
+$('#printcontainer').append("<h1>" + "Gesamtplan" +"</h1>");
+    $('#printcontainer').append("<h2>" + "Montag" +"</h2>");
 //tabelle in print-container kopieren
   $('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
  //tabellen-Cells im print-container leeren:
@@ -124,22 +119,13 @@ this.planmaker.freitag.forEach((zeile,z) => {
 //leere tabelle entfernen:
 $('#printcontainer .gesamtStundenplan-Table').eq(0).remove();
 
-/*$('.gesamtStundenplan-Table').css('line-height','8.5pt');
-$('.gesamtStundenplan-Table td div').css('overflow','hidden');
-//$('.gesamtStundenplan-Table td div').css('width','40px');
-$('.gesamtStundenplan-Table td div').css('font-size','8pt');
-$('.gesamtStundenplan-Table .lehrerFachBehaelter p').css('margin-top','0pt');
-$('.gesamtStundenplan-Table .lehrerFachBehaelter p').css('margin-bottom','0pt'); 
-$('.gesamtStundenplan-Table .lehrerFachBehaelter :nth-child(2)').css('color','red'); //rot machen die kurzel
-$('h2').css('margin-top','10pt');
-$('h2').last().css('margin-top','40pt');
-
-
-$("h2").eq(0).hide();
-  */
+$('app-wochenplan').hide();
+$('app-epochen-scheduler').hide();
 
   window.print();
   $('#printcontainer').empty();
+  $('app-wochenplan').show();
+$('app-epochen-scheduler').show();
 
 }
 

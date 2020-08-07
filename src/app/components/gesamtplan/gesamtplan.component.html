@@ -1,17 +1,17 @@
+<div id="buttonmenu" class="buttonreihe">
+  <div class="center">
+    <button (click)="wochenTag('montag')">Montag</button>
+    <button (click)="wochenTag('dienstag')"> Dienstag</button>
+    <button (click)="wochenTag('mittwoch')">Mittwoch</button>
+    <button (click)="wochenTag('donnerstag')">Donnerstag</button>
+    <button (click)="wochenTag('freitag')">Freitag</button>
 
-<div id="buttonmenu">
-<div class="center">
-<button (click)="wochenTag('montag')" >Montag</button>
-<button (click)="wochenTag('dienstag')" > Dienstag</button>
-<button (click)="wochenTag('mittwoch')" >Mittwoch</button>
-<button (click)="wochenTag('donnerstag')" >Donnerstag</button>
-<button (click)="wochenTag('freitag')" >Freitag</button>
+  </div>
+  <div class="center">
+    <button id="save" (click)="save()">Save</button>
 
-</div><div class="center">
- <!--<button id="save" (click)="save()">Save</button> -->
- 
- 
-  <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button> 
+
+    <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">
           <!-- -->
           <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c)}} lehrerFachBehaelter">
-            
+
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
             <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
           </div>
@@ -47,7 +47,7 @@
 
               <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
               <div class="dropSpan2"> {{lehrerFach[1]}}</div>
-              
+
             </button>
 
             <button (click)="mittagsPause(r,c,$event)" id="mittag" class="btn container-fluid"> Mittag </button>
@@ -62,14 +62,16 @@
 <!--
 <app-gesamtplancopies></app-gesamtplancopies>
 -->
-<div id="printcontainer" #printAdd >
-    
+<div id="printcontainer" class="printContainer" #printAdd>
+
 </div>
 
-<div id="stundenPlanContainer">
-  <app-wochenplan></app-wochenplan>
-</div>
+<div>
+  <div id="stundenPlanContainer">
+    <app-wochenplan></app-wochenplan>
+  </div>
 
-<p id="epochenplan">
-  <app-epochen-scheduler></app-epochen-scheduler>
-</p>
+  <p id="epochenplan">
+    <app-epochen-scheduler></app-epochen-scheduler>
+  </p>
+</div>
