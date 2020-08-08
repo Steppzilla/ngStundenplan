@@ -143,6 +143,7 @@ console.log(this.lehrerservice.stundenRaster.getValue());
   planPushen(tag) {
   //  this.login();
     let z: Array < Array < Array < [Lehrer, Fach] >>> ;
+    //alle tage speichern im planmakerservice
     this.store.collection < Plan > ('tage').valueChanges().subscribe((val: Array < Plan > ) => {
       val.forEach(plan => {
         var tag = plan.wochentag;
@@ -150,30 +151,34 @@ console.log(this.lehrerservice.stundenRaster.getValue());
         //   console.log("HIER");
         // console.log(planJSO);
         this.planmakerService[tag] = planJSO;
-       /// this.planmakerService.aktuell.next(planJSO);  ///will wochenplan haben dafür brauchich den
+       /// this.planmakerService.aktuell.next(planJSO);  ///will wochenplan haben dafür brauchich den? nicht? wird dort gewählt
 
       });
       this.lehrerservice.stundenRaster.next(this.planmakerService[tag]); 
-      
+   
           // console.log("HIER");
      // console.log(this.planmakerService.montag);
       this.planmakerService.planKlasse(1);
       this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
     });
+
     this.store.collection('epochen').valueChanges().subscribe((val:Array<any>)=>{
-      val.forEach(plan=>{
-        var klasse= plan.klasse;
-        var epochenJSO=JSON.parse(atob( plan.epochen)) ; 
-       // var duplicatesJSO= JSON.parse(atob(plan.duplicates));
+      val.forEach(epochenplan=>{
+        var klasse= epochenplan.klasse;
+        var epochenJSO=JSON.parse(atob(epochenplan.epochen)) ; 
+//console.log(epochenplan.epochen);
+//console.log(epochenplan.klasse);
+//console.log(epochenplan.duplicates);
+       // var duplicatesJSO= JSON.parse(atob(epochenplan.duplicates));
         this.planmakerService['epochenplan' + klasse]=epochenJSO;
-       // this.planmakerService['epochenDuplicates' + klasse]=duplicatesJSO;
+    //    this.planmakerService['epochenDuplicates' + klasse]=duplicatesJSO;
       });
     })
 
 
 
 
-  //  this.logout();
+  // this.logout();
   }
 
   constructor(private planmakerService: PlanmakerService,

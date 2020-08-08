@@ -31,7 +31,7 @@ export class LehrerService {
   lehrer: Lehrer[] = [
 
     {
-      id: 32,
+      id: 1,
       name: 'Ba',
       kuerzel: 'Ba',
       anrede: "Herr",
@@ -43,7 +43,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 35,
+      id: 2,
       name: 'Clement',
       kuerzel: 'Cle',
       anrede: "Frau",
@@ -55,7 +55,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 1,
+      id: 3,
       name: 'Crone',
       kuerzel: 'Cr',
       anrede: "Frau",
@@ -65,20 +65,21 @@ export class LehrerService {
       ]
     },
     {
-      id: 2,
+      id: 4,
       name: 'Claußen',
       kuerzel: 'Cla',
       anrede: "Frau",
       faecher: [],
       zuweisung: [
         [Lehrjahr.dreizehn, Fach.mathematik],
+        [Lehrjahr.zwoelf, Fach.mathematik],
         [Lehrjahr.zehn, Fach.kunst],
         [Lehrjahr.elf, Fach.kunst],
         [Lehrjahr.zwoelf, Fach.kunst],
       ]
     },
     {
-      id: 34,
+      id: 5,
       name: 'Corsten',
       kuerzel: 'Co',
       anrede: "Frau",
@@ -91,7 +92,7 @@ export class LehrerService {
     },
     // { id: 3, name: 'Dittmann', kuerzel: 'Dit', anrede: "Frau", facher:  },
     {
-      id: 4,
+      id: 6,
       name: 'Ehrhardt',
       kuerzel: 'Eh',
       anrede: "Frau",
@@ -106,7 +107,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 5,
+      id: 7,
       name: 'Frank',
       kuerzel: 'Fr',
       anrede: "Frau",
@@ -122,7 +123,7 @@ export class LehrerService {
     },
     // { id: 6, name: 'Fucke', kuerzel: 'Fu'  , anrede: "Frau" , faecher: [Fach.]},
     {
-      id: 7,
+      id: 8,
       name: 'Funke',
       kuerzel: 'Fun',
       anrede: "Frau",
@@ -136,7 +137,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 8,
+      id: 9,
       name: 'Gretsch',
       kuerzel: 'Gre',
       anrede: "Frau",
@@ -147,7 +148,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 9,
+      id: 10,
       name: 'Güldenpenning',
       kuerzel: 'Gü',
       anrede: "Frau",
@@ -163,7 +164,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 10,
+      id: 11,
       name: 'Haarmeier',
       kuerzel: 'Hm',
       anrede: "Herr",
@@ -173,12 +174,13 @@ export class LehrerService {
       ]
     },
     {
-      id: 11,
+      id: 12,
       name: 'Häggmark',
       kuerzel: 'Hä',
       anrede: "Herr",
       faecher: [Fach.eurythmie],
       zuweisung: [
+        [Lehrjahr.eins, Fach.eurythmie],
         [Lehrjahr.drei, Fach.eurythmie],
         [Lehrjahr.sieben, Fach.eurythmie],
         [Lehrjahr.zehn, Fach.eurythmie],
@@ -186,7 +188,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 12,
+      id: 13,
       name: 'Hertinger',
       kuerzel: 'He',
       anrede: "Frau",
@@ -205,7 +207,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 13,
+      id: 14,
       name: 'Kießig',
       kuerzel: 'Ki',
       anrede: "Frau",
@@ -221,7 +223,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 36,
+      id: 15,
       name: 'Ke',
       kuerzel: 'Ke',
       anrede: "Frau",
@@ -235,7 +237,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 14,
+      id: 16,
       name: 'Loth',
       kuerzel: 'Lo',
       anrede: "Frau",
@@ -251,7 +253,7 @@ export class LehrerService {
     },
     // { id: 15, name: 'Luley', kuerzel: 'Lu', anrede: "Frau"  , faecher: [Fac]},
     {
-      id: 38,
+      id: 17,
       name: 'Neher',
       kuerzel: 'Ne',
       anrede: "Herr",
@@ -259,6 +261,7 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.zwei, Fach.eurythmie],
         [Lehrjahr.sechs, Fach.eurythmie],
+        [Lehrjahr.sieben, Fach.eurythmie],
         [Lehrjahr.acht, Fach.eurythmie],
         [Lehrjahr.neun, Fach.eurythmie],
         [Lehrjahr.zwoelf, Fach.eurythmie],
@@ -266,7 +269,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 40,
+      id: 18,
       name: 'Nüßgen-Langbehn',
       kuerzel: 'Lb',
       anrede: "Frau",
@@ -281,7 +284,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 16,
+      id: 19,
       name: 'Pagallies-Meincke',
       kuerzel: 'PM',
       anrede: "Frau",
@@ -301,7 +304,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 17,
+      id: 20,
       name: 'Pahnke',
       kuerzel: 'Pa',
       anrede: "Herr",
@@ -317,7 +320,7 @@ export class LehrerService {
     },
     //{ id: 18, name: 'Piaskowski', kuerzel: 'FPi', anrede: "Frau", faecher: [Fach]  },
     {
-      id: 19,
+      id: 21,
       name: 'Reichl',
       kuerzel: 'Rei',
       anrede: "Herr",
@@ -325,7 +328,7 @@ export class LehrerService {
       zuweisung: []
     },
     {
-      id: 20,
+      id: 22,
       name: 'Rosemann-Poch',
       kuerzel: 'RoP',
       anrede: "Herr",
@@ -339,7 +342,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 21,
+      id: 23,
       name: 'Santa',
       kuerzel: 'San',
       anrede: "Frau",
@@ -352,7 +355,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 22,
+      id: 24,
       name: 'Scheunemann',
       kuerzel: 'Sc',
       anrede: "Herr",
@@ -366,7 +369,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 23,
+      id: 25,
       name: 'Schmidt',
       kuerzel: 'Sm',
       anrede: "Frau",
@@ -378,7 +381,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 24,
+      id: 26,
       name: 'Sodemann',
       kuerzel: 'Sod',
       anrede: "Frau",
@@ -392,7 +395,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 25,
+      id: 27,
       name: 'Sommer',
       kuerzel: 'So',
       anrede: "Frau",
@@ -407,7 +410,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 26,
+      id: 28,
       name: 'Sternberg',
       kuerzel: 'Ste',
       anrede: "Herr",
@@ -423,20 +426,21 @@ export class LehrerService {
       ]
     },
     {
-      id: 27,
+      id: 29,
       name: 'Stuchlik',
       kuerzel: 'Stk',
       anrede: "Herr",
       faecher: [Fach.musik],
       zuweisung: [
         [Lehrjahr.fuenf, Fach.musik],
+        [Lehrjahr.acht, Fach.musik],
         [Lehrjahr.acht, Fach.hauptunterricht],
         [Lehrjahr.acht, Fach.uebstunde],
         [Lehrjahr.zehn, Fach.computer],
       ]
     },
     {
-      id: 28,
+      id: 30,
       name: 'Waligorski-Sell',
       kuerzel: 'Wa',
       anrede: "Frau",
@@ -452,7 +456,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 29,
+      id: 31,
       name: 'Wohlers',
       kuerzel: 'Wo',
       anrede: "Frau",
@@ -460,10 +464,12 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.zehn, Fach.mathematik],
         [Lehrjahr.zwoelf, Fach.mathematik],
+        [Lehrjahr.vier, Fach.musik],
+        [Lehrjahr.dreizehn, Fach.mathematik],
       ]
     },
     {
-      id: 30,
+      id: 32,
       name: 'Zenker',
       kuerzel: 'Ze',
       anrede: "Frau",
@@ -477,7 +483,7 @@ export class LehrerService {
       ]
     },
     {
-      id: 31,
+      id: 33,
       name: 'Zwierlein',
       kuerzel: 'Zw',
       anrede: "Frau",
@@ -493,7 +499,43 @@ export class LehrerService {
         [Lehrjahr.acht, Fach.religion],
       ]
     },
+    {
+      id: 34,
+      name: 'Jöhnk',
+      kuerzel: 'Jö',
+      anrede: "Frau",
+      faecher: [Fach.handarbeit],
+      zuweisung: [
+        [Lehrjahr.eins, Fach.handarbeit],
+        [Lehrjahr.zwei, Fach.handarbeit],
+        [Lehrjahr.fuenf, Fach.handarbeit],
+
+      ]
+    },
+    {
+      id: 35,
+      name: 'Si',
+      kuerzel: 'Si',
+      anrede: "Frau",
+      faecher: [Fach.handarbeit],
+      zuweisung: [
+        [Lehrjahr.vier, Fach.handarbeit],
+      ]
+    },
+    {
+      id: 36,
+      name: 'Pi',
+      kuerzel: 'Pi',
+      anrede: "Herr",
+      faecher: [Fach.sport],
+      zuweisung: [
+        [Lehrjahr.dreizehn, Fach.sport],
+      ]
+    },
+
   ];
+
+
 
   createEmptyStundenraster() {
     return new Array(this.stundenanzahl).fill(null).map(

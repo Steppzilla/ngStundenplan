@@ -231,7 +231,7 @@ save(){
   farbwaehler(row, cell, lehrer, r, c) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente
     let previousHit: boolean;
     cell.forEach(([cellLehrer, fach]) => {
-      if (cellLehrer.id === lehrer.id) {
+      if (cellLehrer.kuerzel === lehrer.kuerzel) {
         previousHit = true;
       }
 
@@ -246,7 +246,7 @@ save(){
     var duplicates = 0;
     row.forEach(element => {
       element.forEach(lehrerFach => {
-        if ((lehrerFach !== null) && (lehrerFach[0].id === lehrer.id)
+        if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)
         ) {
           ++duplicates;
         }

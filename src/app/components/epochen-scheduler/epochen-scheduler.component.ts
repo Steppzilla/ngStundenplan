@@ -54,7 +54,6 @@ export class EpochenSchedulerComponent {
     ['ferien']
   ];
   changeClass(n:number){ //Buttonklick, andere Klasse aufrufen/laden aus internen Variablen
-   
 
     if(this.planmakerService["epochenplan"+n]!==undefined){
       this.epochenPlanAktuell=this.planmakerService["epochenplan"+n];
@@ -63,17 +62,14 @@ export class EpochenSchedulerComponent {
     }
     //neue Überschrift:
     this.aktuelleKlasse= n;
-    //duplicates laden:
-    if(this.planmakerService["duplicates"+n]!==undefined){
-      this.duplicates=this.planmakerService["epochenDuplicates"+n];
-    }else{
-      this.duplicates=  [{}, {}, {}, {}];
-    }
+    //duplicates bestimmen:
+    this.generateDuplicates(this.epochenPlanAktuell);
+   
    // console.log(this.epochenPlanAktuell);
   }
 
   lehrerErmitteln() {
-    let c = 9;
+    let c = this.aktuelleKlasse;
     switch (c) {
       case 1:
         return this.klassenZuordnung[Lehrjahr.eins];
