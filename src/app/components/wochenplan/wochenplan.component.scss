@@ -109,8 +109,10 @@
 
 #printcontainer2{
   *{padding:0pt;
-  margin:0pt;}
+  margin:0pt;
+}
   width:1150pt;
+  
   //background-color: green;
   }
 //im printcontainer:
@@ -132,11 +134,13 @@
 
 
 #printcontainer2 table {
+  
+  font-size: 25pt;
   margin-left: 15pt;
   margin-top: 15pt;
-  width:450pt!important;
-  max-width:550pt!important;
-   line-height: 12pt; 
+  width:1150pt;
+  max-width:1150pt;
+   line-height: 30pt; 
   border-collapse: collapse;
 
   tr {
@@ -171,14 +175,15 @@
             padding-top: 0px;
             padding-bottom: 0pt;
             overflow: hidden;
-            font-size: 12pt;
+            font-size: 20pt;
             text-align:left;
           }
 
           .unterrichtsFeld {  // background-color: violet; 
-            max-width:60pt;
-            width:60pt;
-            min-width:60pt;
+            max-width:80pt;
+            width:80pt;
+            min-width:80pt;
+            padding-left:15pt;
           }
     
           .lehrerKuerzel {

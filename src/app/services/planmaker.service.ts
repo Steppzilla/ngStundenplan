@@ -41,10 +41,10 @@ export class PlanmakerService {
   epochenplan11;
   epochenplan12;
 
-  epochenDuplicates9;
-  epochenDuplicates10;
-  epochenDuplicates11;
-  epochenDuplicates12;
+  schiene9;
+  schiene10;
+  schiene11;
+  schiene12;
 
   planLehrer(dieserlehrer: Lehrer) {
   //  console.log(this.montag);

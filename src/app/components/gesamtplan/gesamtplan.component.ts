@@ -311,6 +311,7 @@ save(){
       });
     });
     this.klassenZuordnung = klassenZuordnung;
+    console.log(this.klassenZuordnung[9]);
 
     this.lehrer = lehrerservice.lehrer;
     this.klassen = lehrerservice.klassen;

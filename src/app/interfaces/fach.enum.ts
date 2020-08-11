@@ -1,68 +1,73 @@
 export enum Fach {
-    hauptunterricht="Hauptunt.",//eigentlich eins der anderen Fächer
+    hauptunterricht="HU",//eigentlich eins der anderen Fächer
     schiene="Schiene", //eigentlich eines der anderen Fächer
     wahlpflicht="Wahlpfl.",
     hgw="HGW",  //eigentlich Handarbeit, Gartenbau, Werken?
 
     rhythmisch="StartUp",
-    klassenbetreuer="Betreuerstd.",
+    klassenbetreuer="Betreuer",
 
 
-    handarbeit="Handarb.",
-    musik="Musik",
+    handarbeit="Hand",
+    musik="Mus",
     ethik="Ethik",
     sport="Sport",
     eurythmie="Eur",
 
-    deutsch="Deutsch",
-    englisch="Engl.",
-    franzoesisch="Franz.",
-    mathematik="Mathe",
+    deutsch="Deu",
+    englisch="Engl",
+    franzoesisch="Fr",
+    mathematik="Ma",
 
 
     //13. Klasse /Epochen:
-    physik="Physik",
-    chemie="Chemie",
-    geschichte="Gesch.",
-    geographie="Geogr.",
+    physik="Phy",
+    chemie="Chem",
+    geschichte="Gesch",
+    geographie="Geo",
     biologie="Bio",
     kunst="Kunst",
-    informatik="Inform.",
-    kunstgeschichte="Kunstgesch.",
+    informatik="Comp",
+    kunstgeschichte="Kunstg",
 
 
     //gedrittelt:
    // werken="Werken",
-    weben="Weben",
+    weben="Web",
    // schwarzweiss="Schwarzweißzeichnen",
-    plastizieren="Plast.",
-    schmieden="Schm.",
+    plastizieren="Plast",
+    schmieden="Schm",
     //irgendwas von Cla
     //irgendwas von LB
    // handarbeit... oder was in HGW?
-   gartenbau="Gartenb.",
-   werken="Werken",
+   gartenbau="Gart",
+   werken="Werk",
 
 
 
     //praktische Fächer:
-    orchester="Orch.",
+    orchester="Orch",
     chor="Chor",
 
     mittag="Mittag",
 
-    computer="Comp.",
-    wirtschaftspolitik="Wirtsch.pol.",
+    computer="Comp",
+    wirtschaftspolitik="WiPo",
 
     //Unterstufenspezifisch:
-    uebstunde="Übstd.",   //Sonst Angabe des Faches
+    uebstunde="Üb",   //Sonst Angabe des Faches
     spielturnen="Spielt.", //Sonst Sport
-    religion="Relig.", //(Sonst ethik)
-    griechisch="Griech.", //Fünfte klasse
-    latein="Lat.",
+    religion="Rel", //(Sonst ethik)
+    griechisch="Griech", //Fünfte klasse
+    latein="Lat",
 
     //Spontan neu erfunden für rhythmischen Teil: 
     deutschR="Sprache",
-    plastizierenR="Plast."
+    plastizierenR="Plast",
+
+    unbekannt="hä?",
+
+    landbau="Landbau",
+    kunstfahrt="Kunstfahrt",
 
 }

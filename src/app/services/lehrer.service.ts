@@ -32,13 +32,16 @@ export class LehrerService {
 
     {
       id: 1,
-      name: 'Ba',
-      kuerzel: 'Ba',
+      name: 'Bayas',
+      kuerzel: 'By',
       anrede: "Herr",
       faecher: [Fach.mathematik, Fach.physik],
       zuweisung: [
         [Lehrjahr.neun, Fach.mathematik],
         [Lehrjahr.neun, Fach.physik],
+        [Lehrjahr.zehn, Fach.physik],
+        [Lehrjahr.elf, Fach.physik],
+        [Lehrjahr.zwoelf, Fach.physik],
         [Lehrjahr.elf, Fach.mathematik],
       ]
     },
@@ -52,6 +55,8 @@ export class LehrerService {
         [Lehrjahr.sechs, Fach.handarbeit],
         [Lehrjahr.sieben, Fach.handarbeit],
         [Lehrjahr.acht, Fach.handarbeit],
+        [Lehrjahr.zehn, Fach.biologie],
+        [Lehrjahr.elf, Fach.biologie],
       ]
     },
     {
@@ -61,7 +66,11 @@ export class LehrerService {
       anrede: "Frau",
       faecher: [Fach.chemie],
       zuweisung: [
-        [Lehrjahr.neun, Fach.chemie]
+        [Lehrjahr.neun, Fach.chemie],
+        [Lehrjahr.zehn, Fach.chemie],
+        [Lehrjahr.elf, Fach.chemie],
+        [Lehrjahr.zwoelf, Fach.chemie]
+
       ]
     },
     {
@@ -170,7 +179,8 @@ export class LehrerService {
       anrede: "Herr",
       faecher: [Fach.schmieden],
       zuweisung: [
-        [Lehrjahr.neun, Fach.schmieden]
+        [Lehrjahr.neun, Fach.schmieden],
+        [Lehrjahr.zehn, Fach.schmieden]
       ]
     },
     {
@@ -224,7 +234,7 @@ export class LehrerService {
     },
     {
       id: 15,
-      name: 'Ke',
+      name: 'Keyifci',
       kuerzel: 'Ke',
       anrede: "Frau",
       faecher: [Fach.hauptunterricht],
@@ -248,6 +258,7 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.klassenbetreuer],
         [Lehrjahr.elf, Fach.plastizieren],
         [Lehrjahr.zwoelf, Fach.plastizieren],
+        [Lehrjahr.zwoelf, Fach.kunstgeschichte],
         [Lehrjahr.zehn, Fach.plastizierenR]
       ]
     },
@@ -277,6 +288,9 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.vier, Fach.handarbeit],
         [Lehrjahr.neun, Fach.weben],
+
+        [Lehrjahr.neun, Fach.unbekannt],
+        [Lehrjahr.zehn, Fach.weben],
         [Lehrjahr.dreizehn, Fach.biologie],
         [Lehrjahr.zwoelf, Fach.biologie],
         [Lehrjahr.elf, Fach.weben],
@@ -364,6 +378,7 @@ export class LehrerService {
         [Lehrjahr.sieben, Fach.musik],
         [Lehrjahr.zehn, Fach.musik],
         [Lehrjahr.acht, Fach.musik],
+        [Lehrjahr.elf, Fach.wirtschaftspolitik],
         [Lehrjahr.zwoelf, Fach.wirtschaftspolitik],
         [Lehrjahr.zwoelf, Fach.musik]
       ]
@@ -378,6 +393,9 @@ export class LehrerService {
         [Lehrjahr.vier, Fach.hauptunterricht],
         [Lehrjahr.vier, Fach.uebstunde],
         [Lehrjahr.vier, Fach.musik],
+        [Lehrjahr.zehn, Fach.geographie],
+        [Lehrjahr.elf, Fach.geographie],
+        [Lehrjahr.zwoelf, Fach.geographie],
       ]
     },
     {
@@ -388,8 +406,10 @@ export class LehrerService {
       faecher: [Fach.deutsch],
       zuweisung: [
         [Lehrjahr.neun, Fach.deutschR],
+        [Lehrjahr.neun, Fach.kunstgeschichte],
         [Lehrjahr.zehn, Fach.deutsch],
         [Lehrjahr.zehn, Fach.klassenbetreuer],
+        [Lehrjahr.zwoelf, Fach.geschichte],
         [Lehrjahr.dreizehn, Fach.deutsch],
         [Lehrjahr.dreizehn, Fach.geschichte]
       ]
@@ -417,6 +437,8 @@ export class LehrerService {
       faecher: [Fach.deutsch],
       zuweisung: [
         [Lehrjahr.neun, Fach.deutsch],
+        [Lehrjahr.neun, Fach.geschichte],
+        [Lehrjahr.zehn, Fach.geschichte],
         [Lehrjahr.elf, Fach.geschichte],
         [Lehrjahr.elf, Fach.deutsch],
         [Lehrjahr.elf, Fach.klassenbetreuer],
@@ -463,6 +485,7 @@ export class LehrerService {
       faecher: [Fach.mathematik, Fach.musik],
       zuweisung: [
         [Lehrjahr.zehn, Fach.mathematik],
+        [Lehrjahr.zehn, Fach.computer],
         [Lehrjahr.zwoelf, Fach.mathematik],
         [Lehrjahr.vier, Fach.musik],
         [Lehrjahr.dreizehn, Fach.mathematik],
@@ -514,12 +537,13 @@ export class LehrerService {
     },
     {
       id: 35,
-      name: 'Si',
+      name: 'Schilling (Prakt.)',
       kuerzel: 'Si',
       anrede: "Frau",
       faecher: [Fach.handarbeit],
       zuweisung: [
         [Lehrjahr.vier, Fach.handarbeit],
+        [Lehrjahr.neun, Fach.geographie]
       ]
     },
     {

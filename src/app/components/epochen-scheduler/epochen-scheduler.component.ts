@@ -38,10 +38,14 @@ export class EpochenSchedulerComponent {
   epochenplan10: Array < Array < Array < [Lehrer, Fach] | null >>> ;
   epochenplan11: Array < Array < Array < [Lehrer, Fach] | null >>> ;
   epochenplan12: Array < Array < Array < [Lehrer, Fach] | null >>> ;
-  duplicates9;
-  duplicates10;
-  duplicates11;
-  duplicates12;
+
+  schienenplan9;
+  schienenplan10;
+  schienenplan11;
+  schienenplan12;
+  schiene;
+
+  duplicatesSchiene=[{}, {}, {}, {}];
 
   tag;
   //epochenplan13;
@@ -58,12 +62,19 @@ export class EpochenSchedulerComponent {
     if(this.planmakerService["epochenplan"+n]!==undefined){
       this.epochenPlanAktuell=this.planmakerService["epochenplan"+n];
     }else{
-      this.epochenPlanAktuell=this.datumstring.map(zeile => zeile.map(cell => []));;
+      this.epochenPlanAktuell=this.datumstring.map(zeile => zeile.map(cell => []));
+    }
+
+    if(this.planmakerService["schiene" + n]!==undefined){
+      this.schiene=this.planmakerService["schiene" + n];
+    }else{
+      this.schiene=this.datumstring.map(zeile => zeile.map(cell => []));
     }
     //neue Überschrift:
     this.aktuelleKlasse= n;
     //duplicates bestimmen:
-    this.generateDuplicates(this.epochenPlanAktuell);
+    this.generateDuplicates("Epoche",this.epochenPlanAktuell);
+    this.generateDuplicates("Schiene", this.schiene);
    
    // console.log(this.epochenPlanAktuell);
   }
@@ -103,28 +114,32 @@ export class EpochenSchedulerComponent {
   }
 
   //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
-  lehrerWahl(z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
+  lehrerWahl(art: string, z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
 
-    if (this.epochenPlanAktuell[z][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
-      let index = this.epochenPlanAktuell[z][c].indexOf(lehrerFach);
-      this.epochenPlanAktuell[z][c].splice(index, 1);
-    } else if (event.shiftKey) { //mit Shift: Hinzufügen 
+     if ((event.shiftKey)&&(art==="Epoche") ){ //mit Shift: Hinzufügen 
       this.epochenPlanAktuell[z][c].push(lehrerFach);
-    } else {
+    } else if(art==="Epoche"){
       this.epochenPlanAktuell[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
     }
-    this.generateDuplicates(this.epochenPlanAktuell);
+    else if((art==="Schiene")&&(event.shiftKey)){
+      this.schiene[z][c].push(lehrerFach);
+    }else if(art==="Schiene"){
+      this.schiene[z][c] = [lehrerFach];
+    }
+    this.generateDuplicates("Epoche", this.epochenPlanAktuell);
+    this.generateDuplicates("Schiene", this.schiene);
     console.log(this.duplicates);
     //hier im lehrerservice oder planmaker die neuen pläne speichern? übergeben?
-    this.planmakerService["epochenplan" + this.aktuelleKlasse]=this.epochenPlanAktuell;
-    this.planmakerService["epochenDuplicates" + this.aktuelleKlasse]= this.duplicates;
-    console.log(this.planmakerService.epochenplan9);
+    //
+    this.planmakerService["epochenplan" + this.aktuelleKlasse]=this.epochenPlanAktuell;//aktuelles im Service zwischenspeichern
+    this.planmakerService["schiene" + this.aktuelleKlasse]=this.schiene;
   }
 
   duplicates = [{}, {}, {}, {}];
 
-  generateDuplicates(plan) {
+  generateDuplicates(art:string , plan) {
     plan.forEach((row, r) => {
+
       let duplicate = {};
       row.forEach((cell, c) => {
         let prevIndex = c - 1;
@@ -136,7 +151,12 @@ export class EpochenSchedulerComponent {
           duplicate[c] = duplicate[prevIndex];
         }
       });
+      //Fallunterscheidung anders Speichern bei Epoche oder schiene
+      if(art==="Epoche"){
       this.duplicates[r] = duplicate;
+      }else{
+        this.duplicatesSchiene[r]=duplicate;
+      }
     });
   }
 
@@ -192,7 +212,7 @@ export class EpochenSchedulerComponent {
       ],
 
       [
-        '7.1. ',
+        'Do. 7.1. ',
         '11.1.',
         '18.1.',
         '25.1.',
@@ -224,12 +244,18 @@ this.aktuelleKlasse=9;
     this.epochenplan10 = this.planmakerService.epochenplan10;
     this.epochenplan11 = this.planmakerService.epochenplan11;
     this.epochenplan12 = this.planmakerService.epochenplan12;
-    this.epochenPlanAktuell =this.planmakerService.epochenplan9;
-    this.duplicates9=this.planmakerService.epochenDuplicates9;
-    this.duplicates10=this.planmakerService.epochenDuplicates10;
-    this.duplicates11=this.planmakerService.epochenDuplicates11;
-    this.duplicates12=this.planmakerService.epochenDuplicates12;
+   
+
+  
+    this.schienenplan9 = this.planmakerService.schiene9;
+    this.schienenplan10 = this.planmakerService.schiene10;
+    this.schienenplan11 = this.planmakerService.schiene11;
+    this.schienenplan12 = this.planmakerService.schiene12;
     this.tag=loginService.tagAlsString;
+
+    this.epochenPlanAktuell =this.planmakerService.epochenplan9;
+    this.schiene=this.planmakerService.schiene9;
+
 
   }
 

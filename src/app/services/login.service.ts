@@ -74,9 +74,9 @@ tagAlsString; //wird im button-woche gepushed;
       console.log('done' + '. tag: ' + 'epoche9');
     }).catch(function(error){console.error(error);});
     //duplicates
-    x= btoa(JSON.stringify(this.planmakerService.epochenDuplicates9));
-    epochen.doc('/' + 'epochenplan9').update({duplicates: x}).then(()=>{
-      console.log('done' + '. tag: ' + 'duplicates9');
+    x= btoa(JSON.stringify(this.planmakerService.schiene9));
+    epochen.doc('/' + 'epochenplan9').update({schiene: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'schiene9');
     }).catch(function(error){console.error(error);});
      //Epochenplan  Klassen 10:
      x= btoa(JSON.stringify(this.planmakerService.epochenplan10));
@@ -84,9 +84,9 @@ tagAlsString; //wird im button-woche gepushed;
        console.log('done' + '. tag: ' + 'epoche10');
      }).catch(function(error){console.error(error);});
      //duplicates
-     x= btoa(JSON.stringify(this.planmakerService.epochenDuplicates10));
-     epochen.doc('/' + 'epochenplan10').update({duplicates: x}).then(()=>{
-       console.log('done' + '. tag: ' + 'duplicates10');
+     x= btoa(JSON.stringify(this.planmakerService.schiene10));
+     epochen.doc('/' + 'epochenplan10').update({schiene: x}).then(()=>{
+       console.log('done' + '. tag: ' + 'schiene10');
      }).catch(function(error){console.error(error);});
       //Epochenplan  Klassen 11:
     x= btoa(JSON.stringify(this.planmakerService.epochenplan11));
@@ -94,9 +94,9 @@ tagAlsString; //wird im button-woche gepushed;
       console.log('done' + '. tag: ' + 'epoche11');
     }).catch(function(error){console.error(error);});
     //duplicates
-    x= btoa(JSON.stringify(this.planmakerService.epochenDuplicates11));
-    epochen.doc('/' + 'epochenplan11').update({duplicates: x}).then(()=>{
-      console.log('done' + '. tag: ' + 'duplicates11');
+    x= btoa(JSON.stringify(this.planmakerService.schiene11));
+    epochen.doc('/' + 'epochenplan11').update({schiene: x}).then(()=>{
+      console.log('done' + '. tag: ' + 'schiene11');
     }).catch(function(error){console.error(error);});
      //Epochenplan  Klassen 12:
      x= btoa(JSON.stringify(this.planmakerService.epochenplan12));
@@ -104,9 +104,9 @@ tagAlsString; //wird im button-woche gepushed;
        console.log('done' + '. tag: ' + 'epoche12');
      }).catch(function(error){console.error(error);});
      //duplicates
-     x= btoa(JSON.stringify(this.planmakerService.epochenDuplicates12));
-     epochen.doc('/' + 'epochenplan12').update({duplicates: x}).then(()=>{
-       console.log('done' + '. tag: ' + 'duplicates12');
+     x= btoa(JSON.stringify(this.planmakerService.schiene12));
+     epochen.doc('/' + 'epochenplan12').update({schiene: x}).then(()=>{
+       console.log('done' + '. tag: ' + 'schiene12');
      }).catch(function(error){console.error(error);});
     //Logout
 this.logout();
@@ -166,11 +166,14 @@ console.log(this.lehrerservice.stundenRaster.getValue());
       val.forEach(epochenplan=>{
         var klasse= epochenplan.klasse;
         var epochenJSO=JSON.parse(atob(epochenplan.epochen)) ; 
+        var schieneJSO=JSON.parse(atob(epochenplan.schiene));
 //console.log(epochenplan.epochen);
 //console.log(epochenplan.klasse);
 //console.log(epochenplan.duplicates);
        // var duplicatesJSO= JSON.parse(atob(epochenplan.duplicates));
+
         this.planmakerService['epochenplan' + klasse]=epochenJSO;
+        this.planmakerService["schiene" + klasse] = schieneJSO;
     //    this.planmakerService['epochenDuplicates' + klasse]=duplicatesJSO;
       });
     })
