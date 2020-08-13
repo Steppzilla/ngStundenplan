@@ -239,11 +239,12 @@ save(){
     if (previousHit === true) {
       return "gruen";
     }
-    return this.doppelt(row, lehrer, r, c);
+    return this.doppelt(row, lehrer, r, c,1);
   }
 
-  doppelt(row, lehrer, z, c) { //hauptZellen-Methode, daueraktiv, doppelte rot
-    var duplicates = 0;
+  doppelt(row, lehrer, z, c, dupli) { //hauptZellen-Methode, daueraktiv, doppelte rot
+
+    var duplicates = dupli;
     row.forEach(element => {
       element.forEach(lehrerFach => {
         if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)
@@ -252,8 +253,7 @@ save(){
         }
       });
     });
-
-
+    
     if(duplicates>1){
       return "rot";
     }

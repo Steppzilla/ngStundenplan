@@ -9,7 +9,7 @@
   </div>
   <div class="center">
    <!-- <button id="save" (click)="save()">Save</button>
--->
+--> 
 
     <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button>
   </div>
@@ -30,7 +30,7 @@
 
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">
           <!-- -->
-          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c)}} lehrerFachBehaelter">
+          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c,0)}} lehrerFachBehaelter">
 
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
             <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
