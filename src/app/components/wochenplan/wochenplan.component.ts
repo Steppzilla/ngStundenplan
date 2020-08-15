@@ -15,6 +15,7 @@ import {
   Lehrer
 } from '../../interfaces/lehrer';
 import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
+import { Fach } from 'src/app/interfaces/fach.enum';
 
 @Component({
   selector: 'app-wochenplan',
@@ -25,6 +26,13 @@ export class WochenplanComponent implements OnInit {
   lehrer: Array < Lehrer > ;
   klassen: Array < number > ;
   aktuellerPlan: Stundenplan;  //stundenPlan:Array<Array<Array<[Lehrer,Fach,String]>>>;.lehrer und .klasse gibts noch
+
+fachcolor(fach:Fach){
+ 
+
+  return fach;
+}
+
 
   planLehrer(lehrer) {
     this.planMakerService.planLehrer(lehrer);

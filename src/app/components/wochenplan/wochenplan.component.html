@@ -28,8 +28,8 @@
     <td *ngFor="let cell of reihe; index as c">
       <div class="zelle"> 
   <!--    <div class="zellkind">-->  
-        <div *ngFor="let lehrerItemErw of cell" class="container">
-          <div class="unterrichtsFeld">
+        <div *ngFor="let lehrerItemErw of cell" class="container ">
+          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
             {{lehrerItemErw?lehrerItemErw[1]:""}}
           </div>
           <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">

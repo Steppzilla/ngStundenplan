@@ -158,8 +158,8 @@ console.log(this.lehrerservice.stundenRaster.getValue());
    
           // console.log("HIER");
      // console.log(this.planmakerService.montag);
-      this.planmakerService.planKlasse(1);
-      this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
+     // this.planmakerService.planKlasse(1);
+    //  this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
     });
 
     this.store.collection('epochen').valueChanges().subscribe((val:Array<any>)=>{

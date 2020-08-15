@@ -46,8 +46,9 @@ export class PlanmakerService {
   schiene11;
   schiene12;
 
+  //aktuell beschreiben:
   planLehrer(dieserlehrer: Lehrer) {
-  //  console.log(this.montag);
+
     let lehrerPlan = new Stundenplan();
     lehrerPlan.lehrer = dieserlehrer;
 
