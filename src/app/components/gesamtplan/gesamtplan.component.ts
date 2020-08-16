@@ -39,12 +39,13 @@ export class LehrerlisteComponent implements OnInit {
   stundenRaster: Array < Array < Array < [Lehrer, Fach] >>> ; //aktuelles stundenraster
   schieneLage={zeilenStarts:[6,4,8,7],cellsMoMi:[8,11],
     cellsDo:[8,9]};
- 
+ testArray=[1,2,3];
 //Buttons:
 wochentag :string= "montag";
 tagvorher :string;
 
 @ViewChild('Tabelle') someInput:ElementRef;
+
 
 printGesamtplaene(){
   //printAdd
@@ -129,37 +130,90 @@ $('app-epochen-scheduler').show();
 
 }
 
+
+
+duplicates = [{}, {}, {}, {},{},{},{},{},{},{},{}];  //jeweils nur aktueller Wochentag. pro row neues Objekt.
+duplicateVert=[{}, {}, {}, {},{},{},{},{},{},{},{}];
+
+generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
+  let vertical=[{}, {}, {}, {},{},{},{},{},{},{},{}];
+
+  plan.forEach((row, r) => { 
+
+    let duplicate = {};
+    
+    row.forEach((cell, c) => {
+      //Horizontale duplicates:
+      let prevIndex = c - 1;
+      if (this.equal(cell, row[prevIndex])) {
+        if (duplicate[prevIndex] === undefined) {
+          duplicate[prevIndex] = [prevIndex]; //Info einer einzelne reihe in duplicate
+        }
+        duplicate[prevIndex].push(c);   //
+        duplicate[c] = duplicate[prevIndex];
+      }
+
+      // verticale duplicates:
+      let prevRow=r-1;
+      if(r===0){
+
+      }
+      else   if(this.equal(cell, plan[prevRow][c])){ //wenn zelle darüber gleich ist.
+          console.log("gleiche gefunden");
+
+        if (vertical[prevRow][c] === undefined) {
+          vertical[prevRow][c] = [prevRow]; //vorige reihe/zelle steht entsprechende reihe + celle
+        }
+        vertical[prevRow][c].push(r);   //
+        vertical[r][c] = vertical[prevRow][c];
+
+      }
+    
+    });
+    this.duplicates[r] = duplicate;  //pro row macht er das Waagerecht.
+      
+  
+  });
+  this.duplicateVert=vertical;
+  console.log(this.duplicateVert);
+}
+
+
+equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
+  let returnvalue = true;
+  if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
+    returnvalue = false;
+  } else {
+    fl1.forEach(([lehrer, fach], lf) => {
+      if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
+        returnvalue = false;
+      }
+    });
+  }
+  return returnvalue;
+}
+
+
+
+
+
 ueberschrift(){
   let x=this.wochentag.slice(1,this.wochentag.length);
   let z=this.wochentag.slice(0,1);
   let ueberschrift=z.toUpperCase() + x;
   return ueberschrift;
 }
+
+//CLICK
 wochenTag(tag:string) { //Buttonclick
-  
-  console.log("vorher");
-  console.log(this.lehrerservice.stundenRaster.getValue());
-
-
+  //console.log("vorher");
+  //console.log(this.lehrerservice.stundenRaster.getValue());
   this.tagvorher = this.wochentag;
   this.wochentag = tag;
- 
-
-  //this.loginService.login();
-  // this.storageService.save(this.tagvorher);
-  //this.storageService.load(this.wochentag);
-  //this.loginService.save(this.tagvorher);
-
-  //this.loginService.saveIntern(this.tagvorher); //aktuelles stundenraster wird gespeichert in lokal (lehrerservice?)
-  console.log("neues:");
+   //console.log("neues:");
   this.loginService.load(this.wochentag);//aktuelles stundenraster wird überschrieben
-  console.log(this.lehrerservice.stundenRaster.getValue());
-  //pläne der tage sind jeweils im planmakerservice gespeichert 
-  //Logout
-  //this.loginService.logout();
-
-  //diesen Tag speichern im loginservice:
- // this.loginService.tagAlsString=this.wochentag;
+  //console.log(this.lehrerservice.stundenRaster.getValue());
+this.generateDuplicates(this.stundenRaster);
 
 }
 
@@ -245,13 +299,15 @@ save(){
   doppelt(row, lehrer, z, c, dupli) { //hauptZellen-Methode, daueraktiv, doppelte rot
 
     var duplicates = dupli;
-    row.forEach(element => {
-      element.forEach(lehrerFach => {
+    row.forEach((cell,c) => {
+      if(this.duplicates[z][c]===undefined){//nur wenn keine nebeneinander-duplicates existieren
+      cell.forEach(lehrerFach => {
         if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)
         ) {
           ++duplicates;
         }
       });
+    }//
     });
     
     if(duplicates>1){
@@ -298,10 +354,31 @@ save(){
  
   constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService
     ) {
+
+       //alle pläne werden geladen, montag wird stundenRaster im planmaker:
+    this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt
+    
+      //Stundenraster schreiben.
+
     lehrerservice.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
+
+       //duplicates ermitteln:
+this.duplicates = [{}, {}, {}, {},{},{},{},{},{},{},{}];
+this.duplicateVert = [{}, {}, {}, {},{},{},{},{},{},{},{}];
+//this.generateDuplicates(this.stundenRaster);
+
+ //console.log(this.lehrerservice.stundenRaster.getValue());
+ this.tagvorher = this.wochentag;
+ this.wochentag = 'montag';
+  //console.log("neues:");
+ //this.loginService.load(this.wochentag);//aktuelles stundenraster wird
+
+
+//
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
     let klassenZuordnung = {};
 
+    //Klassenzuordnungen der Lehrer auf Klassen undFächer:
     lehrerservice.lehrer.forEach((r) => {
       r.zuweisung.forEach((s) => {
         if (klassenZuordnung[s[0]] === undefined) {
@@ -311,17 +388,17 @@ save(){
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-    console.log(this.klassenZuordnung[9]);
+  //  console.log(this.klassenZuordnung[9]);
 
     this.lehrer = lehrerservice.lehrer;
     this.klassen = lehrerservice.klassen;
   
-   // this.loginService.load('montag');
-    this.loginService.planPushen(this.wochentag);
-       //private storageService:StorageService,
+
+
   }
   
 
   ngOnInit(): void {
+
   }
 }

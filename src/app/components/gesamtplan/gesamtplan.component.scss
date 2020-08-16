@@ -18,23 +18,61 @@ body{
   //align-items: center;
 }
 
+.normalsize{
+  colspan: 1;
+  //width:10%;
+}
+.size-1{
+  colspan: 1;
+}
+.size-2{
+  column-span: 2;
+ // width:14%;
+}
+.size-3{
+  column-span: 3;
+ // width:21%;
+}
+.size-4{
+  column-span: 4;
+  //width:32%;
+}
+.size-5{
+  column-span: 5;
+ // width:40%;
+}
+.size-6{
+  column-span: 6;
+ // width:48%;
+}
+.size-7{
+  column-span: 7;
+ //width:56%;
+}
+.size-8{
+  column-span: 8;
+ //width:64%;
+}
 
-button{
+.hoehe1{
+  height: 25pt;
+}
+.hoehe2{
+  height: 50pt;
+}
+.hoehe3{
+  height: 75pt;
+}
+
+
+
+.buttonreihe div button{
   border:none;
-      margin:2pt;
-      padding:2pt;
+      margin:2pt; 
       background-color:inherit;
-      border-radius:5pt;
-      padding-left:4pt;
-      padding-right:4pt;
-    
+      border-radius:5pt;    
 }
-button:hover{
-  background-color:indianred;
-}
-
-//print ende
-button:hover{
+.buttonreihe div button:hover{
   background-color:indianred;
 }
 
@@ -52,7 +90,7 @@ tr td:first{width:10pt;}
 
 .gesamtStundenplan-Table{
   margin-top:9pt;
-  line-height:0.8em ;
+  line-height:1em ;
    border:1pt;
    row-gap:0pt;
    border-spacing:0pt;
@@ -61,7 +99,7 @@ tr td:first{width:10pt;}
  
 
   tr{
-    min-height:20pt;
+    min-height:40pt;
     margin:0pt;
     padding:0pt;
     border: 1px solid ;
@@ -73,19 +111,24 @@ tr td:first{width:10pt;}
     // background-color:lightgreen;
      padding:0pt;
      .dropButton{ /*Der ganze Button/jetzt div/ in der Table-Zelle*/
-      height:100%;
+    
     // background-color:orange;
       border:0;
       min-width:10pt;
       min-height:8pt;
     ///  background-color:pink; //HIER DARF kein Hintergrund rein SONST WIRDS NICHTs ROT
       display:flex;
+    
       div{      //Lehrer-Fach-Behälter
         width:100%;
         padding-top: 1pt;
         padding-bottom: 1pt;
         border-right:1pt solid;
         //background-color:green;
+  
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         
       :first-child{
        // border-top: 1px solid ;
@@ -95,10 +138,14 @@ tr td:first{width:10pt;}
         width:100%;
         padding-top:1px;
         padding-bottom:1pt;
-   //     background-color:yellow;
+        vertical-align: middle;
+
+     // background-color:yellow;
      //   margin:2pt;
       }
       :nth-child(2){
+        vertical-align: middle;
+ 
         font-size:7pt;
         padding-top:2pt;
         padding-bottom:2pt;
@@ -167,7 +214,8 @@ padding:0pt;
 }
 
 
-.first{width:10pt;}
+.first{width:10pt;
+height: 20pt;}
  
 
 .klassen-titel{
