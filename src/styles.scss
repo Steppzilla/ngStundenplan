@@ -62,15 +62,15 @@ h2 {
 
   //app root alles ausblenden bisauf printcontainer:
   body app-root app-lehrerliste>h1 {
-    display: none;
+    //display: none;
   }
 
   body app-root app-lehrerliste>.gesamtStundenplan-Table {
-    display: none;
+    //display: none;
   }
 
   body app-root app-lehrerliste>h2 {
-    display: none;
+   // display: none;
   }
 
   #printcontainer :nth-child(6) {

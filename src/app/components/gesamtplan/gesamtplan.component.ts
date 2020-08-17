@@ -213,7 +213,16 @@ wochenTag(tag:string) { //Buttonclick
    //console.log("neues:");
   this.loginService.load(this.wochentag);//aktuelles stundenraster wird überschrieben
   //console.log(this.lehrerservice.stundenRaster.getValue());
-this.generateDuplicates(this.stundenRaster);
+
+
+
+
+
+//this.generateDuplicates(this.stundenRaster);
+
+
+
+
 
 }
 
@@ -279,7 +288,7 @@ save(){
     } else {
       this.stundenRaster[r][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
     }
-    
+    //this.generateDuplicates(this.stundenRaster ) ;
   }
 
   farbwaehler(row, cell, lehrer, r, c) { //Einzelklick auf große Zelle, öffnet Menü, färbt kleine Elemente

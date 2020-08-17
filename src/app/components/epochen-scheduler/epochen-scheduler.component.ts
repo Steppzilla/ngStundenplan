@@ -18,6 +18,7 @@ import {
 } from 'src/app/interfaces/fach.enum';
 import { PlanmakerService } from 'src/app/services/planmaker.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Stundenplan } from 'src/app/interfaces/stundenplan';
 
 @Component({
   selector: 'app-epochen-scheduler',
@@ -137,7 +138,7 @@ export class EpochenSchedulerComponent {
 
   duplicates = [{}, {}, {}, {}];
 
-  generateDuplicates(art:string , plan) {
+  generateDuplicates(art:string , plan:Array<Array<Array<[Lehrer,Fach]>>>) {
     plan.forEach((row, r) => {
 
       let duplicate = {};
