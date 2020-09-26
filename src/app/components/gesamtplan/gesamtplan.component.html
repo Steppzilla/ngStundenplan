@@ -8,9 +8,11 @@
 
   </div>
   <div class="center">
- <!--  <button id="save" (click)="save()">Save</button>
-  -->
+   <!--<button id="save" (click)="save()">Save</button>
+
     <button id="printGesamtplaene" (click)="printGesamtplaene()">Gesamtpläne drucken</button>
+    -->
+      <div> Datum: {{datum.getDay()}}.{{datum.getMonth()}}.{{ datum.getFullYear()}}</div>
   </div>
 </div>
 
@@ -30,7 +32,7 @@
       <!-- Td-Box soll nur gezeigt werden, wenn sie leer ist/ falls duplicates existieren, wenn dort der erste Eintrag mit dem Zellenindex übereinstimmt.-->
       <!-- Vertikal: Wenn vertical-dupli existieren, nur zeigen, wenn -->
       <!-- nu zeigen wenn  weder vertical nohc dupli eintrag ODER  (vertical ODER horizontal gleiches feld wie eintrag)-->
-      <td class="box  "   *ngIf="( 
+      <td class="box  {{duplicates[r][c]? 'size-'+duplicates[r][c].length:'normalsize'}}"   *ngIf="( 
         !duplicates[r][c]) && (!duplicateVert[r][c])    
         ||      (duplicates[r][c]&& !duplicateVert[r][c][0]        &&            duplicates[r][c][0]===c)  
          || (duplicateVert[r][c]        &&  !duplicates[r][c] &&          duplicateVert[r][c][0]===r)
@@ -40,7 +42,7 @@
       [attr.colspan]=" duplicates[r][c]   &&duplicates[r][c]!==undefined    ?duplicates[r][c].length:1"
       [attr.rowspan]=" duplicateVert[r][c]   &&duplicateVert[r][c]!==undefined    ?duplicateVert[r][c].length:1"
       >
-        <!--{{duplicates[r][c]? 'size-'+duplicates[r][c].length:'normalsize'}}-->
+        
 
   
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">

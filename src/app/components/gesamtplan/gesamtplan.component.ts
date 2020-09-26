@@ -23,6 +23,7 @@ import {
 
 import { PlanmakerService } from 'src/app/services/planmaker.service';
 import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
+import { DatepickerServiceInputs } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-service';
 
 
 @Component({
@@ -32,6 +33,7 @@ import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
 })
 
 export class LehrerlisteComponent implements OnInit {
+  datum=new Date(); //aktuelles Datum und aktuelle Zeit
   lehrer; //Für buttons
   klassen; //für buttons
   lehrerKuerzel;
@@ -218,7 +220,7 @@ wochenTag(tag:string) { //Buttonclick
 
 
 
-//this.generateDuplicates(this.stundenRaster);
+this.generateDuplicates(this.stundenRaster);
 
 
 
@@ -360,6 +362,7 @@ save(){
     return "hellblau";
   }
 
+  
  
   constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService
     ) {
@@ -401,6 +404,7 @@ this.duplicateVert = [{}, {}, {}, {},{},{},{},{},{},{},{}];
 
     this.lehrer = lehrerservice.lehrer;
     this.klassen = lehrerservice.klassen;
+
   
 
 
