@@ -237,6 +237,58 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
     this.planmakerService.donnerstag[2][11]=this.planmakerService.epochenplan12[zeile][celle];
     this.planmakerService.freitag[1][11]=this.planmakerService.epochenplan12[zeile][celle];
     this.planmakerService.freitag[2][11]=this.planmakerService.epochenplan12[zeile][celle];
+
+     //Schiene 9. Klasse:
+    // console.log(this.planmakerService.epochenplan9);
+
+    //
+    let schienenStundeMontag=7;
+    let schienenStundeDienstag=5;
+    let schienenStundeMittwoch=9;
+    let schienenStundeDonnerstag=8;
+
+    this.planmakerService.montag[schienenStundeMontag-1][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.montag[schienenStundeMontag][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.dienstag[schienenStundeDienstag-1][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.dienstag[schienenStundeDienstag][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.mittwoch[schienenStundeMittwoch-1][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.mittwoch[schienenStundeMittwoch][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.donnerstag[schienenStundeDonnerstag-1][8]=this.planmakerService.schiene9[zeile][celle];
+    this.planmakerService.donnerstag[schienenStundeDonnerstag][8]=this.planmakerService.schiene9[zeile][celle];
+
+         //schiene 10. Klasse:
+   // console.log(this.planmakerService.epochenplan9);
+   this.planmakerService.montag[schienenStundeMontag-1][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.montag[schienenStundeMontag][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag-1][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch-1][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag-1][9]=this.planmakerService.schiene10[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag][9]=this.planmakerService.schiene10[zeile][celle];
+
+        //schiene 11. Klasse:
+   // console.log(this.planmakerService.epochenplan9);
+   this.planmakerService.montag[schienenStundeMontag-1][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.montag[schienenStundeMontag][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag-1][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch-1][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag-1][10]=this.planmakerService.schiene11[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag][10]=this.planmakerService.schiene11[zeile][celle];
+
+        //schiene 12. Klasse:
+   // console.log(this.planmakerService.epochenplan9);
+   this.planmakerService.montag[schienenStundeMontag-1][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.montag[schienenStundeMontag][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag-1][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.dienstag[schienenStundeDienstag][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch-1][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.mittwoch[schienenStundeMittwoch][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag-1][11]=this.planmakerService.schiene12[zeile][celle];
+   this.planmakerService.donnerstag[schienenStundeDonnerstag][11]=this.planmakerService.schiene12[zeile][celle];
+
      // this.planmakerService.planKlasse(1);
     //  this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
 
