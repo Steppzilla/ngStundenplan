@@ -18,6 +18,8 @@ export enum Fach {
     englisch="Engl",
     franzoesisch="Fr",
     mathematik="Ma",
+    //only epoche:
+    poetik="Poetik",
 
 
     //13. Klasse /Epochen:
@@ -67,7 +69,19 @@ export enum Fach {
 
     unbekannt="hä?",
 
+    //Fahrten, Klassenspiele (ganztägig oder nach epoche)
     landbau="Landbau",
     kunstfahrt="Kunstfahrt",
+    mittelstufenorchester="MSO",
+    feldmessen="Feldm.",
+    klassenspiel="Klassenspiel",
+    sozialpraktikum="Sozialprakt.",
+
+    pruefung="mdl. Prüfungen" ,
+    projektwoche="Projektwoche",
+    klassenspielvorbereitung="Kl.sp.Vorb.",
+
+
+
 
 }

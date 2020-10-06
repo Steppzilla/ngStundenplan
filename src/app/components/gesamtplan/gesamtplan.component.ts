@@ -21,10 +21,10 @@ import {
   LoginService
 } from '../../services/login.service';
 
-import { PlanmakerService } from 'src/app/services/planmaker.service';
-import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
-import { DatepickerServiceInputs } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-service';
-
+import {
+  PlanmakerService
+} from 'src/app/services/planmaker.service';
+import * as $ from 'jquery'; //'../../../node_modules/jquery/dist/jquery.min.js';
 
 @Component({
   selector: 'app-lehrerliste',
@@ -33,211 +33,188 @@ import { DatepickerServiceInputs } from '@ng-bootstrap/ng-bootstrap/datepicker/d
 })
 
 export class LehrerlisteComponent implements OnInit {
-  datum=new Date(); //aktuelles Datum und aktuelle Zeit
+  datum = new Date(); //aktuelles Datum und aktuelle Zeit
+
+  datumstring; //objekt mit strings[['3.1.', '4.5.' , ... ],[...],[...],[...]]
+  aktuelleEpochenIndexe;
+
   lehrer; //Für buttons
   klassen; //für buttons
   lehrerKuerzel;
   klassenZuordnung;
   stundenRaster: Array < Array < Array < [Lehrer, Fach] >>> ; //aktuelles stundenraster
-  schieneLage={zeilenStarts:[6,4,8,7],cellsMoMi:[8,11],
-    cellsDo:[8,9]};
- testArray=[1,2,3];
-//Buttons:
-wochentag :string= "montag";
-tagvorher :string;
+  schieneLage = {
+    zeilenStarts: [6, 4, 8, 7],
+    cellsMoMi: [8, 11],
+    cellsDo: [8, 9]
+  };
+  testArray = [1, 2, 3];
+  //Buttons:
+  wochentag: string = "montag";
+  tagvorher: string;
 
-@ViewChild('Tabelle') someInput:ElementRef;
+  @ViewChild('Tabelle') someInput: ElementRef;
 
 
-printGesamtplaene(){
-  //printAdd
-//Tabelle
-$('#printcontainer').append("<h1>" + "Gesamtplan" +"</h1>");
-    $('#printcontainer').append("<h2>" + "Montag" +"</h2>");
-//tabelle in print-container kopieren
-  $('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
- //tabellen-Cells im print-container leeren:
-var raster= this.lehrerservice.createEmptyStundenraster();
-raster.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-  $('#printcontainer .gesamtStundenplan-Table').children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();  //eqc++1 wählt td element aus, das kind ist der dropButton (div)
-});
-});
-  
-//tabelle clonen
-$('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
-//mit Montag befüllen
-this.planmaker.montag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-      //$('.gesamtStundenplan-Table').eq(1).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('#printcontainer .gesamtStundenplan-Table').eq(1).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter">  <p>'+ lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p></div>' );
+  printGesamtplaene() {
+    //printAdd
+    //Tabelle
+    $('#printcontainer').append("<h1>" + "Gesamtplan" + "</h1>");
+    $('#printcontainer').append("<h2>" + "Montag" + "</h2>");
+    //tabelle in print-container kopieren
+    $('#printcontainer').append($(".gesamtStundenplan-Table").eq(0).clone());
+    //tabellen-Cells im print-container leeren:
+    var raster = this.lehrerservice.createEmptyStundenraster();
+    raster.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        $('#printcontainer .gesamtStundenplan-Table').children().first().children().eq(z + 1).children().eq(c + 1).children().first().children().remove(); //eqc++1 wählt td element aus, das kind ist der dropButton (div)
+      });
     });
-  });
-});
 
-$('#printcontainer').append("<h2>" + "Dienstag" +"</h2>");
-$('#printcontainer').append($(" #printcontainer .gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.dienstag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(2).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('#printcontainer  .gesamtStundenplan-Table').eq(2).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
+    //tabelle clonen
+    $('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
+    //mit Montag befüllen
+    this.planmaker.montag.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        cell.forEach(lehrerFach => {
+          //$('.gesamtStundenplan-Table').eq(1).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+          $('#printcontainer .gesamtStundenplan-Table').eq(1).children().first().children().eq(z + 1).children().eq(c + 1).children().first().append('<div class="lehrerFachBehaelter">  <p>' + lehrerFach[1] + '</p> <p >' + lehrerFach[0].kuerzel + '</p></div>');
+        });
+      });
     });
-  });
-});
 
-$('#printcontainer').append("<h2>" + "Mittwoch" +"</h2>");
-$('#printcontainer').append($(" #printcontainer .gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.mittwoch.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-    //  $('.gesamtStundenplan-Table').eq(3).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('#printcontainer  .gesamtStundenplan-Table').eq(3).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
+    $('#printcontainer').append("<h2>" + "Dienstag" + "</h2>");
+    $('#printcontainer').append($(" #printcontainer .gesamtStundenplan-Table").eq(0).clone());
+    this.planmaker.dienstag.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        cell.forEach(lehrerFach => {
+          // $('.gesamtStundenplan-Table').eq(2).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+          $('#printcontainer  .gesamtStundenplan-Table').eq(2).children().first().children().eq(z + 1).children().eq(c + 1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] + '</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>');
+        });
+      });
     });
-  });
-});
 
-$('#printcontainer').append("<h2>" + "Donnerstag" +"</h2>");
-$('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.donnerstag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(4).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('#printcontainer .gesamtStundenplan-Table').eq(4).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>'+ lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
+    $('#printcontainer').append("<h2>" + "Mittwoch" + "</h2>");
+    $('#printcontainer').append($(" #printcontainer .gesamtStundenplan-Table").eq(0).clone());
+    this.planmaker.mittwoch.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        cell.forEach(lehrerFach => {
+          //  $('.gesamtStundenplan-Table').eq(3).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+          $('#printcontainer  .gesamtStundenplan-Table').eq(3).children().first().children().eq(z + 1).children().eq(c + 1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] + '</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>');
+        });
+      });
     });
-  });
-});
 
-$('#printcontainer').append("<h2>" + "Freitag" +"</h2>");
-$('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
-this.planmaker.freitag.forEach((zeile,z) => {
-  zeile.forEach((cell,c) => {
-    cell.forEach(lehrerFach => {
-     // $('.gesamtStundenplan-Table').eq(5).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
-      $('#printcontainer  .gesamtStundenplan-Table').eq(5).children().first().children().eq(z+1).children().eq(c+1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] +'</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>' );
+    $('#printcontainer').append("<h2>" + "Donnerstag" + "</h2>");
+    $('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
+    this.planmaker.donnerstag.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        cell.forEach(lehrerFach => {
+          // $('.gesamtStundenplan-Table').eq(4).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+          $('#printcontainer .gesamtStundenplan-Table').eq(4).children().first().children().eq(z + 1).children().eq(c + 1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] + '</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>');
+        });
+      });
     });
-  });
-});
-//leere tabelle entfernen:
-$('#printcontainer .gesamtStundenplan-Table').eq(0).remove();
 
-$('app-wochenplan').hide();
-$('app-epochen-scheduler').hide();
+    $('#printcontainer').append("<h2>" + "Freitag" + "</h2>");
+    $('#printcontainer').append($("#printcontainer .gesamtStundenplan-Table").eq(0).clone());
+    this.planmaker.freitag.forEach((zeile, z) => {
+      zeile.forEach((cell, c) => {
+        cell.forEach(lehrerFach => {
+          // $('.gesamtStundenplan-Table').eq(5).children().first().children().eq(z+1).children().eq(c+1).children().first().children().remove();
+          $('#printcontainer  .gesamtStundenplan-Table').eq(5).children().first().children().eq(z + 1).children().eq(c + 1).children().first().append('<div class="lehrerFachBehaelter"> <p>' + lehrerFach[1] + '</p> <p >' + lehrerFach[0].kuerzel + '</p> </div>');
+        });
+      });
+    });
+    //leere tabelle entfernen:
+    $('#printcontainer .gesamtStundenplan-Table').eq(0).remove();
 
-  window.print();
-  $('#printcontainer').empty();
-  $('app-wochenplan').show();
-$('app-epochen-scheduler').show();
+    $('app-wochenplan').hide();
+    $('app-epochen-scheduler').hide();
+    window.print();
+    $('#printcontainer').empty();
+    $('app-wochenplan').show();
+    $('app-epochen-scheduler').show();
+  }
 
-}
 
+  duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]; //jeweils nur aktueller Wochentag. pro row neues Objekt.
+  duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
+  generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
+    let vertical = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-duplicates = [{}, {}, {}, {},{},{},{},{},{},{},{}];  //jeweils nur aktueller Wochentag. pro row neues Objekt.
-duplicateVert=[{}, {}, {}, {},{},{},{},{},{},{},{}];
+    plan.forEach((row, r) => {
 
-generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
-  let vertical=[{}, {}, {}, {},{},{},{},{},{},{},{}];
+      let duplicate = {};
 
-  plan.forEach((row, r) => { 
-
-    let duplicate = {};
-    
-    row.forEach((cell, c) => {
-      //Horizontale duplicates:
-      let prevIndex = c - 1;
-      if (this.equal(cell, row[prevIndex])) {
-        if (duplicate[prevIndex] === undefined) {
-          duplicate[prevIndex] = [prevIndex]; //Info einer einzelne reihe in duplicate
+      row.forEach((cell, c) => {
+        //Horizontale duplicates:
+        let prevIndex = c - 1;
+        if (this.equal(cell, row[prevIndex])) {
+          if (duplicate[prevIndex] === undefined) {
+            duplicate[prevIndex] = [prevIndex]; //Info einer einzelne reihe in duplicate
+          }
+          duplicate[prevIndex].push(c); //
+          duplicate[c] = duplicate[prevIndex];
         }
-        duplicate[prevIndex].push(c);   //
-        duplicate[c] = duplicate[prevIndex];
-      }
 
-      // verticale duplicates:
-      let prevRow=r-1;
-      if(r===0){
-
-      }
-      else   if(this.equal(cell, plan[prevRow][c])){ //wenn zelle darüber gleich ist.
+        // verticale duplicates:
+        let prevRow = r - 1;
+        if (r === 0) {} else if (this.equal(cell, plan[prevRow][c])) { //wenn zelle darüber gleich ist.
           console.log("gleiche gefunden");
 
-        if (vertical[prevRow][c] === undefined) {
-          vertical[prevRow][c] = [prevRow]; //vorige reihe/zelle steht entsprechende reihe + celle
+          if (vertical[prevRow][c] === undefined) {
+            vertical[prevRow][c] = [prevRow]; //vorige reihe/zelle steht entsprechende reihe + celle
+          }
+          vertical[prevRow][c].push(r); //
+          vertical[r][c] = vertical[prevRow][c];
         }
-        vertical[prevRow][c].push(r);   //
-        vertical[r][c] = vertical[prevRow][c];
-
-      }
-    
+      });
+      this.duplicates[r] = duplicate; //pro row macht er das Waagerecht
     });
-    this.duplicates[r] = duplicate;  //pro row macht er das Waagerecht.
-      
-  
-  });
-  this.duplicateVert=vertical;
-  console.log(this.duplicateVert);
-}
-
-
-equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
-  let returnvalue = true;
-  if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
-    returnvalue = false;
-  } else {
-    fl1.forEach(([lehrer, fach], lf) => {
-      if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
-        returnvalue = false;
-      }
-    });
+    this.duplicateVert = vertical;
+    console.log(this.duplicateVert);
   }
-  return returnvalue;
-}
 
+  equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
+    let returnvalue = true;
+    if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
+      returnvalue = false;
+    } else {
+      fl1.forEach(([lehrer, fach], lf) => {
+        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
+          returnvalue = false;
+        }
+      });
+    }
+    return returnvalue;
+  }
 
+  ueberschrift() {
+    let x = this.wochentag.slice(1, this.wochentag.length);
+    let z = this.wochentag.slice(0, 1);
+    let ueberschrift = z.toUpperCase() + x;
+    return ueberschrift;
+  }
 
+  //CLICK
+  wochenTag(tag: string) { //Buttonclick
+    //console.log("vorher");
+    //console.log(this.lehrerservice.stundenRaster.getValue());
+    this.tagvorher = this.wochentag;
+    this.wochentag = tag;
+    //console.log("neues:");
+    this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben
+    //console.log(this.lehrerservice.stundenRaster.getValue());
+    this.generateDuplicates(this.stundenRaster);
+  }
 
+  save() {
+    this.loginService.saveAll();
+  }
 
-ueberschrift(){
-  let x=this.wochentag.slice(1,this.wochentag.length);
-  let z=this.wochentag.slice(0,1);
-  let ueberschrift=z.toUpperCase() + x;
-  return ueberschrift;
-}
-
-//CLICK
-wochenTag(tag:string) { //Buttonclick
-  //console.log("vorher");
-  //console.log(this.lehrerservice.stundenRaster.getValue());
-  this.tagvorher = this.wochentag;
-  this.wochentag = tag;
-   //console.log("neues:");
-  this.loginService.load(this.wochentag);//aktuelles stundenraster wird überschrieben
-  //console.log(this.lehrerservice.stundenRaster.getValue());
-
-
-
-
-
-this.generateDuplicates(this.stundenRaster);
-
-
-
-
-
-}
-
-save(){
-  this.loginService.saveAll();
-}
-
-
-//Gesamtplan:
-
-
-
-
+  //Gesamtplan:
   lehrerErmitteln(c) {
     c++;
     switch (c) {
@@ -276,12 +253,11 @@ save(){
     this.stundenRaster[r][c] = [];
   }
 
-  mittagsPause(r, c, e) {
+  mittagsPause(r, c, e) {}
 
-  }
+  //Epcohe und Schiene neu reinschreiben je nach Datum
 
   lehrerWahl(r: number, c: number, lehrerFach: [Lehrer, Fach], event) { //angeklicktes Fach wird reingeschrieben
-
     if (this.stundenRaster[r][c].includes(lehrerFach)) { // wenn wen man die selbe Lehrer-Fach-Kombination wählt, wird sie gelöscht.
       let index = this.stundenRaster[r][c].indexOf(lehrerFach);
       this.stundenRaster[r][c].splice(index, 1);
@@ -299,62 +275,59 @@ save(){
       if (cellLehrer.kuerzel === lehrer.kuerzel) {
         previousHit = true;
       }
-
     });
     if (previousHit === true) {
       return "gruen";
     }
-    return this.doppelt(row, lehrer, r, c,1);
+    return this.doppelt(row, lehrer, r, c, 1);
   }
 
   doppelt(row, lehrer, z, c, dupli) { //hauptZellen-Methode, daueraktiv, doppelte rot
-
     var duplicates = dupli;
-    row.forEach((cell,c) => {
-      if(this.duplicates[z][c]===undefined){//nur wenn keine nebeneinander-duplicates existieren
-      cell.forEach(lehrerFach => {
-        if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)
-        ) {
-          ++duplicates;
-        }
-      });
-    }//
+    row.forEach((cell, c) => {
+      if (this.duplicates[z][c] === undefined) { //nur wenn keine nebeneinander-duplicates existieren
+        cell.forEach(lehrerFach => {
+          if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)) {
+            ++duplicates;
+          }
+        });
+      } //
     });
-    
-    if(duplicates>1){
+
+    if (duplicates > 1) {
       return "rot";
     }
     if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
       return "gruen";
     }
     if ((z === 0) && (c > 7) && (c < 12)) {
-        return "gold";
+      return "gold";
     }
     if ((z === 0) && (c > 7) && (c < 12)) {
       return "gold";
     }
-  
+
     //Bei schiene muss mo/di/mi/do/fr unterschieden werden:
-    switch(this.wochentag){
-      case "montag": 
-     
-        if(((z=== this.schieneLage.zeilenStarts[0])||(z===this.schieneLage.zeilenStarts[0]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+    switch (this.wochentag) {
+      case "montag":
+
+        if (((z === this.schieneLage.zeilenStarts[0]) || (z === this.schieneLage.zeilenStarts[0] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
           return "violet";
         }
         break;
-        
+
       case "dienstag":
-        if(((z=== this.schieneLage.zeilenStarts[1])||(z===this.schieneLage.zeilenStarts[1]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+        if (((z === this.schieneLage.zeilenStarts[1]) || (z === this.schieneLage.zeilenStarts[1] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
           return "violet";
         }
         break;
       case "mittwoch":
-        if(((z=== this.schieneLage.zeilenStarts[2])||(z===this.schieneLage.zeilenStarts[2]+1))&&(c>=this.schieneLage.cellsMoMi[0])&&(c<=this.schieneLage.cellsMoMi[1])){
+        if (((z === this.schieneLage.zeilenStarts[2]) || (z === this.schieneLage.zeilenStarts[2] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
           return "violet";
         }
         break;
       case "donnerstag":
-        if(((z=== this.schieneLage.zeilenStarts[3])||(z===this.schieneLage.zeilenStarts[3]+1))&&(c>=this.schieneLage.cellsDo[0])&&(c<=this.schieneLage.cellsDo[1])){
+        if (((z === this.schieneLage.zeilenStarts[3]) || (z === this.schieneLage.zeilenStarts[3] + 1)) && (c >= this.schieneLage.cellsDo[0]) && (c <= this.schieneLage.cellsDo[1])) {
           return "violet";
         }
         break;
@@ -362,31 +335,26 @@ save(){
     return "hellblau";
   }
 
-  
- 
-  constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService
-    ) {
-
-       //alle pläne werden geladen, montag wird stundenRaster im planmaker:
-    this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt
-    
-      //Stundenraster schreiben.
-
+  constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService) {
+    //alle pläne werden geladen, montag wird stundenRaster im planmaker:
+    this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
+    //Stundenraster schreiben.
     lehrerservice.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
+    //Epochen einfügen:
+    //erst: indexe herausfinden , wo aktuellen Epochen stehen im epochenplan
+    this.aktuelleEpochenIndexe = this.planmaker.epochenAktuell();
 
-       //duplicates ermitteln:
-this.duplicates = [{}, {}, {}, {},{},{},{},{},{},{},{}];
-this.duplicateVert = [{}, {}, {}, {},{},{},{},{},{},{},{}];
-//this.generateDuplicates(this.stundenRaster);
+    //duplicates ermitteln:
+    this.duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    this.duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    //this.generateDuplicates(this.stundenRaster);
 
- //console.log(this.lehrerservice.stundenRaster.getValue());
- this.tagvorher = this.wochentag;
- this.wochentag = 'montag';
-  //console.log("neues:");
- //this.loginService.load(this.wochentag);//aktuelles stundenraster wird
-
-
-//
+    //console.log(this.lehrerservice.stundenRaster.getValue());
+    this.tagvorher = this.wochentag;
+    this.wochentag = 'montag';
+    //console.log("neues:");
+    //this.loginService.load(this.wochentag);//aktuelles stundenraster wird
+    //
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
     let klassenZuordnung = {};
 
@@ -400,16 +368,20 @@ this.duplicateVert = [{}, {}, {}, {},{},{},{},{},{},{},{}];
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-  //  console.log(this.klassenZuordnung[9]);
+    //  console.log(this.klassenZuordnung[9]);
 
     this.lehrer = lehrerservice.lehrer;
     this.klassen = lehrerservice.klassen;
-
-  
-
+    this.datumstring = planmaker.datumstring;
+    console.log(lehrerservice.lehrer[0]);
+    console.log(this.stundenRaster);
+    //this.stundenRaster[1][8]=[lehrerservice.lehrer[0], Fach.mathematik];
+    // if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
+    //  return "gruen";
+    //}
 
   }
-  
+
 
   ngOnInit(): void {
 

@@ -29,12 +29,75 @@ export class PlanmakerService {
   aktuell = new BehaviorSubject < Stundenplan > (null); //von gewähltem lehrer oder klasse der plan
   aktuell$ = this.aktuell.asObservable();
 
+  //Datum
+  datum = new Date(); //aktuelles Datum und aktuelle Zeit
+  aktuellerTag = this.datum.getDate();
+  aktuellerMonat = this.datum.getMonth() + 1;
+  aktuellesJahr = this.datum.getFullYear();
+
   //aktuelle Pläne:
   montag; //Stundenraster Montag
   dienstag;
   mittwoch;
   donnerstag;
   freitag;
+
+  datumstring = [
+    [
+      '10.8.',
+      '17.8.',
+      '24.8.',
+      '31.8.',
+      '7.9.',
+      '14.9.',
+      '21.9.',
+      '28.9.'
+    ],
+
+    [
+      '19.10.',
+      '26.10.',
+      '2.11.',
+      '9.11.',
+      '16.11.',
+      '23.11.',
+      '30.11.',
+      '7.12.',
+      '14.12.'
+    ],
+
+    [
+      '7.1.',
+      '11.1.',
+      '18.1.',
+      '25.1.',
+      '1.2.',
+      '8.2.',
+      '15.2.',
+      '22.2.',
+      '1.3.',
+      '8.3.',
+      '15.3.',
+      '22.3.',
+      '29.3.'
+    ],
+    [
+      '19.4.',
+      '26.4.',
+      '3.5.',
+      '10.5.',
+      '17.5.',
+      '25.5.',
+      '31.5.',
+      '7.6.',
+      '14.6.'
+    ]
+  ];
+
+  rhythmus9;
+  rhythmus10;
+  rhythmus11;
+  rhythmus12;
 
   epochenplan9;
   epochenplan10;
@@ -46,8 +109,83 @@ export class PlanmakerService {
   schiene11;
   schiene12;
 
+
+  //Epochen und Schiene und rhythmischer Teil ersetzen aus epochenplänen in die stundenraster
+
+
+  epochenAktuell() {
+    let epochenSpeicherIndex = [];
+    //console.log(this.datumstring);
+
+    //Gesucht: aktuelles Datum soll nächst kleineres Datum ausm Epochenwochen-Datum heraussuchen. Wir zählen also Tage rückwärts bis es gleich ist:
+    let heute = this.datum;
+
+    for (let i = 0; i < 7; i++) {
+      let tagesEinheit = 24 * 60 * 60 * 1000;
+     // console.log(heute.getTime() - i * tagesEinheit);
+ 
+
+      this.datumstring.forEach((block, b) => {
+        block.forEach((datums, d) => {
+          let datumSplit = datums.split(".");
+          //erste zwei Blöcke 2020er-Datum:
+          let monat = parseInt(datumSplit[1]) - 1;
+          let tag = parseInt(datumSplit[0]);
+          let epochenDatum = new Date(2020, monat, tag);
+          if ((b == 0) || (b == 1)) {} else {
+            //ab Januarblock dann 2021:
+            epochenDatum.setFullYear(2021);
+          }
+      // unter epochenDatum ist jetzt jeder Starttag einer Epochenwoche (teilweise auch dienstag o.Ä.) gespeichert als Datum.
+    
+      //korrektur der heutigen Zeit auf 0 stunden 0 minuten 0 sekunden: Sonst wird der Tag nie derselbe
+      heute.setHours(0);
+      heute.setMinutes(0);
+      heute.setSeconds(0);
+      heute.setMilliseconds(0);
+     // if (heute.getTime() - i * tagesEinheit > epochenDatum.getTime()) {
+     //   console.log("größer");
+      //  console.log(heute.getTime() - i * tagesEinheit);
+      //  console.log(epochenDatum.getTime());
+      //}
+      //epochendatum ist ein Datum des epochenplans in der foreach schleife
+      if (heute.getTime() - i * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt
+        console.log("gleich:");
+        console.log("laufende Epoche:" + new Date(epochenDatum.getTime())); // dies hier hat 0 uhr als Anhaltspunkt
+        console.log("Heute--:" + new Date(heute.getTime()-i*tagesEinheit)); 
+        epochenSpeicherIndex.push(b, d);
+      }
+      else { //wenn datum "mehr als" zu 6 tage zurück liegt
+      epochenSpeicherIndex.push(1, 0); //geschummelt, das ist die ersten epoche nach den herbstferien... das soll eigentlich je nach ferien wechseln
+
+      }
+
+      });
+
+      });
+
+     
+  
+
+    }
+    console.log(epochenSpeicherIndex);
+   // return epochenSpeicherIndex;
+   //console.log(this.montag[epochenSpeicherIndex[0]][epochenSpeicherIndex[1]]);
+   console.log(this.montag);
+
+  
+return epochenSpeicherIndex;
+
+   
+
+  }
+
+
+
+  //Einzelpläne für Lehrer oder Klassen: (Räume fehlen?)
   //aktuell beschreiben:
   planLehrer(dieserlehrer: Lehrer) {
+
 
     let lehrerPlan = new Stundenplan();
     lehrerPlan.lehrer = dieserlehrer;
@@ -143,6 +281,8 @@ export class PlanmakerService {
   }
 
   constructor(private lehrerService: LehrerService) {
+    this.epochenAktuell();
 
+   // lehrerService.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
   }
 }

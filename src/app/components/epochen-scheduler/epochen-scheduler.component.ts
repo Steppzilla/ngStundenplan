@@ -20,6 +20,7 @@ import { PlanmakerService } from 'src/app/services/planmaker.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Stundenplan } from 'src/app/interfaces/stundenplan';
 
+
 @Component({
   selector: 'app-epochen-scheduler',
   templateUrl: './epochen-scheduler.component.html',
@@ -48,7 +49,12 @@ export class EpochenSchedulerComponent {
 
   duplicatesSchiene=[{}, {}, {}, {}];
 
-  tag;
+  tag; //montag oder dienstag , Wochentag
+
+  aktuelleEpochenIndexe; //zwei zahlen z.b.[i,x] wobei i von 0-4 geht und dann jeweils die startdaten der wochen darunter gespeichert sind (indexe vom datumstring)
+
+
+
   //epochenplan13;
   ferien = [
     ['Sommer'],
@@ -188,57 +194,7 @@ export class EpochenSchedulerComponent {
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-    this.datumstring = [
-      [
-        '10.8.',
-        '17. 8.',
-        '24.8.',
-        '31.8.',
-        '7.9.',
-        '14.9.',
-        '21.9.',
-        '28.9. '
-      ],
-
-      [
-        '19.10.',
-        '26.10.',
-        '2.11.',
-        '9.11.',
-        '16.11.',
-        '23.11.',
-        '30.11.',
-        '7.12.',
-        '14.12.'
-      ],
-
-      [
-        'Do. 7.1. ',
-        '11.1.',
-        '18.1.',
-        '25.1.',
-        '1.2.',
-        '8.2.',
-        '15.2.',
-        '22.2.',
-        '1.3.',
-        '8.3.',
-        '15.3.',
-        '22.3.',
-        '29.3.-Mi.'
-      ],
-      [
-        '19.4.',
-        '26.4.',
-        '3.5.',
-        '10.5.-Mi',
-        '17.5.',
-        'Di. 25.5.',
-        '31.5.',
-        '7.6.',
-        '14.6.-Fr.'
-      ]
-    ]
+    this.datumstring =this.planmakerService.datumstring;
 this.aktuelleKlasse=9;
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
     this.epochenplan9 = this.planmakerService.epochenplan9;
@@ -257,8 +213,10 @@ this.aktuelleKlasse=9;
     this.epochenPlanAktuell =this.planmakerService.epochenplan9;
     this.schiene=this.planmakerService.schiene9;
 
-
+    this.aktuelleEpochenIndexe=this.planmakerService.epochenAktuell();
   }
+
+  
 
 
 }

@@ -140,6 +140,7 @@ export class LehrerService {
       zuweisung: [
         // [Lehrjahr.acht, Fach.gartenbau],
         [Lehrjahr.neun, Fach.gartenbau],
+        [Lehrjahr.neun, Fach.landbau],
         [Lehrjahr.sechs, Fach.gartenbau],
         [Lehrjahr.sieben, Fach.gartenbau],
         [Lehrjahr.acht, Fach.gartenbau],
@@ -255,10 +256,12 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.neun, Fach.plastizieren],
         [Lehrjahr.neun, Fach.deutsch],
+        [Lehrjahr.neun, Fach.geschichte],
         [Lehrjahr.neun, Fach.klassenbetreuer],
         [Lehrjahr.elf, Fach.plastizieren],
         [Lehrjahr.zwoelf, Fach.plastizieren],
         [Lehrjahr.zwoelf, Fach.kunstgeschichte],
+        [Lehrjahr.zwoelf, Fach.kunstfahrt], //weil kunstgeschichte
         [Lehrjahr.zehn, Fach.plastizierenR]
       ]
     },
@@ -277,6 +280,7 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.eurythmie],
         [Lehrjahr.zwoelf, Fach.eurythmie],
         [Lehrjahr.zwoelf, Fach.klassenbetreuer],
+        [Lehrjahr.zwoelf, Fach.klassenspiel], //weil klassenbetreuer
       ]
     },
     {
@@ -289,7 +293,7 @@ export class LehrerService {
         [Lehrjahr.vier, Fach.handarbeit],
         [Lehrjahr.neun, Fach.weben],
 
-        [Lehrjahr.neun, Fach.unbekannt],
+        [Lehrjahr.neun, Fach.biologie],
         [Lehrjahr.zehn, Fach.weben],
         [Lehrjahr.dreizehn, Fach.biologie],
         [Lehrjahr.zwoelf, Fach.biologie],
@@ -314,6 +318,8 @@ export class LehrerService {
         [Lehrjahr.zehn, Fach.sport],
         [Lehrjahr.elf, Fach.sport],
         [Lehrjahr.elf, Fach.klassenbetreuer],
+        [Lehrjahr.elf, Fach.sozialpraktikum], //weil klassenbetreuer
+        [Lehrjahr.elf, Fach.klassenspielvorbereitung],//weil klassenlehrer
         [Lehrjahr.zwoelf, Fach.sport]
       ]
     },
@@ -350,6 +356,7 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.sechs, Fach.werken],
         [Lehrjahr.neun, Fach.werken],
+        [Lehrjahr.zehn, Fach.feldmessen],
         [Lehrjahr.sieben, Fach.werken],
         [Lehrjahr.acht, Fach.werken],
         [Lehrjahr.neun, Fach.klassenbetreuer],
@@ -408,10 +415,22 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.deutschR],
         [Lehrjahr.neun, Fach.kunstgeschichte],
         [Lehrjahr.zehn, Fach.deutsch],
+        [Lehrjahr.zehn, Fach.poetik], //weil deutsch
+        [Lehrjahr.zehn, Fach.geschichte],
         [Lehrjahr.zehn, Fach.klassenbetreuer],
-        [Lehrjahr.zwoelf, Fach.geschichte],
+        [Lehrjahr.zehn, Fach.feldmessen],
         [Lehrjahr.dreizehn, Fach.deutsch],
-        [Lehrjahr.dreizehn, Fach.geschichte]
+        [Lehrjahr.dreizehn, Fach.geschichte],
+//als Mitverantwortliche für die mündliche Prüfungswoche stellvertretend:
+        [Lehrjahr.neun, Fach.pruefung],
+        [Lehrjahr.zehn, Fach.pruefung],
+        [Lehrjahr.elf, Fach.pruefung],
+        [Lehrjahr.zwoelf, Fach.pruefung],
+        //projektwoche:
+        [Lehrjahr.neun, Fach.projektwoche],
+        [Lehrjahr.zehn, Fach.projektwoche],
+        [Lehrjahr.elf, Fach.projektwoche],
+        [Lehrjahr.zwoelf, Fach.projektwoche],
       ]
     },
     {
@@ -438,11 +457,14 @@ export class LehrerService {
       zuweisung: [
         [Lehrjahr.neun, Fach.deutsch],
         [Lehrjahr.neun, Fach.geschichte],
-        [Lehrjahr.zehn, Fach.geschichte],
+      //  [Lehrjahr.zehn, Fach.geschichte],
         [Lehrjahr.elf, Fach.geschichte],
         [Lehrjahr.elf, Fach.deutsch],
         [Lehrjahr.elf, Fach.klassenbetreuer],
+        [Lehrjahr.elf, Fach.sozialpraktikum],//weil klassenlehrer
+        [Lehrjahr.elf, Fach.klassenspielvorbereitung],//weil klassenlehrer
         [Lehrjahr.zwoelf, Fach.deutsch],
+        [Lehrjahr.zwoelf, Fach.geschichte],
         [Lehrjahr.dreizehn, Fach.deutsch],
 
       ]
