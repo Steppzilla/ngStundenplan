@@ -9,43 +9,125 @@
 
 <h1 class="noprint">Stundenplan </h1>
 <h2 *ngIf="aktuellerPlan" class="noprint">{{aktuellerPlan.getTitel()}}</h2>
-<table *ngIf="aktuellerPlan" id="stundenPlan" >
+<table *ngIf="aktuellerPlan" id="stundenPlan">
   <tbody>
-  <tr class="reihe reiheOben">
-    <td class="first"> </td>
-    <td> Montag </td>
-    <td> Dienstag </td>
-    <td> Mittwoch </td>
-    <td> Donnerstag  </td>
-    <td> Freitag </td>
-  </tr>
+    <tr class="reihe reiheOben">
+      <td class="first"> </td>
+      <td> Montag </td>
+      <td> Dienstag </td>
+      <td> Mittwoch </td>
+      <td> Donnerstag </td>
+      <td> Freitag </td>
+    </tr>
 
 
-  <tr *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
-    <td class="first">
-      {{r+1}} 
-    </td>
-    <td *ngFor="let cell of reihe; index as c">
-      <div class="zelle"> 
-  <!--    <div class="zellkind">-->  
+    <tr *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
+      <td class="first">
+        {{r+1}}
+      </td>
+      <td *ngFor="let cell of reihe; index as c">
+        <div class="zelle">
+          <!--    <div class="zellkind">-->
+          <div *ngFor="let lehrerItemErw of cell" class="container ">
+            <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+              {{lehrerItemErw?lehrerItemErw[1]:""}}
+            </div>
+            <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+              <!-- wenn Lehrer definiert, will ich ihn im Plan nicht sehen!-->
+              {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+            </div>
+            <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+              {{lehrerItemErw[2]}}
+            </div>
+          </div>
+        </div>
+        <!--</div>-->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!--Epoche, Schiene und Rhythmus:-->
+<p> Rhythmischer Teil:</p>
+<div id="rhythmus">
+
+  <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="epochenReihe">
+    <div *ngFor="let cell of reihe; index as c" class="cell">
+      <div class="zelle" *ngIf="aktuellerPlan.rhythmusPlan[r][c]">
+        <div class="datum"> {{aktuellerPlan.rhythmusPlan[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
         <div *ngFor="let lehrerItemErw of cell" class="container ">
           <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
             {{lehrerItemErw?lehrerItemErw[1]:""}}
           </div>
           <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-            <!-- wenn Lehrer definiert, will ich ihn im Plan nicht sehen!-->
-           {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+
+            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
           </div>
           <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
             {{lehrerItemErw[2]}}
           </div>
         </div>
-       </div>
-   <!--</div>--> 
-    </td>
-  </tr>
-</tbody>
-</table>
+      </div>
+    </div>
+    <div>Ferien</div>
+  </div>
+</div>
+
+<p> Epochen:</p>
+<div id="epochen">
+
+  <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="epochenReihe">
+    <div *ngFor="let cell of reihe; index as c" class="cell">
+      <div class="zelle">
+        <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
+        <div *ngFor="let lehrerItemErw of cell" class="container ">
+          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+            {{lehrerItemErw?lehrerItemErw[1]:""}}
+          </div>
+          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+
+            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+          </div>
+          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+            {{lehrerItemErw[2]}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>Ferien</div>
+  </div>
+</div>
+
+
+
+
+<p> Schiene:</p>
+
+<div id="schiene">
+
+  <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="epochenReihe">
+    <div *ngFor="let cell of reihe; index as c" class="cell">
+      <div class="zelle">
+        <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
+        <div *ngFor="let lehrerItemErw of cell" class="container ">
+          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+            {{lehrerItemErw?lehrerItemErw[1]:""}}
+          </div>
+          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+
+            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+          </div>
+          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+            {{lehrerItemErw[2]}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>Ferien</div>
+  </div>
+</div>
+
 
 
 <div id="printcontainer2"></div>

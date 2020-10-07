@@ -8,6 +8,48 @@
 <button (click)="changeClass(12)">Klasse 12</button> 
 </div>
 
+
+<div id="planRhythmus">
+  <div class="zeile" *ngFor="let zeile of rhythmusaktuell; index as z">
+    <div class="datumzeile">
+      <div class="first normalsize"></div>
+      <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
+    </div>
+    <div class="row">
+      <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <ng-container *ngFor="let cell of zeile; index as c">
+        <div
+          *ngIf="( !duplicatesRhythmus[z][c])      ||      (duplicatesRhythmus[z][c]        &&            duplicatesRhythmus[z][c][0]===c)"
+          ngbDropdown class="{{duplicatesRhythmus[z][c]? 'size-'+duplicatesRhythmus[z][c].length:'normalsize'}}">
+          <div class="btn btn-outline-primary buttonDrop gruen"
+            id="dropdownConfig" ngbDropdownToggle>
+            <!--hier click im main-->
+            <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter ">
+              <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>
+              <p>{{lehrerFach?lehrerFach[1]:""}}</p>
+            </div>
+          </div>
+          <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="buttonContainer">
+            <button ngbDropdownItem *ngFor="let lehrerFach of lehrerErmitteln()" class="toggleButton "
+              (click)="lehrerWahl('Rhythmus', z,c, lehrerFach,$event , zeile)">
+              <!--hier click im toggle-->
+              <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
+              <div class="dropSpan2"> {{lehrerFach[1]}}</div>
+            </button>
+
+          </div>
+        </div>
+      </ng-container>
+
+      <!--<div>{{ferien[z+1]}}-<br> {{ferien[5]}}</div>-->
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <div id="plan">
   <div class="zeile" *ngFor="let zeile of epochenPlanAktuell; index as z">
     <div class="datumzeile">
@@ -82,6 +124,9 @@
     </div>
   </div>
 </div>
+
+
+  
 
 
 

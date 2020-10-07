@@ -8,6 +8,10 @@ export class Stundenplan {
     stundenPlan:Array<Array<Array<[Lehrer,Fach,string]>>>;
     klasse:number;  //Lehrer aktiv
     lehrer:Lehrer; //Klassen aktiv
+    epochenPlan: Array<Array<Array<[Lehrer,Fach,string]>>>;
+    rhythmusPlan:  Array<Array<Array<[Lehrer,Fach,string]>>>;
+    schienenPlan: Array<Array<Array<[Lehrer,Fach,string]>>>;
+    datumString: Array<Array<String>>;
     
 
 

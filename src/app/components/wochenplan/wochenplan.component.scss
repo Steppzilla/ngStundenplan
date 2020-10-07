@@ -1,3 +1,48 @@
+
+
+
+#rhythmus, #epochen,#schiene{
+  display:flex;
+  margin:0pt;
+  padding:0pt;
+  width:100%;
+ 
+
+
+}
+.epochenReihe{
+  display:flex;
+  width:100%;
+  margin:0pt;
+  padding:0pt;
+}
+ 
+ .cell{
+   margin:0pt;
+   padding:0pt;
+   font-size:9pt;
+   width:30pt;
+   height:40pt;
+   overflow: hidden;
+ 
+   div{ //Datum und container für LehrerFach
+    display:center;
+    margin:0pt;
+    padding: 0pt;
+   }
+ }
+
+.datum{
+
+    border-bottom-style:solid;
+    border-bottom-width:1pt;
+  
+
+ }
+
+
+
+
 .buttonreihe {
   display: flex;
   background-color: rgb(78, 161, 120);
@@ -218,8 +263,7 @@
   }
 }
 
-    
-
+ 
 
 
 

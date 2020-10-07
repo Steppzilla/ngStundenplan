@@ -156,7 +156,7 @@ export class PlanmakerService {
         epochenSpeicherIndex.push(b, d);
       }
       else { //wenn datum "mehr als" zu 6 tage zurück liegt
-      epochenSpeicherIndex.push(1, 0); //geschummelt, das ist die ersten epoche nach den herbstferien... das soll eigentlich je nach ferien wechseln
+      epochenSpeicherIndex=[1, 0]; //geschummelt, das ist die ersten epoche nach den herbstferien... das soll eigentlich je nach ferien wechseln
 
       }
 
@@ -188,6 +188,8 @@ return epochenSpeicherIndex;
 
 
     let lehrerPlan = new Stundenplan();
+lehrerPlan.datumString=this.datumstring;
+
     lehrerPlan.lehrer = dieserlehrer;
 
     lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s) => s = []));
@@ -243,9 +245,145 @@ return epochenSpeicherIndex;
       });
     });
 
+    
+
+
+    //Epoche:
+   //Original-Definition vorm Füllen nat. ohne Klasse:  this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
+
+    lehrerPlan.epochenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+    ///new Array(this.datumstring).fill(null).map((item,i)=> new Array(this.datumstring[i]).fill(null).map((s)=>s=[]));
+
+    this.epochenplan9.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.epochenPlan[r][w].push([lehrer, fach, 'Kl. 9' ]);
+          }
+        });
+      });
+    });
+    this.epochenplan10.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.epochenPlan[r][w].push([lehrer, fach, 'Kl. 10' ]);
+          }
+        });
+      });
+    });
+    this.epochenplan11.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.epochenPlan[r][w].push([lehrer, fach, 'Kl. 11' ]);
+          }
+        });
+      });
+    });
+    this.epochenplan12.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.epochenPlan[r][w].push([lehrer, fach, 'Kl. 12' ]);
+          }
+        });
+      });
+    });
+
+    //Schiene
+    lehrerPlan.schienenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+    //new Array(this.datumstring).fill(null).map((item,i)=> new Array(this.datumstring[i]).fill(null).map((s)=>s=[]));
+
+    this.schiene9.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.schienenPlan[r][w].push([lehrer, fach, 'Kl. 9' ]);
+          }
+        });
+      });
+    });
+    this.schiene10.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.schienenPlan[r][w].push([lehrer, fach, 'Kl. 10' ]);
+          }
+        });
+      });
+    });
+    this.schiene11.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.schienenPlan[r][w].push([lehrer, fach, 'Kl. 11' ]);
+          }
+        });
+      });
+    });
+    this.schiene11.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.schienenPlan[r][w].push([lehrer, fach, 'Kl. 12' ]);
+          }
+        });
+      });
+    });
+
+    //Rhythmus:
+
+    lehrerPlan.rhythmusPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+   // new Array(this.datumstring).fill(null).map((item,i)=> new Array(this.datumstring[i]).fill(null).map((s)=>s=[]));
+
+    this.rhythmus9.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.rhythmusPlan[r][w].push([lehrer, fach, 'Kl. 9' ]);
+          }
+        });
+      });
+    });
+    this.rhythmus10.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.rhythmusPlan[r][w].push([lehrer, fach, 'Kl. 10' ]);
+          }
+        });
+      });
+    });
+    this.rhythmus11.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.rhythmusPlan[r][w].push([lehrer, fach, 'Kl. 11' ]);
+          }
+        });
+      });
+    });
+    this.rhythmus12.forEach((row, r) => {
+      row.forEach((week, w) => {
+        week.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
+          if (lehrer.kuerzel === dieserlehrer.kuerzel) {
+            lehrerPlan.rhythmusPlan[r][w].push([lehrer, fach, 'Kl. 12' ]);
+          }
+        });
+      });
+    });  
+
+
+
+
+
     this.aktuell.next(lehrerPlan);
     console.log(this.aktuell$);
+
+
   }
+
 
 
   planKlasse(klasse: number) {
@@ -280,8 +418,12 @@ return epochenSpeicherIndex;
     this.aktuell.next(klassenPlan);
   }
 
+
+  //Statt Lehrerkürzel soll die Klasse dann angezeigt werden
+
+
   constructor(private lehrerService: LehrerService) {
-    this.epochenAktuell();
+    this.epochenAktuell(); //legt datum fest und welche epochen dann angezeigt werden (zwei indizes)
 
    // lehrerService.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
   }

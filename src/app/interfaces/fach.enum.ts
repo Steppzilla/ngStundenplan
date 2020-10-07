@@ -75,7 +75,7 @@ export enum Fach {
     mittelstufenorchester="MSO",
     feldmessen="Feldm.",
     klassenspiel="Klassenspiel",
-    sozialpraktikum="Sozialprakt.",
+    sozialpraktikum="Soz.prakt.",
 
     pruefung="mdl. Prüfungen" ,
     projektwoche="Projektwoche",

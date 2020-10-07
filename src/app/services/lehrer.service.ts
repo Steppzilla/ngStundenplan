@@ -372,7 +372,11 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.franzoesisch],
         [Lehrjahr.zwei, Fach.franzoesisch],
         [Lehrjahr.sechs, Fach.musik],
-        [Lehrjahr.dreizehn, Fach.franzoesisch]
+        [Lehrjahr.dreizehn, Fach.franzoesisch],
+        [Lehrjahr.neun, Fach.musik],
+        [Lehrjahr.zehn, Fach.musik],
+        [Lehrjahr.elf, Fach.musik],
+        [Lehrjahr.zwoelf, Fach.musik],
       ]
     },
     {

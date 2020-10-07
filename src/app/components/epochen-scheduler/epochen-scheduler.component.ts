@@ -45,9 +45,17 @@ export class EpochenSchedulerComponent {
   schienenplan10;
   schienenplan11;
   schienenplan12;
+
+  rhythmisch9;
+  rhythmisch10;
+  rhythmisch11;
+  rhythmisch12;
+
+  rhythmusaktuell;
   schiene;
 
   duplicatesSchiene=[{}, {}, {}, {}];
+  duplicatesRhythmus=[{}, {}, {}, {}];
 
   tag; //montag oder dienstag , Wochentag
 
@@ -77,11 +85,20 @@ export class EpochenSchedulerComponent {
     }else{
       this.schiene=this.datumstring.map(zeile => zeile.map(cell => []));
     }
+
+    if(this.planmakerService["rhythmus"+n]!==undefined){
+      this.rhythmusaktuell=this.planmakerService["rhythmus" + n];
+
+    }else{
+      this.rhythmusaktuell=this.datumstring.map(zeile => zeile.map(cell => []));
+    }
+   
     //neue Überschrift:
     this.aktuelleKlasse= n;
     //duplicates bestimmen:
     this.generateDuplicates("Epoche",this.epochenPlanAktuell);
     this.generateDuplicates("Schiene", this.schiene);
+    this.generateDuplicates("Rhythmus", this.rhythmusaktuell);
    
    // console.log(this.epochenPlanAktuell);
   }
@@ -133,13 +150,23 @@ export class EpochenSchedulerComponent {
     }else if(art==="Schiene"){
       this.schiene[z][c] = [lehrerFach];
     }
+    else if((art==="Rhythmus")&&(event.shiftKey)){
+      this.rhythmusaktuell[z][c].push(lehrerFach);
+    }else if(art==="Rhythmus"){
+      this.rhythmusaktuell[z][c] = [lehrerFach];
+    }
     this.generateDuplicates("Epoche", this.epochenPlanAktuell);
     this.generateDuplicates("Schiene", this.schiene);
+    this.generateDuplicates("Rhythmus", this.rhythmusaktuell);
     console.log(this.duplicates);
     //hier im lehrerservice oder planmaker die neuen pläne speichern? übergeben?
     //
     this.planmakerService["epochenplan" + this.aktuelleKlasse]=this.epochenPlanAktuell;//aktuelles im Service zwischenspeichern
     this.planmakerService["schiene" + this.aktuelleKlasse]=this.schiene;
+    this.planmakerService["rhythmus" + this.aktuelleKlasse]=this.rhythmusaktuell;
+
+
+
   }
 
   duplicates = [{}, {}, {}, {}];
@@ -161,8 +188,14 @@ export class EpochenSchedulerComponent {
       //Fallunterscheidung anders Speichern bei Epoche oder schiene
       if(art==="Epoche"){
       this.duplicates[r] = duplicate;
-      }else{
+      }else if(art==="Schiene"){
         this.duplicatesSchiene[r]=duplicate;
+      }
+      else if(art==="Rhythmus"){
+        this.duplicatesRhythmus[r]=duplicate;
+      }
+      else{
+        console.log("Error. Es werden unkategorisierte Duplicates gesucht");
       }
     });
   }
@@ -195,8 +228,10 @@ export class EpochenSchedulerComponent {
     });
     this.klassenZuordnung = klassenZuordnung;
     this.datumstring =this.planmakerService.datumstring;
-this.aktuelleKlasse=9;
+    this.aktuelleKlasse=9;
+
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
+
     this.epochenplan9 = this.planmakerService.epochenplan9;
     this.epochenplan10 = this.planmakerService.epochenplan10;
     this.epochenplan11 = this.planmakerService.epochenplan11;
@@ -208,10 +243,20 @@ this.aktuelleKlasse=9;
     this.schienenplan10 = this.planmakerService.schiene10;
     this.schienenplan11 = this.planmakerService.schiene11;
     this.schienenplan12 = this.planmakerService.schiene12;
+
+
+    this.rhythmisch9=this.planmakerService.rhythmus9;
+    this.rhythmisch10=this.planmakerService.rhythmus10;
+    this.rhythmisch11=this.planmakerService.rhythmus11;
+    this.rhythmisch12=this.planmakerService.rhythmus12;
+
+
     this.tag=loginService.tagAlsString;
 
+    //nicht verwendet, erstladung:
     this.epochenPlanAktuell =this.planmakerService.epochenplan9;
     this.schiene=this.planmakerService.schiene9;
+    this.rhythmusaktuell=this.planmakerService.rhythmus9;
 
     this.aktuelleEpochenIndexe=this.planmakerService.epochenAktuell();
   }

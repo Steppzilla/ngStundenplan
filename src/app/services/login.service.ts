@@ -73,21 +73,31 @@ tagAlsString; //wird im button-woche gepushed;
     epochen.doc('/' + 'epochenplan9').update({epochen: x}).then(()=>{
       console.log('done' + '. tag: ' + 'epoche9');
     }).catch(function(error){console.error(error);});
-    //duplicates
+    //schiene
     x= btoa(JSON.stringify(this.planmakerService.schiene9));
     epochen.doc('/' + 'epochenplan9').update({schiene: x}).then(()=>{
       console.log('done' + '. tag: ' + 'schiene9');
     }).catch(function(error){console.error(error);});
+        //rhythmus
+        x= btoa(JSON.stringify(this.planmakerService.rhythmus9));
+        epochen.doc('/' + 'epochenplan9').update({rhythmus: x}).then(()=>{
+          console.log('done' + '. tag: ' + 'rhythmus9');
+        }).catch(function(error){console.error(error);});
      //Epochenplan  Klassen 10:
      x= btoa(JSON.stringify(this.planmakerService.epochenplan10));
      epochen.doc('/' + 'epochenplan10').update({epochen: x}).then(()=>{
        console.log('done' + '. tag: ' + 'epoche10');
      }).catch(function(error){console.error(error);});
-     //duplicates
+     //schiene10
      x= btoa(JSON.stringify(this.planmakerService.schiene10));
      epochen.doc('/' + 'epochenplan10').update({schiene: x}).then(()=>{
        console.log('done' + '. tag: ' + 'schiene10');
      }).catch(function(error){console.error(error);});
+        //rhythmus 10
+        x= btoa(JSON.stringify(this.planmakerService.rhythmus10));
+        epochen.doc('/' + 'epochenplan10').update({rhythmus: x}).then(()=>{
+          console.log('done' + '. tag: ' + 'rhythmus10');
+        }).catch(function(error){console.error(error);});
       //Epochenplan  Klassen 11:
     x= btoa(JSON.stringify(this.planmakerService.epochenplan11));
     epochen.doc('/' + 'epochenplan11').update({epochen: x}).then(()=>{
@@ -98,16 +108,26 @@ tagAlsString; //wird im button-woche gepushed;
     epochen.doc('/' + 'epochenplan11').update({schiene: x}).then(()=>{
       console.log('done' + '. tag: ' + 'schiene11');
     }).catch(function(error){console.error(error);});
+     //rhythmus
+     x= btoa(JSON.stringify(this.planmakerService.rhythmus11));
+     epochen.doc('/' + 'epochenplan11').update({rhythmus: x}).then(()=>{
+       console.log('done' + '. tag: ' + 'rhythmus11');
+     }).catch(function(error){console.error(error);});
      //Epochenplan  Klassen 12:
      x= btoa(JSON.stringify(this.planmakerService.epochenplan12));
      epochen.doc('/' + 'epochenplan12').update({epochen: x}).then(()=>{
        console.log('done' + '. tag: ' + 'epoche12');
      }).catch(function(error){console.error(error);});
-     //duplicates
+     //schiene
      x= btoa(JSON.stringify(this.planmakerService.schiene12));
      epochen.doc('/' + 'epochenplan12').update({schiene: x}).then(()=>{
        console.log('done' + '. tag: ' + 'schiene12');
      }).catch(function(error){console.error(error);});
+      //rhythmus
+      x= btoa(JSON.stringify(this.planmakerService.rhythmus12));
+      epochen.doc('/' + 'epochenplan12').update({rhythmus: x}).then(()=>{
+        console.log('done' + '. tag: ' + 'rhythmus12');
+      }).catch(function(error){console.error(error);});
     //Logout
 this.logout();
 console.log(this.lehrerservice.stundenRaster.getValue());
@@ -153,6 +173,7 @@ console.log(this.lehrerservice.stundenRaster.getValue());
       var klasse= epochenplan.klasse;
       var epochenJSO=JSON.parse(atob(epochenplan.epochen)) ; 
       var schieneJSO=JSON.parse(atob(epochenplan.schiene));
+      var rhythmusJSO=JSON.parse(atob(epochenplan.rhythmus));
 //console.log(epochenplan.epochen);
 //console.log(epochenplan.klasse);
 //console.log(epochenplan.duplicates);
@@ -160,6 +181,7 @@ console.log(this.lehrerservice.stundenRaster.getValue());
 
       this.planmakerService['epochenplan' + klasse]=epochenJSO;
       this.planmakerService["schiene" + klasse] = schieneJSO;
+      this.planmakerService["rhythmus" + klasse]= rhythmusJSO;
   //    this.planmakerService['epochenDuplicates' + klasse]=duplicatesJSO;
     });
   })
@@ -183,7 +205,7 @@ console.log(this.lehrerservice.stundenRaster.getValue());
         console.log("epoche:");
         console.log(this.planmakerService.epochenplan9);
           //Epochen aktualisieren in den plänen:
-          this.lehrerservice.stundenRaster.next(this.planmakerService[tag]); 
+    this.lehrerservice.stundenRaster.next(this.planmakerService[tag]); 
    
     let zeile=this.planmakerService.epochenAktuell()[0];
     let celle=this.planmakerService.epochenAktuell()[1];
@@ -239,9 +261,7 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
     this.planmakerService.freitag[2][11]=this.planmakerService.epochenplan12[zeile][celle];
 
      //Schiene 9. Klasse:
-    // console.log(this.planmakerService.epochenplan9);
 
-    //
     let schienenStundeMontag=7;
     let schienenStundeDienstag=5;
     let schienenStundeMittwoch=9;
@@ -257,7 +277,6 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
     this.planmakerService.donnerstag[schienenStundeDonnerstag][8]=this.planmakerService.schiene9[zeile][celle];
 
          //schiene 10. Klasse:
-   // console.log(this.planmakerService.epochenplan9);
    this.planmakerService.montag[schienenStundeMontag-1][9]=this.planmakerService.schiene10[zeile][celle];
    this.planmakerService.montag[schienenStundeMontag][9]=this.planmakerService.schiene10[zeile][celle];
    this.planmakerService.dienstag[schienenStundeDienstag-1][9]=this.planmakerService.schiene10[zeile][celle];
@@ -268,7 +287,7 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
    this.planmakerService.donnerstag[schienenStundeDonnerstag][9]=this.planmakerService.schiene10[zeile][celle];
 
         //schiene 11. Klasse:
-   // console.log(this.planmakerService.epochenplan9);
+
    this.planmakerService.montag[schienenStundeMontag-1][10]=this.planmakerService.schiene11[zeile][celle];
    this.planmakerService.montag[schienenStundeMontag][10]=this.planmakerService.schiene11[zeile][celle];
    this.planmakerService.dienstag[schienenStundeDienstag-1][10]=this.planmakerService.schiene11[zeile][celle];
@@ -279,7 +298,6 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
    this.planmakerService.donnerstag[schienenStundeDonnerstag][10]=this.planmakerService.schiene11[zeile][celle];
 
         //schiene 12. Klasse:
-   // console.log(this.planmakerService.epochenplan9);
    this.planmakerService.montag[schienenStundeMontag-1][11]=this.planmakerService.schiene12[zeile][celle];
    this.planmakerService.montag[schienenStundeMontag][11]=this.planmakerService.schiene12[zeile][celle];
    this.planmakerService.dienstag[schienenStundeDienstag-1][11]=this.planmakerService.schiene12[zeile][celle];
@@ -289,8 +307,54 @@ console.log(this.planmakerService.epochenplan9[zeile][celle]);
    this.planmakerService.donnerstag[schienenStundeDonnerstag-1][11]=this.planmakerService.schiene12[zeile][celle];
    this.planmakerService.donnerstag[schienenStundeDonnerstag][11]=this.planmakerService.schiene12[zeile][celle];
 
+
+
+
+   //RHYTHMISCH aktuelle "epoche" in den plan rein:
+
+   //rhythm. 9. Klasse:
+
+   let rhythmMontag=1;
+   let rhythmDienstag=1;
+   let rhythmMittwoch=1;
+   let rhythmDonnerstag=1;
+   let rhythmFreitag=1;
+
+   this.planmakerService.montag[rhythmMontag-1][8]=this.planmakerService.rhythmus9[zeile][celle];
+   this.planmakerService.dienstag[rhythmDienstag-1][8]=this.planmakerService.rhythmus9[zeile][celle];
+   this.planmakerService.mittwoch[rhythmMittwoch-1][8]=this.planmakerService.rhythmus9[zeile][celle];
+   this.planmakerService.donnerstag[rhythmDonnerstag-1][8]=this.planmakerService.rhythmus9[zeile][celle];
+   this.planmakerService.freitag[rhythmFreitag-1][8]=this.planmakerService.rhythmus9[zeile][celle];
+
+        //rhythm. 10. Klasse:
+        this.planmakerService.montag[rhythmMontag-1][9]=this.planmakerService.rhythmus10[zeile][celle];
+        this.planmakerService.dienstag[rhythmDienstag-1][9]=this.planmakerService.rhythmus10[zeile][celle];
+        this.planmakerService.mittwoch[rhythmMittwoch-1][9]=this.planmakerService.rhythmus10[zeile][celle];
+        this.planmakerService.donnerstag[rhythmDonnerstag-1][9]=this.planmakerService.rhythmus10[zeile][celle];
+        this.planmakerService.freitag[rhythmFreitag-1][9]=this.planmakerService.rhythmus10[zeile][celle];
+
+       //rhythm. 11. Klasse:
+
+       this.planmakerService.montag[rhythmMontag-1][10]=this.planmakerService.rhythmus11[zeile][celle];
+       this.planmakerService.dienstag[rhythmDienstag-1][10]=this.planmakerService.rhythmus11[zeile][celle];
+       this.planmakerService.mittwoch[rhythmMittwoch-1][10]=this.planmakerService.rhythmus11[zeile][celle];
+       this.planmakerService.donnerstag[rhythmDonnerstag-1][10]=this.planmakerService.rhythmus11[zeile][celle];
+       this.planmakerService.freitag[rhythmFreitag-1][10]=this.planmakerService.rhythmus11[zeile][celle];
+
+       //rhythm. 12. Klasse:
+       this.planmakerService.montag[rhythmMontag-1][11]=this.planmakerService.rhythmus12[zeile][celle];
+       this.planmakerService.dienstag[rhythmDienstag-1][11]=this.planmakerService.rhythmus12[zeile][celle];
+       this.planmakerService.mittwoch[rhythmMittwoch-1][11]=this.planmakerService.rhythmus12[zeile][celle];
+       this.planmakerService.donnerstag[rhythmDonnerstag-1][11]=this.planmakerService.rhythmus12[zeile][celle];
+       this.planmakerService.freitag[rhythmFreitag-1][11]=this.planmakerService.rhythmus12[zeile][celle];
+
+
+
+
      // this.planmakerService.planKlasse(1);
     //  this.planmakerService.planLehrer(this.lehrerservice.lehrer[13]);
+
+
 
     
     });
