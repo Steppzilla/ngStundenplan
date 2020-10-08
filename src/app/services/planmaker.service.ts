@@ -425,6 +425,15 @@ lehrerPlan.datumString=this.datumstring;
   constructor(private lehrerService: LehrerService) {
     this.epochenAktuell(); //legt datum fest und welche epochen dann angezeigt werden (zwei indizes)
 
+    let lehrerPlan = new Stundenplan();
+    lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s) => s = []));
+    lehrerPlan.epochenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+    lehrerPlan.rhythmusPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+    lehrerPlan.schienenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
+    lehrerPlan.lehrer = lehrerService.lehrer[0];
+    lehrerPlan.datumString=this.datumstring;
+    this.aktuell.next(lehrerPlan);
+
    // lehrerService.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
   }
 }

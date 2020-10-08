@@ -31,6 +31,16 @@ export class LehrerService {
   lehrer: Lehrer[] = [
 
     {
+      id: 0,
+      name: ' ',
+      kuerzel: ' ',
+      anrede: " ",
+      faecher: [],
+      zuweisung: [
+      ]
+    },
+
+    {
       id: 1,
       name: 'Bayas',
       kuerzel: 'By',

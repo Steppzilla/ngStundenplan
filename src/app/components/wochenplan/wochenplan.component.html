@@ -20,7 +20,6 @@
       <td> Freitag </td>
     </tr>
 
-
     <tr *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
       <td class="first">
         {{r+1}}
@@ -50,7 +49,7 @@
 
 <!--Epoche, Schiene und Rhythmus:-->
 <p> Rhythmischer Teil:</p>
-<div id="rhythmus">
+<div *ngIf="aktuellerPlan.rhythmusPlan!null"    id="rhythmus">
 
   <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">
@@ -74,8 +73,9 @@
   </div>
 </div>
 
+
 <p> Epochen:</p>
-<div id="epochen">
+<div *ngIf="aktuellerPlan.epochenPlan"   id="epochen">
 
   <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">
@@ -104,7 +104,7 @@
 
 <p> Schiene:</p>
 
-<div id="schiene">
+<div *ngIf="aktuellerPlan.schienenPlan"  id="schiene">
 
   <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">
