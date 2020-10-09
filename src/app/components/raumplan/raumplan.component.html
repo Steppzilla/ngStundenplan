@@ -1,0 +1,136 @@
+<h1 class="noprint">Hallo </h1>
+
+
+
+
+<h2 *ngIf="loginservice.raumPlanComputer" class="noprint">Raumplan Computerraum</h2>
+<table *ngIf="loginservice.raumPlanComputer" id="stundenPlan">
+  <tbody>
+    <tr class="reihe reiheOben">
+      <td class="first"> </td>
+      <td> Montag </td>
+      <td> Dienstag </td>
+      <td> Mittwoch </td>
+      <td> Donnerstag </td>
+      <td> Freitag </td>
+    </tr>
+
+    <tr *ngFor="let reihe of loginservice.raumPlanComputer.stundenPlan; index as r" class="reihe">
+      <td class="first">
+        {{r+1}}
+      </td>
+      <td *ngFor="let cell of reihe; index as c">
+        <div ngbDropdown aria-label="Button group with nested dropdown">
+          <button class="btn" ngbDropdownToggle>
+              <ng-container *ngIf="cell[0]">
+             <p> {{cell[0]?cell[0][0][0].kuerzel:""}}</p>
+             <p>{{cell[0]?cell[0][0][1]:""}} </p>
+             <p>{{cell[1]? cell[1] + 1:""}}</p>
+              </ng-container >
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngIf="loginservice.zeitgleicheWochen as zeitgleicheWochen">
+              <button *ngFor="let lehrerFach of aktiveParelleleStundenErmitteln(r,c)"
+                ngbDropdownItem (click)="lehrerWahl('Stundenplan', r,c, lehrerFach,$event, c)">
+                {{lehrerFach[0][0][0].kuerzel }}-{{lehrerFach[0][0][1] }}- Kl.{{lehrerFach[1]+1}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p> Rhythmischer Teil:</p>
+<div *ngIf="loginservice.raumPlanComputer.rhythmusPlan" id="rhythmus">
+
+  <div *ngFor="let reihe of loginservice.raumPlanComputer.rhythmusPlan; index as r" class="epochenReihe">
+    <div *ngFor="let cell of reihe; index as c">
+      <div class="zelle" *ngIf="loginservice.raumPlanComputer.rhythmusPlan[r][c]">
+        <div class="datum"> {{loginservice.raumPlanComputer.rhythmusPlan[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
+
+        <div ngbDropdown aria-label="Button group with nested dropdown">
+          <button class="btn" ngbDropdownToggle>
+            <ng-container *ngIf="cell[0]">
+              <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
+              </ng-container >
+          </button>
+          <div ngbDropdownMenu class="rahmen">
+            <div *ngIf="loginservice.zeitgleicheRhythmus as rhythmus">
+              <div *ngFor="let lehrerFach of loginservice.zeitgleicheRhythmus[r][c]; index as p">
+                <button *ngFor="let item of lehrerFach" ngbDropdownItem (click)="lehrerWahl('Rhythmus', r,c, item,$event,p+9)">
+                  Kl. {{p+9}}: {{item[0].kuerzel}}-{{item[1]}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>Ferien</div>
+  </div>
+</div>
+
+
+<p> Epochen:</p>
+<div *ngIf="loginservice.raumPlanComputer.epochenPlan" id="epochen">
+
+  <div *ngFor="let reihe of loginservice.raumPlanComputer.epochenPlan; index as r" class="epochenReihe">
+    <div *ngFor="let cell of reihe; index as c">
+      <div class="zelle">
+        <div class="datum"> {{loginservice.raumPlanComputer.datumString[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
+        <div ngbDropdown aria-label="Button group with nested dropdown">
+          <button class="btn" ngbDropdownToggle>
+            <ng-container *ngIf="cell[0]">
+              <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
+              </ng-container >
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngIf="loginservice.zeitgleicheEpochen as rhythmus">
+              <div *ngFor="let lehrerFach of loginservice.zeitgleicheEpochen[r][c]; index as p">
+                <button *ngFor="let item of lehrerFach" ngbDropdownItem (click)="lehrerWahl('Epoche', r,c, item,$event,p+9 )">
+                  Kl. {{p+9}}: {{item[0].kuerzel}}-{{item[1]}}
+                </button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>Ferien</div>
+    </div>
+  </div>
+
+
+  <p> Schiene:</p>
+
+  <div *ngIf="loginservice.raumPlanComputer.schienenPlan" id="schiene">
+
+    <div *ngFor="let reihe of loginservice.raumPlanComputer.schienenPlan; index as r" class="epochenReihe">
+      <div *ngFor="let cell of reihe; index as c">
+        <div class="zelle">
+          <div class="datum"> {{loginservice.raumPlanComputer.datumString[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
+          <div ngbDropdown aria-label="Button group with nested dropdown">
+            <button class="btn" ngbDropdownToggle>
+              <ng-container *ngIf="cell[0]">
+                <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
+                </ng-container >
+            </button>
+            <div ngbDropdownMenu>
+              <div *ngIf="loginservice.zeitgleicheSchiene rhythmus">
+                <div *ngFor="let lehrerFach of loginservice.zeitgleicheSchiene[r][c]; index as p">
+                  <button *ngFor="let item of lehrerFach" ngbDropdownItem (click)="lehrerWahl('Schiene', r,c, item,$event,p+9)">
+                    Kl. {{p+9}}: {{item[0]?item[0].kuerzel:""}}-{{item?item[1]:""}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>Ferien</div>
+    </div>
+  </div>

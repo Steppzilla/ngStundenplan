@@ -1,0 +1,96 @@
+
+*{font-size:8pt;}
+p{margin:0pt;
+padding:0pt;}
+
+#rhythmus, #epochen,#schiene{
+    display:flex;
+    margin:0pt;
+    padding:0pt;
+    width:100%;
+   
+  
+  
+  }
+  .epochenReihe{
+    display:flex;
+    width:100%;
+    margin:0pt;
+    padding:0pt;
+  }
+   
+
+  
+  .datum{
+  
+      border-bottom-style:solid;
+      border-bottom-width:1pt;
+    
+  
+   }
+   #stundenPlan {
+ 
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 9pt;
+    line-height: 0.8em;
+    row-gap: 0pt;
+    border-spacing: 0pt;
+    border-collapse: collapse;
+  
+    tr {
+      min-height: 20pt;
+      margin: 0pt;
+      padding: 0pt;
+      border: 1px solid;
+  
+      >td {
+        //Cell td
+      
+    //    background-color: green;
+        border: solid 1pt;
+        text-align: center;
+        width:auto;
+        padding: 0pt;
+   
+          .container {
+            display:inline-block;
+            width:auto;
+            padding: 2pt;
+            margin:1pt;
+            border-right: 1pt solid;
+  
+            div{
+           display:block;
+              width:40pt;
+              //display:block;
+            }
+  
+            .unterrichtsFeld {
+              //width: 100%;
+              padding-top: 1px;
+              padding-bottom: 1pt;
+  
+            }
+  
+            .lehrerKuerzel {
+              font-size: 7pt;
+              padding-top: 2pt;
+              padding-bottom: 2pt;
+            }
+  
+            .Klasse {
+              font-size: 7pt;
+              padding-top: 2pt;
+              padding-bottom: 2pt;
+            }
+          }
+          :last-child{border-right:solid 0pt;}
+      
+      
+      }
+    }
+  }
+
+.zelle{font-size:8pt;}
+  

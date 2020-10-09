@@ -42,55 +42,22 @@ export class PlanmakerService {
   donnerstag;
   freitag;
 
+
+
   datumstring = [
     [
-      '10.8.',
-      '17.8.',
-      '24.8.',
-      '31.8.',
-      '7.9.',
-      '14.9.',
-      '21.9.',
-      '28.9.'
+      '10.8.',      '17.8.',      '24.8.',      '31.8.',      '7.9.',      '14.9.',      '21.9.',      '28.9.'
     ],
 
     [
-      '19.10.',
-      '26.10.',
-      '2.11.',
-      '9.11.',
-      '16.11.',
-      '23.11.',
-      '30.11.',
-      '7.12.',
-      '14.12.'
+      '19.10.',      '26.10.',      '2.11.',      '9.11.',      '16.11.',      '23.11.',      '30.11.',      '7.12.',      '14.12.'
     ],
 
     [
-      '7.1.',
-      '11.1.',
-      '18.1.',
-      '25.1.',
-      '1.2.',
-      '8.2.',
-      '15.2.',
-      '22.2.',
-      '1.3.',
-      '8.3.',
-      '15.3.',
-      '22.3.',
-      '29.3.'
+      '7.1.',      '11.1.',      '18.1.',      '25.1.',      '1.2.',      '8.2.',      '15.2.',      '22.2.',      '1.3.',      '8.3.',     '15.3.',      '22.3.',      '29.3.'
     ],
     [
-      '19.4.',
-      '26.4.',
-      '3.5.',
-      '10.5.',
-      '17.5.',
-      '25.5.',
-      '31.5.',
-      '7.6.',
-      '14.6.'
+      '19.4.',      '26.4.',      '3.5.',      '10.5.',      '17.5.',      '25.5.',      '31.5.',      '7.6.',      '14.6.'
     ]
   ];
 
@@ -108,6 +75,8 @@ export class PlanmakerService {
   schiene10;
   schiene11;
   schiene12;
+
+
 
 
   //Epochen und Schiene und rhythmischer Teil ersetzen aus epochenplänen in die stundenraster
@@ -150,9 +119,9 @@ export class PlanmakerService {
       //}
       //epochendatum ist ein Datum des epochenplans in der foreach schleife
       if (heute.getTime() - i * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt
-        console.log("gleich:");
-        console.log("laufende Epoche:" + new Date(epochenDatum.getTime())); // dies hier hat 0 uhr als Anhaltspunkt
-        console.log("Heute--:" + new Date(heute.getTime()-i*tagesEinheit)); 
+      //  console.log("gleich:");
+      //  console.log("laufende Epoche:" + new Date(epochenDatum.getTime())); // dies hier hat 0 uhr als Anhaltspunkt
+       // console.log("Heute--:" + new Date(heute.getTime()-i*tagesEinheit)); 
         epochenSpeicherIndex.push(b, d);
       }
       else { //wenn datum "mehr als" zu 6 tage zurück liegt
@@ -168,10 +137,7 @@ export class PlanmakerService {
   
 
     }
-    console.log(epochenSpeicherIndex);
-   // return epochenSpeicherIndex;
-   //console.log(this.montag[epochenSpeicherIndex[0]][epochenSpeicherIndex[1]]);
-   console.log(this.montag);
+   // console.log(epochenSpeicherIndex);
 
   
 return epochenSpeicherIndex;
@@ -379,7 +345,7 @@ lehrerPlan.datumString=this.datumstring;
 
 
     this.aktuell.next(lehrerPlan);
-    console.log(this.aktuell$);
+   // console.log(this.aktuell$);
 
 
   }
@@ -419,6 +385,12 @@ lehrerPlan.datumString=this.datumstring;
   }
 
 
+
+
+
+
+
+ 
   //Statt Lehrerkürzel soll die Klasse dann angezeigt werden
 
 

@@ -337,7 +337,7 @@ export class LehrerlisteComponent implements OnInit {
 
   constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService) {
     //alle pläne werden geladen, montag wird stundenRaster im planmaker:
-    this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
+    //this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
     //Stundenraster schreiben.
     lehrerservice.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
     //Epochen einfügen:

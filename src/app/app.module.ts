@@ -30,6 +30,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 //import{AuthGuardServiceService} from '../authg'
 
 import { LoginService } from './services/login.service';
+import { RaumplanComponent } from './components/raumplan/raumplan.component';
+import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { LoginService } from './services/login.service';
     LehrerlisteComponent,
     LehrerComponent,
     WochenplanComponent,
-    EpochenSchedulerComponent
+    EpochenSchedulerComponent,
+    RaumplanComponent,
+    RaumplanPageComponent
   ],
   imports: [
     BrowserModule,
