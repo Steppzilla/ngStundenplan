@@ -32,6 +32,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { LoginService } from './services/login.service';
 import { RaumplanComponent } from './components/raumplan/raumplan.component';
 import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.component';
+import { StartComponent } from './pages/start/start.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.compo
     WochenplanComponent,
     EpochenSchedulerComponent,
     RaumplanComponent,
-    RaumplanPageComponent
+    RaumplanPageComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,
