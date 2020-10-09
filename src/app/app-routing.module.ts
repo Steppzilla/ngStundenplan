@@ -6,7 +6,8 @@ import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.compo
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'lehrer', pathMatch:'full'},
+ // {path: '', redirectTo: 'lehrer', pathMatch:'full'},
+
   {path: 'lehrer', component: LehrerlisteComponent},
   {path: 'raumplan', component: RaumplanPageComponent},
 ];
