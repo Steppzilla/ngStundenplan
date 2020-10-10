@@ -1,5 +1,5 @@
 
-
+h3{font-size:14pt;}
 
 #rhythmus, #epochen,#schiene{
   display:flex;
@@ -184,6 +184,7 @@
   margin-left: 5pt;
 }
 
+
 //tabelle: -----------------------------------------------------------------------------------------
 
 
@@ -196,6 +197,8 @@
   max-width:1150pt;
    line-height: 30pt; 
   border-collapse: collapse;
+  margin-bottom:30pt;
+
 
   tr {
     min-height: 20pt;
@@ -243,7 +246,7 @@
           .lehrerKuerzel {
             min-width:25pt;
             width:25pt;
-    //        background-color: red;
+    //      background-color: red;
            // color:red;
             text-align:right;
           }
@@ -263,16 +266,17 @@
   }
 }
 
- 
+//farben:
+#printcontainer2 .cell{
+  margin-top:10pt;
+  height:60pt;
+}
+#printcontainer2  .zelle div{   
 
+  font-size:12pt; 
+}
 
-
-
-
-
-
-      //farben:
-#printcontainer2 {    
-    }
-
+#printcontainer2 .container{
+  height:50pt;
+}
 

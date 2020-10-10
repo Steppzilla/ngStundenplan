@@ -1,6 +1,7 @@
-<div id="menu">
+<div id="menu" class="noprint">
 
-<button (click)="redirect(1)"> Gesamtplan und Epochen </button> 
-  <button (click)="redirect(2)"> Computer-Raum-Plan</button>
-  <button (click)="redirect(3)"> Stundenpläne Lehrer/klassen</button>
+<button class="noprint" (click)="redirect(1)"> Gesamtplan und Epochen </button> 
+  <button class="noprint" (click)="redirect(2)"> Computer-Raum-Plan</button>
+  <button class="noprint" (click)="redirect(3)"> Stundenpläne Lehrer/klassen</button>
+  <div class="noprint"> Datum: {{planmaker.datum.getDate()}}.{{planmaker.datum.getMonth()+1}}.{{planmaker.datum.getFullYear()}}</div>
 </div>

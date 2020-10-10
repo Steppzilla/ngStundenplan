@@ -27,7 +27,7 @@
       <td *ngFor="let cell of reihe; index as c">
         <div class="zelle">
           <!--    <div class="zellkind">-->
-          <div *ngFor="let lehrerItemErw of cell" class="container ">
+          <div *ngFor="let lehrerItemErw of cell" class="container">
             <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
               {{lehrerItemErw?lehrerItemErw[1]:""}}
             </div>
@@ -48,8 +48,8 @@
 
 
 <!--Epoche, Schiene und Rhythmus:-->
-<p> Rhythmischer Teil:</p>
-<div *ngIf="aktuellerPlan.rhythmusPlan!null"    id="rhythmus">
+<h3 class="noprint"> Rhythmischer Teil:</h3>
+<div *ngIf="aktuellerPlan.rhythmusPlan!null"    id="rhythmus" class="noprint">
 
   <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">
@@ -73,10 +73,8 @@
   </div>
 </div>
 
-
-<p> Epochen:</p>
-<div *ngIf="aktuellerPlan.epochenPlan"   id="epochen">
-
+<h3 class="noprint"> Epochen:</h3>
+<div *ngIf="aktuellerPlan.epochenPlan"   id="epochen" class="noprint">
   <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle">
@@ -86,7 +84,6 @@
             {{lehrerItemErw?lehrerItemErw[1]:""}}
           </div>
           <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-
             {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
           </div>
           <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
@@ -102,9 +99,9 @@
 
 
 
-<p> Schiene:</p>
+<h3 class="noprint"> Schiene:</h3>
 
-<div *ngIf="aktuellerPlan.schienenPlan"  id="schiene">
+<div *ngIf="aktuellerPlan.schienenPlan"  id="schiene" class="noprint">
 
   <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="epochenReihe">
     <div *ngFor="let cell of reihe; index as c" class="cell">

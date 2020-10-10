@@ -42,8 +42,6 @@ export class PlanmakerService {
   donnerstag;
   freitag;
 
-
-
   datumstring = [
     [
       '10.8.',      '17.8.',      '24.8.',      '31.8.',      '7.9.',      '14.9.',      '21.9.',      '28.9.'

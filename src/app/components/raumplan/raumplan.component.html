@@ -1,4 +1,7 @@
-<h1> Raumplan </h1>
+<div class="buttonreihe">
+  <button id="stundenPlanDrucken" (click)="stundenPlanDruck()">Stundenplan drucken</button>
+</div>
+  <h1> Raumplan </h1>
 
 <h2 *ngIf="loginservice.raumPlanComputer" class="noprint">Computerraum</h2>
 <table *ngIf="loginservice.raumPlanComputer" id="stundenPlan">

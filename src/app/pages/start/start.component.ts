@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PlanmakerService } from 'src/app/services/planmaker.service';
 
 @Component({
   selector: 'app-start',
@@ -21,7 +22,7 @@ export class StartComponent implements OnInit {
       this.router.navigate(['plaene']);
     }
   }
-  constructor(private router:Router) { }
+  constructor(private router:Router, public planmaker: PlanmakerService) { }
 
   ngOnInit(): void {
   }

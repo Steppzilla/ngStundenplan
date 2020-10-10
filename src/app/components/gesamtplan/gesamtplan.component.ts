@@ -33,7 +33,7 @@ import * as $ from 'jquery'; //'../../../node_modules/jquery/dist/jquery.min.js'
 })
 
 export class LehrerlisteComponent implements OnInit {
-  datum = new Date(); //aktuelles Datum und aktuelle Zeit
+  
 
   datumstring; //objekt mit strings[['3.1.', '4.5.' , ... ],[...],[...],[...]]
   aktuelleEpochenIndexe;

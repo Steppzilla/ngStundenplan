@@ -44,11 +44,20 @@ fachcolor(fach:Fach){
     $('#printcontainer2').append($("app-wochenplan h1").clone());
     $('#printcontainer2').append($("app-wochenplan h2").clone());
     $('#printcontainer2').append($("#stundenPlan").clone());
-    $('app-gesamtplan').hide();
-    $('app-epochen-scheduler').hide();
+    $('#printcontainer2').append($("app-wochenplan h3").eq(0).clone());
+    $('#printcontainer2').append($("#rhythmus").clone());
+    $('#printcontainer2').append($("app-wochenplan h3").eq(1).clone());
+    $('#printcontainer2').append($("#epochen").clone());
+    $('#printcontainer2').append($("app-wochenplan h3").eq(2).clone());
+    $('#printcontainer2').append($("#schiene").clone());
+    $('app-wochenplan').children().hide();
+    $('#printcontainer2').show();
+ //   $('app-gesamtplan').hide();
+  //  $('app-epochen-scheduler').hide();
     window.print();
-    $('app-gesamtplan').show();
-    $('app-epochen-scheduler').show();
+    $('app-wochenplan').children().show();
+   // $('app-gesamtplan').show();
+   // $('app-epochen-scheduler').show();
     $('#printcontainer2').empty();
 
   }
