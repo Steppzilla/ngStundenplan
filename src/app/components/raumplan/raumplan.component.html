@@ -16,7 +16,7 @@
       <td class="first">
         {{r+1}}
       </td>
-      <td *ngFor="let cell of reihe; index as c">
+      <td *ngFor="let cell of reihe; index as c" >
         <div ngbDropdown aria-label="Button group with nested dropdown">
           <button class="btn" ngbDropdownToggle>
               <ng-container *ngIf="cell[0]">
@@ -45,7 +45,7 @@
 <div *ngIf="loginservice.raumPlanComputer.rhythmusPlan" id="rhythmus">
 
   <div *ngFor="let reihe of loginservice.raumPlanComputer.rhythmusPlan; index as r" class="epochenReihe">
-    <div *ngFor="let cell of reihe; index as c">
+    <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle" *ngIf="loginservice.raumPlanComputer.rhythmusPlan[r][c]">
         <div class="datum"> {{loginservice.raumPlanComputer.rhythmusPlan[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
 
@@ -76,7 +76,7 @@
 <div *ngIf="loginservice.raumPlanComputer.epochenPlan" id="epochen">
 
   <div *ngFor="let reihe of loginservice.raumPlanComputer.epochenPlan; index as r" class="epochenReihe">
-    <div *ngFor="let cell of reihe; index as c">
+    <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle">
         <div class="datum"> {{loginservice.raumPlanComputer.datumString[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
         <div ngbDropdown aria-label="Button group with nested dropdown">
