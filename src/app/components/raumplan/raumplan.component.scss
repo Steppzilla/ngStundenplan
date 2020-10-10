@@ -27,8 +27,9 @@ padding:0pt;}
     height:40pt;
     //overflow: hidden;
   
-    div>button{ //Datum und container für LehrerFach
+    div>button{ //
       font-size:inherit;
+      overflow:hidden;
      //display:center;
      //margin:0pt;
      //padding: 0pt;
