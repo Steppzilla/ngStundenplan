@@ -53,7 +53,7 @@ export class LehrerlisteComponent implements OnInit {
   wochentag: string = "montag";
   tagvorher: string;
 
-  @ViewChild('Tabelle') someInput: ElementRef;
+
 
 
   printGesamtplaene() {

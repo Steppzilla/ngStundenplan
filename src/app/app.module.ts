@@ -33,6 +33,7 @@ import { LoginService } from './services/login.service';
 import { RaumplanComponent } from './components/raumplan/raumplan.component';
 import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.component';
 import { StartComponent } from './pages/start/start.component';
+import { PlaeneComponent } from './pages/plaene/plaene.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { StartComponent } from './pages/start/start.component';
     EpochenSchedulerComponent,
     RaumplanComponent,
     RaumplanPageComponent,
-    StartComponent
+    StartComponent,
+    PlaeneComponent
   ],
   imports: [
     BrowserModule,

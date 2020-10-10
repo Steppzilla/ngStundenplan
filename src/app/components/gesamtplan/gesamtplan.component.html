@@ -1,7 +1,4 @@
-
-<app-raumplan></app-raumplan>
-
-
+<app-start></app-start>
 <div id="buttonmenu" class="buttonreihe">
   <div class="center">
     <button (click)="wochenTag('montag')">Montag</button>
@@ -84,6 +81,13 @@
     </tr>
   </tbody>
 </table>
+
+
+
+<p id="epochenplan">
+  <app-epochen-scheduler></app-epochen-scheduler>
+</p>
+
 <!--
 <app-gesamtplancopies></app-gesamtplancopies>
 -->
@@ -91,14 +95,6 @@
 
 </div>
 
-<div>
-  <div id="stundenPlanContainer">
-    <app-wochenplan></app-wochenplan>
-  </div>
 
-  <p id="epochenplan">
-    <app-epochen-scheduler></app-epochen-scheduler>
-  </p>
-</div>
 
 

@@ -17,6 +17,9 @@ export class StartComponent implements OnInit {
     else if(zahl==2){
       this.router.navigate(['raumplan']);
     }
+    else if(zahl==3){
+      this.router.navigate(['plaene']);
+    }
   }
   constructor(private router:Router) { }
 
