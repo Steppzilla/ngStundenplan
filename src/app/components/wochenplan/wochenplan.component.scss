@@ -195,7 +195,7 @@ h3{font-size:14pt;}
   margin-top: 15pt;
   width:1150pt;
   max-width:1150pt;
-   line-height: 30pt; 
+   line-height: 0.8em; 
   border-collapse: collapse;
   margin-bottom:30pt;
 
@@ -205,25 +205,39 @@ h3{font-size:14pt;}
     border: 1px solid;
    
     margin:2pt;
-
+    .first{
+    padding:0pt;
+      font-size:30pt;
+      max-height:auto;
+      min-height:20pt;
+      height:40pt;
+    }
     >td {
       //Cell td 
-    //  background-color: green;
      // max-width: 130pt;
       overflow: hidden;   
       border-right: none; 
    //.container {  //mega fett......   //LehrerFach-behälter //display table-row-group geht..
-    .zelle{display:table;
+  
+    .zelle{//display:table;
+      display:flex;
+      flex-wrap: wrap;
       min-width:75pt;
       width:75pt;
       max-width:75pt;
+     
+    //  background-color:red;
+      padding:0pt;
         .container {   //jetzt wieder div
+         // background-color:blue;
+         padding:0pt;
           border-right: none; 
         //  background-color:yellow;   
           display:table-row;  //nicht optimal, aber inline is auch nich besser?
           width:85pt;
           max-width:85pt;
           min-width:85pt;
+          height:20pt;
           //max-width:33pt!important;
        //   overflow: hidden;
 
@@ -241,6 +255,7 @@ h3{font-size:14pt;}
             width:80pt;
             min-width:80pt;
             padding-left:15pt;
+         //   background-color:yellow;
           }
     
           .lehrerKuerzel {
@@ -272,11 +287,12 @@ h3{font-size:14pt;}
   height:60pt;
 }
 #printcontainer2  .zelle div{   
-
+margin:0pt;
   font-size:12pt; 
 }
 
 #printcontainer2 .container{
+  margin:0pt;
   height:50pt;
 }
 

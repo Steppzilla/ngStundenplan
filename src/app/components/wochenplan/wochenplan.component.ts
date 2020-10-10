@@ -16,6 +16,7 @@ import {
 } from '../../interfaces/lehrer';
 import * as $ from 'jquery';//'../../../node_modules/jquery/dist/jquery.min.js';
 import { Fach } from 'src/app/interfaces/fach.enum';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-wochenplan',
@@ -59,10 +60,10 @@ fachcolor(fach:Fach){
    // $('app-gesamtplan').show();
    // $('app-epochen-scheduler').show();
     $('#printcontainer2').empty();
-
   }
 
-  constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService, ) {
+  constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService,private login:LoginService ) {
+    this.login.planPushen("montag");
     this.lehrer = lehrerService.lehrer;
     this.klassen = lehrerService.klassen;
 
