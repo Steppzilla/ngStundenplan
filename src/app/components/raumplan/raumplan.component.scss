@@ -1,5 +1,6 @@
 
-*{}
+*{margin:0pt;
+  padding:0pt;}
 p{margin:0pt;
 padding:0pt;}
 
@@ -19,13 +20,21 @@ padding:0pt;}
     padding:0pt;
   }
 
+  .noOverflow{
+    overflow: hidden;
+    width:20pt;
+    height:40pt;
+   // background-color:darkgoldenrod;
+    margin:0pt;
+    padding:0pt;
+  }
   .zelle{
     margin:0pt;
     padding:0pt;
     font-size:9pt;
-    width:30pt;
-    height:40pt;
-    //overflow: hidden;
+    //width:30pt;
+   // height:40pt;
+   
   
     div>button{ //
       font-size:inherit;
@@ -46,6 +55,7 @@ padding:0pt;}
   
    }
    #stundenPlan {
+     min-width:800pt;
  
     margin-left:auto;
     margin-right:auto;
@@ -54,54 +64,36 @@ padding:0pt;}
     row-gap: 0pt;
     border-spacing: 0pt;
     border-collapse: collapse;
+    margin-bottom: 20pt;
   
     tr {
       min-height: 20pt;
       margin: 0pt;
       padding: 0pt;
       border: 1px solid;
+
   
       >td {
-        //Cell td
-      
-    //    background-color: green;
-        border: solid 1pt;
+         border: solid 1pt;
         text-align: center;
         width:auto;
         padding: 0pt;
    
-          .container {
-            display:inline-block;
-            width:auto;
-            padding: 2pt;
-            margin:1pt;
-            border-right: 1pt solid;
-  
-            div{
-           display:block;
-              width:40pt;
-              //display:block;
+            div >button{
+              width:100%;
+              min-height:30pt;
+              display:flex;
+
+            }
+
+            div>button p{
+              width:30%;
+            }
+
+            div >div>button{
+
             }
   
-            .unterrichtsFeld {
-              //width: 100%;
-              padding-top: 1px;
-              padding-bottom: 1pt;
-  
-            }
-  
-            .lehrerKuerzel {
-              font-size: 7pt;
-              padding-top: 2pt;
-              padding-bottom: 2pt;
-            }
-  
-            .Klasse {
-              font-size: 7pt;
-              padding-top: 2pt;
-              padding-bottom: 2pt;
-            }
-          }
           :last-child{border-right:solid 0pt;}
       
       

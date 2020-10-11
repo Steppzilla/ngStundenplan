@@ -23,9 +23,9 @@
         <div ngbDropdown aria-label="Button group with nested dropdown">
           <button class="btn" ngbDropdownToggle>
               <ng-container *ngIf="cell[0]">
-             <p> {{cell[0]?cell[0][0][0].kuerzel:""}}</p>
+           <p>{{cell[0]?cell[0][0][0].kuerzel:""}}</p>
              <p>{{cell[0]?cell[0][0][1]:""}} </p>
-             <p>{{cell[1]? cell[1] + 1:""}}</p>
+             <p>{{cell[1]? cell[1] + 1:""}}. Kl.</p>
               </ng-container >
           </button>
           <div ngbDropdownMenu>
@@ -54,9 +54,11 @@
 
         <div ngbDropdown aria-label="Button group with nested dropdown">
           <button class="btn" ngbDropdownToggle>
+            <div class="noOverflow">
             <ng-container *ngIf="cell[0]">
               <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
               </ng-container >
+            </div>
           </button>
           <div ngbDropdownMenu class="rahmen">
             <div *ngIf="loginservice.zeitgleicheRhythmus as rhythmus">
@@ -84,9 +86,11 @@
         <div class="datum"> {{loginservice.raumPlanComputer.datumString[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
         <div ngbDropdown aria-label="Button group with nested dropdown">
           <button class="btn" ngbDropdownToggle>
+            <div class="noOverflow">
             <ng-container *ngIf="cell[0]">
               <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
               </ng-container >
+            </div>
           </button>
           <div ngbDropdownMenu>
             <div *ngIf="loginservice.zeitgleicheEpochen as rhythmus">
@@ -115,9 +119,11 @@
           <div class="datum"> {{loginservice.raumPlanComputer.datumString[r][c]?loginservice.raumPlanComputer.datumString[r][c]:""}}</div>
           <div ngbDropdown aria-label="Button group with nested dropdown">
             <button class="btn" ngbDropdownToggle>
+              <div class="noOverflow">
               <ng-container *ngIf="cell[0]">
                 <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
                 </ng-container >
+              </div>
             </button>
             <div ngbDropdownMenu>
               <div *ngIf="loginservice.zeitgleicheSchiene rhythmus">
