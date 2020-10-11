@@ -465,7 +465,14 @@ export class LoginService {
 
       //FÜR DEN RAUMPLAN :
 
-     
+      this.zeitgleicheWochen= {
+        montag: [          [],          [],          [],          [],          [],          [],          [],          [],          [],          []        ],
+        dienstag: [          [],          [],          [],          [],          [],          [],          [],          [],          [],          []        ],
+        mittwoch: [          [],          [],          [],          [],          [],          [],          [],          [],          [],          []        ],
+        donnerstag: [          [],          [],          [],          [],          [],          [],          [],          [],          [],          []        ],
+        freitag: [          [],          [],          [],          [],          [],
+          [],          [],          [],          [],          []        ]
+      };
 
 
       this.planmakerService.montag.forEach((row, r) => {

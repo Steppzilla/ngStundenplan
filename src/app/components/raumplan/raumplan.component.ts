@@ -16,24 +16,29 @@ export class RaumplanComponent implements OnInit {
 
 
 
-aktiveParelleleStundenErmitteln(r,c){ //fürn wochenplan erstmal in montag dienstag etc sind die einzelnen arrays drin.
+aktiveParelleleStundenErmitteln(r,c){ //row und cell von angeklicktem Feld gegeben.  
 
-let paralleleStunden;
+let paralleleStunden=[];
 
-switch(c){   // 5 wochentage
+switch(c){   // für jeden Wochentag (cell-index) die rows eintragen:
   case 0:paralleleStunden=this.loginservice.zeitgleicheWochen.montag[r];
+  break;
   case 1:paralleleStunden=this.loginservice.zeitgleicheWochen.dienstag[r];
+  break;
   case 2:paralleleStunden=this.loginservice.zeitgleicheWochen.mittwoch[r];
+  break;
   case 3:paralleleStunden=this.loginservice.zeitgleicheWochen.donnerstag[r];
+  break;
   case 4:paralleleStunden=this.loginservice.zeitgleicheWochen.freitag[r];
-}
+  break;
+}  //console.log(paralleleStunden);
+
   return paralleleStunden;
 
 }
 
 
-lehrerWahl(string, z,c, item,$event, klasse){ //Das muss den raumplan updaten bei Wahld es lehrerfaches  //string z.B.: "Rhythmus"  //klasse gilt nur bei epoche, rhythmus + schiene. 
-
+lehrerWahl(string, z,c, item,$event, klasse){ //update Raumplan bei Wahl des lehrerfaches  //string z.B.: "Rhythmus"  //klasse gilt nur bei epoche, rhythmus + schiene. 
 console.log("lehrerWahl");
   if(string=="Epoche"){
    this.loginservice.raumPlanComputer.epochenPlan[z][c]=[item,klasse];
@@ -44,8 +49,8 @@ this.loginservice.raumPlanComputer.rhythmusPlan[z][c]=[item, klasse];
   }else if(string=="Stundenplan"){
    this.loginservice.raumPlanComputer.stundenPlan[z][c]=item;
   }
-  console.log(item + " soll in " + string + " geändert werden und wurde reingeschrieben: " );
-  console.log(this.loginservice.raumPlanComputer.stundenPlan[0][0]);
+  //console.log(item + " soll in " + string + " geändert werden und wurde reingeschrieben: " );
+  //console.log(this.loginservice.raumPlanComputer.stundenPlan[0][0]);
 
 }
 
