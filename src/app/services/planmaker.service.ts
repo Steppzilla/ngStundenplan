@@ -81,7 +81,7 @@ export class PlanmakerService {
 
 
   epochenAktuell() {
-    let epochenSpeicherIndex = [];
+    let epochenSpeicherIndex = [1,0];
     //console.log(this.datumstring);
 
     //Gesucht: aktuelles Datum soll nächst kleineres Datum ausm Epochenwochen-Datum heraussuchen. Wir zählen also Tage rückwärts bis es gleich ist:
@@ -120,11 +120,12 @@ export class PlanmakerService {
       //  console.log("gleich:");
       //  console.log("laufende Epoche:" + new Date(epochenDatum.getTime())); // dies hier hat 0 uhr als Anhaltspunkt
        // console.log("Heute--:" + new Date(heute.getTime()-i*tagesEinheit)); 
-        epochenSpeicherIndex.push(b, d);
+        epochenSpeicherIndex=[b, d];
+        console.log(epochenSpeicherIndex);
       }
       else { //wenn datum "mehr als" zu 6 tage zurück liegt
-      epochenSpeicherIndex=[1, 0]; //geschummelt, das ist die ersten epoche nach den herbstferien... das soll eigentlich je nach ferien wechseln
-
+     // epochenSpeicherIndex=[1, 0]; //geschummelt, das ist die ersten epoche nach den herbstferien... das soll eigentlich je nach ferien wechseln
+console.log("ausnahmezustand");
       }
 
       });

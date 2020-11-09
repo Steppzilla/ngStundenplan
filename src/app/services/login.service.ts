@@ -552,10 +552,8 @@ export class LoginService {
       });
   
 
-      console.log(this.zeitgleicheWochen);
-      console.log(this.zeitgleicheEpochen);
-      console.log(this.zeitgleicheSchiene);
-      console.log(this.zeitgleicheRhythmus);
+    //  console.log(this.zeitgleicheWochen);
+
     }); //Store collection ende
 
     this.store.collection('raum').valueChanges().subscribe((val: Array < any > ) => {
@@ -589,7 +587,7 @@ export class LoginService {
     this.raumPlanComputer.schienenPlan=this.planmakerService.datumstring.map(zeile => zeile.map(cell => []));
     this.raumPlanComputer.datumString=this.planmakerService.datumstring;
     
-    this.planPushen("montag"); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
+    //this.planPushen("montag"); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
 
 
 

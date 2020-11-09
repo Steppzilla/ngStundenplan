@@ -39,7 +39,6 @@ switch(c){   // für jeden Wochentag (cell-index) die rows eintragen:
 
 
 lehrerWahl(string, z,c, item,$event, klasse){ //update Raumplan bei Wahl des lehrerfaches  //string z.B.: "Rhythmus"  //klasse gilt nur bei epoche, rhythmus + schiene. 
-console.log("lehrerWahl");
   if(string=="Epoche"){
    this.loginservice.raumPlanComputer.epochenPlan[z][c]=[item,klasse];
   }else if(string=="Schiene"){
