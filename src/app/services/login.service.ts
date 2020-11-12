@@ -314,7 +314,7 @@ export class LoginService {
       //    console.log("epoche:");
       //    console.log(this.planmakerService.epochenplan9);
       //Epochen aktualisieren in den plänen:
-      this.lehrerservice.stundenRaster.next(this.planmakerService[tag]);
+      this.lehrerservice.stundenRaster.next(this.planmakerService[tag]);  ///STUNDENRASTER WIRD GESETZT
 
       let zeile = this.planmakerService.epochenAktuell()[0];
       let celle = this.planmakerService.epochenAktuell()[1];

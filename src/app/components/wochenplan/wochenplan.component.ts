@@ -63,7 +63,26 @@ fachcolor(fach:Fach){
   }
 
   constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService,private login:LoginService ) {
-    this.login.planPushen("montag");
+    let tag="donnerstag";
+    let xu=this.planMakerService.datum.getDay();
+    switch(xu){
+      case 0:
+        tag='montag'; //eigentlich sonntag, aber sonntag ist keine schule...
+      case 1:
+        tag='montag';
+      case 2:
+        tag="dienstag";
+      case 3:
+        tag="mittwoch";
+      case 4:
+        tag="donnerstag";
+      case 5:
+        tag="freitag";
+      case 6:
+        tag="montag"; //Samstag is keine schule, also sieht man schon montag
+    }
+    tag="donnerstag";
+    this.login.planPushen(tag);
     this.lehrer = lehrerService.lehrer;
     this.klassen = lehrerService.klassen;
 

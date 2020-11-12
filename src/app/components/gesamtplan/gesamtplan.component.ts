@@ -50,7 +50,7 @@ export class LehrerlisteComponent implements OnInit {
   };
   testArray = [1, 2, 3];
   //Buttons:
-  wochentag: string = "montag";
+  wochentag: string ;
   tagvorher: string;
 
 
@@ -350,9 +350,36 @@ export class LehrerlisteComponent implements OnInit {
     //this.generateDuplicates(this.stundenRaster);
 
     //console.log(this.lehrerservice.stundenRaster.getValue());
-    this.tagvorher = this.wochentag;
-    this.wochentag = 'montag';
-    //console.log("neues:");
+   
+    let xu=this.planmaker.datum.getDay();
+    switch(xu){
+      case 0:
+        this.wochentag='montag'; //eigentlich sonntag, aber sonntag ist keine schule...
+        break;
+      case 1:
+        this.wochentag='montag';
+        break;
+      case 2:
+        this.wochentag="dienstag";
+        break;
+      case 3:
+        this.wochentag="mittwoch";
+        break;
+      case 4:
+        this.wochentag="donnerstag";
+        break;
+      case 5:
+        this.wochentag="freitag";
+        break;
+      case 6:
+        this.wochentag="montag"; //Samstag is keine schule, also sieht man schon montag
+        break;
+    }
+   // this.wochentag = 'montag';    ;//Heutiger Tag nicht immer montag!
+    this.tagvorher=this.wochentag;
+    loginService.planPushen(this.wochentag); //HIER WIRD TATsächlich was geändert auf donnerstag, überschrift stimmt nicht
+   
+    console.log(this.wochentag);
     //this.loginService.load(this.wochentag);//aktuelles stundenraster wird
     //
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
@@ -379,6 +406,10 @@ export class LehrerlisteComponent implements OnInit {
     // if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
     //  return "gruen";
     //}
+
+    //this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben
+    //console.log(this.lehrerservice.stundenRaster.getValue());
+    //this.generateDuplicates(this.stundenRaster);
 
   }
 

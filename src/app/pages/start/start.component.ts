@@ -13,7 +13,7 @@ export class StartComponent implements OnInit {
 
   redirect(zahl){
     if(zahl==1){
-      this.router.navigate(['lehrer']);
+      this.router.navigate(['lehrer']); //gesamtplan, planer
     }
     else if(zahl==2){
       this.router.navigate(['raumplan']);
