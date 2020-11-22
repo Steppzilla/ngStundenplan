@@ -24,6 +24,8 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./wochenplan.component.scss']
 })
 export class WochenplanComponent implements OnInit {
+
+  var=1; //1-4 Abschnitte zwiscihen den Ferien
   lehrer: Array < Lehrer > ;
   klassen: Array < number > ;
   aktuellerPlan: Stundenplan;  //stundenPlan:Array<Array<Array<[Lehrer,Fach,String]>>>;.lehrer und .klasse gibts noch
@@ -81,7 +83,7 @@ fachcolor(fach:Fach){
       case 6:
         tag="montag"; //Samstag is keine schule, also sieht man schon montag
     }
-    tag="donnerstag";
+  //  tag="donnerstag";
     this.login.planPushen(tag);
     this.lehrer = lehrerService.lehrer;
     this.klassen = lehrerService.klassen;

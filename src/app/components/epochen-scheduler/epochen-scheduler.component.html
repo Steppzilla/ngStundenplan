@@ -21,7 +21,7 @@
         <div
           *ngIf="( !duplicatesRhythmus[z][c])      ||      (duplicatesRhythmus[z][c]        &&            duplicatesRhythmus[z][c][0]===c)"
           ngbDropdown class="{{duplicatesRhythmus[z][c]? 'size-'+duplicatesRhythmus[z][c].length:'normalsize'}}">
-          <div class="btn btn-outline-primary buttonDrop gruen"
+          <div class="btn btn-outline-primary buttonDrop rhythmus"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
             <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter ">
@@ -62,7 +62,7 @@
         <div
           *ngIf="( !duplicates[z][c])      ||      (duplicates[z][c]        &&            duplicates[z][c][0]===c)"
           ngbDropdown class="{{duplicates[z][c]? 'size-'+duplicates[z][c].length:'normalsize'}}">
-          <div class="btn btn-outline-primary buttonDrop gruen"
+          <div class="btn btn-outline-primary buttonDrop epoche"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
             <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter ">
@@ -100,7 +100,7 @@
         <div
           *ngIf="( !duplicatesSchiene[z][c])      ||      (duplicatesSchiene[z][c]        &&            duplicatesSchiene[z][c][0]===c)"
           ngbDropdown class="{{duplicatesSchiene[z][c]? 'size-'+duplicatesSchiene[z][c].length:'normalsize'}}">
-          <div class="btn btn-outline-primary buttonDrop gruen"
+          <div class="btn btn-outline-primary buttonDrop schiene"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
             <div *ngFor="let lehrerFach of cell" class="lehrerFachBehaelter ">

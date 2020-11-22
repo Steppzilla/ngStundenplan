@@ -1,9 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  ViewContainerRef,
-  ElementRef
 } from '@angular/core';
 import {
   LehrerService
@@ -138,8 +135,8 @@ export class LehrerlisteComponent implements OnInit {
   }
 
 
-  duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]; //jeweils nur aktueller Wochentag. pro row neues Objekt.
-  duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+  duplicates; //jeweils nur aktueller Wochentag. pro row neues Objekt.
+  duplicateVert;
 
   generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
     let vertical = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -200,12 +197,10 @@ export class LehrerlisteComponent implements OnInit {
 
   //CLICK
   wochenTag(tag: string) { //Buttonclick
-    //console.log("vorher");
     //console.log(this.lehrerservice.stundenRaster.getValue());
     this.tagvorher = this.wochentag;
     this.wochentag = tag;
-    //console.log("neues:");
-    this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben, pushen macht immer aktuellen tag
+     this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben, pushen macht immer aktuellen tag
     //console.log(this.lehrerservice.stundenRaster.getValue());
     this.generateDuplicates(this.stundenRaster);
   }
@@ -347,10 +342,8 @@ export class LehrerlisteComponent implements OnInit {
     //duplicates ermitteln:
     this.duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     this.duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-    //this.generateDuplicates(this.stundenRaster);
    
-
-    //console.log(this.lehrerservice.stundenRaster.getValue());
+    
    
     let xu=this.planmaker.datum.getDay();
     switch(xu){
@@ -373,15 +366,13 @@ export class LehrerlisteComponent implements OnInit {
         this.wochentag="freitag";
         break;
       case 6:
-        this.wochentag="montag"; //Samstag is keine schule, also sieht man schon montag
+        this.wochentag="montag"; //Samstag is keine schule, also ist montag
         break;
     }
     this.tagvorher=this.wochentag; // AM WE ist das Montag, sonst aktueller Tag, siehe xu-Variable
     loginService.planPushen(this.wochentag); //HIER WIRD TATsächlich was geändert auf aktuellen tag, überschrift stimmt nicht
-   
+       
     console.log(this.wochentag);
-
-
   
     //
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
@@ -405,21 +396,15 @@ export class LehrerlisteComponent implements OnInit {
     console.log(lehrerservice.lehrer[0]);
     console.log(this.stundenRaster); //ist hier leer
   
-    //this.stundenRaster[1][8]=[lehrerservice.lehrer[0], Fach.mathematik];
-    // if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
-    //  return "gruen";
-    //}
-
-    //this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben
-    //console.log(this.lehrerservice.stundenRaster.getValue());
    
- 
-    
-
+    //this.generateDuplicates(this.stundenRaster);
+   
   }
 
 
   ngOnInit(): void {
+    
+        
 
   }
 }
