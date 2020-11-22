@@ -5,6 +5,7 @@ import { LehrerlisteComponent } from './components/gesamtplan/gesamtplan.compone
 import { PlaeneComponent } from './pages/plaene/plaene.component';
 import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.component';
 import { StartComponent } from './pages/start/start.component';
+import {RechnerComponent} from './pages/rechner/rechner.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
  {path: "plaene", component: PlaeneComponent },
   {path: 'lehrer', component: LehrerlisteComponent},
   {path: 'raumplan', component: RaumplanPageComponent},
+  {path: 'rechner', component: RechnerComponent},
 ];
 
 @NgModule({

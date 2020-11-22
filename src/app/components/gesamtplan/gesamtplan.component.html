@@ -27,12 +27,12 @@
     <tr *ngFor="let row of stundenRaster;index as r">
       <td class="first">{{r+1}}</td>
       <ng-container  *ngFor="let cell of row; index as c">
-      <!-- Td-Box soll nur gezeigt werden, wenn sie leer ist/ falls duplicates existieren, wenn dort der erste Eintrag mit dem Zellenindex übereinstimmt.-->
+      <!-- Td-Box soll nur gezeigt werden, wenn sie leer ist/ falls duplicates existieren: wenn dort der erste Eintrag mit dem Zellenindex übereinstimmt.-->
       <!-- Vertikal: Wenn vertical-dupli existieren, nur zeigen, wenn -->
       <!-- nu zeigen wenn  weder vertical nohc dupli eintrag ODER  (vertical ODER horizontal gleiches feld wie eintrag)-->
-      <td class="box  {{duplicates[r][c]? 'size-'+duplicates[r][c].length:'normalsize'}}"   *ngIf="( 
-        !duplicates[r][c])    && (!duplicateVert[r][c])    
-         ||(duplicates[r][c]  && !duplicateVert[r][c][0]        &&            duplicates[r][c][0]===c)  
+      <td class="box  {{duplicates[r][c]? 'size-'+duplicates[r][c].length:'normalsize'}}"   *ngIf="
+      (( !duplicates[r][c])    && (!duplicateVert[r][c] ))
+         ||(duplicates[r][c]  && !duplicateVert[r][c]        &&            duplicates[r][c][0]===c)  
          ||(duplicateVert[r][c]        &&  !duplicates[r][c] &&          duplicateVert[r][c][0]===r)
          ||(duplicates[r][c]     &&duplicateVert[r][c] &&duplicateVert[r][c][0]===r&& duplicates[r][c][0]===c)"
       [attr.colspan]=" duplicates[r][c]      &&duplicates[r][c]!==undefined    ?duplicates[r][c].length:1"

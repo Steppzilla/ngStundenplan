@@ -21,6 +21,9 @@ export class StartComponent implements OnInit {
     else if(zahl==3){
       this.router.navigate(['plaene']);
     }
+    else if(zahl==4){
+      this.router.navigate(['rechner']);
+    }
   }
   constructor(private router:Router, public planmaker: PlanmakerService) { }
 

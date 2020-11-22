@@ -34,6 +34,8 @@ import { RaumplanComponent } from './components/raumplan/raumplan.component';
 import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.component';
 import { StartComponent } from './pages/start/start.component';
 import { PlaeneComponent } from './pages/plaene/plaene.component';
+import { RechnerComponent } from './pages/rechner/rechner.component';
+import { NotenrechnerComponent } from './components/notenrechner/notenrechner.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { PlaeneComponent } from './pages/plaene/plaene.component';
     RaumplanComponent,
     RaumplanPageComponent,
     StartComponent,
-    PlaeneComponent
+    PlaeneComponent,
+    RechnerComponent,
+    NotenrechnerComponent
   ],
   imports: [
     BrowserModule,

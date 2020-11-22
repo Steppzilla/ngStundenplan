@@ -1,0 +1,11 @@
+div{display:table;
+    line-height: 50pt;
+}
+p{display:table-row;}
+span{
+    display:table-cell;
+    background-color:green;
+    border-radius:15pt;
+    border: 1pt solid;
+    text-align:center;
+}

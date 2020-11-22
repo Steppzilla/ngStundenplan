@@ -2,7 +2,6 @@
 padding:0pt;}
 body{
   line-height:normal;
-  
 }
 #buttonmenu{
   display: grid;
@@ -12,17 +11,14 @@ body{
 .center{
   text-align: center;
 }
-#save{
-  //align-items: center;
-}
 
 .normalsize{
-  colspan: 1;
+  column-span: 1;
   flex-grow:0;
   //width:10%;
 }
 .size-1{
-  colspan: 1;
+  column-span: 1;
   flex-grow:1;
 }
 .size-2{

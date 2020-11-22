@@ -205,7 +205,7 @@ export class LehrerlisteComponent implements OnInit {
     this.tagvorher = this.wochentag;
     this.wochentag = tag;
     //console.log("neues:");
-    this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben
+    this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben, pushen macht immer aktuellen tag
     //console.log(this.lehrerservice.stundenRaster.getValue());
     this.generateDuplicates(this.stundenRaster);
   }
@@ -348,6 +348,7 @@ export class LehrerlisteComponent implements OnInit {
     this.duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     this.duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     //this.generateDuplicates(this.stundenRaster);
+   
 
     //console.log(this.lehrerservice.stundenRaster.getValue());
    
@@ -375,12 +376,13 @@ export class LehrerlisteComponent implements OnInit {
         this.wochentag="montag"; //Samstag is keine schule, also sieht man schon montag
         break;
     }
-   // this.wochentag = 'montag';    ;//Heutiger Tag nicht immer montag!
-    this.tagvorher=this.wochentag;
-    loginService.planPushen(this.wochentag); //HIER WIRD TATsächlich was geändert auf donnerstag, überschrift stimmt nicht
+    this.tagvorher=this.wochentag; // AM WE ist das Montag, sonst aktueller Tag, siehe xu-Variable
+    loginService.planPushen(this.wochentag); //HIER WIRD TATsächlich was geändert auf aktuellen tag, überschrift stimmt nicht
    
     console.log(this.wochentag);
-    //this.loginService.load(this.wochentag);//aktuelles stundenraster wird
+
+
+  
     //
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
     let klassenZuordnung = {};
@@ -401,7 +403,8 @@ export class LehrerlisteComponent implements OnInit {
     this.klassen = lehrerservice.klassen;
     this.datumstring = planmaker.datumstring;
     console.log(lehrerservice.lehrer[0]);
-    console.log(this.stundenRaster);
+    console.log(this.stundenRaster); //ist hier leer
+  
     //this.stundenRaster[1][8]=[lehrerservice.lehrer[0], Fach.mathematik];
     // if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
     //  return "gruen";
@@ -409,7 +412,9 @@ export class LehrerlisteComponent implements OnInit {
 
     //this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben
     //console.log(this.lehrerservice.stundenRaster.getValue());
-    //this.generateDuplicates(this.stundenRaster);
+   
+ 
+    
 
   }
 
