@@ -309,35 +309,7 @@ export class LehrerlisteComponent implements OnInit {
 
     //duplicates ermitteln:
    
-   
-
-   
-    let xu=this.planmaker.datum.getDay();
-    switch(xu){
-      case 0:
-        this.wochentag='montag'; //eigentlich sonntag, aber sonntag ist keine schule...
-        break;
-      case 1:
-        this.wochentag='montag';
-        break;
-      case 2:
-        this.wochentag="dienstag";
-        break;
-      case 3:
-        this.wochentag="mittwoch";
-        break;
-      case 4:
-        this.wochentag="donnerstag";
-        break;
-      case 5:
-        this.wochentag="freitag";
-        break;
-      case 6:
-        this.wochentag="montag"; //Samstag is keine schule, also ist montag
-        break;
-    }
-    this.tagvorher=this.wochentag; // AM WE ist das Montag, sonst aktueller Tag, siehe xu-Variable
-    loginService.planPushen(this.wochentag); //HIER WIRD  auf aktuellen tag geändert, überschrift nicht?
+      // loginService.planPushen(this.wochentag); //HIER WIRD  auf aktuellen tag geändert, überschrift nicht?
 
            
   
@@ -367,9 +339,33 @@ export class LehrerlisteComponent implements OnInit {
 
     //this.generateDuplicates(this.stundenRaster);
 
-
-       
-    console.log(this.wochentag);
+    let tag;
+    let xu=this.planmaker.datum.getDay();
+    switch(xu){
+      case 0:
+        tag='montag'; //eigentlich sonntag, aber sonntag ist keine schule...
+        break;
+      case 1:
+        tag='montag';
+        break;
+      case 2:
+        tag="dienstag";
+        break;
+      case 3:
+        tag="mittwoch";
+        break;
+      case 4:
+        tag="donnerstag";
+        break;
+      case 5:
+        tag="freitag";
+        break;
+      case 6:
+        tag="montag"; //Samstag is keine schule, also ist montag
+        break;
+    }
+    this.wochentag=tag ;
+    this.tagvorher=tag;
    
   }
 

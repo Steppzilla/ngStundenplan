@@ -7,9 +7,9 @@
 </div>
 
 
-<h1 class="noprint">Stundenplan </h1>
-<h2 *ngIf="aktuellerPlan" class="noprint">{{aktuellerPlan.getTitel()}}</h2>
-<table *ngIf="aktuellerPlan" id="stundenPlan">
+<h1 >Stundenplan </h1>
+<h2 *ngIf="aktuellerPlan" >{{aktuellerPlan.getTitel()}}</h2>
+<table *ngIf="aktuellerPlan&&planMakerService.lehrer_klasse_duplicatesVert" id="stundenPlan">
   <tbody>
     <tr class="reihe reiheOben">
       <td class="first"> </td>
@@ -21,114 +21,144 @@
     </tr>
 
     <tr *ngFor="let reihe of aktuellerPlan.stundenPlan; index as r" class="reihe">
-      <td class="first">
+      <td class="firstbox ">
         {{r+1}}
       </td>
-      <td *ngFor="let cell of reihe; index as c">
-        <div class="zelle">
-          <!--    <div class="zellkind">-->
-          <div *ngFor="let lehrerItemErw of cell" class="container">
-            <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
-              {{lehrerItemErw?lehrerItemErw[1]:""}}
-            </div>
-            <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-              <!-- wenn Lehrer definiert, will ich ihn im Plan nicht sehen!-->
-              {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
-            </div>
-            <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
-              {{lehrerItemErw[2]}}
+      <ng-container *ngFor="let cell of reihe; index as c">
+        <td class=" normalsize" *ngIf=" !planMakerService.lehrer_klasse_duplicatesVert[r][c]   
+           ||(planMakerService.lehrer_klasse_duplicatesVert[r][c]   
+           &&   planMakerService.lehrer_klasse_duplicatesVert[r][c][0]===r)" [attr.rowspan]="planMakerService.lehrer_klasse_duplicatesVert[r][c]  
+         &&planMakerService.lehrer_klasse_duplicatesVert[r][c]!==undefined?
+         planMakerService.lehrer_klasse_duplicatesVert[r][c].length:1">
+          <div class="zelle">
+            <!--    <div class="zellkind">-->
+            <div *ngFor="let lehrerItemErw of cell" class="container">
+              <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+                {{lehrerItemErw?lehrerItemErw[1]:""}}
+              </div>
+              <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+                <!-- wenn Lehrer definiert, will ich ihn im Plan nicht sehen!-->
+                {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+              </div>
+              <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+                {{lehrerItemErw[2]}}
+              </div>
             </div>
           </div>
-        </div>
-        <!--</div>-->
-      </td>
+          <!--</div>-->
+        </td>
+      </ng-container>
     </tr>
   </tbody>
 </table>
 
 
 <!--Epoche, Schiene und Rhythmus:-->
-<h3 class="noprint"> Rhythmischer Teil:</h3>
-<div *ngIf="aktuellerPlan.rhythmusPlan!null"    id="rhythmus" class="noprint">
+<h3 > Rhythmischer Teil:</h3>
+<div *ngIf="aktuellerPlan.rhythmusPlan!null" id="rhythmus" >
 
-  <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="epochenReihe">
-   <!-- <ng-container *ngIf="r==this.vari">-->
-    <div *ngFor="let cell of reihe; index as c" class="cell">
-      <div class="zelle" *ngIf="aktuellerPlan.rhythmusPlan[r][c]">
-        <div class="datum"> {{aktuellerPlan.rhythmusPlan[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
-        <div *ngFor="let lehrerItemErw of cell" class="container ">
-          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
-            {{lehrerItemErw?lehrerItemErw[1]:""}}
+  <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="zeile">
+    <div class="block">
+      <!--Datum-->
+      <div class="datumZeile">
+        <div *ngFor="let datum of aktuellerPlan.datumString[r]" class="datum cell"> {{datum?datum:""}}</div>
+      </div>
+      <!--lehrerFach-Items-->
+      <div class="contentZeile">
+        <ng-container *ngFor="let cell of reihe; index as c">
+          <div
+            *ngIf="( !planMakerService.lehrer_klasse_duplicatesRhythmus[r][c])      ||      (planMakerService.lehrer_klasse_duplicatesRhythmus[r][c]        &&            planMakerService.lehrer_klasse_duplicatesRhythmus[r][c][0]===c)">
+            <div
+              class="container {{planMakerService.lehrer_klasse_duplicatesRhythmus[r][c]? 'size-'+planMakerService.lehrer_klasse_duplicatesRhythmus[r][c].length:'normalsize'}}">
+              <ng-container *ngFor="let lehrerItemErw of cell">
+                <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+                  {{lehrerItemErw?lehrerItemErw[1]:""}}
+                </div>
+                <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+                  {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+                </div>
+                <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+                  {{lehrerItemErw[2]}}
+                </div>
+              </ng-container>
+            </div>
           </div>
-          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-
-            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
-          </div>
-          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
-            {{lehrerItemErw[2]}}
-          </div>
-        </div>
+        </ng-container>
       </div>
     </div>
-    <div>Ferien</div>
-   <!--</ng-container>-->
-    
+    <div class="block">Ferien</div>
   </div>
 </div>
 
-<h3 class="noprint"> Epochen:</h3>
-<div *ngIf="aktuellerPlan.epochenPlan"   id="epochen" class="noprint">
-  <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="epochenReihe">
-   <!-- <ng-container *ngIf="r==this.vari">-->
-    <div *ngFor="let cell of reihe; index as c" class="cell">
-      <div class="zelle">
-        <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
-        <div *ngFor="let lehrerItemErw of cell" class="container ">
-          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
-            {{lehrerItemErw?lehrerItemErw[1]:""}}
+<h3 > Epochen:</h3>
+<div *ngIf="aktuellerPlan.epochenPlan" id="epochen">
+  <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="zeile">
+    <div class="block">
+      <!--Datum-->
+      <div class="datumZeile">
+        <div *ngFor="let datum of aktuellerPlan.datumString[r]" class="datum cell"> {{datum?datum:""}}</div>
+      </div>
+      <!--lehrerFach-Items-->
+      <div class="contentZeile">
+        <ng-container *ngFor="let cell of reihe; index as c">
+          <div
+            *ngIf="(!planMakerService.lehrer_klasse_duplicatesEpoche[r][c])||(planMakerService.lehrer_klasse_duplicatesEpoche[r][c] && planMakerService.lehrer_klasse_duplicatesEpoche[r][c][0]===c )"
+            class=" {{planMakerService.lehrer_klasse_duplicatesEpoche[r][c]? 'size-'+planMakerService.lehrer_klasse_duplicatesEpoche[r][c].length:'normalsize'}}">
+            <div class="zelle">
+              <div *ngFor="let lehrerItemErw of cell" class="container ">
+                <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+                  {{lehrerItemErw?lehrerItemErw[1]:""}}
+                </div>
+                <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
+                  {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+                </div>
+                <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+                  {{lehrerItemErw[2]}}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
-          </div>
-          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
-            {{lehrerItemErw[2]}}
-          </div>
-        </div>
+        </ng-container>
       </div>
     </div>
-    <div>Ferien</div>
-     <!--</ng-container>-->
+    <div class="block">Ferien</div>
   </div>
 </div>
 
 
+<h3 > Schiene:</h3>
+<div *ngIf="aktuellerPlan.schienenPlan" id="schiene" >
+  <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="zeile">
+    <div class="block">
+      <!--Datum-->
+      <div class="datumZeile">
+        <div *ngFor="let datum of aktuellerPlan.datumString[r]" class="datum cell"> {{datum?datum:""}}</div>
+      </div>
+      <!--lehrerFach-Items-->
+      <div class="contentZeile">
+        <ng-container *ngFor="let cell of reihe; index as c">
+          <div
+            *ngIf="(!planMakerService.lehrer_klasse_duplicatesSchiene[r][c])||(planMakerService.lehrer_klasse_duplicatesSchiene[r][c] && planMakerService.lehrer_klasse_duplicatesSchiene[r][c][0]===c )"
+            class="{{planMakerService.lehrer_klasse_duplicatesSchiene[r][c]? 'size-'+planMakerService.lehrer_klasse_duplicatesSchiene[r][c].length:'normalsize'}}">
+            <div class="zelle">
+              <div *ngFor="let lehrerItemErw of cell" class="container ">
+                <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
+                  {{lehrerItemErw?lehrerItemErw[1]:""}}
+                </div>
+                <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
 
-
-<h3 class="noprint"> Schiene:</h3>
-
-<div *ngIf="aktuellerPlan.schienenPlan"  id="schiene" class="noprint">
-
-  <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="epochenReihe">
-    <!-- <ng-container *ngIf="r==this.vari">-->
-    <div *ngFor="let cell of reihe; index as c" class="cell">
-      <div class="zelle">
-        <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
-        <div *ngFor="let lehrerItemErw of cell" class="container ">
-          <div class="unterrichtsFeld {{fachcolor(lehrerItemErw[1])}}">
-            {{lehrerItemErw?lehrerItemErw[1]:""}}
+                  {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
+                </div>
+                <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
+                  {{lehrerItemErw[2]}}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="lehrerKuerzel" *ngIf="aktuellerPlan.lehrer===undefined">
-
-            {{lehrerItemErw[0]?lehrerItemErw[0].kuerzel:""}}
-          </div>
-          <div class="Klasse" *ngIf="aktuellerPlan.klasse===undefined">
-            {{lehrerItemErw[2]}}
-          </div>
-        </div>
+        </ng-container>
       </div>
     </div>
-    <div>Ferien</div>
-      <!--</ng-container>-->
+    <div class="block">Ferien</div>
   </div>
 </div>
 

@@ -18,8 +18,8 @@
 
 <h1>Gesamtplan</h1>
 <h2>{{ueberschrift()}}</h2>
-<table #tabelle id="table" *ngIf="stundenRaster&& planmaker.duplicates" class="gesamtStundenplan-Table" >
-  <tbody>
+<table #tabelle id="table"  class="gesamtStundenplan-Table" >
+  <tbody *ngIf="stundenRaster&& planmaker.duplicates">
     <tr>
       <td></td>
       <td class="klassen-titel" *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}. Klasse</td>

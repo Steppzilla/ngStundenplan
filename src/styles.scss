@@ -122,13 +122,8 @@ h2 {
 
   //-----------------------------------------------------------------------------------
   //Stundenplan alles ausblenden bis auf printcontainer2: 
-  body app-root app-wochenplan > .noprint {
-    display: none;
-  }
+ 
 
-  body app-root app-wochenplan >#stundenPlan {
-    display: none;
-  }
   body app-root app-start .noprint{
     display: none;
   }

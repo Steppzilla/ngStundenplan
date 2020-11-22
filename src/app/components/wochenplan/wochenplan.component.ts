@@ -39,6 +39,7 @@ fachcolor(fach:Fach){
 
   planLehrer(lehrer) {
     this.planMakerService.planLehrer(lehrer);
+    console.log(this.planMakerService.lehrer_klasse_duplicatesVert);
   }
   planKlasse(klasse) {
     this.planMakerService.planKlasse(klasse);
@@ -64,7 +65,7 @@ fachcolor(fach:Fach){
     $('#printcontainer2').empty();
   }
 
-  constructor(private lehrerService: LehrerService, private planMakerService: PlanmakerService,private login:LoginService ) {
+  constructor(private lehrerService: LehrerService, public planMakerService: PlanmakerService,private login:LoginService ) {
     let tag="donnerstag";
     let xu=this.planMakerService.datum.getDay();
     switch(xu){
