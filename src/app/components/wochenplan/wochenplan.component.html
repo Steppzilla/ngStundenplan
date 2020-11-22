@@ -52,7 +52,7 @@
 <div *ngIf="aktuellerPlan.rhythmusPlan!null"    id="rhythmus" class="noprint">
 
   <div *ngFor="let reihe of aktuellerPlan.rhythmusPlan; index as r" class="epochenReihe">
-    <ng-container *ngIf="this.var==r">
+   <!-- <ng-container *ngIf="r==this.vari">-->
     <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle" *ngIf="aktuellerPlan.rhythmusPlan[r][c]">
         <div class="datum"> {{aktuellerPlan.rhythmusPlan[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
@@ -71,7 +71,7 @@
       </div>
     </div>
     <div>Ferien</div>
-  </ng-container>
+   <!--</ng-container>-->
     
   </div>
 </div>
@@ -79,7 +79,7 @@
 <h3 class="noprint"> Epochen:</h3>
 <div *ngIf="aktuellerPlan.epochenPlan"   id="epochen" class="noprint">
   <div *ngFor="let reihe of aktuellerPlan.epochenPlan; index as r" class="epochenReihe">
-    <ng-container *ngIf="r==this.var">
+   <!-- <ng-container *ngIf="r==this.vari">-->
     <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle">
         <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
@@ -97,7 +97,7 @@
       </div>
     </div>
     <div>Ferien</div>
-    </ng-container>
+     <!--</ng-container>-->
   </div>
 </div>
 
@@ -109,7 +109,7 @@
 <div *ngIf="aktuellerPlan.schienenPlan"  id="schiene" class="noprint">
 
   <div *ngFor="let reihe of aktuellerPlan.schienenPlan; index as r" class="epochenReihe">
-    <ng-container *ngIf="r==this.var">
+    <!-- <ng-container *ngIf="r==this.vari">-->
     <div *ngFor="let cell of reihe; index as c" class="cell">
       <div class="zelle">
         <div class="datum"> {{aktuellerPlan.datumString[r][c]?aktuellerPlan.datumString[r][c]:""}}</div>
@@ -128,7 +128,7 @@
       </div>
     </div>
     <div>Ferien</div>
-    </ng-container>
+      <!--</ng-container>-->
   </div>
 </div>
 

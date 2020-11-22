@@ -1,4 +1,3 @@
-
 <h1>Epochen-Plan </h1>
 <h2> {{aktuelleKlasse}}. Klasse</h2>
 <div id="buttonmenuEpochenplan">
@@ -8,9 +7,8 @@
 <button (click)="changeClass(12)">Klasse 12</button> 
 </div>
 
-
-<div id="planRhythmus">
-  <div class="zeile" *ngFor="let zeile of rhythmusaktuell; index as z">
+<div id="planRhythmus" *ngIf="planmakerS['rhythmus'+aktuelleKlasse]&&planmakerS.duplicatesRhythmus">
+  <div class="zeile" *ngFor="let zeile of planmakerS['rhythmus'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
@@ -19,8 +17,8 @@
       <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
-          *ngIf="( !duplicatesRhythmus[z][c])      ||      (duplicatesRhythmus[z][c]        &&            duplicatesRhythmus[z][c][0]===c)"
-          ngbDropdown class="{{duplicatesRhythmus[z][c]? 'size-'+duplicatesRhythmus[z][c].length:'normalsize'}}">
+          *ngIf="( !planmakerS.duplicatesRhythmus[z][c])      ||      (planmakerS.duplicatesRhythmus[z][c]        &&            planmakerS.duplicatesRhythmus[z][c][0]===c)"
+          ngbDropdown class="{{planmakerS.duplicatesRhythmus[z][c]? 'size-'+planmakerS.duplicatesRhythmus[z][c].length:'normalsize'}}">
           <div class="btn btn-outline-primary buttonDrop rhythmus"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
@@ -50,8 +48,8 @@
 
 
 
-<div id="plan">
-  <div class="zeile" *ngFor="let zeile of epochenPlanAktuell; index as z">
+<div id="plan" *ngIf="planmakerS['epochenplan'+aktuelleKlasse]&&planmakerS.duplicatesEpoche">
+  <div class="zeile" *ngFor="let zeile of planmakerS['epochenplan'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
@@ -60,8 +58,8 @@
       <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
-          *ngIf="( !duplicates[z][c])      ||      (duplicates[z][c]        &&            duplicates[z][c][0]===c)"
-          ngbDropdown class="{{duplicates[z][c]? 'size-'+duplicates[z][c].length:'normalsize'}}">
+          *ngIf="( !planmakerS.duplicatesEpoche[z][c])      ||      (planmakerS.duplicatesEpoche[z][c]        &&            planmakerS.duplicatesEpoche[z][c][0]===c)"
+          ngbDropdown class="{{planmakerS.duplicatesEpoche[z][c]? 'size-'+planmakerS.duplicatesEpoche[z][c].length:'normalsize'}}">
           <div class="btn btn-outline-primary buttonDrop epoche"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
@@ -88,8 +86,8 @@
 </div>
 
 
-<div id="planSchiene">
-  <div class="zeile" *ngFor="let zeile of schiene; index as z">
+<div id="planSchiene" *ngIf="planmakerS['schiene'+aktuelleKlasse]&&planmakerS.duplicatesSchiene">
+  <div class="zeile" *ngFor="let zeile of planmakerS['schiene'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
@@ -98,8 +96,8 @@
       <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
-          *ngIf="( !duplicatesSchiene[z][c])      ||      (duplicatesSchiene[z][c]        &&            duplicatesSchiene[z][c][0]===c)"
-          ngbDropdown class="{{duplicatesSchiene[z][c]? 'size-'+duplicatesSchiene[z][c].length:'normalsize'}}">
+          *ngIf="( !planmakerS.duplicatesSchiene[z][c])      ||      (planmakerS.duplicatesSchiene[z][c]        &&            planmakerS.duplicatesSchiene[z][c][0]===c)"
+          ngbDropdown class="{{planmakerS.duplicatesSchiene[z][c]? 'size-'+planmakerS.duplicatesSchiene[z][c].length:'normalsize'}}">
           <div class="btn btn-outline-primary buttonDrop schiene"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->

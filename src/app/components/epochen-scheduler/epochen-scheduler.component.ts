@@ -17,8 +17,6 @@ import {
   Fach
 } from 'src/app/interfaces/fach.enum';
 import { PlanmakerService } from 'src/app/services/planmaker.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Stundenplan } from 'src/app/interfaces/stundenplan';
 
 
 @Component({
@@ -29,78 +27,25 @@ import { Stundenplan } from 'src/app/interfaces/stundenplan';
 export class EpochenSchedulerComponent {
   items;
   klassenZuordnung; //entspricht der aus dem gesamtplan
-
-  aktuelleKlasse;
-
+  aktuelleKlasse; //zahl zwischen 9-12 (epochenklasse)
   datumstring; // siehe unten für Unterteilung, enthält jeweils Startdatum und ggf End-Wochentag als String der Woche
 
   epochenplanLeer: Array < Array < Array < [Lehrer, Fach] | null >>> ;
-  epochenPlanAktuell: Array < Array < Array < [Lehrer, Fach] | null >>> ;
-  epochenplan9: Array < Array < Array < [Lehrer, Fach] | null >>> ; // in 0 die Wochen bis Herbst, 1 bis Weihnachten, 3 bis oster, 4 bis sommer (lehreritem)
-  epochenplan10: Array < Array < Array < [Lehrer, Fach] | null >>> ;
-  epochenplan11: Array < Array < Array < [Lehrer, Fach] | null >>> ;
-  epochenplan12: Array < Array < Array < [Lehrer, Fach] | null >>> ;
 
-  schienenplan9;
-  schienenplan10;
-  schienenplan11;
-  schienenplan12;
-
-  rhythmisch9;
-  rhythmisch10;
-  rhythmisch11;
-  rhythmisch12;
-
-  rhythmusaktuell;
-  schiene;
-
-  duplicatesSchiene=[{}, {}, {}, {}];
-  duplicatesRhythmus=[{}, {}, {}, {}];
-
-  tag; //montag oder dienstag , Wochentag
+    tag; //montag oder dienstag , Wochentag
 
   aktuelleEpochenIndexe; //zwei zahlen z.b.[i,x] wobei i von 0-4 geht und dann jeweils die startdaten der wochen darunter gespeichert sind (indexe vom datumstring)
 
-
-
   //epochenplan13;
-  ferien = [
-    ['Sommer'],
-    ['Herbst'],
-    ['Winter'],
-    ['Oster'],
-    ['Sommer'],
-    ['ferien']
+  ferien = [    ['Sommer'],    ['Herbst'],    ['Winter'],    ['Oster'],    ['Sommer'],    ['ferien']
   ];
-  changeClass(n:number){ //Buttonklick, andere Klasse aufrufen/laden aus internen Variablen
-
-    if(this.planmakerService["epochenplan"+n]!==undefined){
-      this.epochenPlanAktuell=this.planmakerService["epochenplan"+n];
-    }else{
-      this.epochenPlanAktuell=this.datumstring.map(zeile => zeile.map(cell => []));
-    }
-
-    if(this.planmakerService["schiene" + n]!==undefined){
-      this.schiene=this.planmakerService["schiene" + n];
-    }else{
-      this.schiene=this.datumstring.map(zeile => zeile.map(cell => []));
-    }
-
-    if(this.planmakerService["rhythmus"+n]!==undefined){
-      this.rhythmusaktuell=this.planmakerService["rhythmus" + n];
-
-    }else{
-      this.rhythmusaktuell=this.datumstring.map(zeile => zeile.map(cell => []));
-    }
-   
-    //neue Überschrift:
+  changeClass(n:number){ //Buttonklick,  Klasse 9-12 wählen
+        //neue Überschrift:
     this.aktuelleKlasse= n;
     //duplicates bestimmen:
-    this.generateDuplicates("Epoche",this.epochenPlanAktuell);
-    this.generateDuplicates("Schiene", this.schiene);
-    this.generateDuplicates("Rhythmus", this.rhythmusaktuell);
-   
-   // console.log(this.epochenPlanAktuell);
+    this.planmakerS.generateDuplicatesESR("Rhythmus", this.planmakerS["rhythmus"+this.aktuelleKlasse]);
+    this.planmakerS.generateDuplicatesESR("Epoche",this.planmakerS["epochenplan"+this.aktuelleKlasse]);
+    this.planmakerS.generateDuplicatesESR("Schiene", this.planmakerS["schiene"+this.aktuelleKlasse]);
   }
 
   lehrerErmitteln() {
@@ -136,86 +81,38 @@ export class EpochenSchedulerComponent {
         return this.klassenZuordnung[Lehrjahr.dreizehn];
     }
   }
-
+  //this.planmakerS["epochenplan"+n]);
+ // this.planmakerS["schiene"+n]);
+  // this.planmakerS["rhythmus"+n]);
   //row: Wenn gleiches angewählt wird wie in der zeilte davor, dann solln die gemerged werden....
   lehrerWahl(art: string, z: number, c: number, lehrerFach: [Lehrer, Fach], event, row) { //angeklicktes Fach wird reingeschrieben
-
      if ((event.shiftKey)&&(art==="Epoche") ){ //mit Shift: Hinzufügen 
-      this.epochenPlanAktuell[z][c].push(lehrerFach);
+      this.planmakerS["epochenplan"+this.aktuelleKlasse][z][c].push(lehrerFach);
     } else if(art==="Epoche"){
-      this.epochenPlanAktuell[z][c] = [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
+      this.planmakerS["epochenplan"+this.aktuelleKlasse][z][c]= [lehrerFach]; // standard: Ersetzen des Lehrers durch neuen Lehrer.
     }
     else if((art==="Schiene")&&(event.shiftKey)){
-      this.schiene[z][c].push(lehrerFach);
+      this.planmakerS["schiene"+this.aktuelleKlasse][z][c].push(lehrerFach);
     }else if(art==="Schiene"){
-      this.schiene[z][c] = [lehrerFach];
+      this.planmakerS["schiene"+this.aktuelleKlasse][z][c] = [lehrerFach];
     }
     else if((art==="Rhythmus")&&(event.shiftKey)){
-      this.rhythmusaktuell[z][c].push(lehrerFach);
+      this.planmakerS["rhythmus"+this.aktuelleKlasse][z][c].push(lehrerFach);
     }else if(art==="Rhythmus"){
-      this.rhythmusaktuell[z][c] = [lehrerFach];
+      this.planmakerS["rhythmus"+this.aktuelleKlasse][z][c] = [lehrerFach];
     }
-    this.generateDuplicates("Epoche", this.epochenPlanAktuell);
-    this.generateDuplicates("Schiene", this.schiene);
-    this.generateDuplicates("Rhythmus", this.rhythmusaktuell);
-    console.log(this.duplicates);
+    this.planmakerS.generateDuplicatesESR("Epoche", this.planmakerS["epochenplan"+this.aktuelleKlasse]);
+    this.planmakerS.generateDuplicatesESR("Schiene", this.planmakerS["schiene"+this.aktuelleKlasse]);
+    this.planmakerS.generateDuplicatesESR("Rhythmus", this.planmakerS["rhythmus"+this.aktuelleKlasse]);
     //hier im lehrerservice oder planmaker die neuen pläne speichern? übergeben?
-    //
-    this.planmakerService["epochenplan" + this.aktuelleKlasse]=this.epochenPlanAktuell;//aktuelles im Service zwischenspeichern
-    this.planmakerService["schiene" + this.aktuelleKlasse]=this.schiene;
-    this.planmakerService["rhythmus" + this.aktuelleKlasse]=this.rhythmusaktuell;
-
-
-
+    this.planmakerS["epochenplan" + this.aktuelleKlasse]=this.planmakerS["epochenplan"+this.aktuelleKlasse];//aktuelles im Service zwischenspeichern
+    this.planmakerS["schiene" + this.aktuelleKlasse]=this.planmakerS["schiene"+this.aktuelleKlasse];
+    this.planmakerS["rhythmus" + this.aktuelleKlasse]= this.planmakerS["rhythmus"+this.aktuelleKlasse];
   }
 
-  duplicates = [{}, {}, {}, {}];
+ 
 
-  generateDuplicates(art:string , plan:Array<Array<Array<[Lehrer,Fach]>>>) {
-    plan.forEach((row, r) => {
-
-      let duplicate = {};
-      row.forEach((cell, c) => {
-        let prevIndex = c - 1;
-        if (this.equal(cell, row[prevIndex])) {
-          if (duplicate[prevIndex] === undefined) {
-            duplicate[prevIndex] = [prevIndex];
-          }
-          duplicate[prevIndex].push(c);
-          duplicate[c] = duplicate[prevIndex];
-        }
-      });
-      //Fallunterscheidung anders Speichern bei Epoche oder schiene
-      if(art==="Epoche"){
-      this.duplicates[r] = duplicate;
-      }else if(art==="Schiene"){
-        this.duplicatesSchiene[r]=duplicate;
-      }
-      else if(art==="Rhythmus"){
-        this.duplicatesRhythmus[r]=duplicate;
-      }
-      else{
-        console.log("Error. Es werden unkategorisierte Duplicates gesucht");
-      }
-    });
-  }
-
-
-  equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
-    let returnvalue = true;
-    if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
-      returnvalue = false;
-    } else {
-      fl1.forEach(([lehrer, fach], lf) => {
-        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
-          returnvalue = false;
-        }
-      });
-    }
-    return returnvalue;
-  }
-
-  constructor(private planmakerService: PlanmakerService, private loginService: LoginService, lehrerservice: LehrerService) {
+  constructor(public planmakerS: PlanmakerService, private loginService: LoginService, lehrerservice: LehrerService) {
     this.items = loginService.items;
     let klassenZuordnung = {};
     lehrerservice.lehrer.forEach((r) => {
@@ -227,38 +124,17 @@ export class EpochenSchedulerComponent {
       });
     });
     this.klassenZuordnung = klassenZuordnung;
-    this.datumstring =this.planmakerService.datumstring;
+    this.datumstring =this.planmakerS.datumstring;
     this.aktuelleKlasse=9;
 
     this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
 
-    this.epochenplan9 = this.planmakerService.epochenplan9;
-    this.epochenplan10 = this.planmakerService.epochenplan10;
-    this.epochenplan11 = this.planmakerService.epochenplan11;
-    this.epochenplan12 = this.planmakerService.epochenplan12;
-   
-
-  
-    this.schienenplan9 = this.planmakerService.schiene9;
-    this.schienenplan10 = this.planmakerService.schiene10;
-    this.schienenplan11 = this.planmakerService.schiene11;
-    this.schienenplan12 = this.planmakerService.schiene12;
-
-
-    this.rhythmisch9=this.planmakerService.rhythmus9;
-    this.rhythmisch10=this.planmakerService.rhythmus10;
-    this.rhythmisch11=this.planmakerService.rhythmus11;
-    this.rhythmisch12=this.planmakerService.rhythmus12;
-
-
     this.tag=loginService.tagAlsString;
 
-    //nicht verwendet, erstladung:
-    this.epochenPlanAktuell =this.planmakerService.epochenplan9;
-    this.schiene=this.planmakerService.schiene9;
-    this.rhythmusaktuell=this.planmakerService.rhythmus9;
 
-    this.aktuelleEpochenIndexe=this.planmakerService.epochenAktuell();
+
+    this.aktuelleEpochenIndexe=this.planmakerS.epochenAktuell();
+
   }
 
   

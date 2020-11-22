@@ -18,7 +18,7 @@
 
 <h1>Gesamtplan</h1>
 <h2>{{ueberschrift()}}</h2>
-<table #tabelle id="table" *ngIf="stundenRaster" class="gesamtStundenplan-Table">
+<table #tabelle id="table" *ngIf="stundenRaster&& planmaker.duplicates" class="gesamtStundenplan-Table" >
   <tbody>
     <tr>
       <td></td>
@@ -27,23 +27,23 @@
     <tr *ngFor="let row of stundenRaster;index as r">
       <td class="first">{{r+1}}</td>
       <ng-container  *ngFor="let cell of row; index as c">
-      <!-- Td-Box soll nur gezeigt werden, wenn sie leer ist/ falls duplicates existieren: wenn dort der erste Eintrag mit dem Zellenindex übereinstimmt.-->
+      <!-- Td-Box soll nur gezeigt werden, wenn sie leer ist/ falls planmaker.duplicates existieren: wenn dort der erste Eintrag mit dem Zellenindex übereinstimmt.-->
       <!-- Vertikal: Wenn vertical-dupli existieren, nur zeigen, wenn -->
       <!-- nu zeigen wenn  weder vertical nohc dupli eintrag ODER  (vertical ODER horizontal gleiches feld wie eintrag)-->
-      <td class="box  {{duplicates[r][c]? 'size-'+duplicates[r][c].length:'normalsize'}}"   *ngIf="
-      (( !duplicates[r][c])    && (!duplicateVert[r][c] ))
-         ||(duplicates[r][c]  && !duplicateVert[r][c]        &&            duplicates[r][c][0]===c)  
-         ||(duplicateVert[r][c]        &&  !duplicates[r][c] &&          duplicateVert[r][c][0]===r)
-         ||(duplicates[r][c]     &&duplicateVert[r][c] &&duplicateVert[r][c][0]===r&& duplicates[r][c][0]===c)"
-      [attr.colspan]=" duplicates[r][c]      &&duplicates[r][c]!==undefined    ?duplicates[r][c].length:1"
-      [attr.rowspan]=" duplicateVert[r][c]   &&duplicateVert[r][c]!==undefined    ?duplicateVert[r][c].length:1"
+      <td class="box  {{planmaker.duplicates[r][c]? 'size-'+planmaker.duplicates[r][c].length:'normalsize'}}"   *ngIf="
+      (( !planmaker.duplicates[r][c])    && (!planmaker.duplicateVert[r][c] ))
+         ||(planmaker.duplicates[r][c]  && !planmaker.duplicateVert[r][c]        &&            planmaker.duplicates[r][c][0]===c)  
+         ||(planmaker.duplicateVert[r][c]        &&  !planmaker.duplicates[r][c] &&          planmaker.duplicateVert[r][c][0]===r)
+         ||(planmaker.duplicates[r][c]     &&planmaker.duplicateVert[r][c] &&planmaker.duplicateVert[r][c][0]===r&& planmaker.duplicates[r][c][0]===c)"
+      [attr.colspan]=" planmaker.duplicates[r][c]      &&planmaker.duplicates[r][c]!==undefined    ?planmaker.duplicates[r][c].length:1"
+      [attr.rowspan]=" planmaker.duplicateVert[r][c]   &&planmaker.duplicateVert[r][c]!==undefined    ?planmaker.duplicateVert[r][c].length:1"
       >
         
 
   
         <div triggers="click" [autoClose]="true" class="dropButton" [ngbTooltip]="Lehrer" placement="bottom">
           <!-- Höhe muss im folgenden angepasst werden, wenn es über mehrere zeilen geht. Doppelte sind farbig-->
-          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c,0)}}  {{ duplicateVert[r][c]&&duplicateVert[r][c][0]==r? 'hoehe'+ duplicateVert[r][c].length:'hoehe'+ 1}} lehrerFachBehaelter">
+          <div *ngFor="let lehrerFach of cell" class="{{doppelt(row,lehrerFach[0],r,c,0)}}  {{ planmaker.duplicateVert[r][c]&&planmaker.duplicateVert[r][c][0]==r? 'hoehe'+ planmaker.duplicateVert[r][c].length:'hoehe'+ 1}} lehrerFachBehaelter">
 
             <p>{{lehrerFach?lehrerFach[1]:""}}</p>
             <p>{{lehrerFach?lehrerFach[0].kuerzel:""}}</p>

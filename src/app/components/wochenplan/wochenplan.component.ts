@@ -25,7 +25,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class WochenplanComponent implements OnInit {
 
-  var=1; //1-4 Abschnitte zwiscihen den Ferien
+  vari=1; //1-4 Abschnitte zwiscihen den Ferien
   lehrer: Array < Lehrer > ;
   klassen: Array < number > ;
   aktuellerPlan: Stundenplan;  //stundenPlan:Array<Array<Array<[Lehrer,Fach,String]>>>;.lehrer und .klasse gibts noch

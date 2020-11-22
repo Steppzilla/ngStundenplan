@@ -75,7 +75,99 @@ export class PlanmakerService {
   schiene12;
 
 
+  duplicates;
+  duplicateVert;
 
+ 
+  duplicatesRhythmus=[[], [], [], []];
+  duplicatesEpoche=[[], [], [], []];
+  duplicatesSchiene=[[], [], [], []];
+
+  generateDuplicatesESR(art:string , plan:Array<Array<Array<[Lehrer,Fach]>>>) {
+
+    plan.forEach((row, r) => {
+      let duplicate = [];
+      row.forEach((cell, c) => {
+        let prevIndex = c - 1;
+        if (this.equal(cell, row[prevIndex])) {
+          if (duplicate[prevIndex] === undefined) {
+            duplicate[prevIndex] = [prevIndex];
+          }
+          duplicate[prevIndex].push(c);
+          duplicate[c] = duplicate[prevIndex];
+        }
+      });
+      //Fallunterscheidung anders Speichern bei Epoche oder schiene
+      if(art==="Epoche"){
+      this.duplicatesEpoche[r] = duplicate;
+      }else if(art==="Schiene"){
+        this.duplicatesSchiene[r]=duplicate;
+      }
+      else if(art==="Rhythmus"){
+        this.duplicatesRhythmus[r]=duplicate;
+      }
+      else{
+        console.log("Error. Es werden unkategorisierte Duplicates gesucht");
+      }
+     
+    });
+    console.log("Rhythmus/Epoche/Schiene")
+    console.log(this.duplicatesRhythmus);
+    console.log(this.duplicatesEpoche);
+    console.log(this.duplicatesSchiene);
+  }
+
+  generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
+    let vertical = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    this.duplicates= [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    this.duplicateVert=[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    plan.forEach((row, r) => {
+      let duplicate = {};
+      row.forEach((cell, c) => {
+        //Horizontale duplicates:
+        let prevIndex = c - 1;
+        if (this.equal(cell, row[prevIndex])) {
+          if (duplicate[prevIndex] === undefined) {
+            duplicate[prevIndex] = [prevIndex]; //Info einer einzelne reihe in duplicate
+          }
+          duplicate[prevIndex].push(c); //
+          duplicate[c] = duplicate[prevIndex];
+        }
+
+        // verticale duplicates:
+        let prevRow = r - 1;
+        if (r === 0) {} else if (this.equal(cell, plan[prevRow][c])) { //wenn zelle darüber gleich ist.
+          console.log("gleiche gefunden");
+
+          if (vertical[prevRow][c] === undefined) {
+            vertical[prevRow][c] = [prevRow]; //vorige reihe/zelle steht entsprechende reihe + celle
+          }
+          vertical[prevRow][c].push(r); //
+          vertical[r][c] = vertical[prevRow][c];
+        }
+      });
+      this.duplicates[r] = duplicate; //pro row macht er das Waagerecht
+    });
+    this.duplicateVert = vertical;
+    console.log(this.duplicateVert);
+  }
+
+  
+  equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
+    let returnvalue = true;
+    if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
+      returnvalue = false;
+    } else {
+      fl1.forEach(([lehrer, fach], lf) => {
+        if ((lehrer.kuerzel !== fl2[lf][0].kuerzel) || (fach !== fl2[lf][1])) {
+          returnvalue = false;
+        }
+      });
+    }
+    return returnvalue;
+  }
+
+  
 
   //Epochen und Schiene und rhythmischer Teil ersetzen aus epochenplänen in die stundenraster
 
@@ -404,6 +496,8 @@ lehrerPlan.datumString=this.datumstring;
     lehrerPlan.lehrer = lehrerService.lehrer[0];
     lehrerPlan.datumString=this.datumstring;
     this.aktuell.next(lehrerPlan);
+
+
 
    // lehrerService.stundenRaster$.subscribe((stundenRaster) => this.stundenRaster = stundenRaster);
   }

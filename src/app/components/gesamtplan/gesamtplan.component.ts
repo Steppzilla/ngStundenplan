@@ -51,6 +51,9 @@ export class LehrerlisteComponent implements OnInit {
   tagvorher: string;
 
 
+  //duplicates; //jeweils nur aktueller Wochentag. pro row neues Objekt.
+ // duplicateVert;
+
 
 
   printGesamtplaene() {
@@ -135,44 +138,9 @@ export class LehrerlisteComponent implements OnInit {
   }
 
 
-  duplicates; //jeweils nur aktueller Wochentag. pro row neues Objekt.
-  duplicateVert;
+ 
 
-  generateDuplicates(plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
-    let vertical = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-    plan.forEach((row, r) => {
-
-      let duplicate = {};
-
-      row.forEach((cell, c) => {
-        //Horizontale duplicates:
-        let prevIndex = c - 1;
-        if (this.equal(cell, row[prevIndex])) {
-          if (duplicate[prevIndex] === undefined) {
-            duplicate[prevIndex] = [prevIndex]; //Info einer einzelne reihe in duplicate
-          }
-          duplicate[prevIndex].push(c); //
-          duplicate[c] = duplicate[prevIndex];
-        }
-
-        // verticale duplicates:
-        let prevRow = r - 1;
-        if (r === 0) {} else if (this.equal(cell, plan[prevRow][c])) { //wenn zelle darüber gleich ist.
-          console.log("gleiche gefunden");
-
-          if (vertical[prevRow][c] === undefined) {
-            vertical[prevRow][c] = [prevRow]; //vorige reihe/zelle steht entsprechende reihe + celle
-          }
-          vertical[prevRow][c].push(r); //
-          vertical[r][c] = vertical[prevRow][c];
-        }
-      });
-      this.duplicates[r] = duplicate; //pro row macht er das Waagerecht
-    });
-    this.duplicateVert = vertical;
-    console.log(this.duplicateVert);
-  }
 
   equal(fl1: Array < [Lehrer, Fach] > , fl2: Array < [Lehrer, Fach] > ): boolean {
     let returnvalue = true;
@@ -202,7 +170,7 @@ export class LehrerlisteComponent implements OnInit {
     this.wochentag = tag;
      this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben, pushen macht immer aktuellen tag
     //console.log(this.lehrerservice.stundenRaster.getValue());
-    this.generateDuplicates(this.stundenRaster);
+    this.planmaker.generateDuplicates(this.stundenRaster);
   }
 
   save() {
@@ -280,7 +248,7 @@ export class LehrerlisteComponent implements OnInit {
   doppelt(row, lehrer, z, c, dupli) { //hauptZellen-Methode, daueraktiv, doppelte rot
     var duplicates = dupli;
     row.forEach((cell, c) => {
-      if (this.duplicates[z][c] === undefined) { //nur wenn keine nebeneinander-duplicates existieren
+      if (this.planmaker.duplicates[z][c] === undefined) { //nur wenn keine nebeneinander-duplicates existieren
         cell.forEach(lehrerFach => {
           if ((lehrerFach !== null) && (lehrerFach[0].kuerzel === lehrer.kuerzel)) {
             ++duplicates;
@@ -330,7 +298,7 @@ export class LehrerlisteComponent implements OnInit {
     return "hellblau";
   }
 
-  constructor(private planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService) {
+  constructor(public planmaker: PlanmakerService, private lehrerservice: LehrerService, private loginService: LoginService) {
     //alle pläne werden geladen, montag wird stundenRaster im planmaker:
     //this.loginService.planPushen(this.wochentag); //Montag ist standard. im planmaker wird montag als Stundenraster gesetzt, im lehrerservice das Stundenraster behavioural
     //Stundenraster schreiben.
@@ -340,10 +308,9 @@ export class LehrerlisteComponent implements OnInit {
     this.aktuelleEpochenIndexe = this.planmaker.epochenAktuell();
 
     //duplicates ermitteln:
-    this.duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-    this.duplicateVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
    
-    
+   
+
    
     let xu=this.planmaker.datum.getDay();
     switch(xu){
@@ -370,9 +337,10 @@ export class LehrerlisteComponent implements OnInit {
         break;
     }
     this.tagvorher=this.wochentag; // AM WE ist das Montag, sonst aktueller Tag, siehe xu-Variable
-    loginService.planPushen(this.wochentag); //HIER WIRD TATsächlich was geändert auf aktuellen tag, überschrift stimmt nicht
-       
-    console.log(this.wochentag);
+    loginService.planPushen(this.wochentag); //HIER WIRD  auf aktuellen tag geändert, überschrift nicht?
+
+           
+  
   
     //
     this.lehrerKuerzel = lehrerservice.lehrer.map((r) => r.kuerzel);
@@ -396,8 +364,12 @@ export class LehrerlisteComponent implements OnInit {
     console.log(lehrerservice.lehrer[0]);
     console.log(this.stundenRaster); //ist hier leer
   
-   
+
     //this.generateDuplicates(this.stundenRaster);
+
+
+       
+    console.log(this.wochentag);
    
   }
 
