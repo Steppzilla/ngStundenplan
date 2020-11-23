@@ -3,6 +3,8 @@
     padding:0pt;
  
   }
+
+
 #buttonmenuEpochenplan{
   background-color:    rgb(78, 161, 120);
   margin: 15pt 15pt 15pt 15pt;
@@ -49,12 +51,24 @@ button:hover{
 }
 
 
+
 .zeile{margin-bottom:15pt;
 }
 .row  >div{
     border-bottom:solid 1pt;
 }
 
+.row .first{ //ferien-icon-behälter
+    display:table-cell;
+}
+img{
+  width:100%;
+  height:100%;
+  align-self: center;
+  padding:2pt;
+  margin:0pt;
+  
+}
 #plan, #planSchiene, #planRhythmus{display:flex;
 //flex-wrap: wrap;
 }

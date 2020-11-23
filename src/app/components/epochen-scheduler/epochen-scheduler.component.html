@@ -14,7 +14,12 @@
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
     </div>
     <div class="row">
-      <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <div class="first normalsize">
+        <img *ngIf="z==0" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==1" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==2" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==3" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+      </div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !planmakerS.duplicatesRhythmus[z][c])      ||      (planmakerS.duplicatesRhythmus[z][c]        &&            planmakerS.duplicatesRhythmus[z][c][0]===c)"
@@ -55,7 +60,12 @@
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
     </div>
     <div class="row">
-      <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <div class="first normalsize">
+        <img *ngIf="z==0" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==1" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==2" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==3" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+      </div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !planmakerS.duplicatesEpoche[z][c])      ||      (planmakerS.duplicatesEpoche[z][c]        &&            planmakerS.duplicatesEpoche[z][c][0]===c)"
@@ -93,7 +103,12 @@
       <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
     </div>
     <div class="row">
-      <div class="first normalsize">{{ferien[z]}} - <br> {{ferien[5]}}</div>
+      <div class="first normalsize"> 
+        <img *ngIf="z==0" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==1" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==2" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+        <img *ngIf="z==3" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
+      </div>
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !planmakerS.duplicatesSchiene[z][c])      ||      (planmakerS.duplicatesSchiene[z][c]        &&            planmakerS.duplicatesSchiene[z][c][0]===c)"

@@ -56,7 +56,7 @@
           <button class="btn" ngbDropdownToggle>
             <div class="noOverflow">
             <ng-container *ngIf="cell[0]">
-              <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
+              <p>{{cell[0]?cell[0][0].kuerzel:""}}{{cell[1]? cell[1] :""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p>
               </ng-container >
             </div>
           </button>
@@ -88,7 +88,7 @@
           <button class="btn" ngbDropdownToggle>
             <div class="noOverflow">
             <ng-container *ngIf="cell[0]">
-              <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
+              <p>{{cell[0]?cell[0][0].kuerzel:""}}{{cell[1]? cell[1] :""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p>
               </ng-container >
             </div>
           </button>
@@ -121,8 +121,8 @@
             <button class="btn" ngbDropdownToggle>
               <div class="noOverflow">
               <ng-container *ngIf="cell[0]">
-                <p>{{cell[0]?cell[0][0].kuerzel:""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p><p>{{cell[1]? cell[1] :""}}</p>
-                </ng-container >
+                <p>{{cell[0]?cell[0][0].kuerzel:""}}{{cell[1]? cell[1] :""}}</p> <p>{{cell[0]?cell[0][1]:""}}</p>
+                </ng-container>
               </div>
             </button>
             <div ngbDropdownMenu>
