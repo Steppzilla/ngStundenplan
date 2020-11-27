@@ -37,6 +37,7 @@ import { PlaeneComponent } from './pages/plaene/plaene.component';
 import { RechnerComponent } from './pages/rechner/rechner.component';
 import { NotenrechnerComponent } from './components/notenrechner/notenrechner.component';
 import { HinweiseComponent } from './components/hinweise/hinweise.component';
+import { GesamtplanComponent } from './pages/gesamtplan/gesamtplan.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HinweiseComponent } from './components/hinweise/hinweise.component';
     PlaeneComponent,
     RechnerComponent,
     NotenrechnerComponent,
-    HinweiseComponent
+    HinweiseComponent,
+    GesamtplanComponent
   ],
   imports: [
     BrowserModule,

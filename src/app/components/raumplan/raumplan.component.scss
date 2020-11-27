@@ -1,9 +1,13 @@
 
 *{margin:0pt;
-  padding:0pt;}
+  padding:0pt;
+color:grey;
+background-color:inherit;}
 p{margin:0pt;
 padding:0pt;}
 
+
+.dropp{background-color: pink;}
 #rhythmus, #epochen,#schiene{
     display:flex;
     margin:0pt;
@@ -36,12 +40,10 @@ padding:0pt;}
    // height:40pt;
    
   
+   //Epochenbuttons:
     div>button{ //
       font-size:inherit;
       overflow:hidden;
-     //display:center;
-     //margin:0pt;
-     //padding: 0pt;
     }
   }
    

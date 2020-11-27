@@ -28,9 +28,9 @@
              <p>{{cell[1]? cell[1] + 1:""}}. Kl.</p>
               </ng-container >
           </button>
-          <div ngbDropdownMenu>
+          <div ngbDropdownMenu >
             <div *ngIf="loginservice.zeitgleicheWochen as zeitgleicheWochen">
-              <button *ngFor="let lehrerFach of aktiveParelleleStundenErmitteln(r,c)"
+              <button *ngFor="let lehrerFach of aktiveParelleleStundenErmitteln(r,c)" class="dropp"
                 ngbDropdownItem (click)="lehrerWahl('Stundenplan', r,c, lehrerFach,$event, c)">
                 {{lehrerFach[0][0][0].kuerzel }}-{{lehrerFach[0][0][1] }}- Kl.{{lehrerFach[1]+1}}
               </button>

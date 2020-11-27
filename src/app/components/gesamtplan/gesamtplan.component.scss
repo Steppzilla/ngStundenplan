@@ -6,7 +6,9 @@ body{
 #buttonmenu{
   display: grid;
   grid-template-columns: 50% 50%;
-  background-color:    rgb(78, 161, 120);
+ // background-color:    rgb(38, 78, 58);
+  color: lightgrey;
+  border-bottom:1pt solid;
 }
 .center{
   text-align: center;
@@ -68,19 +70,21 @@ body{
       margin:2pt; 
       background-color:inherit;
       border-radius:5pt;    
+      color: inherit;
 }
 .buttonreihe div button:hover{
   background-color:indianred;
 }
+.rhythmus{background-color:  rgb(77, 38, 68);}
+.epoche{background-color: rgb(116, 57, 134);}
+.schiene{    background-color: rgb(100, 45, 68);}  
 
-.rot{background-color:red;} //doppelte/falsche lehrer ;P
-.violet{background-color: rgb(229, 236, 132)} //Schiene// rgb(125, 224, 175)
-.gruen{background-color: rgb(78, 161, 120)} //epoche
-.gold{background-color:  rgb(189, 212, 147);} //rhythmischer teil
-.hellblau{background-color:rgb(104, 172, 212)} //standard hintergrund-farbe
+.rot{background-color:rgb(87, 36, 36);
+color:black;
+font-size:7pt;} //doppelte/falsche lehrer ;P
+.hellblau{background-color:rgb(35, 81, 107)} //standard hintergrund-farbe
 #mittag{background-color:blue;
-border-radius:5pt;
-color:lightgrey;}
+border-radius:5pt;}
 
 tr td:first{width:10pt;}
 
@@ -91,6 +95,8 @@ tr td:first{width:10pt;}
    row-gap:0pt;
    border-spacing:0pt;
    border-collapse:collapse; 
+   margin-left: auto;
+   margin-right: auto;
 
   tr{
     min-height:40pt;
@@ -147,14 +153,15 @@ tr td:first{width:10pt;}
 .fachklein{font-size:10pt;}
 
 .buttonContainer{  /* der Aufpopp-Rahmen*/
- 
 border:none;
 margin:0pt;
 padding:0pt;
+color:inherit;
 
   .dropCell{           /* das ist der button im Aufplopp-Rahmen*/
     text-align:left;
     display:flex;
+    color:inherit;
     .dropSpan1{
    //   background-color:green;
       width:80pt;
@@ -179,7 +186,8 @@ padding:0pt;
 
 #epochenplan{
   margin-top:15pt;
-  margin-left:15pt;
+  margin-left: auto;
+  margin-right: auto;
  // background-color: lightgoldenrodyellow;
 }
 

@@ -16,7 +16,7 @@ export class StartComponent implements OnInit {
 
   redirect(zahl){
     if(zahl==1){
-      this.router.navigate(['lehrer']); //gesamtplan, planer
+      this.router.navigate(['gesamtplan']); //gesamtplan, planer
 
     }
     else if(zahl==2){

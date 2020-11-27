@@ -1,14 +1,15 @@
 //achtung, css aus gesamtplan kopiert, kann vieles nutzlos sein...
 *{margin:0pt;
     padding:0pt;
- 
+ color:lightgrey;
   }
 
 
 #buttonmenuEpochenplan{
-  background-color:    rgb(78, 161, 120);
-  margin: 15pt 15pt 15pt 15pt;
+ // background-color:    rgb(38, 78, 58);
+  margin: 15pt 0pt 15pt 0pt;
   text-align: center;
+  border-bottom:1pt solid;
 }
   button{
     width: 70pt;
@@ -22,6 +23,11 @@
 button:hover{
   background-color:indianred;
 }
+.rhythmus{background-color:  rgb(77, 38, 68);}
+.epoche{background-color: rgb(116, 57, 134);}
+.schiene{    background-color: rgb(100, 45, 68);  }
+.buttonDrop:hover{background-color:indianred;}
+
   
   div{  font-size:8pt; }
     .btn-outline-primary{
@@ -69,7 +75,9 @@ img{
   margin:0pt;
   
 }
-#plan, #planSchiene, #planRhythmus{display:flex;
+#plan, #planSchiene, #planRhythmus{
+  display:flex;
+justify-content: center;
 //flex-wrap: wrap;
 }
 //#plan .zeile{width:auto;}
@@ -110,11 +118,6 @@ img{
   width:160pt;
  //width:64%;
 }
-
-
-  .schiene{    background-color: rgb(229, 236, 132);  }
-  .epoche{background-color: rgb(78, 161, 120);}
-  .rhythmus{background-color:  rgb(189, 212, 147);}
 
 
 .buttonContainer{  /* der Aufpopp-Rahmen*/
@@ -165,4 +168,4 @@ img{
       }
       }
 
-      .buttonDrop:hover{background-color:indianred;}
+      

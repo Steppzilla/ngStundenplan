@@ -240,7 +240,7 @@ export class LehrerlisteComponent implements OnInit {
       }
     });
     if (previousHit === true) {
-      return "gruen";
+      return "epoche";
     }
     return this.doppelt(row, lehrer, r, c, 1);
   }
@@ -261,13 +261,13 @@ export class LehrerlisteComponent implements OnInit {
       return "rot";
     }
     if (((z === 1) || (z == 2)) && (c > 7) && (c < 12)) {
-      return "gruen";
+      return "epoche";
     }
     if ((z === 0) && (c > 7) && (c < 12)) {
-      return "gold";
+      return "rhythmus";
     }
     if ((z === 0) && (c > 7) && (c < 12)) {
-      return "gold";
+      return "rhythmus";
     }
 
     //Bei schiene muss mo/di/mi/do/fr unterschieden werden:
@@ -275,23 +275,23 @@ export class LehrerlisteComponent implements OnInit {
       case "montag":
 
         if (((z === this.schieneLage.zeilenStarts[0]) || (z === this.schieneLage.zeilenStarts[0] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
-          return "violet";
+          return "schiene";
         }
         break;
 
       case "dienstag":
         if (((z === this.schieneLage.zeilenStarts[1]) || (z === this.schieneLage.zeilenStarts[1] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
-          return "violet";
+          return "schiene";
         }
         break;
       case "mittwoch":
         if (((z === this.schieneLage.zeilenStarts[2]) || (z === this.schieneLage.zeilenStarts[2] + 1)) && (c >= this.schieneLage.cellsMoMi[0]) && (c <= this.schieneLage.cellsMoMi[1])) {
-          return "violet";
+          return "schiene";
         }
         break;
       case "donnerstag":
         if (((z === this.schieneLage.zeilenStarts[3]) || (z === this.schieneLage.zeilenStarts[3] + 1)) && (c >= this.schieneLage.cellsDo[0]) && (c <= this.schieneLage.cellsDo[1])) {
-          return "violet";
+          return "schiene";
         }
         break;
     }

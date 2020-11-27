@@ -37,7 +37,7 @@ export class EpochenSchedulerComponent {
   aktuelleEpochenIndexe; //zwei zahlen z.b.[i,x] wobei i von 0-4 geht und dann jeweils die startdaten der wochen darunter gespeichert sind (indexe vom datumstring)
 
   //epochenplan13;
-  ferien = [    ['sun.svg'],    ['leaf.svg'],    ['snowflake.svg'],    ['ostereier.svg'],    ['sun.svg'],    ['ferien']
+  ferien = [    ['sun.svg'],    ['leaf.svg'],    ['snowflake.svg'],    ['spriessen.svg'],    ['sun.svg'],    ['ferien']
   ];
   changeClass(n:number){ //Buttonklick,  Klasse 9-12 wählen
         //neue Überschrift:
