@@ -17,6 +17,7 @@ import {
   Fach
 } from 'src/app/interfaces/fach.enum';
 import { PlanmakerService } from 'src/app/services/planmaker.service';
+import { resolveDefaultAnimationDriver } from '@angular/animation/src/animation_module';
 
 
 @Component({
@@ -39,6 +40,14 @@ export class EpochenSchedulerComponent {
   //epochenplan13;
   ferien = [    ['sun.svg'],    ['leaf.svg'],    ['snowflake.svg'],    ['spriessen.svg'],    ['sun.svg'],    ['ferien']
   ];
+
+  emph(z,c){
+    if((z==this.aktuelleEpochenIndexe[0])&&(c==this.aktuelleEpochenIndexe[1])){
+      return "emph";
+    }
+  }
+
+
   changeClass(n:number){ //Buttonklick,  Klasse 9-12 wählen
         //neue Überschrift:
     this.aktuelleKlasse= n;
@@ -47,6 +56,8 @@ export class EpochenSchedulerComponent {
     this.planmakerS.generateDuplicatesESR("Epoche",this.planmakerS["epochenplan"+this.aktuelleKlasse]);
     this.planmakerS.generateDuplicatesESR("Schiene", this.planmakerS["schiene"+this.aktuelleKlasse]);
   }
+
+
 
   lehrerErmitteln() {
     let c = this.aktuelleKlasse;

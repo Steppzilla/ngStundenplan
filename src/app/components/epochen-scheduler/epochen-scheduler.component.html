@@ -11,7 +11,7 @@
   <div class="zeile" *ngFor="let zeile of planmakerS['rhythmus'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
-      <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
+      <div *ngFor="let datum of datumstring[z]; index as c" class="normalsize {{emph(z,c)}}">{{datum}}</div>
     </div>
     <div class="row">
       <div class="first normalsize">

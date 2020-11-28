@@ -209,7 +209,7 @@ export class PlanmakerService {
           // if (heute.getTime() - i * tagesEinheit > epochenDatum.getTime()) {
           //}
           //epochendatum ist ein Datum des epochenplans in der foreach schleife
-          if (heute.getTime() - i * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt
+          if (heute.getTime() - (i-2) * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt, nein, 4 tage zurück oder 2 tage davor!
             epochenSpeicherIndex = [b, d];
             console.log(epochenSpeicherIndex);
           } else { //wenn datum "mehr als" zu 6 tage zurück lieg
