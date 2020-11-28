@@ -21,9 +21,9 @@
         <img *ngIf="z==3" src="../../../assets/icons/{{ferien[z]}}" width="20pt"/> 
       </div>
       <ng-container *ngFor="let cell of zeile; index as c">
-        <div
+        <div 
           *ngIf="( !planmakerS.duplicatesRhythmus[z][c])      ||      (planmakerS.duplicatesRhythmus[z][c]        &&            planmakerS.duplicatesRhythmus[z][c][0]===c)"
-          ngbDropdown class="{{planmakerS.duplicatesRhythmus[z][c]? 'size-'+planmakerS.duplicatesRhythmus[z][c].length:'normalsize'}}">
+          ngbDropdown class="{{planmakerS.duplicatesRhythmus[z][c]? 'size-'+planmakerS.duplicatesRhythmus[z][c].length:'size-1'}} ">
           <div class="btn btn-outline-primary buttonDrop rhythmus"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
@@ -57,7 +57,7 @@
   <div class="zeile" *ngFor="let zeile of planmakerS['epochenplan'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
-      <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
+      <div *ngFor="let datum of datumstring[z], index as c" class="normalsize {{emph(z,c)}}">{{datum}}</div>
     </div>
     <div class="row">
       <div class="first normalsize">
@@ -69,7 +69,7 @@
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !planmakerS.duplicatesEpoche[z][c])      ||      (planmakerS.duplicatesEpoche[z][c]        &&            planmakerS.duplicatesEpoche[z][c][0]===c)"
-          ngbDropdown class="{{planmakerS.duplicatesEpoche[z][c]? 'size-'+planmakerS.duplicatesEpoche[z][c].length:'normalsize'}}">
+          ngbDropdown class="{{planmakerS.duplicatesEpoche[z][c]? 'size-'+planmakerS.duplicatesEpoche[z][c].length:'size-1'}}">
           <div class="btn btn-outline-primary buttonDrop epoche"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
@@ -100,7 +100,7 @@
   <div class="zeile" *ngFor="let zeile of planmakerS['schiene'+aktuelleKlasse]; index as z">
     <div class="datumzeile">
       <div class="first normalsize"></div>
-      <div *ngFor="let datum of datumstring[z]" class="normalsize">{{datum}}</div>
+      <div *ngFor="let datum of datumstring[z], index as c" class="normalsize {{emph(z,c)}}">{{datum}}</div>
     </div>
     <div class="row">
       <div class="first normalsize"> 
@@ -112,7 +112,7 @@
       <ng-container *ngFor="let cell of zeile; index as c">
         <div
           *ngIf="( !planmakerS.duplicatesSchiene[z][c])      ||      (planmakerS.duplicatesSchiene[z][c]        &&            planmakerS.duplicatesSchiene[z][c][0]===c)"
-          ngbDropdown class="{{planmakerS.duplicatesSchiene[z][c]? 'size-'+planmakerS.duplicatesSchiene[z][c].length:'normalsize'}}">
+          ngbDropdown class="{{planmakerS.duplicatesSchiene[z][c]? 'size-'+planmakerS.duplicatesSchiene[z][c].length:'size-1'}}">
           <div class="btn btn-outline-primary buttonDrop schiene"
             id="dropdownConfig" ngbDropdownToggle>
             <!--hier click im main-->
