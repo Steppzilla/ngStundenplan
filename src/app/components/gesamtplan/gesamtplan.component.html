@@ -22,7 +22,7 @@
   <tbody *ngIf="stundenRaster&& planmaker.duplicates">
     <tr>
       <td></td>
-      <td class="klassen-titel" *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}. Klasse</td>
+      <td class="klassen-titel" *ngFor="let zelle of stundenRaster[0]; index as f">{{f+1}}. Kl.</td>
     </tr>
     <tr *ngFor="let row of stundenRaster;index as r">
       <td class="first">{{r+1}}</td>
