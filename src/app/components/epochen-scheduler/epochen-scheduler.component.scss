@@ -172,9 +172,7 @@ justify-content: center;
       }
 
       @media (max-width:720px) {
-        *{     }
-
-        #plan, #planSchiene, #planRhythmus{
+          #plan, #planSchiene, #planRhythmus{
           //font-size:20pt;   
           display:flex;
           flex-wrap:wrap;
