@@ -414,3 +414,52 @@ div{
 
 }
 
+
+@media only screen and (max-width:720px) {
+  *{     }
+
+
+  .datumZeile{
+    display:flex;
+    border-bottom: solid 1pt;
+    margin-bottom:0pt;
+    padding-bottom:0pt;
+  }
+
+  .buttonreihe {
+    font-size:24pt;
+    display: flex;
+    flex-wrap:wrap;
+   // background-color: rgb(78, 161, 120);
+   border-bottom:1pt solid;
+  
+  
+    button {
+      //width:100%;
+  
+      margin: 2pt;
+  
+      background-color: inherit;
+      color:lightgrey;
+      // background-color:rgb(132, 158, 147);
+      //  border-radius:5pt;
+    }
+  }
+  
+  
+  
+  //@at-root
+  #rhythmus, #epochen,#schiene{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width:720px) {
+    *{background-color:green;}
+}
+
+@media only screen and (min-width:1220px) {
+  *{background-color:orange;}
+}
