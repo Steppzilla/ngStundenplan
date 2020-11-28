@@ -184,11 +184,19 @@ justify-content: center;
     }
 
       @media only screen and (min-width:720px) {
-          *{background-color:green;}
+        
+        #plan, #planSchiene, #planRhythmus{
+          //font-size:20pt;   
+          display:flex;
+          flex-wrap:wrap;
+        justify-content: center;
+        //flex-wrap: wrap;
+        }
+         // *{background-color:green;}
       }
 
       @media only screen and (min-width:1220px) {
-        *{background-color:orange;}
+        //*{background-color:orange;}
     }
 
       

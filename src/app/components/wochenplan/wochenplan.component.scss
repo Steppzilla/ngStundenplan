@@ -457,9 +457,13 @@ div{
 }
 
 @media only screen and (min-width:720px) {
-    *{background-color:green;}
+  #rhythmus, #epochen,#schiene{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+  }
 }
 
 @media only screen and (min-width:1220px) {
-  *{background-color:orange;}
+  //*{background-color:orange;}
 }
