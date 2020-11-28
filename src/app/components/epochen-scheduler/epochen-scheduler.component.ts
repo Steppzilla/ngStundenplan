@@ -17,7 +17,7 @@ import {
   Fach
 } from 'src/app/interfaces/fach.enum';
 import { PlanmakerService } from 'src/app/services/planmaker.service';
-import { resolveDefaultAnimationDriver } from '@angular/animation/src/animation_module';
+
 
 
 @Component({
