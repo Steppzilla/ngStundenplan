@@ -1,17 +1,19 @@
 //achtung, css aus gesamtplan kopiert, kann vieles nutzlos sein...
 *{margin:0pt;
     padding:0pt;
- color:lightgrey;
+ 
   }
 
 
 #buttonmenuEpochenplan{
+  color:lightgrey;
  // background-color:    rgb(38, 78, 58);
   margin: 15pt 0pt 15pt 0pt;
   text-align: center;
   border-bottom:1pt solid;
 }
   button{
+    color:lightgrey;
     width: 70pt;
     font-size: 12pt;
     border:none;
@@ -23,15 +25,15 @@
 button:hover{
   background-color:indianred;
 }
-.rhythmus{background-color:  rgb(77, 38, 68);}
-.epoche{background-color: rgb(116, 57, 134);}
-.schiene{    background-color: rgb(100, 45, 68);  }
+.rhythmus{color:  rgb(204, 206, 127);}
+.epoche{color: rgb(114, 143, 87);}
+.schiene{ color: rgb(121, 112, 156);}  
 .buttonDrop:hover{background-color:indianred;}
 
   
   div{  font-size:8pt; }
     .btn-outline-primary{
-      color:inherit;
+      //color:inherit;
     }
 
 .row {

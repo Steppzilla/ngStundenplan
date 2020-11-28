@@ -10,9 +10,33 @@ body{
   color: lightgrey;
   border-bottom:0.1px solid;
 }
+
+.buttonreihe div button{
+  border:none;
+      margin:2pt; 
+      background-color:inherit;
+      border-radius:5pt;    
+      color: inherit;
+}
+.buttonreihe div button:hover{
+  background-color:indianred;
+}
+.rhythmus{color:  rgb(204, 206, 127);}
+.epoche{color: rgb(114, 143, 87);}
+.schiene{ color: rgb(121, 112, 156);}  
+
+.rot{background-color:rgb(87, 36, 36);
+color:black;
+font-size:7pt;} //doppelte/falsche lehrer ;P
+.hellblau{color:darkgrey} //standard hintergrund-farbe
+#mittag{background-color:darkgrey;
+border-radius:5pt;}
+
 .center{
   text-align: center;
 }
+
+
 
 .normalsize{
   column-span: 1;
@@ -65,26 +89,7 @@ body{
   height: 75pt;
 }
 
-.buttonreihe div button{
-  border:none;
-      margin:2pt; 
-      background-color:inherit;
-      border-radius:5pt;    
-      color: inherit;
-}
-.buttonreihe div button:hover{
-  background-color:indianred;
-}
-.rhythmus{background-color:  rgb(77, 38, 68);}
-.epoche{background-color: rgb(116, 57, 134);}
-.schiene{    background-color: rgb(100, 45, 68);}  
 
-.rot{background-color:rgb(87, 36, 36);
-color:black;
-font-size:7pt;} //doppelte/falsche lehrer ;P
-.hellblau{background-color:rgb(35, 81, 107)} //standard hintergrund-farbe
-#mittag{background-color:blue;
-border-radius:5pt;}
 
 tr td:first{width:10pt;}
 
