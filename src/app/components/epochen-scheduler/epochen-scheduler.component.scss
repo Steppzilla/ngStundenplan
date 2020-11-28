@@ -171,7 +171,7 @@ justify-content: center;
       }
       }
 
-      @media only screen and (max-width:720px) {
+      @media (max-width:720px) {
         *{     }
 
         #plan, #planSchiene, #planRhythmus{
@@ -183,7 +183,7 @@ justify-content: center;
         }
     }
 
-      @media only screen and (min-width:720px) {
+      @media (min-width:720px) {
         
         #plan, #planSchiene, #planRhythmus{
           //font-size:20pt;   
@@ -195,7 +195,7 @@ justify-content: center;
          // *{background-color:green;}
       }
 
-      @media only screen and (min-width:1220px) {
+      @media (min-width:1220px) {
         //*{background-color:orange;}
     }
 

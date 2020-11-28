@@ -202,3 +202,38 @@ height: 20pt;}
 .klassen-titel{
   font-size:8pt;
 }
+
+
+@media (max-width:720px) {
+  #printGesamtplaene{
+    display:none;
+  }
+  #buttonmenu{
+    display: flex;
+    flex-wrap:wrap;
+   // background-color:    rgb(38, 78, 58);
+   // border-bottom:0.1px solid;
+  }
+  
+  .buttonreihe div button{
+   // border:none;
+    //    margin:2pt; 
+    //    background-color:inherit;
+    //    border-radius:5pt;    
+    //    color: inherit;
+  }
+
+}
+
+@media (min-width:720px) {
+  #printGesamtplaene{
+    display:none;
+  }
+ 
+   // *{background-color:green;}
+}
+
+@media (min-width:1220px) {
+  //*{background-color:orange;}
+}
+

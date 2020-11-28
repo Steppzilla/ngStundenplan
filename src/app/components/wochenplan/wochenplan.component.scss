@@ -415,7 +415,7 @@ div{
 }
 
 
-@media only screen and (max-width:720px) {
+@media (max-width:720px) {
   *{     }
 
 
@@ -456,7 +456,7 @@ div{
   }
 }
 
-@media only screen and (min-width:720px) {
+@media  (min-width:720px) {
   #rhythmus, #epochen,#schiene{
     display:flex;
     flex-wrap:wrap;
@@ -464,6 +464,6 @@ div{
   }
 }
 
-@media only screen and (min-width:1220px) {
+@media  (min-width:1220px) {
   //*{background-color:orange;}
 }
