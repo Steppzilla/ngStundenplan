@@ -11,7 +11,7 @@ import { GesamtplanComponent } from './pages/gesamtplan/gesamtplan.component';
 
 const routes: Routes = [
  // {path: '', redirectTo: 'lehrer', pathMatch:'full'},
- {path: '', component: StartComponent},
+ {path: '', component: GesamtplanComponent},
  {path: "plaene", component: PlaeneComponent },
   {path: 'gesamtplan', component: GesamtplanComponent},
   {path: 'raumplan', component: RaumplanPageComponent},
