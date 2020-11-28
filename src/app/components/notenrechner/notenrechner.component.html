@@ -1,6 +1,8 @@
 
-<input type="gesamtpunkte" required autofocus  (keyup)="onKey($event)"/>
+<div> Maximal erreichbare Punkte in der Klausur: </div> 
+<input type="gesamtpunkte" required autofocus  (keyup)="onKey($event)"/> 
 
+<br>
 <br>
 
 <div>
@@ -13,11 +15,38 @@
 <span>- 1 + </span>
 </p>
 <p>
-<span> [0 - {{0.19*eingabe  | number:'1.1-5'}}]</span>
-<span> ]{{0.19*eingabe  | number:'1.1-5'}} - {{0.26*eingabe | number:'1.1-2'}}]  - {{0.33*eingabe | number:'1.1-2'}}]  - {{0.40*eingabe | number:'1.1-2'}}]</span>
-<span> ]{{0.40*eingabe | number:'1.1-2'}} - {{0.45*eingabe | number:'1.1-2'}}]  - {{0.50*eingabe | number:'1.1-2'}}]  - {{0.55*eingabe | number:'1.1-2'}}]</span>
-<span> ]{{0.55*eingabe | number:'1.1-2'}} - {{0.60*eingabe | number:'1.1-2'}}] - {{0.65*eingabe| number:'1.1-2'}}]  - {{0.70*eingabe| number:'1.1-2'}}]</span>
-<span> ]{{0.70*eingabe| number:'1.1-2'}} - {{0.75*eingabe| number:'1.1-2'}}] - {{0.80*eingabe| number:'1.1-2'}}]  - {{0.85*eingabe| number:'1.1-2'}}]</span>
-<span> ]{{0.85*eingabe| number:'1.1-2'}} - {{0.90*eingabe| number:'1.1-2'}}]  - {{0.95*eingabe| number:'1.1-2'}}] - {{1*eingabe| number:'1.1-2'}}]</span>
+<span> 0 - {{0.19*eingabe  | number:'1.1-5'}}</span>
+<span> {{0.19*eingabe+0.1  | number:'1.1-5'}}  - {{0.40*eingabe | number:'1.1-2'}}</span>
+<span> {{0.40*eingabe+0.1 | number:'1.1-2'}} - {{0.55*eingabe | number:'1.1-2'}}</span>
+<span> {{0.55*eingabe+0.1 | number:'1.1-2'}}  - {{0.70*eingabe| number:'1.1-2'}}</span>
+<span> {{0.70*eingabe+0.1| number:'1.1-2'}} - {{0.85*eingabe| number:'1.1-2'}}</span>
+<span> {{0.85*eingabe+0.1| number:'1.1-2'}} - {{1*eingabe| number:'1.1-2'}}</span>
 </p>
+<p>
+    <span> 0 - {{0.19*eingabe  | number:'1.1-5'}}</span>
+    <span> <span class="zell">{{0.19*eingabe+0.1  | number:'1.1-5'}}-{{0.26*eingabe | number:'1.1-2'}}</span>
+            <span class="zell"> {{0.26*eingabe+0.1 | number:'1.1-2'}}-{{0.33*eingabe | number:'1.1-2'}} </span>
+             <span class="zell">  {{0.33*eingabe+0.1 | number:'1.1-2'}}-{{0.40*eingabe | number:'1.1-2'}} </span>
+    </span>
+    <span> 
+        <span class="zell">{{0.40*eingabe+0.1 | number:'1.1-2'}}-{{0.45*eingabe | number:'1.1-2'}}</span>
+        <span class="zell"> {{0.45*eingabe+0.1 | number:'1.1-2'}}-{{0.50*eingabe | number:'1.1-2'}} </span>
+        <span class="zell">  {{0.50*eingabe+0.1 | number:'1.1-2'}}-{{0.55*eingabe | number:'1.1-2'}} </span>
+    </span>
+    <span> 
+        <span class="zell">{{0.55*eingabe+0.1 | number:'1.1-2'}}-{{0.60*eingabe | number:'1.1-2'}}</span>
+        <span class="zell"> {{0.60*eingabe+0.1 | number:'1.1-2'}}-{{0.65*eingabe| number:'1.1-2'}} </span>
+        <span class="zell">  {{0.65*eingabe+0.1| number:'1.1-2'}}-{{0.70*eingabe| number:'1.1-2'}} </span>
+    </span>
+    <span> 
+        <span class="zell">{{0.70*eingabe+0.1| number:'1.1-2'}}-{{0.75*eingabe| number:'1.1-2'}}</span>
+        <span class="zell"> {{0.75*eingabe+0.1| number:'1.1-2'}}-{{0.80*eingabe| number:'1.1-2'}} </span>
+        <span class="zell">  {{0.80*eingabe+0.1| number:'1.1-2'}} -{{0.85*eingabe| number:'1.1-2'}} </span>
+    </span>
+    <span> 
+        <span class="zell">{{0.85*eingabe+0.1| number:'1.1-2'}}-{{0.90*eingabe| number:'1.1-2'}}</span>
+        <span class="zell"> {{0.90*eingabe+0.1| number:'1.1-2'}}-{{0.95*eingabe| number:'1.1-2'}} </span>
+        <span class="zell">  {{0.95*eingabe+0.1| number:'1.1-2'}}-{{1*eingabe| number:'1.1-2'}} </span>
+    </span>
+    </p>
 </div>

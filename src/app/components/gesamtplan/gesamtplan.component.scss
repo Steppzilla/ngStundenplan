@@ -8,7 +8,7 @@ body{
   grid-template-columns: 50% 50%;
  // background-color:    rgb(38, 78, 58);
   color: lightgrey;
-  border-bottom:1pt solid;
+  border-bottom:0.1px solid;
 }
 .center{
   text-align: center;
@@ -91,7 +91,7 @@ tr td:first{width:10pt;}
 .gesamtStundenplan-Table{
   margin-top:9pt;
   line-height:1em ;
-   border:1pt;
+   border:1px;
    row-gap:0pt;
    border-spacing:0pt;
    border-collapse:collapse; 
@@ -102,10 +102,10 @@ tr td:first{width:10pt;}
     min-height:40pt;
     margin:0pt;
     padding:0pt;
-    border: 1px solid ;
+    border: 0.5px solid ;
 
    td{
-    border: solid 1pt;
+    border: solid 0.5px;
     //min-width:50pt;
      text-align:center;
     // background-color:lightgreen;
@@ -123,7 +123,7 @@ tr td:first{width:10pt;}
         width:100%;
         padding-top: 1pt;
         padding-bottom: 1pt;
-        border-right:1pt solid;  
+        border-right:0.5px solid;  
         display: flex;
         flex-direction: column;
         justify-content: center;

@@ -1,11 +1,27 @@
+*{color:darkgrey}
 div{display:table;
-    line-height: 50pt;
+    //line-height: 30pt;
 }
 p{display:table-row;}
-span{
+p>span{
     display:table-cell;
-    background-color:green;
-    border-radius:15pt;
+    //background-color:green;
+    //border-radius:5pt;
     border: 1pt solid;
     text-align:center;
+}
+
+p>span>span{
+  //  display:block;
+    margin:0pt;
+    padding:0pt;
+    border-right:1px solid;
+    height: inherit;
+
+
+}
+p>span>span:last-child{
+
+    border-right:none;
+
 }
