@@ -36,9 +36,17 @@ fachcolor(fach:Fach){
   return fach;
 }
 
-
+deputat=0;//deputat
+//wochenstunden=0;
+////schienenstunden=0;
+//rhythmusstunden=0;
+//epochenstunden=0;
   planLehrer(lehrer) {
     this.planMakerService.planLehrer(lehrer);
+   // this.wochenstunden=this.planMakerService.deputateArray.Wochenstunden;//deputat
+  //  this.schienenstunden=this.planMakerService.deputateArray.Schienenstunden;//deputat
+  //  this.rhythmusstunden=this.planMakerService.deputateArray.Rhythmusstunden;//deputat
+  //  this.epochenstunden=this.planMakerService.deputateArray.Epochenstunden;//deputat
     console.log(this.planMakerService.lehrer_klasse_duplicatesVert);
   }
   planKlasse(klasse) {
@@ -93,6 +101,7 @@ fachcolor(fach:Fach){
       this.aktuellerPlan = plan;
       //    console.log(plan);
     });
+  
     // this.aktuellerPlan=planMakerService.aktuell$;
     //this.planKlasse(1);
     // this.planLehrer(this.lehrerService.lehrer[13]);
