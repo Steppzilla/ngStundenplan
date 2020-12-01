@@ -227,6 +227,7 @@ export class PlanmakerService {
   //Einzelpläne für Lehrer oder Klassen: (Räume fehlen?)
   //aktuell beschreiben:
   planLehrer(dieserlehrer: Lehrer) {
+    this.deputateArray.Lehrer=dieserlehrer.kuerzel;//deputat
     let lehrerPlan = new Stundenplan();
     lehrerPlan.datumString = this.datumstring;
     lehrerPlan.lehrer = dieserlehrer;
@@ -242,7 +243,7 @@ export class PlanmakerService {
               lehrerPlan.stundenPlan[r][d].push([lehrer, fach, 'Kl.' + c]);
              
             }
-            this.deputateArray.Lehrer=lehrer.kuerzel;//deputat
+            
             this.deputateArray.Wochenstunden=zaehler; //deputat
           });
         });
