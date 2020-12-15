@@ -95,6 +95,8 @@ export class LehrerService {
         [Lehrjahr.zehn, Fach.kunst],
         [Lehrjahr.elf, Fach.kunst],
         [Lehrjahr.zwoelf, Fach.kunst],
+        [Lehrjahr.neun, Fach.kunst],
+        [Lehrjahr.zehn, Fach.kunst],
       ]
     },
     {
@@ -345,6 +347,7 @@ export class LehrerService {
         [Lehrjahr.neun, Fach.musik],
         [Lehrjahr.elf, Fach.musik],
         [Lehrjahr.dreizehn, Fach.musik],
+        [Lehrjahr.zwoelf, Fach.musik],
 
       ]
     },
@@ -445,6 +448,7 @@ export class LehrerService {
         [Lehrjahr.zehn, Fach.projektwoche],
         [Lehrjahr.elf, Fach.projektwoche],
         [Lehrjahr.zwoelf, Fach.projektwoche],
+        [Lehrjahr.elf, Fach.poetik],
       ]
     },
     {
@@ -584,12 +588,14 @@ export class LehrerService {
     },
     {
       id: 36,
-      name: 'Pi',
+      name: 'Piaskowski',
       kuerzel: 'Pi',
       anrede: "Herr",
       faecher: [Fach.sport],
       zuweisung: [
         [Lehrjahr.dreizehn, Fach.sport],
+        [Lehrjahr.neun, Fach.sport],
+        [Lehrjahr.zehn, Fach.sport],
       ]
     },
 

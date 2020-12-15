@@ -7,11 +7,13 @@ import { RaumplanPageComponent } from './pages/raumplan-page/raumplan-page.compo
 import { StartComponent } from './pages/start/start.component';
 import {RechnerComponent} from './pages/rechner/rechner.component';
 import { GesamtplanComponent } from './pages/gesamtplan/gesamtplan.component';
+import { Aufgabe1Component } from './components/aufgabe1/aufgabe1.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'gesamtplan', pathMatch:'full'},
+  {path: '', redirectTo: 'aufgabe1', pathMatch:'full'},
 // {path: '', component: GesamtplanComponent},
+{path: "aufgabe1", component: Aufgabe1Component },
  {path: "plaene", component: PlaeneComponent },
   {path: 'gesamtplan', component: GesamtplanComponent},
   {path: 'raumplan', component: RaumplanPageComponent},

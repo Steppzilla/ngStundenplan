@@ -39,19 +39,13 @@
               <div class="dropSpan1">{{lehrerFach[0].kuerzel}}</div> :
               <div class="dropSpan2"> {{lehrerFach[1]}}</div>
             </button>
-
           </div>
         </div>
       </ng-container>
-
       <!--<div>{{ferien[z+1]}}-<br> {{ferien[5]}}</div>-->
     </div>
   </div>
 </div>
-
-
-
-
 
 <div id="plan" *ngIf="planmakerS['epochenplan'+aktuelleKlasse]&&planmakerS.duplicatesEpoche">
   <div class="zeile" *ngFor="let zeile of planmakerS['epochenplan'+aktuelleKlasse]; index as z">

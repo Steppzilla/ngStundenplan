@@ -285,7 +285,7 @@ export class PlanmakerService {
               }
             }
             this.deputateArray.SchienenstundenKurz=zaehler; //deputat
-              this.deputateArray.SchienenstundenLang=zaehler2;//deputat
+            this.deputateArray.SchienenstundenLang=zaehler2;//deputat
           });
         });
       });
