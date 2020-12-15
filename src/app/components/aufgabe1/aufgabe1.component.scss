@@ -1,18 +1,7 @@
-*{color:darkgrey;}
-
-h3{font-size:14pt;}
-
-.show{opacity:1;
-height:auto;}
-.show:hover{
-    color:green;
-    
-}
-.hide{opacity:0;
-height:3pt;
-pointer-events: none;
+*{color:darkgrey;
 }
 
-.loesung:hover{
-    color:red;
-}
+
+.hide{color:rgb(39, 39, 41);}
+.show{color:darkgrey;}
+

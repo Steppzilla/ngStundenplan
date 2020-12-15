@@ -1,12 +1,14 @@
+<div class="body">
 <h1>Aufgabe für die 12. Klasse: </h1>
+<div class="container">
 <p>Bestimmen Sie den Funktionsterm f(x) derjenigen ganzrationalen Funktion vierten Grades, </p>
 <p> deren Graph im Punkt (0 | 0) einen Sattelpunkt und im Punkt (3 | 27) einen Tiefpunkt hat.</p>
 <p>Hinweis: Sie benötigen 5 Gleichungen, da es 5 unbekannte Variablen gibt.</p>
 <p>Bitte lösen Sie alles ohne Taschenrechner, trainieren Sie Ihren Kopf :) !!</p>
-
+</div>
 <h2 class="loesung" (click)="loesunganzeigen()">Lösungsweg (bitte erst selbst versuchen! Nur zur Kontrolle!)</h2>
 <h3 class="{{show}} " (click)="schritt(0)"> Schritt 0: Allgemeine Funktionsgleichung erstellen und ableiten (Click to "spick")</h3>
-<div class="{{schritt0}}">
+<div class="{{schritt0}} container">
   <p>
     `f(x) = ax^4 + bx^3 + cx^2 + dx^1 +e`
   </p>
@@ -21,7 +23,7 @@
   </p>
 </div>
 <h3 class="{{show}} " (click)="schritt(1)"> Schritt 1: Finden der Bedingungen </h3>
-<div class="{{schritt1}}">
+<div class="{{schritt1}} container">
   <p>
     I) P(0/0) liegt auf f(x) `rarr` `f(0)=0`
   </p>
@@ -43,7 +45,7 @@
 </div>
 <h3 class="{{show}}" (click)="schritt(2)"> Schritt 2: Aufstellen der Gleichungen/übersetzen der Aussagen in
   mathematische Gleichungen</h3>
-<div class="{{schritt2}}">
+<div class="{{schritt2}} container">
   <p>
     I) `f(0)=0` `Leftrightarrow` `0 = a cdot 0^4 + b cdot 0^3 + c cdot 0^2 + d cdot 0^1 +e`
   </p>
@@ -62,7 +64,7 @@
   </p>
 </div>
 <h3 class="{{show}}" (click)="schritt(3)">Schritt 3: Vereinfachen und Lösen des Gleichungssystems</h3>
-<div class="{{schritt3}}">
+<div class="{{schritt3}} container">
   <p>
     I) `0 = e`
   </p>
@@ -99,7 +101,8 @@
   <p> `108 = 27b | :27` </p>
   <p> `b= 4 ` </p>
 </div>
-<h3 class="{{show}}" (click)="schritt(4)">Schritt 4: Funktionsgleichung aufschreiben</h3>
-<div class="{{schritt4}}">
+<h3 class="{{show}} " (click)="schritt(4)">Schritt 4: Funktionsgleichung aufschreiben</h3>
+<div class="{{schritt4}} container">
   <p> f(x) = − x + 4x </p>
+</div>
 </div>

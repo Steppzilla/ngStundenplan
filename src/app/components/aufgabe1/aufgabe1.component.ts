@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aufgabe1.component.scss']
 })
 export class Aufgabe1Component implements OnInit {
-  show="hide";;
+  show="hide";
   schritt0="hide";
   schritt1="hide";
   schritt2="hide";
