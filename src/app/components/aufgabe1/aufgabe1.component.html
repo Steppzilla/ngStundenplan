@@ -4,99 +4,102 @@
 <p>Hinweis: Sie benötigen 5 Gleichungen, da es 5 unbekannte Variablen gibt.</p>
 <p>Bitte lösen Sie alles ohne Taschenrechner, trainieren Sie Ihren Kopf :) !!</p>
 
-<h2 (click)="loesunganzeigen()">Lösungsweg (bitte erst selbst versuchen! Nur zur Kontrolle!)</h2>
-<h3 *ngIf="show" (click)="schritt(0)"> Schritt 0: Allgemeine Funktionsgleichung erstellen und ableiten</h3>
-<div *ngIf="schritt0">
-<p>
-  `f(x) = ax^4 + bx^3 + cx^2 + dx^1 +e`
-</p>
-<p>
-  `f'(x) = 4ax^3 + 3bx^2 + 2cx^1 + dx^0 = 4ax^3 + 3bx^2 + 2cx + d`
-</p>
-<p>
-  `f''(x) = 12ax^2 + 6bx +2c`
-</p>
-<p>
-  `f'''(x) = 24ax+6b`
-</p>
+<h2 class="loesung" (click)="loesunganzeigen()">Lösungsweg (bitte erst selbst versuchen! Nur zur Kontrolle!)</h2>
+<h3 class="{{show}} " (click)="schritt(0)"> Schritt 0: Allgemeine Funktionsgleichung erstellen und ableiten (Click to "spick")</h3>
+<div class="{{schritt0}}">
+  <p>
+    `f(x) = ax^4 + bx^3 + cx^2 + dx^1 +e`
+  </p>
+  <p>
+    `f'(x) = 4ax^3 + 3bx^2 + 2cx^1 + dx^0 = 4ax^3 + 3bx^2 + 2cx + d`
+  </p>
+  <p>
+    `f''(x) = 12ax^2 + 6bx +2c`
+  </p>
+  <p>
+    `f'''(x) = 24ax+6b`
+  </p>
 </div>
-<h3 *ngIf="show" (click)="schritt(1)"> Schritt 1: Finden der Bedingungen</h3>
-<div *ngIf="schritt1">
-<p>
- I)  P(0/0) liegt auf f(x)  `rarr` `f(0)=0`
-</p>
-<p>
-   II)  P(3/27) ist Teil der Funktion f(x)  `rarr` `f(3)=27`
-</p>
-<p>
-   III)  P(3/27) ist auch Tiefpunkt, also : Die Ableitung bei x=3 muss 0 sein, denn bei einem Tiefpunkt ist die Steigung gleich Null!  `rarr` `f'(3)=0`
+<h3 class="{{show}} " (click)="schritt(1)"> Schritt 1: Finden der Bedingungen </h3>
+<div class="{{schritt1}}">
+  <p>
+    I) P(0/0) liegt auf f(x) `rarr` `f(0)=0`
+  </p>
+  <p>
+    II) P(3/27) ist Teil der Funktion f(x) `rarr` `f(3)=27`
+  </p>
+  <p>
+    III) P(3/27) ist auch Tiefpunkt, also : Die Ableitung bei x=3 muss 0 sein, denn bei einem Tiefpunkt ist die Steigung
+    gleich Null! `rarr` `f'(3)=0`
 
-</p>
-<p>
-    IV)  P(0/0) ist Sattelpunkt: Die erste Ableitung an der Stelle x=0 muss gleich Null sein  `rarr` `f'(0)=0`
-</p>
-<p>
-    V)  P(0/0) ist Sattelpunkt: Auch die 2. Ableitung an der Stelle des Sattelpunktes, also bei x=0, muss Null ergeben.  `rarr` `f''(0)=0`
-</p>
+  </p>
+  <p>
+    IV) P(0/0) ist Sattelpunkt: Die erste Ableitung an der Stelle x=0 muss gleich Null sein `rarr` `f'(0)=0`
+  </p>
+  <p>
+    V) P(0/0) ist Sattelpunkt: Auch die 2. Ableitung an der Stelle des Sattelpunktes, also bei x=0, muss Null ergeben.
+    `rarr` `f''(0)=0`
+  </p>
 </div>
-<h3 *ngIf="show" (click)="schritt(2)"> Schritt 2: Aufstellen der Gleichungen/übersetzen der Aussagen in mathematische Gleichungen</h3>
-<div *ngIf="schritt2">
-<p>
-    I)  `f(0)=0` `Leftrightarrow` `0 = a cdot 0^4 + b cdot 0^3 + c cdot 0^2 + d cdot 0^1 +e`
-   </p>
-   <p>
-      II) `f(3)=27` `Leftrightarrow` `27 = a cdot 3^4 + b cdot 3^3 + c cdot 3^2 + d cdot 3^1 +e`
-   </p>
-   <p>
-      III) `f'(3)=0` `Leftrightarrow`  `0 = 4a cdot 3^3 + 3b cdot 3^2 + 2c cdot 3 + d `
-   
-   </p>
-   <p>
-       IV) `f'(0)=0` `Leftrightarrow`  `0 = 4a cdot 0^3 + 3b cdot 0^2 + 2c cdot 0 +d `
-   </p>
-   <p>
-       V) `f''(0)=0` `Leftrightarrow`  `0 = 12a cdot 0^2 + 6b cdot 0 +2c`
-   </p>
+<h3 class="{{show}}" (click)="schritt(2)"> Schritt 2: Aufstellen der Gleichungen/übersetzen der Aussagen in
+  mathematische Gleichungen</h3>
+<div class="{{schritt2}}">
+  <p>
+    I) `f(0)=0` `Leftrightarrow` `0 = a cdot 0^4 + b cdot 0^3 + c cdot 0^2 + d cdot 0^1 +e`
+  </p>
+  <p>
+    II) `f(3)=27` `Leftrightarrow` `27 = a cdot 3^4 + b cdot 3^3 + c cdot 3^2 + d cdot 3^1 +e`
+  </p>
+  <p>
+    III) `f'(3)=0` `Leftrightarrow` `0 = 4a cdot 3^3 + 3b cdot 3^2 + 2c cdot 3 + d `
+
+  </p>
+  <p>
+    IV) `f'(0)=0` `Leftrightarrow` `0 = 4a cdot 0^3 + 3b cdot 0^2 + 2c cdot 0 +d `
+  </p>
+  <p>
+    V) `f''(0)=0` `Leftrightarrow` `0 = 12a cdot 0^2 + 6b cdot 0 +2c`
+  </p>
 </div>
-<h3 *ngIf="show" (click)="schritt(3)">Schritt 3: Vereinfachen und Lösen des Gleichungssystems</h3>
-<div *ngIf="schritt3">
-<p>
-    I)  `0 = e`
-   </p>
-   <p>
-      II) `27 = 81a + 27b + 9c + 3d +e`
-   </p>
-   <p>
-      III) `0 = 4 cdot 27a  + 3 cdot 9b  + 6c + d Leftrightarrow 0= 108a + 27b + 6c +d`
-   
-   </p>
-   <p>
-       IV)  `0 = d `
-   </p>
-   <p>
-       V)`0 = 2c Leftrightarrow c=0`
-   </p>
-   <p> Weiter vereinfachen: Direkt auflösende Gleichungen e=0,  d=0 und c=0 einsetzen in die anderen Gleichungen:</p>
-   <p>
+<h3 class="{{show}}" (click)="schritt(3)">Schritt 3: Vereinfachen und Lösen des Gleichungssystems</h3>
+<div class="{{schritt3}}">
+  <p>
+    I) `0 = e`
+  </p>
+  <p>
+    II) `27 = 81a + 27b + 9c + 3d +e`
+  </p>
+  <p>
+    III) `0 = 4 cdot 27a + 3 cdot 9b + 6c + d Leftrightarrow 0= 108a + 27b + 6c +d`
+
+  </p>
+  <p>
+    IV) `0 = d `
+  </p>
+  <p>
+    V)`0 = 2c Leftrightarrow c=0`
+  </p>
+  <p> Weiter vereinfachen: Direkt auflösende Gleichungen e=0, d=0 und c=0 einsetzen in die anderen Gleichungen:</p>
+  <p>
     II) `27 = 81a + 27b `
- </p>
- <p>
+  </p>
+  <p>
     III) `0= 108a + 27b`
- </p>
- <p>Gleichungen voneinander subtrahieren (da der Faktor vor b gleich ist fällt dann eine Variable weg):</p>
- <p>
+  </p>
+  <p>Gleichungen voneinander subtrahieren (da der Faktor vor b gleich ist fällt dann eine Variable weg):</p>
+  <p>
     II-III) `27 = -27a | :(-27)`
- </p>
- <p>
+  </p>
+  <p>
     `-1= a `
- </p>
- <p> a in II einsetzen:</p>
- <p> II) `27 = 81 cdot (-1) + 27b  ` </p>
- <p>  `27 = -81  + 27b   | + 81` </p>
- <p>  `108 = 27b   | :27` </p>
- <p>  `b= 4  ` </p>
+  </p>
+  <p> a in II einsetzen:</p>
+  <p> II) `27 = 81 cdot (-1) + 27b ` </p>
+  <p> `27 = -81 + 27b | + 81` </p>
+  <p> `108 = 27b | :27` </p>
+  <p> `b= 4 ` </p>
 </div>
-<h3 *ngIf="show" (click)="schritt(4)">Schritt 4: Funktionsgleichung aufschreiben</h3>
-<div *ngIf="schritt4">
-<p> f(x) = − x + 4x </p>
+<h3 class="{{show}}" (click)="schritt(4)">Schritt 4: Funktionsgleichung aufschreiben</h3>
+<div class="{{schritt4}}">
+  <p> f(x) = − x + 4x </p>
 </div>
