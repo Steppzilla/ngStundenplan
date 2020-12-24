@@ -1,11 +1,16 @@
+import { AfterContentInit } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import {ScriptLoaderService} from 'src/app/services/script-loader.service';
+
+declare var asciimath:any;
 
 @Component({
   selector: 'app-aufgabe1',
   templateUrl: './aufgabe1.component.html',
   styleUrls: ['./aufgabe1.component.scss']
 })
-export class Aufgabe1Component implements OnInit {
+export class Aufgabe1Component implements OnInit, AfterContentInit {
+
   show="hide";
   schritt0="hide";
   schritt1="hide";
@@ -38,7 +43,19 @@ export class Aufgabe1Component implements OnInit {
     }
   }
 
-  constructor() { }
+
+
+  //Mathjax:
+  //<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML'></script>
+  
+
+  constructor(public dynamicScript: ScriptLoaderService) {
+    
+   }
+   ngAfterContentInit():void{
+   // asciimath.translate();
+   this.dynamicScript.loadScript("mathjax");
+   }
 
   ngOnInit(): void {
   }
