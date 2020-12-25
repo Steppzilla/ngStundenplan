@@ -11,7 +11,7 @@ import { Aufgabe1Component } from './components/aufgabe1/aufgabe1.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'aufgabe1', pathMatch:'full'},
+  {path: '', redirectTo: 'gesamtplan', pathMatch:'full'},
 // {path: '', component: GesamtplanComponent},
 {path: "aufgabe1", component: Aufgabe1Component },
  {path: "plaene", component: PlaeneComponent },
