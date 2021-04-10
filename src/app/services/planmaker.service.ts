@@ -19,6 +19,9 @@ import {
 import {
   Stundenplan
 } from '../interfaces/stundenplan'
+import {
+  exit
+} from 'process';
 
 
 @Injectable({
@@ -90,9 +93,24 @@ export class PlanmakerService {
 
   //lehrer_klasse_duplicates; //für wochenplan Stundenplan Horitontal unnötig da mo di verschieden
   lehrer_klasse_duplicatesVert; //für wochenplan Stundenplan
-  lehrer_klasse_duplicatesRhythmus = [    [],    [],    [],    []  ]; //für wochenplan
-  lehrer_klasse_duplicatesEpoche = [    [],    [],    [],    []  ]; //für wochenplan
-  lehrer_klasse_duplicatesSchiene = [    [],    [],    [],    []  ]; //für wochenplan
+  lehrer_klasse_duplicatesRhythmus = [
+    [],
+    [],
+    [],
+    []
+  ]; //für wochenplan
+  lehrer_klasse_duplicatesEpoche = [
+    [],
+    [],
+    [],
+    []
+  ]; //für wochenplan
+  lehrer_klasse_duplicatesSchiene = [
+    [],
+    [],
+    [],
+    []
+  ]; //für wochenplan
 
   generateDuplicatesESR(art: string, plan: Array < Array < Array < [Lehrer, Fach] >>> ) {
 
@@ -176,81 +194,107 @@ export class PlanmakerService {
     }
     return returnvalue;
   }
- 
+
 
 
   //Epochen und Schiene und rhythmischer Teil ersetzen aus epochenplänen in die stundenraster
 
 
   epochenAktuell() {
-    let epochenSpeicherIndex = [1, 0];
+    let epochenSpeicherIndex = [-1, -1];
     //Gesucht: aktuelles Datum soll nächst kleineres Datum ausm Epochenwochen-Datum heraussuchen. Wir zählen also Tage rückwärts bis es gleich ist:
     let heute = this.datum;
-    for (let i = 0; i < 7; i++) {
-      let tagesEinheit = 24 * 60 * 60 * 1000;
-      this.datumstring.forEach((block, b) => {
-        block.forEach((datums, d) => {
-          let datumSplit = datums.split(".");
-          //erste zwei Blöcke 2020er-Datum:
-          let monat = parseInt(datumSplit[1]) - 1;
-          let tag = parseInt(datumSplit[0]);
-          let epochenDatum = new Date(2020, monat, tag);
-          if ((b == 0) || (b == 1)) {} else {
-            //ab Januarblock dann 2021:
-            epochenDatum.setFullYear(2021);
-          }
-          // unter epochenDatum ist jetzt jeder Starttag einer Epochenwoche (teilweise auch dienstag o.Ä.) gespeichert als Datum.
+    //korrektur der heutigen Zeit auf 0 stunden 0 minuten 0 sekunden: Sonst wird der Tag nie derselbe
+    heute.setHours(0);
+    heute.setMinutes(0);
+    heute.setSeconds(0);
+    heute.setMilliseconds(0);
+    let tagesEinheit = 24 * 60 * 60 * 1000;
 
-          //korrektur der heutigen Zeit auf 0 stunden 0 minuten 0 sekunden: Sonst wird der Tag nie derselbe
-          heute.setHours(0);
-          heute.setMinutes(0);
-          heute.setSeconds(0);
-          heute.setMilliseconds(0);
-          // if (heute.getTime() - i * tagesEinheit > epochenDatum.getTime()) {
-          //}
-          //epochendatum ist ein Datum des epochenplans in der foreach schleife
-          if (heute.getTime() - (i-2) * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt, nein, 4 tage zurück oder 2 tage davor!
+
+    //nun den Datumstring in ein echtes Datum-Format umwandeln
+    this.datumstring.forEach((block, b) => {
+      block.forEach((datums, d) => {
+        let datumSplit = datums.split(".");
+        //erste zwei Blöcke 2020er-Datum:
+        let monat = parseInt(datumSplit[1]) - 1;
+        let tag = parseInt(datumSplit[0]);
+        let epochenDatum = new Date(2020, monat, tag);
+        if ((b == 0) || (b == 1)) {} else {
+          //ab Januarblock dann 2021:
+          epochenDatum.setFullYear(2021);
+        }
+        // unter epochenDatum ist jetzt jeder Starttag einer Epochenwoche (teilweise auch dienstag o.Ä.) gespeichert als Datum.
+
+        //Erst prüfen wann nächste Epoche ist:
+        //zunächst  die nächste Epoche anwählen zwecks Ferien oder Ähnlichem. //ZUkunftsepoche für Ferien z.b
+        let wochendatum = heute.getTime();
+        // console.log(epochenSpeicherIndex);
+        if ((epochenSpeicherIndex[0] == -1) && (wochendatum <= epochenDatum.getTime())) { //nächste epoche belegen, sofern epochenspeier noch nicht belegt ist
+          epochenSpeicherIndex = [b, d];
+          // console.log("nächste epoche belegt");
+          wochendatum = wochendatum + 7 * tagesEinheit;
+        } else {
+          //console.log("nächste epoche nicht belegt");
+        }
+
+
+        // if (heute.getTime() - i * tagesEinheit > epochenDatum.getTime()) {
+        //}
+        //epochendatum ist ein Datum des epochenplans in der foreach schleife
+        for (let i = 0; i < 7; i++) {
+          if (heute.getTime() - (i - 2) * tagesEinheit == epochenDatum.getTime()) { //wenn datum bis zu 6 tage zurück liegt, nein, 4 tage zurück oder 2 tage davor!
             epochenSpeicherIndex = [b, d];
-           // console.log(epochenSpeicherIndex);
-          } else { //wenn datum "mehr als" zu 6 tage zurück lieg
-       //     console.log("ausnahmezustand");
+            // console.log(epochenSpeicherIndex);
+          } else { //wenn datum "mehr als" zu 6 tage zurück liegt
+            //     console.log("ausnahmezustand");
           }
-        });
+        }
+        //WEnn epochenspeicher nicht überschrieben wurde bisher:
+
       });
-    }
-    // console.log(epochenSpeicherIndex);
+    });
+
+    console.log(epochenSpeicherIndex);
 
     return epochenSpeicherIndex;
   }
 
-  deputateArray={Lehrer: "mrX", Wochenstunden: 0, Epochenstunden: 0, Rhythmusstunden: 0, SchienenstundenKurz:0, SchienenstundenLang:0 };
+  deputateArray = {
+    Lehrer: "mrX",
+    Wochenstunden: 0,
+    Epochenstunden: 0,
+    Rhythmusstunden: 0,
+    SchienenstundenKurz: 0,
+    SchienenstundenLang: 0
+  };
   //Einzelpläne für Lehrer oder Klassen: (Räume fehlen?)
   //aktuell beschreiben:
   planLehrer(dieserlehrer: Lehrer) {
-    this.deputateArray.Lehrer=dieserlehrer.kuerzel;//deputat
+    this.deputateArray.Lehrer = dieserlehrer.kuerzel; //deputat
     let lehrerPlan = new Stundenplan();
     lehrerPlan.datumString = this.datumstring;
     lehrerPlan.lehrer = dieserlehrer;
     lehrerPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s) => s = []));
-    let zaehler=0; //deputatszähler 
+    let zaehler = 0; //deputatszähler 
     ["montag", "dienstag", "mittwoch", "donnerstag", "freitag"].forEach((day, d) => {
       this[day].forEach((row, r) => {
         row.forEach((cell, c) => {
           cell.forEach(([lehrer, fach]: [Lehrer, Fach]) => {
             if (lehrer.kuerzel === dieserlehrer.kuerzel) {
               c++;
-              zaehler++;  //deputat
+              zaehler++; //deputat
               lehrerPlan.stundenPlan[r][d].push([lehrer, fach, 'Kl.' + c]);
-             
+
             }
-            
-            this.deputateArray.Wochenstunden=zaehler; //deputat
+
+            this.deputateArray.Wochenstunden = zaehler; //deputat
           });
         });
       });
     });
-    
-    zaehler=0; //deputat
+
+    zaehler = 0; //deputat
     //Epoche:
     //Original-Definition vorm Füllen nat. ohne Klasse:  this.epochenplanLeer = this.datumstring.map(zeile => zeile.map(cell => []));
     lehrerPlan.epochenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
@@ -262,13 +306,13 @@ export class PlanmakerService {
               zaehler++; //deputat
               lehrerPlan.epochenPlan[r][w].push([lehrer, fach, 'Kl. ' + z]);
             }
-            this.deputateArray.Epochenstunden=zaehler; //deputat
+            this.deputateArray.Epochenstunden = zaehler; //deputat
           });
         });
       });
     });
-    zaehler=0; //deputat
-    let zaehler2=0;
+    zaehler = 0; //deputat
+    let zaehler2 = 0;
     //Schiene
     lehrerPlan.schienenPlan = this.datumstring.map(zeile => zeile.map(cell => []));
     [9, 10, 11, 12].forEach(z => {
@@ -278,19 +322,19 @@ export class PlanmakerService {
             if (lehrer.kuerzel === dieserlehrer.kuerzel) {
               lehrerPlan.schienenPlan[r][w].push([lehrer, fach, 'Kl. ' + z]);
               //unterscheiden ob 11., 12.(kurz) oder andere Klasse:
-              if( (z==12)||(z==11)){
+              if ((z == 12) || (z == 11)) {
                 zaehler++; //deputat
-              }else{
-                zaehler2++;//deputat
+              } else {
+                zaehler2++; //deputat
               }
             }
-            this.deputateArray.SchienenstundenKurz=zaehler; //deputat
-            this.deputateArray.SchienenstundenLang=zaehler2;//deputat
+            this.deputateArray.SchienenstundenKurz = zaehler; //deputat
+            this.deputateArray.SchienenstundenLang = zaehler2; //deputat
           });
         });
       });
     });
-    zaehler=0; //deputat
+    zaehler = 0; //deputat
     //Rhythmus:
     lehrerPlan.rhythmusPlan = this.datumstring.map(zeile => zeile.map(cell => []));
     // new Array(this.datumstring).fill(null).map((item,i)=> new Array(this.datumstring[i]).fill(null).map((s)=>s=[]));
@@ -301,32 +345,32 @@ export class PlanmakerService {
             if (lehrer.kuerzel === dieserlehrer.kuerzel) {
               lehrerPlan.rhythmusPlan[r][w].push([lehrer, fach, 'Kl. ' + z]);
               zaehler++; //deputat
-              
+
             }
-            this.deputateArray.Rhythmusstunden=zaehler; //deputat
+            this.deputateArray.Rhythmusstunden = zaehler; //deputat
           });
         });
       });
     });
     //korrektur wenn aktuelle Rhythmus/Epoche/Schiene:
-    let index= this.epochenAktuell(); //returns EpochespeicherIndex
-    if (lehrerPlan.rhythmusPlan[index[0]][index[1]][0]==undefined){
-     // console.log("es läuft kein ryhtmischer teil");   
-    }else{   //Wenn schiene läuft stunden abziehen von Wochenstunden
-      this.deputateArray.Wochenstunden=this.deputateArray.Wochenstunden-5;
+    let index = this.epochenAktuell(); //returns EpochespeicherIndex
+    if (lehrerPlan.rhythmusPlan[index[0]][index[1]][0] == undefined) {
+      // console.log("es läuft kein ryhtmischer teil");   
+    } else { //Wenn schiene läuft stunden abziehen von Wochenstunden
+      this.deputateArray.Wochenstunden = this.deputateArray.Wochenstunden - 5;
     }
-    if (lehrerPlan.epochenPlan[index[0]][index[1]][0]==undefined){
-     // console.log("es läuft keine Epoche");   
-    }else{   
-      this.deputateArray.Wochenstunden=this.deputateArray.Wochenstunden-10;
+    if (lehrerPlan.epochenPlan[index[0]][index[1]][0] == undefined) {
+      // console.log("es läuft keine Epoche");   
+    } else {
+      this.deputateArray.Wochenstunden = this.deputateArray.Wochenstunden - 10;
     }
-    if (lehrerPlan.schienenPlan[index[0]][index[1]][0]==undefined){
-     // console.log("es läuft keine Schiene");   
-    }else{   //wenn 11 oder 12. Klasse müssen nur 6 Stunden abgezogen werden, sonst 8
-      if((lehrerPlan.schienenPlan[index[0]][index[1]][0][2]=="Kl. 12")||(lehrerPlan.schienenPlan[index[0]][index[1]][0][2]=="Kl. 11")){
-        this.deputateArray.Wochenstunden=this.deputateArray.Wochenstunden-6;
-      }else{
-        this.deputateArray.Wochenstunden=this.deputateArray.Wochenstunden-8;
+    if (lehrerPlan.schienenPlan[index[0]][index[1]][0] == undefined) {
+      // console.log("es läuft keine Schiene");   
+    } else { //wenn 11 oder 12. Klasse müssen nur 6 Stunden abgezogen werden, sonst 8
+      if ((lehrerPlan.schienenPlan[index[0]][index[1]][0][2] == "Kl. 12") || (lehrerPlan.schienenPlan[index[0]][index[1]][0][2] == "Kl. 11")) {
+        this.deputateArray.Wochenstunden = this.deputateArray.Wochenstunden - 6;
+      } else {
+        this.deputateArray.Wochenstunden = this.deputateArray.Wochenstunden - 8;
       }
     }
 
@@ -355,14 +399,14 @@ export class PlanmakerService {
   }
 
   //Duplicates für wochenplaner:
-  equals(fl1: Array < [Lehrer, Fach , string] > , fl2: Array < [Lehrer, Fach ,string] > ): boolean {
+  equals(fl1: Array < [Lehrer, Fach, string] > , fl2: Array < [Lehrer, Fach, string] > ): boolean {
     let returnvalue = true;
     //console.log(fl1 + " : " + fl2);
     if ((fl1 === undefined) || (fl2 === undefined) || (fl1.length !== fl2.length) || (fl1.length === 0)) {
       returnvalue = false;
     } else {
       fl1.forEach(([lehrer, fach, text], index) => {
-        if ((lehrer.kuerzel !== fl2[index][0].kuerzel) || (fach !== fl2[index][1])||(text!==fl2[index][2])) {
+        if ((lehrer.kuerzel !== fl2[index][0].kuerzel) || (fach !== fl2[index][1]) || (text !== fl2[index][2])) {
           returnvalue = false;
         }
       });
@@ -371,17 +415,16 @@ export class PlanmakerService {
   }
 
 
-  duplicateWochenplan(plan: Stundenplan ) {   //Lehrerplan bzw klassenplan
+  duplicateWochenplan(plan: Stundenplan) { //Lehrerplan bzw klassenplan
     let vertical = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-   // this.lehrer_klasse_duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    // this.lehrer_klasse_duplicates = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     this.lehrer_klasse_duplicatesVert = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     plan.stundenPlan.forEach((row, r) => {
       row.forEach((cell, c) => {
         //Horizontale duplicates brauch ich im stundenplan nicht (mo, di etc sind verschieden)   
         // verticale duplicates:
         let prevRow = r - 1;
-        if (r === 0) {} else if 
-        ( this.equals(cell, plan.stundenPlan[prevRow][c])) { //wenn zelle darüber gleich ist.
+        if (r === 0) {} else if (this.equals(cell, plan.stundenPlan[prevRow][c])) { //wenn zelle darüber gleich ist.
           console.log("gleiche gefunden");
 
           if (vertical[prevRow][c] === undefined) {
@@ -397,33 +440,125 @@ export class PlanmakerService {
 
 
 
- duplicateWochenplan_ESR(plan:Stundenplan ) {
-//  console.log("wochenplan:");
-//  console.log(plan);
-  ["rhythmusPlan", "epochenPlan", "schienenPlan"].forEach(res=>{
-    let speicherort;
-    if(res=="rhythmusPlan"){speicherort="duplicatesRhythmus";}
-    else if(res=="epochenPlan"){speicherort="duplicatesEpoche";}
-    else if(res=="schienenPlan"){speicherort="duplicatesSchiene";}
-    plan[res].forEach((row, r) => {
-      let duplicate = [];
-      row.forEach((cell, c) => {
-        let prevIndex = c - 1;
-        if (this.equals(cell, row[prevIndex])) {
-          if (duplicate[prevIndex] === undefined) {
-            duplicate[prevIndex] = [prevIndex];
+  duplicateWochenplan_ESR(plan: Stundenplan) {
+    //  console.log("wochenplan:");
+    //  console.log(plan);
+    ["rhythmusPlan", "epochenPlan", "schienenPlan"].forEach(res => {
+      let speicherort;
+      if (res == "rhythmusPlan") {
+        speicherort = "duplicatesRhythmus";
+      } else if (res == "epochenPlan") {
+        speicherort = "duplicatesEpoche";
+      } else if (res == "schienenPlan") {
+        speicherort = "duplicatesSchiene";
+      }
+      plan[res].forEach((row, r) => {
+        let duplicate = [];
+        row.forEach((cell, c) => {
+          let prevIndex = c - 1;
+          if (this.equals(cell, row[prevIndex])) {
+            if (duplicate[prevIndex] === undefined) {
+              duplicate[prevIndex] = [prevIndex];
+            }
+            duplicate[prevIndex].push(c); 
+            duplicate[c] = duplicate[prevIndex];
           }
-          duplicate[prevIndex].push(c);
-          duplicate[c] = duplicate[prevIndex];
-        }
+        });
+        this["lehrer_klasse_" + speicherort][r] = duplicate;
       });
-      this["lehrer_klasse_"+speicherort][r]=duplicate;
-  });
     });
-  //  console.log("wochenplan: Rhythmus/Epoche/Schiene");
-  //  console.log(this.lehrer_klasse_duplicatesRhythmus);
-  //  console.log(this.lehrer_klasse_duplicatesEpoche);
-  //  console.log(this.lehrer_klasse_duplicatesSchiene);
+    //  console.log("wochenplan: Rhythmus/Epoche/Schiene");
+    //  console.log(this.lehrer_klasse_duplicatesRhythmus);
+    //  console.log(this.lehrer_klasse_duplicatesEpoche);
+    //  console.log(this.lehrer_klasse_duplicatesSchiene);
+  }
+
+  fehlermeldung(klasse, r,c,obj){
+   // console.log(klasse + "klasse: " + r + " / " + c + " / " + obj[0][1]);
+  }
+
+  stundenPruefen(klasse: number) {
+    let faecherStundenAnzahl = {};
+    //hier soll ein Array entstehen mit Fächern und anzahl der Stunden (spezifisch für klasse 1 z.b.)
+    //Spezialfall: bei geteilten Gruppen oder gedrittelten soll die Stunde auch nur 1/2 bzw 1/3 zählen 
+    //Datengrundlage : this.montag, dienstag, mittwoch, donnerstag, freitag (Gesamtpläne)
+
+    let klassenPlan = new Stundenplan();
+    klassenPlan.klasse = klasse;
+    klassenPlan.stundenPlan = new Array(this.lehrerService.stundenanzahl).fill(null).map((r) => new Array(this.lehrerService.wochentage).fill(null).map((s) => s = []));
+    ["montag", "dienstag", "mittwoch", "donnerstag", "freitag"].forEach((day, d) => {
+      this[day].forEach((row, r) => {
+        row[klasse - 1].forEach(([lehrer, fach]: [Lehrer, Fach], c) => {
+          klassenPlan.stundenPlan[r][d].push([lehrer, fach, 'Kl.' + klasse]);
+        });
+      });
+    });
+    //erstellt: klassenPlan mit Unterpunkt:
+    //.klasse
+    //.stundenPlan von der aktuellen Klasse
+    //row,cell,[lehrer,fach, "klasse x"]
+
+    //neues Array füllen:
+
+    //anzahl der Stunden des jeweiligen Faches prüfen:
+
+   
+
+    klassenPlan.stundenPlan.forEach((row, r) => {
+       
+      row.forEach((cell, c) => {
+       // console.log("row:" +r);
+        cell.forEach((item, i) => {
+          if (faecherStundenAnzahl[item[1]] === undefined) { //leere unterpunkte erstellen, wenn das stundenPlan-Fach noch kein Unterpunkt ist
+            faecherStundenAnzahl[item[1]] = [0, 0];
+          }
+          //nur bei den "nicht-epoche oder rhythmus oder schienen-stunden". Achtung hier gibt es nur einen klassenplan.
+          if ((klasse>8)&&(klasse<13)){ //klasse 9-12 
+           
+            if((r==0)||(r==1)||(r==2)){ //keine epoche+rhythmus  Stunde 0,1,2
+          this.fehlermeldung(klasse, r,c,klassenPlan.stundenPlan[r][c]);
+        
+            }
+            else if( (c==0) && ( (r==6)||(r==7) )){//montag 7.und 8. Stunde
+           this.fehlermeldung(klasse,r,c,klassenPlan.stundenPlan[r][c]);
+        
+
+            }else if((c==1)&&((r==4)||(r==5))){ //Dienstag 5. und 6. stunde
+        this.fehlermeldung(klasse,r,c,klassenPlan.stundenPlan[r][c]);
+        
+
+            }
+            else if((c==2)&&((r==8)||(r==9))){ //Mittwoch 9. und 10. stunde
+              this.fehlermeldung(klasse,r,c,klassenPlan.stundenPlan[r][c]);
+        
+
+            }
+            else if(((c==3)&&((r==7)||(r==8)))&&(klasse<11)){ //donnerstag 8. und 9. stunde
+            this.fehlermeldung(klasse,r,c,klassenPlan.stundenPlan[r][c]);
+        
+
+            }else{//bei 9-12 wenn keine epoche oder schiene oder rhythmus ist:
+         
+              //console.log("hi");
+              faecherStundenAnzahl[item[1]][0]++;
+              //halbe/drittelstunden im zweiten Array einfügen:
+              faecherStundenAnzahl[item[1]][1] = faecherStundenAnzahl[item[1]][1] + 1 / cell.length;
+            }
+          
+
+          } else{ //wenn klasse nicht zwischen 9-12
+         
+            //console.log("hi");
+            faecherStundenAnzahl[item[1]][0]++;
+            //halbe/drittelstunden im zweiten Array einfügen:
+            faecherStundenAnzahl[item[1]][1] = faecherStundenAnzahl[item[1]][1] + 1 / cell.length;
+          }
+        });
+      });
+    });
+    //neu formatieren:
+    // console.log(faecherStundenAnzahl);
+    return faecherStundenAnzahl;
   }
 
 

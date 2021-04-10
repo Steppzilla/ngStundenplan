@@ -39,6 +39,7 @@ import { NotenrechnerComponent } from './components/notenrechner/notenrechner.co
 import { HinweiseComponent } from './components/hinweise/hinweise.component';
 import { GesamtplanComponent } from './pages/gesamtplan/gesamtplan.component';
 import { Aufgabe1Component } from './components/aufgabe1/aufgabe1.component';
+import { FachverteilungComponent } from './components/fachverteilung/fachverteilung.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { Aufgabe1Component } from './components/aufgabe1/aufgabe1.component';
     NotenrechnerComponent,
     HinweiseComponent,
     GesamtplanComponent,
-    Aufgabe1Component
+    Aufgabe1Component,
+    FachverteilungComponent
   ],
   imports: [
     BrowserModule,

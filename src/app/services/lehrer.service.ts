@@ -13,6 +13,7 @@ import {
 import {
   BehaviorSubject
 } from 'rxjs';
+import { Unterrichtsstunde } from '../interfaces/unterrichtsstunde';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ import {
 export class LehrerService {
   stundenanzahl = 10;
   klassen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  stundenRaster = new BehaviorSubject < Array < Array < Array < [Lehrer, Fach] >>> > (null);
+  stundenRaster = new BehaviorSubject < Array < Array < Array < [Lehrer,Fach] >>> > (null);
   stundenRaster$ = this.stundenRaster.asObservable();
  // alleStundenRaster: Array < Array < Array < Array < [Lehrer, Fach] >>> >= []; im planmaker
   //

@@ -171,6 +171,7 @@ export class LehrerlisteComponent implements OnInit {
      this.loginService.load(this.wochentag); //aktuelles stundenraster wird überschrieben, pushen macht immer aktuellen tag
     //console.log(this.lehrerservice.stundenRaster.getValue());
     this.planmaker.generateDuplicates(this.stundenRaster);
+  
   }
 
   save() {
@@ -366,6 +367,8 @@ export class LehrerlisteComponent implements OnInit {
     }
     this.wochentag=tag ;
     this.tagvorher=tag;
+
+    
    
   }
 
